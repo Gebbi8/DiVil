@@ -38,7 +38,7 @@ function showSbgn(data){
 		tick();
 	}
 
-	var svg = d3.select("#right").append("svg")
+	var svg = d3.select("#bivesGraph").append("svg")
 		.attr("id", 'bivesGraphSvg')
 		.attr("width", width)
 		.attr("height", height)

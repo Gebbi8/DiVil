@@ -53,7 +53,7 @@
 	</div>
 </div>
 
-<div id="right">
+<div id="bivesGraph">
 
 	<div id="buttons">
 		<button id="sbgnMLdownload">Download SBGN-ML</button>
