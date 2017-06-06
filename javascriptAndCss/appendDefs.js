@@ -1,13 +1,14 @@
 function appendDefs(svg){
 var defs = svg.append("defs");
 var refX = 12;
+var refXProduction = 10;
 	defs.append("marker")
 			.attr({
 				"id":"productionnothing",
 				"viewBox":"0 -6 11 12",
 				"fill":"black",
 				"stroke-width":"0",
-				"refX":refX,
+				"refX":refXProduction,
 				"refY":0,
 				"markerWidth":marker,
 				"markerHeight":marker,
@@ -23,7 +24,55 @@ var refX = 12;
 				"viewBox":"0 -6 11 12",
 				"fill":"orange",
 				"stroke-width":"0",
-				"refX":refX,
+				"refX":refXProduction,
+				"refY":0,
+				"markerWidth":marker,
+				"markerHeight":marker,
+				"orient":"auto"
+			})
+			.append("path")
+				.attr("d", "M0,-5L10,0L0,5")
+				.attr("class","arrowHead");
+
+	defs.append("marker")
+			.attr({
+				"id":"productiondelete",
+				"viewBox":"0 -6 11 12",
+				"fill":"black",
+				"stroke-width":"0",
+				"refX":refXProduction,
+				"refY":0,
+				"markerWidth":marker,
+				"markerHeight":marker,
+				"orient":"auto"
+			})
+			.append("path")
+				.attr("d", "M0,-5L10,0L0,5")
+				.attr("class","arrowHead");
+
+	defs.append("marker")
+			.attr({
+				"id":"productioninsert",
+				"viewBox":"0 -6 11 12",
+				"fill":"black",
+				"stroke-width":"0",
+				"refX":refXProduction,
+				"refY":0,
+				"markerWidth":marker,
+				"markerHeight":marker,
+				"orient":"auto"
+			})
+			.append("path")
+				.attr("d", "M0,-5L10,0L0,5")
+				.attr("class","arrowHead");
+
+	defs.append("marker")
+			.attr({
+				"id":"productionmove",
+				"viewBox":"0 -6 11 12",
+				"fill":"black",
+				"stroke-width":"0",
+				"refX":refXProduction,
 				"refY":0,
 				"markerWidth":marker,
 				"markerHeight":marker,

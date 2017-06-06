@@ -133,7 +133,7 @@ function showSbgn(data){
 			})
 		  .attr("id", function(d) {return d.id})
 		  .attr("class", function(d) { return "link " + d.bivesClass;})
-		  .style("stroke-width", 2)
+		  .style("stroke-width", 1)
 		  .style("fill", "none")
 		  .style("stroke", function(d) { return getColor(d.bivesClass);})
 
@@ -563,7 +563,10 @@ function compartmentText(key){
 
 			//return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,1 " + x2 + "," + y2;
 		});
-		link.attr("stroke-dasharray", function() {
+
+		link.filter(function(d){return sboSwitch(d.class) != 'consumption'})
+		 .attr("stroke-dasharray", function(d) {
+			console.log(sboSwitch(d.class));
 						return this.getTotalLength() - 5;
 					})
 
