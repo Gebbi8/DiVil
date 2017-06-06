@@ -244,8 +244,8 @@ function sboSwitchArc(sboTerm){
 		case "SBO:0000297": return "complex" ; break;
 		case "SBO:0000286": return "complex" ; break;
 		case "unknown": return "modulation" ; break;
-		case "stimulator": return "stimulator" ; break;
-		case "inhibitor": return "inhibitor" ; break;
+		case "stimulator": return "stimulation" ; break;
+		case "inhibitor": return "inhibition" ; break;
 		default: return "modulation";
 	}
 }
