@@ -334,7 +334,7 @@ var refXProduction = 10;
 			.attr({
 				"id":"necessarystimulationnothing",
 				"viewBox":"0 -6 11 12",
-				"stroke-width":"0",
+				"stroke-width":"0.5",
 				"stroke":"black",
 				"fill":"white",
 				"refX":refX,
@@ -352,7 +352,7 @@ var refXProduction = 10;
 			.attr({
 				"id":"necessarystimulationinsert",
 				"viewBox":"0 -6 11 12",
-				"stroke-width":"0",
+				"stroke-width":"0.5",
 				"stroke":"black",
 				"fill":"white",
 				"refX":refX,
