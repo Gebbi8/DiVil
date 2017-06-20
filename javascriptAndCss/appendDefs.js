@@ -332,9 +332,27 @@ var refXProduction = 10;
 
 	defs.append("marker")
 			.attr({
+				"id":"necessarystimulationnothing",
+				"viewBox":"0 -6 11 12",
+				"stroke-width":"0",
+				"stroke":"black",
+				"fill":"white",
+				"refX":refX,
+				"refY":0,
+				"markerWidth":marker,
+				"markerHeight":marker,
+				"orient":"auto"
+			})
+			.append("path")
+				.style("stroke", "black")
+				.attr("d", "M1,-5L1,105M2,-4L2,4L10,0L2,-4")
+				.attr("class","arrowHead");
+
+	defs.append("marker")
+			.attr({
 				"id":"necessarystimulationinsert",
 				"viewBox":"0 -6 11 12",
-				"stroke-width":"0.5",
+				"stroke-width":"0",
 				"stroke":"black",
 				"fill":"white",
 				"refX":refX,
