@@ -38,7 +38,7 @@ var refXProduction = 10;
 			.attr({
 				"id":"productiondelete",
 				"viewBox":"0 -6 11 12",
-				"fill":"black",
+				"fill":"red",
 				"stroke-width":"0",
 				"refX":refXProduction,
 				"refY":0,
@@ -54,7 +54,7 @@ var refXProduction = 10;
 			.attr({
 				"id":"productioninsert",
 				"viewBox":"0 -6 11 12",
-				"fill":"black",
+				"fill":"green",
 				"stroke-width":"0",
 				"refX":refXProduction,
 				"refY":0,
@@ -70,7 +70,7 @@ var refXProduction = 10;
 			.attr({
 				"id":"productionmove",
 				"viewBox":"0 -6 11 12",
-				"fill":"black",
+				"fill":"blue",
 				"stroke-width":"0",
 				"refX":refXProduction,
 				"refY":0,
@@ -234,6 +234,8 @@ var refXProduction = 10;
 			.append("path")
 				.attr("d", "M1,0A1,1,0,0,1,9,0A1,1,0,0,1,1,0")
 				.attr("class","arrowHead");
+
+// catalysis ...
 
 	defs.append("marker")
 			.attr({

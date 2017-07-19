@@ -548,7 +548,7 @@ function compartmentText(key){
 			//var distance = distanceHack(sboSwitch(d.target.class), size);
 
 			switch(d.bivesClass){
-				case "insert": if(d.source.y < d.target.y){
+		/*		case "insert": if(d.source.y < d.target.y){
 					return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,1 " + (x2) + "," + y2;
 				} else {
 					return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,1 " + (x2) + "," + y2;
@@ -557,7 +557,7 @@ function compartmentText(key){
 					return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,0 " + (x2) + "," + y2;
 				} else {
 					return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,0 " + (x2) + "," + y2;
-				}; break;
+				}; break;*/
 				default: return "M" + x1 + "," + y1 + "L" + (x2 + 0) + "," + y2;
 			}
 
@@ -566,7 +566,6 @@ function compartmentText(key){
 
 		link.filter(function(d){return sboSwitch(d.class) != 'consumption'})
 		 .attr("stroke-dasharray", function(d) {
-			console.log(sboSwitch(d.class));
 						return this.getTotalLength() - 5;
 					})
 

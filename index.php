@@ -22,6 +22,10 @@
 	<div id="modelSelection">
 	<h1> Select two model versions </h1>
 	<select id="versionChoice" class="box" size="10">
+		<optgroup label="Schroebel2002 vs Chen2009">
+			<option class="opt" value="test">BIOMD0000000019</option>
+			<option class="opt" value="test">BIOMD0000000255</option>
+		</optgroup>
 		<optgroup label="Tyson1991 - Cell Cycle 2 var (BioModel 6)">
 			<option class="opt" value="test">original</option>
 		</optgroup>
@@ -38,6 +42,10 @@
 		<optgroup label="BSA-laczsynth">
 			<option class="opt" value="test">2012-11-10</option>
 			<option class="opt" value="test">2012-11-11</option>
+		</optgroup>
+		<optgroup label="Diff different models - Test">
+			<option class="opt" value="test">BIOM348</option>
+			<option class="opt" value="test">BIOM349</option>
 		</optgroup>
 	</select>
 	<button id="selectVersion">select</button>
@@ -59,7 +67,8 @@
 		<button id="sbgnMLdownload">Download SBGN-ML</button>
 	</div>
 </div>
-
+<div id="bivesReport">
+</div>
 <script>
 	var obj;
 	//showSbgn(data);
@@ -78,9 +87,13 @@
 			x.remove(x.selectedIndex);
 	}
 	document.getElementById("sbgnMLdownload").onclick = function() {download(obj)};
-	document.getElementById("compareModels").onclick = function() {obj = getBivesData("http://localhost/SBI-Rep/masterthesis_tom/implementation/testModels/000006/" + document.getElementById("selection")[0].text + ".xml", "http://localhost/SBI-Rep/masterthesis_tom/implementation/testModels/000006/" + document.getElementById("selection")[1].text + ".xml", "reactionsSbgnJson");
+	document.getElementById("compareModels").onclick = function() {obj = getBivesData("http://localhost/SBI-Rep/divil/testModels/000006/" + document.getElementById("selection")[0].text + ".xml",
+																					"http://localhost/SBI-Rep/divil/testModels/000006/" + document.getElementById("selection")[1].text + ".xml",
+																					["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations"]);
   showSbgn(obj);
-	console.log("http://localhost/SBI-Rep/masterthesis_tom/implementation/testModels/000006/" + document.getElementById("selection")[0].text + "", "http://localhost/SBI-Rep/masterthesis_tom/implementation/testModels/000006/" + document.getElementById("selection")[1].text + "", "reactionsSbgnJson");};
+	console.log("http://localhost/SBI-Rep/divil/testModels/000006/" + document.getElementById("selection")[0].text + "",
+	 						"http://localhost/SBI-Rep/divil/testModels/000006/" + document.getElementById("selection")[1].text + "",
+							["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations"]);};
 	//document.getElementById("compareModels").onclick = function() {obj = getBivesData("http://localhost/SBI-Rep/masterthesis_tom/implementation/testModels/BioModel7/Novak1997_CellCycle-R3", "http://localhost/SBI-Rep/masterthesis_tom/implementation/testModels/BioModel7/Novak1997_CellCycle-R37", "reactionsSbgnJson");};
 </script>
 </body>
