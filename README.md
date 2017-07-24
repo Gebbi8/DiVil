@@ -8,7 +8,7 @@ The standard ist extended by adding colors to visualize differences between two 
 ## Input
 The network information is provided by a JSON Object in the following format:
 
-{
+```{
 	"nodes":[
 		{
 		"bivesClass":"...",
@@ -28,7 +28,7 @@ The network information is provided by a JSON Object in the following format:
 		},
 		...
 	]
-}
+}```
 
 The object contains a list of nodes and a list of links. Nodes may have different attributes.
 Supported attributes are:
