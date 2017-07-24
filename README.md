@@ -28,7 +28,8 @@ The network information is provided by a JSON Object in the following format:
 		},
 		...
 	]
-}```
+}
+```
 
 The object contains a list of nodes and a list of links. Nodes may have different attributes.
 Supported attributes are:
