@@ -53,16 +53,16 @@ The map is computed by a force directed layout.
 To produce a SBGN PD layout several parts are necessary.
 In SBGN the symbol shows the kind/class of the entitity. D3, so far, does not provide an easy way to add symbols. Therfor the included symbols have to be extended by adding svg paths.
 At this point the following symbols are supported:
-	-Process
-	-Dissociation
-	-Association
-	-Macromolecule
-	-Source and Sink
-	-Complex
-	-Pertubing Agent
-	-Unspecified Entity
-	-Simple Chemical
-	-Compartment
+	* Process
+	* Dissociation
+	* Association
+	* Macromolecule
+	* Source and Sink
+	* Complex
+	* Pertubing Agent
+	* Unspecified Entity
+	* Simple Chemical
+	 *Compartment
 	
 The symbols are sized by their content. For example a simple chemical will grow with the size of its label and compartments are drawn around the contained nodes.
 
