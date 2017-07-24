@@ -8,7 +8,8 @@ The standard ist extended by adding colors to visualize differences between two 
 ## Input
 The network information is provided by a JSON Object in the following format:
 
-```{
+```js
+{
 	"nodes":[
 		{
 		"bivesClass":"...",
