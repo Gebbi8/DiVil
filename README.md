@@ -2,7 +2,7 @@
 DiVil is a javascript based tool that produces interactive graphs. It aims to visualise differences between two versions of a model in a standard format. 
 DiVil uses:
  * the Bives algorithm to detect those differences [(Scharm et al, 2015)](https://doi.org/10.1093/bioinformatics/btv484)
- * the Systems Biology Graphical Notation (SBGN) standard [(Le Novère et al, 2009)](http://dx.doi.org/10.1038/nbt.1558), more specifically the Process Description (SBGN PD) language, to visually represent the network with the differences highlighted.
+ * the Systems Biology Graphical Notation (SBGN) standard [(Le Novère et al, 2009)](http://dx.doi.org/10.1038/nbt.1558), more specifically the Process Description (PD) language, to visually represent the network with the differences highlighted.
 SBGN-ML is the XML based format used to store an SBGN map. In DiVil, the SBGN-ML is extended with a color coded information to visualize the differences.
 
 ## Try it out
@@ -55,6 +55,7 @@ DiVil produces a graph by using the D3.js (Copyright 2010-2017 Mike Bostock, htt
 The map is computed by a force directed layout.
 
 To produce a SBGN PD network several steps are necessary.
+
 (1) In SBGN, each symbol relates to a specific type of entity (e.g, a rectangle with round corner is a macromolecule). They are called 'glyphs'. So far, D3 does not provide an easy way to add those symbols. Therefore the included symbols have to be extended by adding svg paths.
 At this point the following SBGN glyphs are supported in DiVil:
 * Process
