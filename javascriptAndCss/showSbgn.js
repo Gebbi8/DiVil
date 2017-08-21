@@ -1,4 +1,5 @@
 function showSbgn(data){
+	console.log(data);
 	d3.selectAll("#bivesGraph").selectAll("svg").remove();
 	$('#graphTab').show();
 	$('#donwload').show();

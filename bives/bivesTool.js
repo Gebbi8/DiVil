@@ -23,6 +23,8 @@ function getBivesData(v1, v2, command){
 			//obj = showSbgn(JSON.parse(data).reactionsSbgnJson);
 			console.log(obj);
 			$("#bivesReport").html ($.parseJSON (data).reportHtml);
+			var sbgnJson = $.parseJSON (data).reactionsSbgnJson;
+			showSbgn(sbgnJson);
 		}
 	);
 }
