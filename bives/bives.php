@@ -1,7 +1,13 @@
 <?php
 
-$BIVES="http://localhost:8080/bives/";
-	
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+ini_set('max_execution_time', 600);
+$BIVES="https://bives.bio.informatik.uni-rostock.de/";
+//DEBUG:
+//docker run -it --rm -p 1234:8080 binfalse/bives-webapp
+//$BIVES="http://localhost:1234/";
+
 
 if (!isset ($_POST["bivesJob"]) || empty ($_POST["bivesJob"]))
 	die ("no job description2");

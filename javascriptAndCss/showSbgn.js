@@ -4,6 +4,16 @@ function showSbgn(data){
 	$('#graphTab').show();
 	$('#donwload').show();
 
+	//add addEventListener to checkbox for port toggling
+	var checkbox = document.querySelector("input[id=portToggle]");
+
+	checkbox.addEventListener( 'change', function() {
+		changeProcessNode(size);
+		tick();
+		console.log("Toogle want's to tickle")
+	});
+
+
 	if(data == "" || data == undefined) {
 		$('#graphTab').hide();
 		return;
@@ -14,7 +24,7 @@ function showSbgn(data){
 	// register click-listeners to the download button
     $("#download").click (function (){download (obj);});
 
-	var width = 1000,
+	var width = 1400,
 		height = 800,
 		size = (width - 50) / 10 ;
 		marker = width / 100;
@@ -96,6 +106,14 @@ function showSbgn(data){
 	function dragstart(d) {
 		d3.event.sourceEvent.stopPropagation();
 		d3.select(this).classed("fixed", d.fixed = true);
+		console.log("draging me down.");
+		d3.event.sourceEvent.stopPropagation()
+	}
+
+	function clicked(d){
+		if (d3.event.defaultPrevented) return; // dragged
+
+		d3.select(this).classed("fixed", d.fixed = false);
 	}
 
 	var dragCompartment = d3.behavior.drag()
@@ -190,8 +208,8 @@ function showSbgn(data){
 			.attr("class", function(d) {return "node " + sboSwitch(d.class);})
 			.attr("compartment", function(d) {return d.compartment;} )
 			.attr("fill", function(d) { if(d.class != "SBO:0000290") return "white"; if(sboSwitch(d.class)=='association') return black})
-				.call(drag)
-				;//.call(node_drag);
+						.on("click", clicked) //d3.select(this).classed("fixed", d.fixed = true);
+				.call(drag);//.call(node_drag);
 
 		node.insert("path")
 		  .attr("class", function(d) { return "node " + d.bivesClass } )
@@ -281,6 +299,7 @@ function compartmentText(key){
 }
 
 	function tick() {
+
 		//compartments
 		  // Push different nodes in different directions for clustering.
 /*  		var k = .1 * e.alpha;
@@ -334,18 +353,21 @@ function compartmentText(key){
 			}
 
 
-
-			//for process nodes: connect arcs to reactant and product ports
 			elementClass = sboSwitchArc(d.class);
-			if(elementClass == "consumption"){
-				x2 = d.target.x - halfElementWidth;
-			} else if (elementClass == "production") {
-				var sourceWidth =  d3.select("#"+d.source.id).node();
-				if(sourceWidth != null){
-					sourceWidth = sourceWidth.getBoundingClientRect().width/2/currentZoom;
-				} else sourceWidth = 0;
-				x1 = d.source.x + sourceWidth;
+			//for process nodes: connect arcs to reactant and product ports
+			if(!document.getElementById("portToggle").checked){
+				if(elementClass == "consumption"){
+					x2 = d.target.x - halfElementWidth;
+				} else if (elementClass == "production") {
+					var sourceWidth =  d3.select("#"+d.source.id).node();
+					if(sourceWidth != null){
+						sourceWidth = sourceWidth.getBoundingClientRect().width/2/currentZoom;
+					} else sourceWidth = 0;
+					x1 = d.source.x + sourceWidth;
+				}
 			}
+
+
 
 			var targetClass = sboSwitch(d.target.class);
 
@@ -590,5 +612,20 @@ function distanceHack(nodeClass, sized){
 		case "unspecifiedentity": return size*0.5; break;
 		case "simplechemical": return size*0.25; break;
 		default: return size;
+	}
+}
+
+function changeProcessNode(size){
+	console.log("call for change", size);
+	var size = size * 0.15;
+	if(document.getElementById("portToggle").checked){
+		d3.selectAll(".node.process").selectAll("path")
+			.attr("d", "m -" + size*0.5 + " -" + size*0.5 +	" h " + size + " v " + size + " h -" + size +	" z "
+		);
+		console.log("changed");
+	} else {
+		d3.selectAll(".node.process").selectAll("path")
+			.attr("d", "m -" + size*0.5 + " -" + size*0.5 +	" h " + size + " v " + size + " h -" + size +	" z " + " m 0 " + size/2 + " h -" + size/2 + " m " + size*2 + " 0" + " h -" + size/2
+		);
 	}
 }

@@ -4,31 +4,28 @@
 var reactionLayout = function(size) {
 	size = size*0.15;
 	return "m -" + size*0.5 + " -" + size*0.5 +
-	" h " + size + 
-	" v " + size + 
+	" h " + size +
+	" v " + size +
 	" h -" + size +
-	" z " + " m 0 " + size/2 +
-	" h -" + size/2 +
-	" m " + size*2 + " 0" + 
-	" h -" + size/2;
+	" z " 
   };
 
 
 var customSymbolTypes = d3.map({
   'compartment': function(size) { //size depends on node content
 	  size = size *8;
-	return "m -" + size*0.5 + " -" + size*0.5 + 
+	return "m -" + size*0.5 + " -" + size*0.5 +
 	" m  0 " + size*0.05 +
 	" q " + size*0.2 + " -" + size* 0.05 + " " + size*0.4 + " -" + size*0.05 +
 	" l " + size*0.2 + " 0" +
 	" q " + size*0.2 + " 0 " + size*0.4 + " " + size*0.05 +
-	" l 0 " + size*0.7 + 
+	" l 0 " + size*0.7 +
 	" q -" + size*0.2 + " " + size*0.05 + " -" + size*0.4 + " " + size*0.05 +
-	" l -" + size*0.2 + " 0 " + 
-	" q -" + size*0.2 + " 0 -" + size*0.4 + " -" + size*0.05 + 
+	" l -" + size*0.2 + " 0 " +
+	" q -" + size*0.2 + " 0 -" + size*0.4 + " -" + size*0.05 +
 	" z ";
   },
-  
+
   'process': reactionLayout,
   'production': reactionLayout,
   'consumption': reactionLayout,
@@ -36,48 +33,48 @@ var customSymbolTypes = d3.map({
   'stimulation': reactionLayout,
   'catalysis': reactionLayout,
   'necessary stimulation': reactionLayout,
-  
+
   'dissociation': function(size) {
 	size = size*0.1;
-	return "m -" + size * 0.5 + " -" + size * 0.5 + 
+	return "m -" + size * 0.5 + " -" + size * 0.5 +
 	" m -" + size*0.5 + " " + size*0.5 +
     " a " + size + " " + size + " 0 1 0 " +  size * 2 + " 0" +
 	" a " + size + " " + size + " 0 1 0 -" +  size * 2 + " 0" +
-	" m " + size*0.3 + " 0" + 
+	" m " + size*0.3 + " 0" +
     " a " + size*0.7 + " " + size*0.7 + " 0 1 0 " +  size*0.7 * 2 + " 0" +
 	" a " + size*0.7 + " " + size*0.7 + " 0 1 0 -" +  size*0.7 * 2 + " 0" +
-	" m -" + size*0.3 + " 0" + 
+	" m -" + size*0.3 + " 0" +
 	//" m 0 " + size/2 +
 	" h -" + size/2 +
-	" m " + size*3 + " 0" + 
+	" m " + size*3 + " 0" +
 	" h -" + size/2;
   },
   'association': function(size) {
 	size = size*0.1;
-	return "m -" + size * 0.5 + " -" + size * 0.5 + 
+	return "m -" + size * 0.5 + " -" + size * 0.5 +
 	" m -" + size*0.5 + " " + size*0.5 +
     " a " + size + " " + size + " 0 1 0 " +  size * 2 + " 0" +
 	" a " + size + " " + size + " 0 1 0 -" +  size * 2 + " 0" +
 	//" m 0 " + size/2 +
 	" h -" + size/2 +
-	" m " + size*3 + " 0" + 
+	" m " + size*3 + " 0" +
 	" h -" + size/2;
   },
   'macromolecule': function(size) {
-	return "m -" + size*0.5 + " -" +size*0.5 + 
+	return "m -" + size*0.5 + " -" +size*0.5 +
 	" m " + size*0.1 + " 0" +
 	" a " + size*0.1 + " " + size*0.1 + " " + size*0.02 + " 0 0 -" + size*0.1 + " " + size*0.1 +
 	" l 0 " + size*0.8 +
 	" a " + size*0.1 + " " + size*0.1 + " " + size*0.02 + " 0 0 " + size*0.1 + " " + size*0.1 +
 	" l " + size*0.8 + " 0" +
 	" a " + size*0.1 + " " + size*0.1 + " " + size*0.02 + " 0 0 " + size*0.1 + " -" + size*0.1 +
-	" l 0 -" + size*0.8 + 
+	" l 0 -" + size*0.8 +
 	" a " + size*0.1 + " " + size*0.1 + " " + size*0.02 + " 0 0 -" + size*0.1 + " -" + size*0.1 +
 	" z ";
   },
    'source and sink': function(size) {
 	size = size*0.1;
-	return "m -" + size * 0.5 + " -" + size * 0.5 + 
+	return "m -" + size * 0.5 + " -" + size * 0.5 +
 	" m -" + size*0.5 + " " + size*0.5 +
     " a " + size + " " + size + " 0 1 0 " +  size * 2 + " 0" +
 	" a " + size + " " + size + " 0 1 0 -" +  size * 2 + " 0" +
@@ -93,7 +90,7 @@ var customSymbolTypes = d3.map({
 	" l -" + size*0.1 + " " + size*0.1 +
 	" l -" + size*0.8 + " 0" +
 	" l -" + size*0.1 + " -" + size*0.1 +
-	" l 0 -" + size*0.8 + 
+	" l 0 -" + size*0.8 +
 	" z ";
   },
    'perturbing agent': function(size) {
@@ -108,18 +105,18 @@ var customSymbolTypes = d3.map({
   'unspecified entity': function(size) {
 	size = size;
 	if(size > 150) size = 150;
-	return "m -" + size * 0.5 + " -" + size * 0 + 
+	return "m -" + size * 0.5 + " -" + size * 0 +
     " a " + size*0.25 + " " + size*0.5 + " -90 0 1 " +  size + " 0" +
 	" a " + size*0.25 + " " + size*0.5 + " -90 0 1 -" +  size + " 0";
   },
-  
+
   'simple chemical': function(size) {
 	if (size > 35) {
 		return "m -" + size/2 + " 0" +
 		" m 17.5 -17.5" +
-		" a  -17.5 17.5 0.5 1 0 0 35" +  
+		" a  -17.5 17.5 0.5 1 0 0 35" +
 		" l " + (size - 35) + " 0 " +
-		" a  -17.5 17.5 0.5 1 0 0 -35" 
+		" a  -17.5 17.5 0.5 1 0 0 -35"
 		+ " z ";
 	} else {
 		return "m -" + size/2 + " 0" +

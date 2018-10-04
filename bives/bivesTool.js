@@ -1,7 +1,7 @@
 //Info-Content
 function getBivesData(v1, v2, command){
 	var data;
-	//console.log(v1.url, v2.url);
+	console.log(v1, v2);
 
 	var bivesJob = {
 		files:
@@ -21,9 +21,10 @@ function getBivesData(v1, v2, command){
 		function (data)
 		{
 			//obj = showSbgn(JSON.parse(data).reactionsSbgnJson);
-			console.log(obj);
+			console.log(data);
 			$("#bivesReport").html ($.parseJSON (data).reportHtml);
 			var sbgnJson = $.parseJSON (data).reactionsSbgnJson;
+			console.log(sbgnJson);
 			showSbgn(sbgnJson);
 		}
 	);
