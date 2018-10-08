@@ -26,6 +26,7 @@ function getBivesData(v1, v2, command){
 			var sbgnJson = $.parseJSON (data).reactionsSbgnJson;
 			console.log(sbgnJson);
 			showSbgn(sbgnJson);
+			document.getElementById("sbmlDownload").onclick = function() {downloadSBML(sbgnJson)};
 		}
 	);
 }

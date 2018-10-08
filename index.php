@@ -11,7 +11,8 @@
 	<script type="text/javascript" src="javascriptAndCss/costumSymbol.js"></script>
 	<script type="text/javascript" src="bives/bivesTool.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/download.js"></script>
-<!--	<script type="text/javascript" src="javascriptAndCss/fileSaver.js"></script> -->
+	<script type="text/javascript" src="javascriptAndCss/downloadSBML.js"></script>
+	<script type="text/javascript" src="javascriptAndCss/FileSaver.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/appendDefs.js"></script>
 
 
@@ -22,6 +23,10 @@
 	<div id="modelSelection">
 	<h1> Select two model versions </h1>
 	<select id="versionChoice" class="box" size="10">
+		<optgroup label="PK Cycle">
+			<option class="opt" value="test">PKA_cycle_l2v5</option>
+			<option class="opt" value="test">PKA_cycle_MOR_l2v4</option>
+		</optgroup>
 		<optgroup label="Schroebel2002 vs Chen2009">
 			<option class="opt" value="test">BIOMD0000000019</option>
 			<option class="opt" value="test">BIOMD0000000255</option>
@@ -69,6 +74,9 @@
 	<div id="buttons">
 		<button id="sbgnMLdownload">Download SBGN-ML</button>
 	</div>
+	<div id="buttons">
+		<button id="sbmlDownload">Download SBML</button>
+	</div>
 </div>
 <div id="bivesReport">
 </div>
@@ -87,13 +95,15 @@
 		    var x = document.getElementById("selection");
 			x.remove(x.selectedIndex);
 	}
-	document.getElementById("sbgnMLdownload").onclick = function() {download(obj)};
+
 	document.getElementById("compareModels").onclick = function() {
 
 		obj = getBivesData("http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + document.getElementById("selection")[0].text + ".xml",
 											 "http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + document.getElementById("selection")[1].text + ".xml",
 											 ["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations"]);
 	}
+	//document.getElementById("sbgnMLdownload").onclick = function() {console.log(obj); download(obj)};
+	//document.getElementById("sbmlDownload").onclick = function() {console.log(obj); downloadSBML(obj)};
   //showSbgn(obj);
 	// console.log("http://localhost/SBI-Rep/divil/testModels/000006/" + document.getElementById("selection")[0].text + "",
 	//  						"http://localhost/SBI-Rep/divil/testModels/000006/" + document.getElementById("selection")[1].text + "",

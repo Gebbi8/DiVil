@@ -567,20 +567,13 @@ function compartmentText(key){
 
 
 			var dr = Math.sqrt((x2-d.source.x) * (x2-d.source.x) + (y2-d.source.y) * (y2-d.source.y));
-
+			var xr = 20;
+			var yr = 20;
 			//var distance = distanceHack(sboSwitch(d.target.class), size);
 
 			switch(d.bivesClass){
-		/*		case "insert": if(d.source.y < d.target.y){
-					return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,1 " + (x2) + "," + y2;
-				} else {
-					return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,1 " + (x2) + "," + y2;
-				}; break;
-				case "delete": if(d.source.y < d.target.y){
-					return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,0 " + (x2) + "," + y2;
-				} else {
-					return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,0 " + (x2) + "," + y2;
-				}; break;*/
+//				case "insert": return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,1 " + (x2) + "," + y2; break;
+//				case "delete": return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,0 " + (x2) + "," + y2; break;
 				default: return "M" + x1 + "," + y1 + "L" + (x2 + 0) + "," + y2;
 			}
 

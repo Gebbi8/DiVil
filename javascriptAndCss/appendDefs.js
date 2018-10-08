@@ -94,6 +94,7 @@ var refXProduction = 10;
 				"markerHeight":marker,
 				"orient":"auto"
 			})
+			.style("stroke", "black")
 			.append("path")
 				.attr("d", "M0,0L5,5L10,0L5,-5Z")
 				.attr("class","arrowHead");
