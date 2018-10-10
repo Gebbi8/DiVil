@@ -22,7 +22,18 @@ function downloadSBML(obj) {
 	xml = xml + '</listOfUnitDefinitions>\n';
 	xml = xml + '<listOfCompartments>\n';
 
-	xml = xml + '<compartment>  </compartment>\n';
+	for(i = 0; i < data.nodes.length; i++){
+		if(data.nodes[i].id.startsWith("c")){ //types for nodes is needed to read it out from the json, unique ID directly from the model would also be good!
+			xml = xml + '<compartment\n';
+			if(data.nodes[i].id != "null")	xml = xml + ' id="' + data.nodes[i].id + '" ';
+			if(data.nodes[i].compartment != "null")	xml = xml + ' compartment="' + data.nodes[i].compartment + '" ';
+			if(data.nodes[i].class != "null")	xml = xml + ' sbo="' + data.nodes[i].class + '" ';
+			if(data.nodes[i].label != "null")	xml = xml + ' name="' + data.nodes[i].label + '" ';
+			xml = xml + '>\n'
+			xml = xml + '</compartment>\n';
+		}
+	}
+
 
 
 
@@ -31,20 +42,15 @@ function downloadSBML(obj) {
 
 	console.log(data.nodes.length, data.nodes[1]);
 	for(i = 0; i < data.nodes.length; i++){
-		xml = xml + '<species '
-
-		xml = xml + 'id="' + data.nodes[i].id + '"';
-		if(data.nodes[i].compartment != "null")	xml = xml + ' compartment="' + data.nodes[i].compartment + '" ';
-
-
-		xml = xml + '>\n'
-
-
-
-		xml = xml + '</species>\n';
-
-
-
+		if(!data.nodes[i].id.startsWith("r") && !data.nodes[i].id.startsWith("c")){ //types for ndoes is needed to read it out from the json, unique ID directly from the model would also be good!
+			xml = xml + '<species '
+			if(data.nodes[i].id != "null")	xml = xml + ' id="' + data.nodes[i].id + '" ';
+			if(data.nodes[i].compartment != "null")	xml = xml + ' compartment="' + data.nodes[i].compartment + '" ';
+			if(data.nodes[i].class != "null")	xml = xml + ' sbo="' + data.nodes[i].class + '" ';
+			if(data.nodes[i].label != "null")	xml = xml + ' name="' + data.nodes[i].label + '" ';
+			xml = xml + '>\n'
+			xml = xml + '</species>\n';
+		}
 	}
 
 
@@ -76,7 +82,17 @@ function downloadSBML(obj) {
 	xml = xml + '</listOfConstraints>\n';
 	xml = xml + '<listOfReactions>\n';
 
-	xml = xml + '<reaction> ... </reaction>\n';
+	for(i=0; i<data.links.length; i++){
+		xml = xml + '<reaction'
+		if(data.links[i].id != "null")	xml = xml + ' id="' + data.links[i].id + '" '; //id from model would be better
+		if(data.links[i].compartment != "null")	xml = xml + ' compartment="' + data.links[i].compartment + '" ';
+		xml = xml + '>\n';
+
+
+
+		xml = xml +  '</reaction>\n';
+	}
+
 
 
 	xml = xml + '</listOfReactions>\n';
