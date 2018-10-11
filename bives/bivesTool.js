@@ -1,5 +1,5 @@
 //Info-Content
-function getBivesData(v1, v2, command){
+function getBivesData(v1, v2, command, callback){
 	var data;
 	console.log(v1, v2);
 
@@ -21,10 +21,25 @@ function getBivesData(v1, v2, command){
 		function (data)
 		{
 			//obj = showSbgn(JSON.parse(data).reactionsSbgnJson);
-			console.log(data);
-			$("#bivesReport").html ($.parseJSON (data).reportHtml);
+		//	$("#demo2").text($.parseJSON (data).xmlDiff);
+			var dataJson = $.parseJSON (data);
+
+				parser = new DOMParser();
+				var xmlDocDiff = parser.parseFromString(dataJson.xmlDiff,"text/xml");
+				var xmlDocSbml;
+
+
+				foo("testModels/" + document.getElementById("selection")[1].text + ".xml", function(xmlDoc){
+				  console.log(xmlDoc); // this is where you get the return value
+					xmlDocSbml = xmlDoc;
+					console.log(xmlDocDiff, xmlDocSbml);
+				});
+
+
+				$("#demo2").text(xmlDiffToXmlJson($.parseJSON (data).xmlDiff));
+	//		$("#bivesReport").html ($.parseJSON (data).reportHtml);
 			var sbgnJson = $.parseJSON (data).reactionsSbgnJson;
-			console.log(sbgnJson);
+			console.log(xmlDocDiff, xmlDocSbml);
 			showSbgn(sbgnJson);
 			document.getElementById("sbmlDownload").onclick = function() {downloadSBML(sbgnJson)};
 		}

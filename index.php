@@ -14,6 +14,8 @@
 	<script type="text/javascript" src="javascriptAndCss/downloadSBML.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/FileSaver.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/appendDefs.js"></script>
+	<script type="text/javascript" src="javascriptAndCss/sbmlParser.js"></script>
+	<script type="text/javascript" src="javascriptAndCss/xmlDiffParser.js"></script>
 
 
 </head>
@@ -79,6 +81,10 @@
 	</div>
 </div>
 <div id="bivesReport">
+</div>
+<div id="demo">
+</div>
+<div id="demo2">
 </div>
 <script>
 	var obj;
