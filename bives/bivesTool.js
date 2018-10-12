@@ -33,6 +33,7 @@ function getBivesData(v1, v2, command, callback){
 				  console.log(xmlDoc); // this is where you get the return value
 					xmlDocSbml = xmlDoc;
 					console.log(xmlDocDiff, xmlDocSbml);
+					document.getElementById("sbmlDownload").onclick = function() {downloadSBML(sbgnJson, xmlDocDiff, xmlDocSbml)};
 				});
 
 
@@ -41,7 +42,7 @@ function getBivesData(v1, v2, command, callback){
 			var sbgnJson = $.parseJSON (data).reactionsSbgnJson;
 			console.log(xmlDocDiff, xmlDocSbml);
 			showSbgn(sbgnJson);
-			document.getElementById("sbmlDownload").onclick = function() {downloadSBML(sbgnJson)};
+
 		}
 	);
 }
