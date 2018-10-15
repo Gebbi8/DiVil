@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Stats-website</title>
+	<title>Merge Prototype</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="javascriptAndCss/style.css">
 	<script type="text/javascript" src="thirdParty/d3.min.js"></script>
@@ -21,7 +21,7 @@
 </head>
 <body>
 <div id="left">
-	<h2>Merger - Dev</h2>
+	<h4>Merger Proto</h4>
 	<div id="modelSelection">
 	<h1> Select two model versions </h1>
 	<select id="versionChoice" class="box" size="10">

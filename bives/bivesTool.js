@@ -20,6 +20,7 @@ function getBivesData(v1, v2, command, callback){
 		"bivesJob=" + JSON.stringify (bivesJob),
 		function (data)
 		{
+			console.log(data);
 			//obj = showSbgn(JSON.parse(data).reactionsSbgnJson);
 		//	$("#demo2").text($.parseJSON (data).xmlDiff);
 				var dataJson = $.parseJSON (data);
