@@ -22,25 +22,29 @@ function getBivesData(v1, v2, command, callback){
 		{
 			//obj = showSbgn(JSON.parse(data).reactionsSbgnJson);
 		//	$("#demo2").text($.parseJSON (data).xmlDiff);
-			var dataJson = $.parseJSON (data);
+				var dataJson = $.parseJSON (data);
 
 				parser = new DOMParser();
 				var xmlDocDiff = parser.parseFromString(dataJson.xmlDiff,"text/xml");
-				var xmlDocSbml;
-
-
-				foo("testModels/" + document.getElementById("selection")[1].text + ".xml", function(xmlDoc){
-				  console.log(xmlDoc); // this is where you get the return value
-					xmlDocSbml = xmlDoc;
-					console.log(xmlDocDiff, xmlDocSbml);
-					document.getElementById("sbmlDownload").onclick = function() {downloadSBML(sbgnJson, xmlDocDiff, xmlDocSbml)};
+				var xmlDocSbmlNew, xmlDocSbmlOld;
+				console.log(document.getElementById("selection")[0].text, document.getElementById("selection")[1].text);
+				foo("testModels/" + document.getElementById("selection")[0].text + ".xml", function(xmlDocOld){
+				  console.log(xmlDocOld); // this is where you get the return value
+					xmlDocSbmlOld = xmlDocOld;
+					foo("testModels/" + document.getElementById("selection")[1].text + ".xml", function(xmlDocNew){
+						console.log(xmlDocNew); // this is where you get the return value
+						xmlDocSbmlNew = xmlDocNew;
+						document.getElementById("sbmlDownload").onclick = function() {downloadSBML(sbgnJson, xmlDocDiff, xmlDocSbmlOld, xmlDocNew)};
+					});
 				});
 
 
-				$("#demo2").text(xmlDiffToXmlJson($.parseJSON (data).xmlDiff));
+
+
+	//			$("#demo2").text(xmlDiffToXmlJson($.parseJSON (data).xmlDiff));
 	//		$("#bivesReport").html ($.parseJSON (data).reportHtml);
 			var sbgnJson = $.parseJSON (data).reactionsSbgnJson;
-			console.log(xmlDocDiff, xmlDocSbml);
+			//console.log(xmlDocDiff, xmlDocSbml);
 			showSbgn(sbgnJson);
 
 		}

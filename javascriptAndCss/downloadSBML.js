@@ -1,144 +1,67 @@
-function downloadSBML(obj, xmlDocDiff, xmlDocSbml) {
+function downloadSBML(obj, xmlDocDiff, xmlDocSbmlOld, xmlDocSbmlNew) {
 	var data = JSON.parse(obj);
-	console.log(xmlDocDiff, xmlDocSbml);
+	console.log(xmlDocDiff, "new Doc", xmlDocSbmlNew, "old Doc",  xmlDocSbmlOld);
 	var xDiff, xSbml;
 
 
-	xDiff = xmlDocDiff.getElementsByTagName("insert")[0].getElementsByTagName("node");
-	for(i=0; i < 4; i++){
-		var newPath, pathArray;
+	xDiff = xmlDocDiff.getElementsByTagName("delete")[0].getElementsByTagName("node");
+	console.log(xDiff.length);
+	for(i=0; i < xDiff.length; i++){
+		if(!xDiff[i].hasAttribute("triggeredBy")){
+			var newPath, pathArray, nextSibling, oldObject, parent;
 
-		newPath = xDiff[i].getAttribute("newPath");
-		pathArray =  splitXmlPath(newPath);
-		console.log(pathArray);
-	//	xml = xml + '<reaction'
-	//	if(data.links[i].id != "null")	xml = xml + ' id="' + data.links[i].id + '" '; //id from model would be better
-	//	if(data.links[i].compartment != "null")	xml = xml + ' compartment="' + data.links[i].compartment + '" ';
-	//	xml = xml + '>\n';
+			newPath = xDiff[i].getAttribute("oldPath");
+			pathArray =  splitXmlPath(newPath);
+			console.log(pathArray);
+			console.log("it worked how often?");
 
+			parent = xmlDocSbmlNew;
+			oldObject = xmlDocSbmlOld;
 
+			for(k=0; k < pathArray.length-1; k++){
 
-	//	xml = xml +  '</reaction>\n';
-	}
+				if(parent != undefined) parent = parent.getElementsByTagName(pathArray[k][0])[pathArray[k][1]-1];
+				else console.log("parent was undefined");
 
-
-
-
-
-
-
-
+				if(oldObject != undefined) oldObject = oldObject.getElementsByTagName(pathArray[k][0])[pathArray[k][1]-1];
+				else console.log("oldObject was undefined");
+			}
 
 
+			console.log(oldObject, parent);
 
-	var xml =	'<?xml version="1.0" encoding="UTF-8"?>\n';
-	xml = xml +	'\t<sbml xmlns="http://www.sbml.org/sbml/level3/version2/core" level="3" version="2">\n'
-	xml = xml +	'\t\t<model id="MyMergedModel">\n';
+			if(parent != undefined && oldObject != undefined){
+				nextSibling = parent.getElementsByTagName(pathArray[pathArray.length-1][0])[pathArray[pathArray.length-1][1]];
+				console.log(oldObject);
+				oldObject = oldObject.getElementsByTagName(pathArray[pathArray.length-1][0])[pathArray[pathArray.length-1][1]-1];
 
-	xml = xml + '<listOfFunctionDefinitions>\n';
+				if(nextSibling != undefined && oldObject != undefined){
+					console.log("nextSibling", nextSibling, "oldObject", oldObject);
+					nextSibling.parentNode.insertBefore(oldObject, nextSibling); // is the xml manipulated or just
+					console.log(oldObject.ownerDocument);
+				} else {
+					console.log("parent", parent, "parentTag", parent.tagName, "oldO", oldObject);
+					if(oldObject != undefined) parent.appendChild(oldObject);
+					else console.log("undefined oldObject");
 
-	xml = xml + '<functionDefinition> </functionDefinition>\n';
-
-
-
-	xml = xml + '</listOfFunctionDefinitions>\n';
-	xml = xml + '<listOfUnitDefinitions>\n';
-
-	xml = xml + '<unitDefinition>  </unitDefinition>\n';
-
-
-
-	xml = xml + '</listOfUnitDefinitions>\n';
-	xml = xml + '<listOfCompartments>\n';
-
-	for(i = 0; i < data.nodes.length; i++){
-		if(data.nodes[i].id.startsWith("c")){ //types for nodes is needed to read it out from the json, unique ID directly from the model would also be good!
-			xml = xml + '<compartment\n';
-			if(data.nodes[i].id != "null")	xml = xml + ' id="' + data.nodes[i].id + '" ';
-			if(data.nodes[i].compartment != "null")	xml = xml + ' compartment="' + data.nodes[i].compartment + '" ';
-			if(data.nodes[i].class != "null")	xml = xml + ' sbo="' + data.nodes[i].class + '" ';
-			if(data.nodes[i].label != "null")	xml = xml + ' name="' + data.nodes[i].label + '" ';
-			xml = xml + '>\n'
-			xml = xml + '</compartment>\n';
+				}
+			} else console.log("undefined parent or object");
 		}
 	}
 
-
-
-
-	xml = xml + '</listOfCompartments>\n';
-	xml = xml + '<listOfSpecies>\n';
-
-	console.log(data.nodes.length, data.nodes[1]);
-	for(i = 0; i < data.nodes.length; i++){
-		if(!data.nodes[i].id.startsWith("r") && !data.nodes[i].id.startsWith("c")){ //types for ndoes is needed to read it out from the json, unique ID directly from the model would also be good!
-			xml = xml + '<species '
-			if(data.nodes[i].id != "null")	xml = xml + ' id="' + data.nodes[i].id + '" ';
-			if(data.nodes[i].compartment != "null")	xml = xml + ' compartment="' + data.nodes[i].compartment + '" ';
-			if(data.nodes[i].class != "null")	xml = xml + ' sbo="' + data.nodes[i].class + '" ';
-			if(data.nodes[i].label != "null")	xml = xml + ' name="' + data.nodes[i].label + '" ';
-			xml = xml + '>\n'
-			xml = xml + '</species>\n';
-		}
-	}
-
-
-
-	xml = xml + '</listOfSpecies>\n';
-	xml = xml + '<listOfParameters>\n';
-
-	xml = xml + '<parameter>  </parameter>\n';
-
-
-
-	xml = xml + '</listOfParameters>\n';
-	xml = xml + '<listOfInitialAssignments>\n';
-
-	xml = xml + '<initialAssignment>  </initialAssignment>\n';
-
-
-
-	xml = xml + '</listOfInitialAssignments>\n';
-	xml = xml + '<listOfRules>\n';
-
-	xml = xml + '</listOfRules>\n';
-	xml = xml + '<listOfConstraints>\n';
-
-	xml = xml + '<constraint> ... </constraint>\n';
-
-
-
-	xml = xml + '</listOfConstraints>\n';
-	xml = xml + '<listOfReactions>\n';
-
-
-	xml = xml + '</listOfReactions>\n';
-	xml = xml + '<listOfEvents>\n';
-
-	xml = xml + '<event> ... </event>\n';
-
-
-
-	xml = xml + '</listOfEvents>\n';
-
-
-
-	xml = xml + '\t\t</model>\n';
-	xml = xml +	'\t</sbml>\n';
-
-	//check and print
-	var blob = new Blob([(new XMLSerializer).serializeToString(xmlDocDiff)], {type: "text/xml;charset=utf-8"});
-	saveAs(blob, "sbgn-ml.xml");
+	//check and download
+	var blob = new Blob([(new XMLSerializer).serializeToString(xmlDocSbmlNew)], {type: "text/xml;charset=utf-8"}); //xmlDocSbmlNew
+	saveAs(blob, "SBML-Merge.xml");
 }
 
 function splitXmlPath(path){
 	var pathArray;
 
-	pathArray = path.substr(1);
-	pathArray = pathArray.split("/");
-	for(i = 0; i < pathArray.length; i++){
-		pathArray = pathArray[i].slice(0,-1);
-		pathArray = pathArray[i].split("[");
+	path = path.substr(1);
+	pathArray = path.split("/");
+	for(j = 0; j < pathArray.length; j++){
+		pathArray[j] = pathArray[j].slice(0,-1);
+		pathArray[j] = pathArray[j].split("[");
 	}
 
 	return pathArray;

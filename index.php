@@ -21,10 +21,14 @@
 </head>
 <body>
 <div id="left">
-	<h2>DiVil</h2>
+	<h2>Merger - Dev</h2>
 	<div id="modelSelection">
 	<h1> Select two model versions </h1>
 	<select id="versionChoice" class="box" size="10">
+		<optgroup label="PK Cycle">
+			<option class="opt" value="test">model_MOR_AC</option>
+			<option class="opt" value="test">model_PKA_cycle</option>
+		</optgroup>
 		<optgroup label="PK Cycle">
 			<option class="opt" value="test">PKA_cycle_l2v5</option>
 			<option class="opt" value="test">PKA_cycle_MOR_l2v4</option>

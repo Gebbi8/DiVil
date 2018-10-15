@@ -33,9 +33,13 @@ function showSbgn(data){
 	var color = d3.scale.category20();
 
 	var force = d3.layout.force()
-		.charge(-400)
-		.linkDistance(100)
-		.gravity(0.2)
+	.linkStrength(0.1)
+	.friction(0.9)
+	.linkDistance(20)
+	.charge(-300)
+	.gravity(0.1)
+	.theta(0.8)
+	.alpha(0.1)
 		.size([width, height]);
 
 	//zoom the whole svg
@@ -356,7 +360,7 @@ function compartmentText(key){
 
 			elementClass = sboSwitchArc(d.class);
 			//for process nodes: connect arcs to reactant and product ports
-			if(!document.getElementById("portToggle").checked){
+			if(document.getElementById("portToggle").checked){
 				if(elementClass == "consumption"){
 					x2 = d.target.x - halfElementWidth;
 				} else if (elementClass == "production") {

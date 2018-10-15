@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version4" level="2" metaid="_000000" version="4">
+<model>
+      <listOfCompartments>
+      <compartment id="cell" metaid="_000002" size="1">
+
+      </compartment>
+    </listOfCompartments>
+
+    <listOfSpecies>
+      <species id="EmptySet" initialAmount="1" hasOnlySubstanceUnits="true" metaid="_808249" boundaryCondition="true" sboTerm="SBO:0000291" compartment="cell"/>
+      <species id="u" initialAmount="0" hasOnlySubstanceUnits="true" metaid="_808265" boundaryCondition="true" sboTerm="SBO:0000297" compartment="cell">
+
+      </species>
+      <species id="z" initialAmount="0" hasOnlySubstanceUnits="true" metaid="_808285" boundaryCondition="true" sboTerm="SBO:0000297" compartment="cell">
+
+      </species>
+      <species id="v" initialAmount="0" hasOnlySubstanceUnits="true" metaid="_175119" boundaryCondition="true" sboTerm="SBO:0000297" compartment="cell">
+
+      </species>
+    </listOfSpecies>
+    <listOfParameters>
+
+    </listOfParameters>
+    <listOfRules>
+
+    </listOfRules>
+    <listOfReactions>
+
+      <reaction id="Reaction3" metaid="_175123" reversible="false" sboTerm="SBO:0000176">
+        <listOfReactants>
+          <speciesReference species="z" metaid="_372816"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="u" metaid="_372828"/>
+        </listOfProducts>
+
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>
