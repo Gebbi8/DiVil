@@ -4,7 +4,7 @@
 	<title>Stats-website</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="javascriptAndCss/style.css">
-	<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="thirdParty/d3.min.js"></script>
 	<script type="text/javascript" src="thirdParty/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/sboTermMapping.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/showSbgn.js"></script>
