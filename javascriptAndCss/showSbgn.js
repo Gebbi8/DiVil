@@ -25,7 +25,7 @@ function showSbgn(data){
 	// register click-listeners to the download button
     $("#download").click (function (){download (obj);});
 
-	var width = 1400,
+	var width = 1000,
 		height = 800,
 		size = (width - 50) / 10 ;
 		marker = width / 100;
