@@ -1,67 +1,110 @@
 function showSbgn(data){
 
-	console.log(data);
+	//delete current graph and sho graph tab and download button
 	d3.selectAll("#bivesGraph").selectAll("svg").remove();
-	$('#graphTab').show();
-	$('#donwload').show();
+
+	//check if graph data is available
+	if(data == "" || data == undefined) {
+		$('#graphTab').hide();
+		return;
+	}
+//	$('#graphTab').show();
+//	$('#donwload').show();
+
+//Variables for d3
+var currentZoom = 1;
+var width = 1000,
+	height = 800,
+	size = (width - 50) / 10 ;
+	marker = width / 100;
+
+	//append clean svg
+	var svg = d3.select("#bivesGraph").append("svg")
+		.attr("id", 'bivesGraphSvg')
+		.attr("width", width)
+		.attr("height", height)
+		.attr("width", width);
+//		.call(zoom);
 
 	//add addEventListener to checkbox for port toggling
 	var checkbox = document.querySelector("input[id=portToggle]");
 
+	//register event listerners
 	checkbox.addEventListener( 'change', function() {
 		changeProcessNode(size);
 		tick();
 		console.log("Toogle want's to tickle")
 	});
 
-
-	if(data == "" || data == undefined) {
-		$('#graphTab').hide();
-		return;
-	}
+	//parse the data and register download function
 	var obj = JSON.parse(data);
-
-	var currentZoom = 1;
 	// register click-listeners to the download button
-    $("#download").click (function (){download (obj);});
+	$("#download").click (function (){download (obj);});
 
-	var width = 1000,
-		height = 800,
-		size = (width - 50) / 10 ;
-		marker = width / 100;
+	//get nodes and links
+	var nodes = obj.nodes;
+	var links = obj.links;
 
-	var color = d3.scale.category20();
+	console.log(nodes, links);
+	//create force layout
 
-	var force = d3.layout.force()
-	.linkStrength(0.1)
-	.friction(0.9)
-	.linkDistance(20)
-	.charge(-300)
-	.gravity(0.1)
-	.theta(0.8)
-	.alpha(0.1)
-		.size([width, height]);
+
+	var forceSimulation = d3.forceSimulation(nodes)
+		.force('charge', d3.forceManyBody())		//set colision to avoid overlap
+	  .force('center', d3.forceCenter(width / 2, height / 2)) //attract to the svg center
+	//	.force('link', d3.forceLink().links(links)) //link have a specific distance, default is 30
+	  .on('tick', ticked);
+
+
+	const link = svg.append("g")
+      .attr("stroke", "#999")
+      .attr("stroke-opacity", 0.6)
+	    .selectAll("line")
+		    .data(links)
+		    .enter().append("line")
+		      .attr("stroke-width", 5);
+
+	var node = svg.selectAll("path")
+								.data(nodes).enter()
+							    .append("g")
+							    .attr("class", "node");
+
+				var shapes = node.enter()
+									.append("path")
+										.attr("d","M0,0H10V10H-10Z")
+	            			.attr("fill","black");
+	//            .call(d3.drag()
+	//	            .on("start",dragstarted)
+//		            .on("drag",dragged));
+
+
+					function ticked() {
+				    link
+				        .attr("x1", d => d.source.x)
+				        .attr("y1", d => d.source.y)
+				        .attr("x2", d => d.target.x)
+				        .attr("y2", d => d.target.y);
+
+				    node
+				        .attr("cx", d => d.x)
+				        .attr("cy", d => d.y);
+				  }
+
 
 	//zoom the whole svg
-	var zoom = d3.behavior.zoom()
+	var zoom = d3.zoom()
     .scaleExtent([0.1, 10])
     .on("zoom", zoomed);
 
-	function zoomed() {
-		container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-
-		tick();
-	}
-
-	var svg = d3.select("#bivesGraph").append("svg")
-		.attr("id", 'bivesGraphSvg')
-		.attr("width", width)
-		.attr("height", height)
-		.call(zoom);
-
 	var container = svg.append("g");
 
-	var defs = appendDefs(svg); //define arrowheads: see appendDefs.js
+	function zoomed() {
+		container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+		ticked();
+	}
+
+
+//	var defs = appendDefs(svg); //define arrowheads: see appendDefs.js
 
 	var edges = [];
 	var compartments = [];
@@ -100,19 +143,36 @@ function showSbgn(data){
 		link.target = nodeById.get(link.target);
 	  });
 
-	force
-		.nodes(obj.nodes)
-		.links(obj.links)
-		.start();
+//	force
+//		.nodes(obj.nodes)
+//		.links(obj.links)
+//		.start();
 
-	var drag = force.drag()
-    .on("dragstart", dragstart);
+		var radius = 15;
+		var color = d3.scaleOrdinal();
 
-	function dragstart(d) {
+/*		svg.selectAll("nodes")
+		  .data(nodes)
+		  .enter().append("circle")
+		    .attr("cx", function(d) { return d.x; })
+		    .attr("cy", function(d) { return d.y; })
+		    .attr("r", radius)
+		    .style("fill", function(d, i) { return color(i); })
+		    .call(d3.drag()
+		        .on("start", dragstarted)
+		        .on("drag", dragged));
+*/
+
+	function dragstarted(d) {
 		d3.event.sourceEvent.stopPropagation();
 		d3.select(this).classed("fixed", d.fixed = true);
 		console.log("draging me down.");
-		d3.event.sourceEvent.stopPropagation()
+		d3.event.sourceEvent.stopPropagation();
+	}
+
+	function dragged(d) {
+  	d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
+		ticked();
 	}
 
 	function clicked(d){
@@ -121,8 +181,8 @@ function showSbgn(data){
 		d3.select(this).classed("fixed", d.fixed = false);
 	}
 
-	var dragCompartment = d3.behavior.drag()
-		.on("dragstart", function() {force.start(); d3.event.sourceEvent.stopPropagation();})
+/*	var dragCompartment = d3.behavior.drag()
+		.on("dragstart", function() {forceSimulation.start(); d3.event.sourceEvent.stopPropagation();})
 		.on("drag", function(d, i){
 
 			var key = d.key;
@@ -142,13 +202,13 @@ function showSbgn(data){
 					}
 				);
 			tick();
-		})
+		}) */
 
 	var nested_data = d3.nest()
 		.key(function(d) { return d.compartment; })
 		.entries(obj.nodes);
 
-	  var link = container.selectAll(".link")
+/*	 var link = container.selectAll(".link")
 		  .data(obj.links)
 		.enter().append("path")
 		  .attr("marker-end", function(d) {
@@ -160,7 +220,7 @@ function showSbgn(data){
 		  .style("stroke-width", 1)
 		  .style("fill", "none")
 		  .style("stroke", function(d) { return getColor(d.bivesClass);})
-
+*/
 	function getColor(bivesColor){
 		switch (bivesColor){
 			case 'insert': return "green"; break;
@@ -207,7 +267,7 @@ function showSbgn(data){
 		" z ";
 	}
 
-	  var node = container.selectAll(".node")
+/*	  var node = container.selectAll(".node")
 		  .data(obj.nodes.filter(function(d) { return sboSwitch(d.class) != "compartment"}))
 		.enter().append("g")
 			.attr("class", function(d) {return "node " + sboSwitch(d.class);})
@@ -215,18 +275,18 @@ function showSbgn(data){
 			.attr("fill", function(d) { if(d.class != "SBO:0000290") return "white"; if(sboSwitch(d.class)=='association') return black})
 						.on("click", clicked) //d3.select(this).classed("fixed", d.fixed = true);
 				.call(drag);//.call(node_drag);
-
-		node.insert("path")
+*/
+/*		node.insert("path")
 		  .attr("class", function(d) { return "node " + d.bivesClass } )
 		  .attr("id", function(d) {return d.id})
 		  .attr("compartment", function(d) {return d.compartment})
 		  .attr('d', function(d) {
 			var nodeWidth = size;
 			if(d.label != null && d.class != "SBO:0000290") {nodeWidth = d.label.length * 7; if(nodeWidth < 35) nodeWidth = 35;} // biggest size of a Char is ca. 9
-			return getSymbol(d.class, nodeWidth || size);
+		//	return getSymbol(d.class, nodeWidth || size);
 		  });
-
-		node.append("text")
+*/
+/*		node.append("text")
 		  .style("text-anchor", "middle")
 		  .style("stroke-width", "0px")
 		  .style("fill", "black")
@@ -244,8 +304,8 @@ function showSbgn(data){
 						.text(lines[i]);
 				}
 			  });
-
-	var compartment = container.selectAll(".compartment")
+*/
+/*	var compartment = container.selectAll(".compartment")
 		.data(nested_data)
 		//.attr("d", compartmentPath)
 	  .enter().insert("g", ":first-child")
@@ -301,44 +361,20 @@ function compartmentText(key){
 		});
 		if(xMin==Infinity)  return;
 		return "translate("+(xMin+xMax)/2+", "+(yMin-16)+")";
-}
+}*/
 
 	function tick() {
 
-		//compartments
-		  // Push different nodes in different directions for clustering.
-/*  		var k = .1 * e.alpha;
+/*
 
-		  // Push nodes toward their designated focus.
-		nodeById.forEach(function(id, o) {
-			if(sboSwitch(o.class) != "compartment"){
-				if(compartments.length == 1){
-					for(var j=0; j<compartments.length; j++){
-						o.y += (compartments[o.id].y - o.y) * k;
-						o.x += (compartments[o.id].x - o.x) * k;
-					}
-				}
-				if(compartments.length == 2){
-					for(var j=0; j<focis[compartments.length-1].length; j++){
-						for(var i=0; i<compartments.length; i++){
-							if(compartments[i].id == o.compartment){
-								o.y += (focis[compartments.length-1][j].y - o.y) * k;
-								o.x += (focis[compartments.length-1][j].x - o.x) * k;
-							}
-						}
-					}
-				}
-			}
-		});  */
-
-	compartment.select("path").attr("d", function(d){
+		compartment.select("path").attr("d", function(d){
 		return compartmentFlex(d.key);
 	})
 
 	compartment.select("text").attr("transform", function(d){
 		return compartmentText(d.key);
 	})
-
+*/
 	//links for costum symbols and multiple links for inserts and updates
 
 		link.attr("d", function(d){

@@ -8,11 +8,11 @@
 	<script type="text/javascript" src="thirdParty/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/sboTermMapping.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/showSbgn.js"></script>
-	<script type="text/javascript" src="javascriptAndCss/costumSymbol.js"></script>
+<!--	<script type="text/javascript" src="javascriptAndCss/costumSymbol.js"></script> -->
 	<script type="text/javascript" src="bives/bivesTool.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/download.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/downloadSBML.js"></script>
-	<script type="text/javascript" src="javascriptAndCss/FileSaver.js"></script>
+	<script type="text/javascript" src="thirdParty/FileSaver.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/appendDefs.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/sbmlParser.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/xmlDiffParser.js"></script>
