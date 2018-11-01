@@ -26,13 +26,15 @@ var width = 1000,
 		.attr("width", width);
 //		.call(zoom);
 
+	appendDefs(); //define arrowheads: see appendDefs.js
+
 	//add addEventListener to checkbox for port toggling
 	var checkbox = document.querySelector("input[id=portToggle]");
 
 	//register event listerners
 	checkbox.addEventListener( 'change', function() {
 		changeProcessNode(size);
-		tick();
+		ticked();
 		console.log("Toogle want's to tickle")
 	});
 
@@ -57,37 +59,51 @@ var width = 1000,
 
 
 	const link = svg.append("g")
-      .attr("stroke", "#999")
-      .attr("stroke-opacity", 0.6)
+      .attr("stroke", "black")
+      .attr("stroke-opacity", 1)
 	    .selectAll("line")
 		    .data(links)
+				.style("marker-end", "url(#" + sboSwitchArc(d.class) + "" + d.bivesClass + ")")
 		    .enter().append("line")
-		      .attr("stroke-width", 5);
+		      .attr("stroke-width", 3);
 
-	var node = svg.selectAll("path")
-								.data(nodes).enter()
+	var node = svg.selectAll("g")
+								.data(nodes);
+
+	var enterNode = node.enter()
 							    .append("g")
 							    .attr("class", "node");
 
-				var shapes = node.enter()
-									.append("path")
-										.attr("d","M0,0H10V10H-10Z")
-	            			.attr("fill","black");
-	//            .call(d3.drag()
-	//	            .on("start",dragstarted)
-//		            .on("drag",dragged));
+	var nodeShape = enterNode.append("path")
+							.attr("d", function(d) {
+								var nodeType = sboSwitch(d.class);
+								console.log(d);
+
+								return customSymbol(nodeType, 50);
+							})
+							.style("stroke", "black")
+							.style("stroke-width", 5)
+        			.attr("fill","none")
+	            .call(d3.drag()
+		            .on("start",dragstarted)
+		            .on("drag",dragged)
+								.on("end", dragended));
 
 
 					function ticked() {
-				    link
-				        .attr("x1", d => d.source.x)
-				        .attr("y1", d => d.source.y)
-				        .attr("x2", d => d.target.x)
-				        .attr("y2", d => d.target.y);
+						link
+				        .attr("x1", function(d) { return d.source.x; })
+				        .attr("y1", function(d) { return d.source.y; })
+				        .attr("x2", function(d) { return d.target.x; })
+				        .attr("y2", function(d) { return d.target.y; });
 
 				    node
-				        .attr("cx", d => d.x)
-				        .attr("cy", d => d.y);
+				        .attr("cx", function(d) { return d.x; })
+				        .attr("cy", function(d) { return d.y; });
+
+						nodeShape.attr("transform", function(d) {
+								return "translate(" + d.x + "," + d.y + ")";
+							});
 				  }
 
 
@@ -102,9 +118,6 @@ var width = 1000,
 		container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 		ticked();
 	}
-
-
-//	var defs = appendDefs(svg); //define arrowheads: see appendDefs.js
 
 	var edges = [];
 	var compartments = [];
@@ -143,39 +156,29 @@ var width = 1000,
 		link.target = nodeById.get(link.target);
 	  });
 
-//	force
-//		.nodes(obj.nodes)
-//		.links(obj.links)
-//		.start();
 
 		var radius = 15;
 		var color = d3.scaleOrdinal();
 
-/*		svg.selectAll("nodes")
-		  .data(nodes)
-		  .enter().append("circle")
-		    .attr("cx", function(d) { return d.x; })
-		    .attr("cy", function(d) { return d.y; })
-		    .attr("r", radius)
-		    .style("fill", function(d, i) { return color(i); })
-		    .call(d3.drag()
-		        .on("start", dragstarted)
-		        .on("drag", dragged));
-*/
-
 	function dragstarted(d) {
-		d3.event.sourceEvent.stopPropagation();
-		d3.select(this).classed("fixed", d.fixed = true);
-		console.log("draging me down.");
-		d3.event.sourceEvent.stopPropagation();
+		if (!d3.event.active) forceSimulation.alphaTarget(0.3).restart();
+	  d.fx = d.x;
+	  d.fy = d.y;
 	}
 
 	function dragged(d) {
-  	d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
-		ticked();
+		d.fx = d3.event.x;
+	  d.fy = d3.event.y;
+	}
+
+	function dragended(d) {
+	  if (!d3.event.active) forceSimulation.alphaTarget(0);
+	  d.fx = null;
+	  d.fy = null;
 	}
 
 	function clicked(d){
+		console.log("click");
 		if (d3.event.defaultPrevented) return; // dragged
 
 		d3.select(this).classed("fixed", d.fixed = false);
@@ -377,7 +380,9 @@ function compartmentText(key){
 */
 	//links for costum symbols and multiple links for inserts and updates
 
-		link.attr("d", function(d){
+/*		link.attr("d", function(d){
+			alert("trying to relink");
+
 			currentZoom = zoom.scale();
 			var x1 = d.source.x,
 					y1 = d.source.y,
@@ -412,7 +417,7 @@ function compartmentText(key){
 
 			var targetClass = sboSwitch(d.target.class);
 
-
+/*
 
 			if((targetClass == "simple chemical" && halfElementWidth*2 <= 35.1) || targetClass == "source and sink" || ((targetClass == "dissociation" || targetClass == "association") && elementClass != "consumption")){
 				var m = (d.target.y - d.source.y)/(d.target.x-d.source.x);
@@ -513,9 +518,9 @@ function compartmentText(key){
 					}
 
 				}
-			}
+			}  */
 
-			if(targetClass == "complex" || targetClass == "macromolecule"){
+/*			if(targetClass == "complex" || targetClass == "macromolecule"){
 				var m = (d.target.y - d.source.y)/(d.target.x-d.source.x);
 				var rectWidth = halfElementWidth*2;
 				var rectHeight = halfElementHeight*2;
@@ -541,9 +546,10 @@ function compartmentText(key){
 					y2 = d.target.y + rectY;
 					x2 = d.target.x + rectX;
 				}
-			}
+			} */
 
-			if((targetClass == "process" || targetClass == "inhibition" || targetClass == "conusmption" || targetClass == "production" || targetClass == "modulation" || targetClass == "stimulation" || targetClass == "catalysis" || targetClass == "necessary stimulation") && elementClass != "consumption" && elementClass != "production"){
+/*			if((targetClass == "process" || targetClass == "inhibition" || targetClass == "conusmption" || targetClass == "production" ||
+			 targetClass == "modulation" || targetClass == "stimulation" || targetClass == "catalysis" || targetClass == "necessary stimulation") && elementClass != "consumption" && elementClass != "production"){
 
 				var m = (d.target.y - d.source.y)/(d.target.x-d.source.x);
 				var rectWidth = halfElementWidth;
@@ -570,9 +576,9 @@ function compartmentText(key){
 					y2 = d.target.y + rectY;
 					x2 = d.target.x + rectX;
 				}
-			}
+			} */
 
-			if(targetClass == "unspecified entity"){
+/*			if(targetClass == "unspecified entity"){
 
 
 				var m = (d.target.y - d.source.y)/(d.target.x-d.source.x);
@@ -603,9 +609,9 @@ function compartmentText(key){
 					}
 				}
 			}
+*/
 
-
-
+/*
 
 			var dr = Math.sqrt((x2-d.source.x) * (x2-d.source.x) + (y2-d.source.y) * (y2-d.source.y));
 			var xr = 20;
@@ -615,21 +621,21 @@ function compartmentText(key){
 			switch(d.bivesClass){
 				//case "insert": return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,1 " + (x2) + "," + y2; break;
 				//case "delete": return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,0 " + (x2) + "," + y2; break;
-				default: return "M" + x1 + "," + y1 + "L" + (x2 + 0) + "," + y2;
+//				default: return "M" + x1 + "," + y1 + "L" + (x2 + 0) + "," + y2;
 			}
 
 			//return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,1 " + x2 + "," + y2;
-		});
+		}); */
 
 		link.filter(function(d){return sboSwitch(d.class) != 'consumption'})
 		 .attr("stroke-dasharray", function(d) {
 						return this.getTotalLength() - 5;
 					})
-
+/*
 		node.attr("transform", function(d) {
 				return "translate(" + d.x + "," + d.y + ")";
 			});
-
+*/
 	  };
 
 

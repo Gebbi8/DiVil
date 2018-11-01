@@ -8,7 +8,7 @@
 	<script type="text/javascript" src="thirdParty/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/sboTermMapping.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/showSbgn.js"></script>
-<!--	<script type="text/javascript" src="javascriptAndCss/costumSymbol.js"></script> -->
+	<script type="text/javascript" src="javascriptAndCss/customSymbol.js"></script>
 	<script type="text/javascript" src="bives/bivesTool.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/download.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/downloadSBML.js"></script>
