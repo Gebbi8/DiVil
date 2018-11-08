@@ -16,6 +16,7 @@
 	<script type="text/javascript" src="javascriptAndCss/appendDefs.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/sbmlParser.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/xmlDiffParser.js"></script>
+	<script type="text/javascript" src="javascriptAndCss/arrowsOnNodes.js"></script>
 
 
 </head>
