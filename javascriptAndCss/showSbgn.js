@@ -81,13 +81,19 @@ var width = 1000,
 							})
 							.attr("id", function(d) {return d.id})
 							.style("stroke", "black")
-							.style("stroke-width", 5)
-        			.attr("fill","none")
+							.style("stroke-width", 3)
+        			.attr("fill","white")
 	            .call(d3.drag()
 		            .on("start",dragstarted)
 		            .on("drag",dragged)
 								.on("end", dragended));
 
+		var nodeLabel = enterNode.append("text")
+											.style("text-anchor", "middle")
+											.style("stroke", "none")
+											.style("font-size", "14px")
+											.attr('dy', "0.25em")
+											.text(function(d) { console.log(d.label); return d.label });
 
 					function ticked() {
 				//		link
@@ -103,6 +109,10 @@ var width = 1000,
 				        .attr("cy", function(d) { return d.y; });
 
 						nodeShape.attr("transform", function(d) {
+								return "translate(" + d.x + "," + d.y + ")";
+							});
+
+						nodeLabel.attr("transform", function(d) {
 								return "translate(" + d.x + "," + d.y + ")";
 							});
 						//	tickArrows(container, obj, node, link, zoom);

@@ -326,7 +326,7 @@ var targetClass = sboSwitch(d.target.class);
 			switch(d.bivesClass){
 				//case "insert": return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,1 " + (x2) + "," + y2; break;
 				//case "delete": return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,0 " + (x2) + "," + y2; break;
-				default: console.log(x2, y2);return "M" + x1 + "," + y1 + "L" + (x2 + 0) + "," + y2;
+				default: return "M" + x1 + "," + y1 + "L" + (x2 + 0) + "," + y2;
 			}
 
 			//return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,1 " + x2 + "," + y2;
