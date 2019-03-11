@@ -1,4 +1,4 @@
-function showSbgn(data){
+	function showSbgn(data){
 
 	//delete current graph and sho graph tab and download button
 	d3.selectAll("#bivesGraph").selectAll("svg").remove();
@@ -45,15 +45,15 @@ var width = 1000,
 
 	//get nodes and links
 	var nodes = obj.nodes;
+	console.log(nodes);
 	var links = obj.links;
+	console.log(links);
 
-	console.log(nodes, links);
 	//create force layout
-
-
 	var forceSimulation = d3.forceSimulation(nodes)
-		.force('charge', d3.forceManyBody())		//set colision to avoid overlap
+		.force('charge', d3.forceManyBody().strength(-50))		//set colision to avoid overlap
 	  .force('center', d3.forceCenter(width / 2, height / 2)) //attract to the svg center
+		.force('charge', d3.forceManyBody())
 	//	.force('link', d3.forceLink().links(links)) //link have a specific distance, default is 30
 	  .on('tick', ticked);
 
@@ -72,12 +72,13 @@ var width = 1000,
 
 	var enterNode = node.enter()
 							    .append("g")
+									.attr("id", function(d) {return d.id})
 							    .attr("class", "node");
 
 	var nodeShape = enterNode.append("path")
 							.attr("d", function(d) {
 								var nodeType = sboSwitch(d.class);
-								return customSymbol(nodeType, 50);
+								return customSymbol(nodeType, 30);
 							})
 							.attr("id", function(d) {return d.id})
 							.style("stroke", "black")
@@ -95,28 +96,21 @@ var width = 1000,
 											.attr('dy', "0.25em")
 											.text(function(d) { console.log(d.label); return d.label });
 
-					function ticked() {
-				//		link
-				//        .attr("x1", function(d) { return d.source.x; })
-				//        .attr("y1", function(d) { return d.source.y; })
-				//        .attr("x2", function(d) { return d.target.x; })
-				//       .attr("y2", function(d) { return d.target.y; });
+		function ticked() {
 
-						link.attr("d", tickArrows);
+			link.attr("d", tickArrows);
 
-				    node
-				        .attr("cx", function(d) { return d.x; })
-				        .attr("cy", function(d) { return d.y; });
+	    node.attr("cx", function(d) { return d.x; })
+	        .attr("cy", function(d) { return d.y; });
 
-						nodeShape.attr("transform", function(d) {
-								return "translate(" + d.x + "," + d.y + ")";
-							});
+			nodeShape.attr("transform", function(d) {
+					return "translate(" + d.x + "," + d.y + ")";
+				});
 
-						nodeLabel.attr("transform", function(d) {
-								return "translate(" + d.x + "," + d.y + ")";
-							});
-						//	tickArrows(container, obj, node, link, zoom);
-				  }
+			nodeLabel.attr("transform", function(d) {
+					return "translate(" + d.x + "," + d.y + ")";
+				});
+	  }
 
 
 	//zoom the whole svg
@@ -133,13 +127,8 @@ var width = 1000,
 
 	var edges = [];
 	var compartments = [];
-	var focis= [
-		[{x:width/2,y:height/2}],
-		[{x:0,y:height/2},{x:width,y:height/2}],
-		[{x:width/2,y:0},{x:0,y:height},{x:width, y:height}],
-		[{x:0,y:0},{x:width,y:0},{x:0, y:height},{x:width,y:height}],
-		[{x:0,y:0},{x:width,y:0},{x:width/2, y:height/2},{x:0,y:height},{x:width,y:height}]
-	]
+
+
 	var nodeById = d3.map();
 
 	  obj.nodes.forEach(function(node) {
@@ -158,14 +147,14 @@ var width = 1000,
 		nodeById.set(node.id, node);
 	  });
 
-	  //console.log(compartments);
-	  //console.log(nodeById);
+	  console.log(compartments);
+	  console.log(nodeById);
 
 
 
 	  obj.links.forEach(function(link) {
-		link.source = nodeById.get(link.source);
-		link.target = nodeById.get(link.target);
+			link.source = nodeById.get(link.source);
+			link.target = nodeById.get(link.target);
 	  });
 
 
@@ -173,7 +162,7 @@ var width = 1000,
 		var color = d3.scaleOrdinal();
 
 	function dragstarted(d) {
-		if (!d3.event.active) forceSimulation.alphaTarget(0.3).restart();
+		if (!d3.event.active) forceSimulation.alphaTarget(0.5).restart();
 	  d.fx = d.x;
 	  d.fy = d.y;
 	}
