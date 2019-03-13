@@ -1,3 +1,5 @@
+/*
+
 #left{
 	width: 20%;
 	float: left;
@@ -39,7 +41,7 @@ body {
   margin:0;
 }
 
-body { /*vorher midDiv*/
+body { /*vorher midDiv *//*
   width: 100vw;
   margin: 0 auto;
 	min-height: 900px;
@@ -116,7 +118,7 @@ footer {
 		shape-rendering: crispEdges;
 }
 
-/* SELECTION  */
+/* SELECTION  *//*
 
 .brush .extent {
     stroke: #0DFFFC;
@@ -124,7 +126,7 @@ footer {
     shape-rendering: crispEdges;
 }
 
-/* BUTTONS */
+/* BUTTONS *//*
 .buttons {
 	display: flex;
     padding-bottom: 20px;
@@ -208,7 +210,7 @@ footer {
 
 
 
-/* MENU */
+/* MENU *//*
 #menu {
 	 text-align: center
 }
@@ -225,7 +227,7 @@ footer {
 	width: 100px;
 }
 
-/* BIVES TOOL */
+/* BIVES TOOL *//*
 
 .bives-insert {
     color: #01df01;
@@ -247,7 +249,7 @@ footer {
     color: #014adf;
 }
 
-/* BOXPLOTS */
+/* BOXPLOTS *//*
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -282,7 +284,7 @@ body {
   font: 12px sans-serif;
 }
 
-/* INFO-BUTTON */
+/* INFO-BUTTON *//*
 #infoButton{
 	position: absolute;
 	top: 20px;
@@ -337,7 +339,7 @@ body {
   text-decoration: none;
 }
 
-/* LOG-SCALE SWITCH */
+/* LOG-SCALE SWITCH *//*
     .onoffswitch {
         position: relative; width: 90px;
         -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
@@ -384,7 +386,7 @@ body {
         right: 0px;
     }
 
-/* INFOBOX */
+/* INFOBOX *//*
 .infoBox{
 	position: absolute;
 	background-color: gray;
