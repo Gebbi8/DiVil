@@ -5,6 +5,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="javascriptAndCss/style.css">
+	<link rel="stylesheet" href="thirdParty/atom-one-light.css">
+
 	<script type="text/javascript" src="thirdParty/d3.min.js"></script>
 	<script type="text/javascript" src="thirdParty/highlight.pack.js"></script>
 	<script type="text/javascript" src="thirdParty/jquery-2.1.4.min.js"></script>
@@ -99,17 +101,31 @@
 
 </div>
 
-<div class="col-4"
-	<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+<div class="col-4">
+	<div id="carousel" class="carousel slide">
 	  <div class="carousel-inner" id="innerCarousel">
 
 	  </div>
 	</div>
+	<a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="sr-only">Previous</span>
+	</a>
+	<a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="sr-only">Next</span>
+	</a>
 </div>
 
-
-
+<div class="btn-group" role="group" aria-label="Basic example">
+	<button type="button" class="btn btn-secondary">Keep</button>
+	<button type="button" class="btn btn-secondary">Discard</button>
+  <button type="button" class="btn btn-secondary">From Model A</button>
+  <button type="button" class="btn btn-secondary">From Model B</button>
+	<button type="button" class="btn btn-secondary">Everything from A</button>
+	<button type="button" class="btn btn-secondary">Everything from B</button>
 </div>
+
 </div>
 
 
@@ -120,6 +136,41 @@
 </div>
 <div id="demo2">
 </div>
+
+
+
+
+
+
+
+
+<!-- <div id="carouselExampleIndicators" class="carousel slide">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="..." alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="..." alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="..." alt="Third slide">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div> -->
+
 
 
 

@@ -10,7 +10,17 @@
 </div>
 */
 
+
+
 function createSlides(obj, xmlDocDiff, sbmlDocOld, sbmlDocNew) {
+  //carousel settings
+  $('.carousel').carousel({
+    interval: 0
+  })
+
+
+
+
 	var data = JSON.parse(obj);
 	console.log(xmlDocDiff, "new Doc", sbmlDocNew, "old Doc",  sbmlDocOld);
 	var xDiff, xSbml;
@@ -36,78 +46,145 @@ function createSlides(obj, xmlDocDiff, sbmlDocOld, sbmlDocNew) {
 				console.log("find a solution for XPath: " + noNamespace);
 			}
 
-			var carouselItem = '<div class="carousel-item ';
-			if(first){
-				carouselItem += 'active';
-				first = false;
-			}
-			carouselItem += '">';
+			var carouselItem = '<div class="carousel-item delete">';
 
-// put the xml stuff where	//highlight XmlDiff
-	// $("#highlightXmlDiff").text($.parseJSON (data).xmlDiff);
-	//   $('#highlightXmlDiff').each(function(i, block) {
-	// 	hljs.highlightBlock(block);
-	// });
-			console.log(xmlSnippet);
-			carouselItem += hljs.highlightBlock(xmlSnippet);
 			carouselItem += '</div>';
 
-			console.log(carouselItem);
+      $( "#innerCarousel" ).append( carouselItem );
+      $(".carousel-item").last().text(xmlSnippet.outerHTML)
+      $('.carousel-item').last().each(function(i, block) {
+       	hljs.highlightBlock(block);
+       });
     }
-    //console.log(deleted.triggeredBy);
-  //  console.log(deleted.childNodes[0].nodeValue);
-    //console.log(deleted.childNodes[0].nodeValue);
-
-		// present deleted element
-	//	console.log(deleted)//, xmlDocSbmlOld.evaluate(deleted.t, xmlDocSbmlOld, null, XPathResult.ANY_TYPE, null));
-    var carouselItem = '<div class="carousel-item ';
-    // set first element as active
-    if(first) {
-      carouselItem += 'active';
-      first = false;
-    }
-    carouselItem += '"><div class="d-block w-50">';
-
-/////// add slide content here
-
-    //carousel
-
-
-///////
-    carouselItem += '</div\n</div>';
-
-
-
-
-
-    $( "#innerCarousel" ).append( carouselItem );
 		deleted = deletes.iterateNext();
-
-
 	}
+
+
+
+
 
 	var insert = inserts.iterateNext();
 	while(insert != null){
 		// present inserted element
+    if(!insert.attributes.triggeredBy){
 
+
+      var noNamespace = getLocalXPath(insert.attributes.newPath.value);
+      //console.log(noNamespace);
+      var xPathResult = sbmlDocNew.evaluate(noNamespace, sbmlDocNew, null, XPathResult.ANY_TYPE, null);
+      var xmlSnippet = xPathResult.iterateNext();
+
+      if(xmlSnippet == null ) {
+        console.log("find a solution for XPath: " + noNamespace);
+      }
+
+      var carouselItem = '<div class="carousel-item insert">';
+
+      carouselItem += '</div>';
+
+      $( "#innerCarousel" ).append( carouselItem );
+      $(".carousel-item").last().text(xmlSnippet.outerHTML)
+      $('.carousel-item').last().each(function(i, block) {
+        hljs.highlightBlock(block);
+       });
+    }
 		insert = inserts.iterateNext();
 	}
 
 	var update = updates.iterateNext();
 	while(update != null){
 		// present updated content
+    if(!update.attributes.triggeredBy){
 
+
+      var noNamespaceA = getLocalXPath(update.attributes.oldPath.value);
+      var noNamespaceB = getLocalXPath(update.attributes.newPath.value);
+
+      //console.log(noNamespace);
+      var xPathResultA = sbmlDocOld.evaluate(noNamespaceA, sbmlDocOld, null, XPathResult.ANY_TYPE, null);
+      var xmlSnippetA = xPathResultA.iterateNext();
+
+      var xPathResultB = sbmlDocNew.evaluate(noNamespaceB, sbmlDocNew, null, XPathResult.ANY_TYPE, null);
+      var xmlSnippetB = xPathResultB.iterateNext();
+
+      if(xmlSnippet == null ) {
+        console.log("find a solution for XPath: " + noNamespace);
+      }
+
+      var carouselItem = '<div class="carousel-item update">';
+
+      carouselItem += '<div class="updateA"></div>'
+      carouselItem += '<div class="updateB"></div>'
+
+      carouselItem += '</div>';
+
+      $( "#innerCarousel" ).append( carouselItem );
+      $(".updateA").last().text(xmlSnippetA.outerHTML)
+      $(".updateB").last().text(xmlSnippetB.outerHTML)
+      $('.updateA').last().each(function(i, block) {
+        console.log(i, block);
+        hljs.highlightBlock(block);
+       });
+       $('.updateB').last().each(function(i, block) {
+         console.log(i, block);
+         hljs.highlightBlock(block);
+        });
+    }
 
 		update = updates.iterateNext();
 	}
 
 	var move = moves.iterateNext();
 	while(move != null){
-		// present moved content
+    // present moved content
+    if(!move.attributes.triggeredBy){
 
-		move = moves.iterateNext();
+
+      var noNamespaceA = getLocalXPath(move.attributes.oldPath.value);
+      var noNamespaceB = getLocalXPath(move.attributes.newPath.value);
+
+      //console.log(noNamespace);
+      var xPathResultA = sbmlDocOld.evaluate(noNamespaceA, sbmlDocOld, null, XPathResult.ANY_TYPE, null);
+      var xmlSnippetA = xPathResultA.iterateNext();
+
+      var xPathResultB = sbmlDocNew.evaluate(noNamespaceB, sbmlDocNew, null, XPathResult.ANY_TYPE, null);
+      var xmlSnippetB = xPathResultB.iterateNext();
+
+      if(xmlSnippet == null ) {
+        console.log("find a solution for XPath: " + noNamespace);
+      }
+
+      var carouselItem = '<div class="carousel-item move">';
+
+      carouselItem += '<div class="moveA"></div>'
+      carouselItem += '<div class="moveB"></div>'
+
+      carouselItem += '</div>';
+
+      $( "#innerCarousel" ).append( carouselItem );
+      $(".moveA").last().text(xmlSnippetA.outerHTML)
+      $(".moveB").last().text(xmlSnippetB.outerHTML)
+      $('.moveA').last().each(function(i, block) {
+        console.log(i, block);
+        hljs.highlightBlock(block);
+       });
+       $('.moveB').last().each(function(i, block) {
+         console.log(i, block);
+         hljs.highlightBlock(block);
+        });
+    }
+
+    move = moves.iterateNext();
 	}
+
+
+
+  $('.carousel-item').first().addClass('active');
 }
+
+
+
+
 
 function getLocalXPath(path){
 	var pathArray;
@@ -117,7 +194,7 @@ function getLocalXPath(path){
 	for(j = 0; j < pathArray.length; j++){
 		var splitArr = pathArray[j].split("[");
 
-		if(splitArr[0] == "text()"){
+		if(splitArr[0] == "text()"){                                                  //add special cases
 			returnPath += '/' + splitArr[0] + '[' + splitArr[1];
 		} else 	returnPath += "/*[local-name()='" + splitArr[0] + "'][" + splitArr[1];
 	}
