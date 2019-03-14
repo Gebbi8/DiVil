@@ -26,7 +26,7 @@ function getBivesData(v1, v2, command, callback){
 		console.log(dataCatch);
 
 		//save diff in local storage
-		sessionStorage.setItem(v1.model+"_"+v1.versionid+"_"+v2.versionid, dataCatch);
+		//sessionStorage.setItem(v1.model+"_"+v1.versionid+"_"+v2.versionid, dataCatch);
 		console.log("saved in sessionStorage");
 		prepareData($.parseJSON (dataCatch), v1, v2);
 	});
