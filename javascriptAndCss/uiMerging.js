@@ -12,7 +12,7 @@
 
 
 
-function createSlides(obj, xmlDocDiff, sbmlDocOld, sbmlDocNew) {
+function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
   //carousel settings
   $('.carousel').carousel({
     interval: 0
@@ -20,8 +20,6 @@ function createSlides(obj, xmlDocDiff, sbmlDocOld, sbmlDocNew) {
 
 
 
-
-	var data = JSON.parse(obj);
 	console.log(xmlDocDiff, "new Doc", sbmlDocNew, "old Doc",  sbmlDocOld);
 	var xDiff, xSbml;
 

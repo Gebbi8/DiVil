@@ -20,36 +20,37 @@ function getBivesData(v1, v2, command, callback){
 		"bivesJob=" + JSON.stringify (bivesJob),
 		function (data)
 		{
-			console.log(data);
-			//obj = showSbgn(JSON.parse(data).reactionsSbgnJson);
-		//	$("#demo2").text($.parseJSON (data).xmlDiff);
-				var dataJson = $.parseJSON (data);
-				document.getElementById("sbgnMLdownload").onclick = function() {download(data)};
-				parser = new DOMParser();
-				var xmlDocDiff = parser.parseFromString(dataJson.xmlDiff,"text/xml");
-				var xmlDocSbmlNew, xmlDocSbmlOld;
-				console.log(document.getElementById("selection")[0].text, document.getElementById("selection")[1].text);
-				foo("testModels/" + document.getElementById("selection")[0].text + ".xml", function(xmlDocOld){
-				  console.log(xmlDocOld); // this is where you get the return value
-					xmlDocSbmlOld = xmlDocOld;
-					foo("testModels/" + document.getElementById("selection")[1].text + ".xml", function(xmlDocNew){
-						console.log(xmlDocNew); // this is where you get the return value
-						xmlDocSbmlNew = xmlDocNew;
-						document.getElementById("sbmlDownload").onclick = function() {downloadSBML(sbgnJson, xmlDocDiff, xmlDocSbmlOld, xmlDocNew)};
-						document.getElementById("createSlides").onclick = function() {createSlides(sbgnJson, xmlDocDiff, xmlDocSbmlOld, xmlDocNew)};
-						document.getElementById("sbgnMLdownload").onclick = function() {download(sbgnJson)};
-					});
-				});
-
-
-
-
-	//			$("#demo2").text(xmlDiffToXmlJson($.parseJSON (data).xmlDiff));
-	//		$("#bivesReport").html ($.parseJSON (data).reportHtml);
-			var sbgnJson = $.parseJSON (data).reactionsSbgnJson;
-			//console.log(xmlDocDiff, xmlDocSbml);
-			showSbgn(sbgnJson);
-
+			dataCatch = data;
 		}
-	);
+	).done(function(){
+		console.log(dataCatch);
+
+		//save diff in local storage
+		sessionStorage.setItem(v1.model+"_"+v1.versionid+"_"+v2.versionid, dataCatch);
+		console.log("saved in sessionStorage");
+		prepareData($.parseJSON (dataCatch), v1, v2);
+	});
+
+	//createSlides($.parseJSON (data).xmlDiff, , y);
+
 }
+
+function prepareData(data, v1, v2){
+	console.log(data);
+	parser = new DOMParser();
+	var xmlDocDiff = parser.parseFromString(data.xmlDiff,"text/xml");
+
+
+	foo(v1, function(xmlDocOld){
+		console.log(xmlDocOld); // this is where you get the return value
+		foo(v2, function(xmlDocNew){
+			console.log(xmlDocNew); // this is where you get the return value
+			createSlides(sbgnJson, xmlDocDiff, xmlDoclOld, xmlDocNew);
+		});
+	});
+}
+
+
+
+
+	var xmlDocSbmlNew, xmlDocSbmlOld;

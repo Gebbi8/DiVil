@@ -22,12 +22,14 @@
 	<script type="text/javascript" src="javascriptAndCss/xmlDiffParser.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/arrowsOnNodes.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/uiMerging.js"></script>
+<script type="text/javascript" src="javascriptAndCss/parseURL.js"></script>
 
 	<link rel="stylesheet" href="thirdParty/bootstrap.min.css">
 	<script src="thirdParty/popper.min.js"></script>
 	<script src="thirdParty/bootstrap.min.js"></script>
 
 
+	<script type="text/javascript" src="javascriptAndCss/init.js"></script>
 
 </head>
 <body>
