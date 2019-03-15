@@ -24,8 +24,6 @@ console.log(v1, v2, command);
 			dataCatch = data;
 		}
 	).done(function(){
-		console.log(dataCatch);
-
 		//save diff in local storage
 		//sessionStorage.setItem(v1.model+"_"+v1.versionid+"_"+v2.versionid, dataCatch);
 		//console.log("saved in sessionStorage");

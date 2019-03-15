@@ -37,7 +37,7 @@
 	<div class="row">
 
 
-	<div class="col-4">
+	<div class="col">
 		<div id="carousel" class="carousel slide">
 		  <div class="carousel-inner" id="innerCarousel">
 
@@ -52,7 +52,7 @@
 			<span class="sr-only">Next</span>
 		</a>
 	</div>
-
+</div>
 	<div class="btn-group" role="group" aria-label="Basic example">
 		<button id="btnKeep" type="button" class="btn btn-secondary">Keep</button>
 		<button id="btnDiscard" type="button" class="btn btn-secondary">Discard</button>
@@ -62,7 +62,7 @@
 		<button id="btnAllB" type="button" class="btn btn-secondary">Everything from B</button>
 	</div>
 
-</div>
+
 <script type="text/javascript">
 		$(document).ready(
 			function () {
