@@ -14,7 +14,9 @@ function foo(modelURL, callback){
     consol.log(result);
     callback(result[0].xmlDoc)
   };
-  xmlhttp.open("GET", 'http://localhost/GitRepos/DiVil/proxy.php?url=' + modelURL, true);
+  //localhost:
+  //
+  xmlhttp.open("GET", 'proxy.php?url=' + modelURL, true);
   // If specified, responseType must be empty string or "document"
   xmlhttp.responseType = 'document';
 

@@ -37,7 +37,7 @@ console.log(v1, v2, command);
 }
 
 function prepareData(data, v1, v2){
-	console.log(v1);
+	console.log(v1, v2);
 	parser = new DOMParser();
 	var xmlDocDiff = parser.parseFromString(data.xmlDiff,"text/xml");
 
