@@ -624,3 +624,8 @@ h2{
 button{
 	margin-top: 5px;
 }
+*/
+
+.btnChoice{
+    display: none;
+}

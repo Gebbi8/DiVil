@@ -1,5 +1,6 @@
-// get links to files from outerHTML
-parseURL();
-// call BiVeS
+function init(){
+  $('.btn-secondary').hide();
 
-//show UI
+  //parse URL and call BiVeS
+  parseURL();
+}
