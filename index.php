@@ -34,8 +34,16 @@
 </head>
 <body>
 	<div class="container">
-		<div class="row">
+		<div class="row" id="pageHeader">
 
+		</div>
+		<div class="row">
+			<div class="col">
+				<div id="changeOfSum">
+				</div>
+				<div id="typeOfChange">
+				</div>
+			</div>
 
 		<div class="col">
 			<div id="carousel" class="carousel slide">
@@ -58,33 +66,35 @@
 
 	<div class="btn-toolbar">
 		<div class="btn-group btn-group-toggle" id="bgSingle" data-toggle="buttons">
-			<label id="btnKeep" class="btn btn-secondary">
+			<label id="btnKeep" class="btn btn-secondary choiceBtns">
 	        <input type="radio" name="options">Keep
 	    </label>
-	    <label id="btnDiscard" class="btn btn-secondary">
+	    <label id="btnDiscard" class="btn btn-secondary choiceBtns">
 	        <input type="radio" name="options">Discard
 	    </label>
 		</div>
 		<div class="btn-group btn-group-toggle" id="bgChoice"  data-toggle="buttons">
-			<label id="btnFromA" class="btn btn-secondary">
+			<label id="btnFromA" class="btn btn-secondary choiceBtns">
 	        <input type="radio" name="options">From Model A
 	    </label>
-	    <label id="btnFromB" class="btn btn-secondary">
+	    <label id="btnFromB" class="btn btn-secondary choiceBtns">
 	        <input type="radio" name="options">From Model B
 	    </label>
 		</div>
 		<div class="btn-group btn-group-toggle" id="bgAll"  data-toggle="buttons">
-			<label id="btnAllA" class="btn btn-secondarye">
+			<label id="btnAllA" class="btn btn-secondary choiceBtns">
 	        <input type="radio" name="options">All from A
 	    </label>
-	    <label id="btnAllB" class="btn btn-secondary">
+	    <label id="btnAllB" class="btn btn-secondary choiceBtns">
 	        <input type="radio" name="options">All from B
 	    </label>
 		</div>
 	</div>
 
-
-	<button id="downloadSBML" type="button" class="btn btn-success">Download SBML</button>
+	<div class="progress">
+  	<div id="progressBar" class="progress-bar bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%"></div>
+	</div>
+	<button id="downloadSBML" type="button" class="btn btn-success btn-lg btn-block" disabled aria-disabled="true">Download SBML</button>
 
 
 

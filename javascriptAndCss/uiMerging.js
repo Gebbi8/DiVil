@@ -225,11 +225,15 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
 
 
   $('.carousel-item').first().addClass('active');
+
   initButtons();
 
   console.log(decisionArr);
   var currentIndex = 0;
 
+  $('#changeOfSum').text(currentIndex + 1 + " of " + $('.carousel-item').length);
+  $('#typeOfChange').text(decisionArr[currentIndex][0]);
+  
   //slide manager
 
   $('#carousel').on('slid.bs.carousel', function (ev) {
@@ -251,6 +255,11 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
       if(slideCategory == 'move' || slideCategory == 'update') $('#btnFromB').button('toggle');
       else $('#btnDiscard').button('toggle');
     }
+
+    //update currentNode and change type
+    $('#changeOfSum').text(currentIndex + 1 + " of " + $('.carousel-item').length);
+    $('#typeOfChange').text(decisionArr[currentIndex][0]);
+
   });
 
 
@@ -259,30 +268,40 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
   //save decision
   $('#btnKeep').on('click', function (e) {
     decisionArr[currentIndex][1] = 0;
+    checkBtn();
   });
 
   $('#btnDiscard').on('click', function (e) {
     decisionArr[currentIndex][1] = 1;
+    checkBtn();
   });
 
   $('#btnFromA').on('click', function (e) {
     decisionArr[currentIndex][1] = 0;
-    console.log(decisionArr);
+    checkBtn();
   });
 
   $('#btnFromB').on('click', function (e) {
     decisionArr[currentIndex][1] = 1;
+    checkBtn();
   });
-
 
   $('#downloadSBML').on('click', function (e) {
     downloadSBML(decisionArr, sbmlDocOld, sbmlDocNew);
   });
 
+  function checkBtn(){
+    var sumDecided = 0;
+    var enableDownload = true;
+    for(var i = 0; i < decisionArr.length; i++){
+      if(decisionArr[i][1] != -1){
+         sumDecided++;
+      } else enableDownload = false;
+    }
+    $('#progressBar').width("" + 100 / decisionArr.length * sumDecided + "%")
+    if(enableDownload) $('#downloadSBML').prop('disabled', false);
+  }
 }
-
-
-
 
 
 function getLocalXPath(path){
