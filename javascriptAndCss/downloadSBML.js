@@ -1,43 +1,26 @@
-function downloadSBML(obj, xmlDocDiff, xmlDocSbmlOld, xmlDocSbmlNew) {
-	var data = JSON.parse(obj);
-	console.log(xmlDocDiff, "new Doc", xmlDocSbmlNew, "old Doc",  xmlDocSbmlOld);
-	var xDiff, xSbml;
+function downloadSBML(decisionArr, oldDoc, newDoc) { //works always with the second document as main
 
-	var deletes = xmlDocDiff.evaluate("//delete/child::node()", xmlDocDiff, null, XPathResult.ANY_TYPE,null);
-	var inserts = xmlDocDiff.evaluate("//insert/child::node()", xmlDocDiff, null, XPathResult.ANY_TYPE,null);
-	var updates = xmlDocDiff.evaluate("//update/child::node()", xmlDocDiff, null, XPathResult.ANY_TYPE,null);
-	var moves = xmlDocDiff.evaluate("//move/child::node()", xmlDocDiff, null, XPathResult.ANY_TYPE,null);
+console.log(newDoc);
 
-	console.log(deletes.iterateNext(), moves.iterateNext(), inserts.iterateNext(), updates.iterateNext());
 
-	var deleted = deletes.iterateNext();
-	while(deleted != null){
-		// present deleted element
-	//	console.log(deleted)//, xmlDocSbmlOld.evaluate(deleted.t, xmlDocSbmlOld, null, XPathResult.ANY_TYPE, null));
-		deleted = deletes.iterateNext();
+	//iterate through decision array
+	for(var i=0; i < decisionArr.length; i++){
+		console.log(decisionArr[i]);
+
+		if(decisionArr[i][0] == 'delete' && decisionArr[i][1] == 0){ //add to the file if the user selected to keep it
+		//	newDoc.add(  ); //add decisionArr[i][2] to position X in doc
+
+		} else if(decisionArr[i][0] == 'insert' && decisionArr[i][1] == 1) { //delete from the file if the user selected to keep it
+			console.log(decisionArr[i][2], decisionArr[i][2].parentNode.removeChild(decisionArr[i][2]));
+			
+		} else if(decisionArr[i][0] == 'move' && decisionArr[i][1] == 0) { // delete moved node from document and insert the old node
+
+		} else if(decisionArr[i][0] == 'update' && decisionArr[i][1] == 0) { // delete moved node from document and insert the old node
+
+		}
+
 	}
 
-	var insert = inserts.iterateNext();
-	while(insert != null){
-		// present inserted element
-
-		insert = inserts.iterateNext();
-	}
-
-	var update = updates.iterateNext();
-	while(update != null){
-		// present updated content
-
-		
-		update = updates.iterateNext();
-	}
-
-	var move = moves.iterateNext();
-	while(move != null){
-		// present moved content
-
-		move = moves.iterateNext();
-	}
 
 	//xDiff = xmlDocDiff.getElementsByTagName("delete")[0].getElementsByTagName("node");
 	//console.log(xDiff.length);
@@ -91,8 +74,8 @@ function downloadSBML(obj, xmlDocDiff, xmlDocSbmlOld, xmlDocSbmlNew) {
 	// }
 
 	//check and download
-	var blob = new Blob([(new XMLSerializer).serializeToString(xmlDocSbmlNew)], {type: "text/xml;charset=utf-8"}); //xmlDocSbmlNew
-	saveAs(blob, "SBML-Merge.xml");
+//	var blob = new Blob([(new XMLSerializer).serializeToString(xmlDocSbmlNew)], {type: "text/xml;charset=utf-8"}); //xmlDocSbmlNew
+//	saveAs(blob, "SBML-Merge.xml");
 }
 
 function splitXmlPath(path){

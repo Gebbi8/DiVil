@@ -22,7 +22,7 @@
 	<script type="text/javascript" src="javascriptAndCss/xmlDiffParser.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/arrowsOnNodes.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/uiMerging.js"></script>
-<script type="text/javascript" src="javascriptAndCss/parseURL.js"></script>
+	<script type="text/javascript" src="javascriptAndCss/parseURL.js"></script>
 
 	<link rel="stylesheet" href="thirdParty/bootstrap.min.css">
 	<script src="thirdParty/popper.min.js"></script>
@@ -33,34 +33,59 @@
 
 </head>
 <body>
-<div class="container">
-	<div class="row">
+	<div class="container">
+		<div class="row">
 
 
-	<div class="col">
-		<div id="carousel" class="carousel slide">
-		  <div class="carousel-inner" id="innerCarousel">
+		<div class="col">
+			<div id="carousel" class="carousel slide">
+			  <div class="carousel-inner" id="innerCarousel">
 
-		  </div>
+			  </div>
+			</div>
+			<a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
 		</div>
-		<a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			<span class="sr-only">Previous</span>
-		</a>
-		<a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-			<span class="carousel-control-next-icon" aria-hidden="true"></span>
-			<span class="sr-only">Next</span>
-		</a>
 	</div>
-</div>
-	<div class="btn-group" role="group" aria-label="Basic example">
-		<button id="btnKeep" type="button" class="btn btn-secondary">Keep</button>
-		<button id="btnDiscard" type="button" class="btn btn-secondary">Discard</button>
-	  <button id="btnFromA" type="button" class="btn btn-secondary">From Model A</button>
-	  <button id="btnFromB" type="button" class="btn btn-secondary">From Model B</button>
-		<button id="btnAllA" type="button" class="btn btn-secondary">Everything from A</button>
-		<button id="btnAllB" type="button" class="btn btn-secondary">Everything from B</button>
+
+
+
+	<div class="btn-toolbar">
+		<div class="btn-group btn-group-toggle" id="bgSingle" data-toggle="buttons">
+			<label id="btnKeep" class="btn btn-secondary">
+	        <input type="radio" name="options">Keep
+	    </label>
+	    <label id="btnDiscard" class="btn btn-secondary">
+	        <input type="radio" name="options">Discard
+	    </label>
+		</div>
+		<div class="btn-group btn-group-toggle" id="bgChoice"  data-toggle="buttons">
+			<label id="btnFromA" class="btn btn-secondary">
+	        <input type="radio" name="options">From Model A
+	    </label>
+	    <label id="btnFromB" class="btn btn-secondary">
+	        <input type="radio" name="options">From Model B
+	    </label>
+		</div>
+		<div class="btn-group btn-group-toggle" id="bgAll"  data-toggle="buttons">
+			<label id="btnAllA" class="btn btn-secondarye">
+	        <input type="radio" name="options">All from A
+	    </label>
+	    <label id="btnAllB" class="btn btn-secondary">
+	        <input type="radio" name="options">All from B
+	    </label>
+		</div>
 	</div>
+
+
+	<button id="downloadSBML" type="button" class="btn btn-success">Download SBML</button>
+
 
 
 <script type="text/javascript">

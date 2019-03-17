@@ -1,13 +1,6 @@
-var news, old;
-
 function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
-  news = sbmlDocNew;
-  old = sbmlDocOld;
-
-
-
-
-
+  //save the decision in array: array pos equals slide number
+  var decisionArr = [];
 
   //carousel settings
   $('.carousel').carousel({
@@ -27,8 +20,7 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
 	var deleted = deletes.iterateNext();
   var first = true;
 
-	//while(deleted){
-  while(false){
+	while(deleted){
     if(!deleted.attributes.triggeredBy){
 
 
@@ -36,6 +28,8 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
       //console.log(noNamespace);
       var xPathResult = sbmlDocOld.evaluate(noNamespace, sbmlDocOld, null, XPathResult.ANY_TYPE, null);
       var xmlSnippet = xPathResult.iterateNext();
+
+      decisionArr.push(["delete", -1, xmlSnippet]);
 
       if(xmlSnippet == null ) {
 				console.log("find a solution for XPath: " + noNamespace);
@@ -48,10 +42,16 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
       $( "#innerCarousel" ).append( carouselItem );
 
       //replace angle brackets and run hljs
-      var plainXmlSnippet = xmlSnippet.outerHTML.replace(new RegExp(['<'],"g"), "&lt;");
-      plainXmlSnippet = plainXmlSnippet.replace(new RegExp(['>'],"g"), "&gt;");
+  //    console.log(xmlSnippet);
+      if(xmlSnippet.nodeName != "#text") {
+        plainXmlSnippet = xmlSnippetA.outerHTML.replace(new RegExp(['<'],"g"), "&lt;").replace(new RegExp(['>'],"g"), "&gt;");
+        $(".delete").last().append('<pre><code class="xml">\n' + plainXmlSnippet + '\n</code><pre>' );
+      } else {
+        $(".delete").last().append('<pre><code class="xml">\n' + xmlSnippet.data +  '\n</code><pre>');
+      }
 
-      $(".carousel-item").last().append('<pre><code class="xml">\n' + plainXmlSnippet + '\n</code><pre>' ); //.replace(/(?:\r\n|\r|\n)/g, '<br>')
+
+      //$(".carousel-item").last().append('<pre><code class="xml">\n' + plainXmlSnippet + '\n</code><pre>' ); //.replace(/(?:\r\n|\r|\n)/g, '<br>')
 
     //  console.log('<pre><code class="xml">\n' + xmlSnippet.outerHTML + '\n</code><pre>', $('pre code'));
       $('pre code').last().each(function(i, block) {
@@ -63,8 +63,7 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
 	}
 
 	var insert = inserts.iterateNext();
-//	while(insert != null){
-  while(false){
+	while(insert != null){
 		// present inserted element
     if(!insert.attributes.triggeredBy){
 
@@ -78,18 +77,24 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
         console.log("find a solution for XPath: " + noNamespace);
       }
 
+      decisionArr.push(["insert", -1, xmlSnippet]);
+
+      if(xmlSnippet == null ) {
+        console.log("find a solution for XPath: " + noNamespace);
+      }
+
       var carouselItem = '<div class="carousel-item insert">';
 
       carouselItem += '</div>';
 
 
       $( "#innerCarousel" ).append( carouselItem );
-
-      //replace angle brackets and run hljs
-      var plainXmlSnippet = xmlSnippet.outerHTML.replace(new RegExp(['<'],"g"), "&lt;");
-      plainXmlSnippet = plainXmlSnippet.replace(new RegExp(['>'],"g"), "&gt;");
-      $(".carousel-item").last().append('<pre><code class="xml">\n' + plainXmlSnippet + '\n</code><pre>' ); //.replace(/(?:\r\n|\r|\n)/g, '<br>')
-    //  console.log('<pre><code class="xml">\n' + xmlSnippet.outerHTML + '\n</code><pre>', $('pre code'));
+      if(xmlSnippet.nodeName != "#text") {
+        plainXmlSnippet = xmlSnippet.outerHTML.replace(new RegExp(['<'],"g"), "&lt;").replace(new RegExp(['>'],"g"), "&gt;");
+        $(".insert").last().append('<pre><code class="xml">\n' + plainXmlSnippet + '\n</code><pre>' );
+      } else {
+        $(".insert").last().append('<pre><code class="xml">\n' + xmlSnippet.data +  '\n</code><pre>');
+      }
       $('pre code').last().each(function(i, block) {
         hljs.highlightBlock(block);
        });
@@ -100,6 +105,7 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
 
 	var update = updates.iterateNext();
 	while(update != null){
+
 		// present updated content
     if(!update.attributes.triggeredBy){
 
@@ -118,6 +124,7 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
       var xPathResultB = sbmlDocNew.evaluate(noNamespaceB, sbmlDocNew, null, XPathResult.ANY_TYPE, null);
       var xmlSnippetB = xPathResultB.iterateNext();
 
+      decisionArr.push(["update", -1, xmlSnippetA, xmlSnippetB]);
 
       var carouselItem = '<div class="carousel-item update">';
 
@@ -157,8 +164,7 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
 	}
 
 	var move = moves.iterateNext();
-	//while(move != null){
-  while(false){
+	while(move != null){
     // present moved content
     if(!move.attributes.triggeredBy){
 
@@ -166,16 +172,18 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
       var noNamespaceA = getLocalXPath(move.attributes.oldPath.value);
       var noNamespaceB = getLocalXPath(move.attributes.newPath.value);
 
-      //console.log(noNamespace);
+
       var xPathResultA = sbmlDocOld.evaluate(noNamespaceA, sbmlDocOld, null, XPathResult.ANY_TYPE, null);
       var xmlSnippetA = xPathResultA.iterateNext();
+
+      console.log(xmlSnippetA.nodeName);
+
+
 
       var xPathResultB = sbmlDocNew.evaluate(noNamespaceB, sbmlDocNew, null, XPathResult.ANY_TYPE, null);
       var xmlSnippetB = xPathResultB.iterateNext();
 
-      if(xmlSnippet == null ) {
-        console.log("find a solution for XPath: " + noNamespace);
-      }
+      decisionArr.push(["move", -1, xmlSnippetA, xmlSnippetB]);
 
       var carouselItem = '<div class="carousel-item move">';
 
@@ -185,14 +193,28 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
       carouselItem += '</div>';
 
       $( "#innerCarousel" ).append( carouselItem );
-      $(".moveA").last().text(xmlSnippetA.outerHTML);
-      $(".moveB").last().text(xmlSnippetB.outerHTML);
+
+      console.log(xmlSnippetA.nodeName != "#text");
+
+      if(xmlSnippetA.nodeName != "#text") {
+        plainXmlSnippetA = xmlSnippetA.outerHTML.replace(new RegExp(['<'],"g"), "&lt;").replace(new RegExp(['>'],"g"), "&gt;");
+        plainXmlSnippetB = xmlSnippetB.outerHTML.replace(new RegExp(['<'],"g"), "&lt;").replace(new RegExp(['>'],"g"), "&gt;");
+
+        $(".moveA").last().append('<pre><code class="xml">\n' + plainXmlSnippetA + '\n</code><pre>' );
+        $(".moveB").last().append('<pre><code class="xml">\n' + plainXmlSnippetB + '\n</code><pre>' );
+      } else {
+        console.log(typeof xmlSnippetA.data, xmlSnippetA);
+        $(".moveA").last().append('<pre><code class="xml">\n' + xmlSnippetA.data +  '\n</code><pre>');
+        $(".moveB").last().append('<pre><code class="xml">\n' + xmlSnippetB.data +  '\n</code><pre>');
+        console.log("takecare of text");
+      }
+
+
+
       $('.moveA').last().each(function(i, block) {
-        console.log(i, block);
         hljs.highlightBlock(block);
        });
        $('.moveB').last().each(function(i, block) {
-         console.log(i, block);
          hljs.highlightBlock(block);
         });
     }
@@ -203,6 +225,60 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
 
 
   $('.carousel-item').first().addClass('active');
+  initButtons();
+
+  console.log(decisionArr);
+  var currentIndex = 0;
+
+  //slide manager
+
+  $('#carousel').on('slid.bs.carousel', function (ev) {
+    var slideClass = ev.relatedTarget.classList;
+    showButtons(ev.relatedTarget.classList);
+    currentIndex = $('.active').index();
+
+    //show decision by toogling the right button
+    console.log(decisionArr[currentIndex][1], decisionArr[currentIndex][0], decisionArr[currentIndex][0] == ('insert' || 'delete'));
+    var slideCategory = decisionArr[currentIndex][0];
+    if(decisionArr[currentIndex][1] == 0){
+      if(slideCategory == 'insert' || slideCategory == 'delete'){
+        $('#btnKeep').button('toggle');
+      }  else {
+        $('#btnFromA').button('toggle');
+      }
+
+    } else if(decisionArr[currentIndex][1] == 1){
+      if(slideCategory == 'move' || slideCategory == 'update') $('#btnFromB').button('toggle');
+      else $('#btnDiscard').button('toggle');
+    }
+  });
+
+
+
+
+  //save decision
+  $('#btnKeep').on('click', function (e) {
+    decisionArr[currentIndex][1] = 0;
+  });
+
+  $('#btnDiscard').on('click', function (e) {
+    decisionArr[currentIndex][1] = 1;
+  });
+
+  $('#btnFromA').on('click', function (e) {
+    decisionArr[currentIndex][1] = 0;
+    console.log(decisionArr);
+  });
+
+  $('#btnFromB').on('click', function (e) {
+    decisionArr[currentIndex][1] = 1;
+  });
+
+
+  $('#downloadSBML').on('click', function (e) {
+    downloadSBML(decisionArr, sbmlDocOld, sbmlDocNew);
+  });
+
 }
 
 
@@ -222,6 +298,5 @@ function getLocalXPath(path){
 		} else 	returnPath += "/*[local-name()='" + splitArr[0] + "'][" + splitArr[1];
 	}
   //returnPath += '/*:' + pathArray[pathArray.length-1];
-
 	return returnPath;
 }
