@@ -1,5 +1,5 @@
 function init(){
-  $('.btn-group').hide();
+  $('.btn-group-vertical').hide();
 
 
 
@@ -19,10 +19,10 @@ function initButtons(){
 
 function showButtons(classes){
   if(classes.contains('update' || 'move')){
-    $('.btn-group').hide();
+    $('.btn-group-vertical').hide();
     $('#bgChoice').show();
   } else {
-    $('.btn-group').hide();
+    $('.btn-group-vertical').hide();
     $('#bgSingle').show();
 
   }

@@ -35,7 +35,7 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
 				console.log("find a solution for XPath: " + noNamespace);
 			}
 
-			var carouselItem = '<div class="carousel-item delete">';
+			var carouselItem = '<div class="carousel-item delete text-center">';
 
 			carouselItem += '</div>';
 
@@ -83,7 +83,7 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
         console.log("find a solution for XPath: " + noNamespace);
       }
 
-      var carouselItem = '<div class="carousel-item insert">';
+      var carouselItem = '<div class="carousel-item insert text-center">';
 
       carouselItem += '</div>';
 
@@ -126,7 +126,7 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
 
       decisionArr.push(["update", -1, xmlSnippetA, xmlSnippetB]);
 
-      var carouselItem = '<div class="carousel-item update">';
+      var carouselItem = '<div class="carousel-item update text-center">';
 
       carouselItem += '<div class="updateA"></div>'
       carouselItem += '<div class="updateB"></div>'
@@ -185,7 +185,7 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
 
       decisionArr.push(["move", -1, xmlSnippetA, xmlSnippetB, noNamespaceA]);
 
-      var carouselItem = '<div class="carousel-item move">';
+      var carouselItem = '<div class="carousel-item move text-center">';
 
       carouselItem += '<div class="moveA"></div>'
       carouselItem += '<div class="moveB"></div>'
@@ -231,19 +231,20 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
   console.log(decisionArr);
   var currentIndex = 0;
 
-  $('#changeOfSum').text(currentIndex + 1 + " of " + $('.carousel-item').length);
-  $('#typeOfChange').text(decisionArr[currentIndex][0]);
-  
+  $('#changeOfSum').text("Change: " + (1 + currentIndex) + " of " + $('.carousel-item').length);
+  $('#typeOfChange').text("Type of change: " + decisionArr[currentIndex][0]);
+
   //slide manager
 
   $('#carousel').on('slid.bs.carousel', function (ev) {
     var slideClass = ev.relatedTarget.classList;
     showButtons(ev.relatedTarget.classList);
-    currentIndex = $('.active').index();
+
+    currentIndex = ev.to;
 
     //show decision by toogling the right button
-    console.log(decisionArr[currentIndex][1], decisionArr[currentIndex][0], decisionArr[currentIndex][0] == ('insert' || 'delete'));
     var slideCategory = decisionArr[currentIndex][0];
+    $('.choiceBtns').removeClass('active');
     if(decisionArr[currentIndex][1] == 0){
       if(slideCategory == 'insert' || slideCategory == 'delete'){
         $('#btnKeep').button('toggle');
@@ -257,8 +258,8 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
     }
 
     //update currentNode and change type
-    $('#changeOfSum').text(currentIndex + 1 + " of " + $('.carousel-item').length);
-    $('#typeOfChange').text(decisionArr[currentIndex][0]);
+    $('#changeOfSum').text("Change: " + (1 + currentIndex) + " / " + $('.carousel-item').length);
+    $('#typeOfChange').text("Type of change: " + decisionArr[currentIndex][0]);
 
   });
 
