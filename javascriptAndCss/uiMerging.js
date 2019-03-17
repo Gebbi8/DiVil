@@ -29,7 +29,7 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
       var xPathResult = sbmlDocOld.evaluate(noNamespace, sbmlDocOld, null, XPathResult.ANY_TYPE, null);
       var xmlSnippet = xPathResult.iterateNext();
 
-      decisionArr.push(["delete", -1, xmlSnippet]);
+      decisionArr.push(["delete", -1, xmlSnippet, noNamespace]);
 
       if(xmlSnippet == null ) {
 				console.log("find a solution for XPath: " + noNamespace);
@@ -44,7 +44,7 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
       //replace angle brackets and run hljs
   //    console.log(xmlSnippet);
       if(xmlSnippet.nodeName != "#text") {
-        plainXmlSnippet = xmlSnippetA.outerHTML.replace(new RegExp(['<'],"g"), "&lt;").replace(new RegExp(['>'],"g"), "&gt;");
+        plainXmlSnippet = xmlSnippet.outerHTML.replace(new RegExp(['<'],"g"), "&lt;").replace(new RegExp(['>'],"g"), "&gt;");
         $(".delete").last().append('<pre><code class="xml">\n' + plainXmlSnippet + '\n</code><pre>' );
       } else {
         $(".delete").last().append('<pre><code class="xml">\n' + xmlSnippet.data +  '\n</code><pre>');
@@ -183,7 +183,7 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
       var xPathResultB = sbmlDocNew.evaluate(noNamespaceB, sbmlDocNew, null, XPathResult.ANY_TYPE, null);
       var xmlSnippetB = xPathResultB.iterateNext();
 
-      decisionArr.push(["move", -1, xmlSnippetA, xmlSnippetB]);
+      decisionArr.push(["move", -1, xmlSnippetA, xmlSnippetB, noNamespaceA]);
 
       var carouselItem = '<div class="carousel-item move">';
 
