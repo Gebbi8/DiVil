@@ -1,11 +1,12 @@
 function init(){
-  $('.btn-group-vertical').hide();
+  $('.leftBtns').hide();
 
 
 
   parseURL();
 
   //parse URL and call BiVeS
+
 
 
 
@@ -19,10 +20,10 @@ function initButtons(){
 
 function showButtons(classes){
   if(classes.contains('update' || 'move')){
-    $('.btn-group-vertical').hide();
+    $('.leftBtns').hide();
     $('#bgChoice').show();
   } else {
-    $('.btn-group-vertical').hide();
+    $('.leftBtns').hide();
     $('#bgSingle').show();
 
   }

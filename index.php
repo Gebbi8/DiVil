@@ -46,7 +46,7 @@
 				<div id="typeOfChange">
 				</div>
 				<div class="btn-toolbar justify-content-center">
-					<div class="btn-group-vertical btn-group-toggle" id="bgSingle" data-toggle="buttons">
+					<div class="btn-group-vertical btn-group-toggle leftBtns" id="bgSingle" data-toggle="buttons">
 						<label id="btnKeep" class="btn btn-outline-primary choiceBtns">
 				        <input type="radio" name="options">Keep
 				    </label>
@@ -54,20 +54,12 @@
 				        <input type="radio" name="options">Discard
 				    </label>
 					</div>
-					<div class="btn-group-vertical btn-group-toggle" id="bgChoice"  data-toggle="buttons">
+					<div class="btn-group-vertical btn-group-toggle leftBtns" id="bgChoice"  data-toggle="buttons">
 						<label id="btnFromA" class="btn btn-outline-primary choiceBtns">
 				        <input type="radio" name="options">From Model A
 				    </label>
 				    <label id="btnFromB" class="btn btn-outline-primary choiceBtns">
 				        <input type="radio" name="options">From Model B
-				    </label>
-					</div>
-					<div class="btn-group-vertical btn-group-toggle" id="bgAll"  data-toggle="buttons">
-						<label id="btnAllA" class="btn btn-outline-primary choiceBtns">
-				        <input type="radio" name="options">All from A
-				    </label>
-				    <label id="btnAllB" class="btn btn-outline-primary choiceBtns">
-				        <input type="radio" name="options">All from B
 				    </label>
 					</div>
 				</div>
@@ -87,6 +79,19 @@
 				<span class="carousel-control-next-icon" aria-hidden="false"></span>
 				<span class="sr-only">Next</span>
 			</a>
+		</div>
+
+		<div class="col-md-1">
+			<div class="btn-toolbar justify-content-center">
+				<div class="btn-group-vertical btn-group-toggle" id="bgAll"  data-toggle="buttons">
+					<label id="btnAllA" class="btn btn-outline-primary choiceBtns">
+							<input type="radio" name="options">Model A
+					</label>
+					<label id="btnAllB" class="btn btn-outline-primary choiceBtns">
+							<input type="radio" name="options">Model B
+					</label>
+				</div>
+			</div>
 		</div>
 	</div>
 

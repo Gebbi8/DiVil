@@ -244,18 +244,8 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
 
     //show decision by toogling the right button
     var slideCategory = decisionArr[currentIndex][0];
-    $('.choiceBtns').removeClass('active');
-    if(decisionArr[currentIndex][1] == 0){
-      if(slideCategory == 'insert' || slideCategory == 'delete'){
-        $('#btnKeep').button('toggle');
-      }  else {
-        $('#btnFromA').button('toggle');
-      }
-
-    } else if(decisionArr[currentIndex][1] == 1){
-      if(slideCategory == 'move' || slideCategory == 'update') $('#btnFromB').button('toggle');
-      else $('#btnDiscard').button('toggle');
-    }
+    var decision = decisionArr[currentIndex][1];
+    updateBtns(slideCategory, decision),
 
     //update currentNode and change type
     $('#changeOfSum').text("Change: " + (1 + currentIndex) + " / " + $('.carousel-item').length);
@@ -291,6 +281,29 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
     downloadSBML(decisionArr, sbmlDocOld, sbmlDocNew);
   });
 
+  $('#btnAllA').on('click', function (e) {
+    for(var i = 0; i< decisionArr.length; i++){
+      if(decisionArr[i][0] == 'delete' || decisionArr[i][0] == 'move' || decisionArr[i][0] == 'update'){
+        decisionArr[i][1] = 0;
+      }
+    }
+    updateBtns(decisionArr[currentIndex][0], decisionArr[currentIndex][1]);
+    checkBtn();
+  });
+
+  $('#btnAllB').on('click', function (e) {
+    for(var i = 0; i< decisionArr.length; i++){
+      if(decisionArr[i][0] == 'insert'){
+        decisionArr[i][1] = 0;
+      } else if(decisionArr[i][0] == 'move' || decisionArr[i][0] == 'update'){
+        decisionArr[i][1] = 1;
+      }
+    }
+    updateBtns(decisionArr[currentIndex][0], decisionArr[currentIndex][1]);
+    checkBtn();
+
+  });
+
   function checkBtn(){
     var sumDecided = 0;
     var enableDownload = true;
@@ -301,6 +314,21 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
     }
     $('#progressBar').width("" + 100 / decisionArr.length * sumDecided + "%")
     if(enableDownload) $('#downloadSBML').prop('disabled', false);
+  }
+
+  function updateBtns(slideCategory, decision){
+    $('.choiceBtns').removeClass('active');
+    if(decision == 0){
+      if(slideCategory == 'insert' || slideCategory == 'delete'){
+        $('#btnKeep').button('toggle');
+      }  else {
+        $('#btnFromA').button('toggle');
+      }
+
+    } else if(decision == 1){
+      if(slideCategory == 'move' || slideCategory == 'update') $('#btnFromB').button('toggle');
+      else $('#btnDiscard').button('toggle');
+    }
   }
 }
 
