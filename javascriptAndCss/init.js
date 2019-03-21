@@ -1,5 +1,7 @@
 function init(){
-  $('.leftBtns').hide();
+
+  
+//  $('.leftBtns').hide();
 
 
 

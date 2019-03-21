@@ -25,19 +25,32 @@
 	<script type="text/javascript" src="javascriptAndCss/uiMerging.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/parseURL.js"></script>
 
+
 	<link rel="stylesheet" href="thirdParty/bootstrap.min.css">
 	<link rel="stylesheet" href="javascriptAndCss/style.css">
 	<script src="thirdParty/popper.min.js"></script>
 	<script src="thirdParty/bootstrap.min.js"></script>
 
 
+	<script type="text/x-mathjax-config">
+	MathJax.Hub.Config({
+	  MathML: {
+	    extensions: ["content-mathml.js"]
+	  }
+	});
+	</script>
+
+	<script src='thirdParty/MathJax-master/MathJax.js'></script>
+
+
+
 	<script type="text/javascript" src="javascriptAndCss/init.js"></script>
+
 
 </head>
 <body>
 	<div class="container-fluid">
 		<div class="row" id="pageHeader">
-
 		</div>
 		<div class="row main">
 			<div class="col-md-1 text-center">

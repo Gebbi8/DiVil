@@ -9,7 +9,7 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
 
 
 
-	console.log(xmlDocDiff, "new Doc", sbmlDocNew, "old Doc",  sbmlDocOld);
+	console.log(xmlDocDiff, "new Doc:", sbmlDocNew, "old Doc:",  sbmlDocOld);
 	var xDiff, xSbml;
 
 	var deletes = xmlDocDiff.evaluate("/bives/delete/*", xmlDocDiff, null, XPathResult.ANY_TYPE,null);
@@ -18,21 +18,40 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
 	var moves = xmlDocDiff.evaluate("/bives/move/*", xmlDocDiff, null, XPathResult.ANY_TYPE,null);
 
 	var deleted = deletes.iterateNext();
-  var first = true;
+
+  var lastNoNamespace;
+  var xPathResult;
+  var xmlSnippet;
 
 	while(deleted){
     if(!deleted.attributes.triggeredBy){
 
 
       var noNamespace = getLocalXPath(deleted.attributes.oldPath.value);
-      //console.log(noNamespace);
-      var xPathResult = sbmlDocOld.evaluate(noNamespace, sbmlDocOld, null, XPathResult.ANY_TYPE, null);
-      var xmlSnippet = xPathResult.iterateNext();
+
+      var mathIndex = noNamespace.indexOf("/*[local-name()='math']");
+      if(mathIndex >= 0) {
+        //var helpString,
+        var helpString =  noNamespace.substr(mathIndex+23);
+        noNamespace = noNamespace.substr(0, mathIndex+23) + helpString.substr(0, helpString.indexOf("/"));
+      }
+
+      if(lastNoNamespace != noNamespace){
+          lastNoNamespace = noNamespace;
+
+            xPathResult = sbmlDocOld.evaluate(noNamespace, sbmlDocOld, null, XPathResult.ANY_TYPE, null);
+
+
+            xmlSnippet = xPathResult.iterateNext();
+      }
+
+
+      //  console.log(xmlSnippet, xPathResult);
 
       decisionArr.push(["delete", -1, xmlSnippet, noNamespace]);
 
       if(xmlSnippet == null ) {
-				console.log("find a solution for XPath: " + noNamespace);
+				//console.log("find a solution for XPath: " + noNamespace);
 			}
 
 			var carouselItem = '<div class="carousel-item delete text-center">';
@@ -43,11 +62,16 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
 
       //replace angle brackets and run hljs
   //    console.log(xmlSnippet);
-      if(xmlSnippet.nodeName != "#text") {
+      if (mathIndex > -1){
+        $(".delete").last().append(xmlSnippet.outerHTML);
+        console.log("!!!!!!MATH!!!!!!");
+        console.log(xmlSnippet);
+      } else if(xmlSnippet.nodeName == "#text") {
+        $(".delete").last().append('<pre><code class="xml">\n' + xmlSnippet.data +  '\n</code><pre>');
+
+      } else {
         plainXmlSnippet = xmlSnippet.outerHTML.replace(new RegExp(['<'],"g"), "&lt;").replace(new RegExp(['>'],"g"), "&gt;");
         $(".delete").last().append('<pre><code class="xml">\n' + plainXmlSnippet + '\n</code><pre>' );
-      } else {
-        $(".delete").last().append('<pre><code class="xml">\n' + xmlSnippet.data +  '\n</code><pre>');
       }
 
 
@@ -73,15 +97,8 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
       var xPathResult = sbmlDocNew.evaluate(noNamespace, sbmlDocNew, null, XPathResult.ANY_TYPE, null);
       var xmlSnippet = xPathResult.iterateNext();
 
-      if(xmlSnippet == null ) {
-        console.log("find a solution for XPath: " + noNamespace);
-      }
 
       decisionArr.push(["insert", -1, xmlSnippet]);
-
-      if(xmlSnippet == null ) {
-        console.log("find a solution for XPath: " + noNamespace);
-      }
 
       var carouselItem = '<div class="carousel-item insert text-center">';
 
@@ -117,7 +134,7 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
       var xPathResultA = sbmlDocOld.evaluate(noNamespaceA, sbmlDocOld, null, XPathResult.ANY_TYPE, null);
       var xmlSnippetA = xPathResultA.iterateNext();
 
-      console.log(xmlSnippetA.nodeName);
+      //console.log(xmlSnippetA.nodeName);
 
 
 
@@ -135,7 +152,7 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
 
       $( "#innerCarousel" ).append( carouselItem );
 
-      console.log(xmlSnippetA.nodeName != "#text");
+      //console.log(xmlSnippetA.nodeName != "#text");
 
       if(xmlSnippetA.nodeName != "#text") {
         plainXmlSnippetA = xmlSnippetA.outerHTML.replace(new RegExp(['<'],"g"), "&lt;").replace(new RegExp(['>'],"g"), "&gt;");
@@ -176,7 +193,7 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
       var xPathResultA = sbmlDocOld.evaluate(noNamespaceA, sbmlDocOld, null, XPathResult.ANY_TYPE, null);
       var xmlSnippetA = xPathResultA.iterateNext();
 
-      console.log(xmlSnippetA.nodeName);
+      //console.log(xmlSnippetA.nodeName);
 
 
 
@@ -194,7 +211,7 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
 
       $( "#innerCarousel" ).append( carouselItem );
 
-      console.log(xmlSnippetA.nodeName != "#text");
+      //console.log(xmlSnippetA.nodeName != "#text");
 
       if(xmlSnippetA.nodeName != "#text") {
         plainXmlSnippetA = xmlSnippetA.outerHTML.replace(new RegExp(['<'],"g"), "&lt;").replace(new RegExp(['>'],"g"), "&gt;");
@@ -222,7 +239,7 @@ function createSlides(xmlDocDiff, sbmlDocOld, sbmlDocNew) {
     move = moves.iterateNext();
 	}
 
-
+  MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 
   $('.carousel-item').first().addClass('active');
 
