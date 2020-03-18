@@ -2,13 +2,13 @@ function customSymbol(node, nodeSize ){
 	size = nodeSize;
 
 	// DEFINE A COUPLE OF CUSTOM SYMBOLS
-	var reactionSize = nodeSize*.7;
+	var size;
 
 	var reaction =
-			"m -" + reactionSize*0.5 + " -" + reactionSize*0.5 +
-			" h " + reactionSize +
-			" v " + reactionSize +
-			" h -" + reactionSize +
+			"m -" + size*0.5 + " -" + size*0.5 +
+			" h " + size +
+			" v " + size +
+			" h -" + size +
 			" z ";
 
 	var dissociation =
@@ -47,18 +47,17 @@ function customSymbol(node, nodeSize ){
 			" z ";
 
 	var unspecifiedEntity =
-			"m -" + size + " -" + size * 0 +
-		  " a " + size*0.5 + " " + size + " -90 0 1 " +  size*2 + " 0" +
-			" a " + size*0.5 + " " + size + " -90 0 1 -" +  size*2 + " 0";
+			"m -" + size * 0.5 + " -" + size * 0 +
+		  " a " + size*0.25 + " " + size*0.5 + " -90 0 1 " +  size + " 0" +
+			" a " + size*0.25 + " " + size*0.5 + " -90 0 1 -" +  size + " 0";
 
-	var sourceAndSinkSize = size *0.5;
 	var sourceAndSink =
-			"m -" + sourceAndSinkSize * 0.5 + " -" + sourceAndSinkSize * 0.5 +
-	 		" m -" + sourceAndSinkSize*0.5 + " " + sourceAndSinkSize*0.5 +
-	    " a " + sourceAndSinkSize + " " + sourceAndSinkSize + " 0 1 0 " +  sourceAndSinkSize * 2 + " 0" +
-	 		" a " + sourceAndSinkSize + " " + sourceAndSinkSize + " 0 1 0 -" +  sourceAndSinkSize * 2 + " 0" +
-	 		" m 0 " + sourceAndSinkSize +
-	 		" l " + 2*sourceAndSinkSize + " -" + 2*sourceAndSinkSize;
+			"m -" + size * 0.5 + " -" + size * 0.5 +
+	 		" m -" + size*0.5 + " " + size*0.5 +
+	    " a " + size + " " + size + " 0 1 0 " +  size * 2 + " 0" +
+	 		" a " + size + " " + size + " 0 1 0 -" +  size * 2 + " 0" +
+	 		" m 0 " + size +
+	 		" l " + 2*size + " -" + 2*size;
 
 	var complex =
 			"m -" + size*0.5 + " -" + size*0.5 +
@@ -96,7 +95,8 @@ function customSymbol(node, nodeSize ){
 	switch (node) {
 		case 'simple chemical': return simpleChemical; break;
 		case 'reaction':
-		case 'process':	return reaction; break;
+		case 'process':
+		 	return reaction; break;
 		case 'dissociation': return dissociation; break;
 		case 'association': return association; break;
 		case 'macromolecule': return macromolecule; break;
