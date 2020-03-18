@@ -94,7 +94,7 @@ var width = 1000,
 											.style("stroke", "none")
 											.style("font-size", "14px")
 											.attr('dy', "0.25em")
-											.text(function(d) { return d.label });
+											.text(function(d) { console.log(d.label); return d.label });
 
 		function ticked() {
 

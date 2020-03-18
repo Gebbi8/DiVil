@@ -7,11 +7,6 @@ function downloadSBML(obj, xmlDocDiff, xmlDocSbmlOld, xmlDocSbmlNew) {
 	xDiff = xmlDocDiff.getElementsByTagName("delete")[0].getElementsByTagName("node");
 	console.log(xDiff.length);
 	for(i=0; i < xDiff.length; i++){
-
-		//console.log(xDiff[i], xDiff[i].getAttribute("oldParent"), xDiff[i].getAttribute("newParent"));
-		getXmlElement(xmlDocSbmlOld, xDiff[i].getAttribute("oldParent"));
-
-
 		if(!xDiff[i].hasAttribute("triggeredBy")){
 			var newPath, pathArray, nextSibling, oldObject, parent;
 
@@ -70,10 +65,4 @@ function splitXmlPath(path){
 	}
 
 	return pathArray;
-}
-
-function getXmlElement(xmlDoc, xpath){
-	console.log(xmlDoc, xpath);
-	var xmlElement = xmlDoc.evaluate(xpath, xmlDoc, null, XPathResult.ANY_TYPE,null);
-	console.log(xmlElement.iterateNext());
 }
