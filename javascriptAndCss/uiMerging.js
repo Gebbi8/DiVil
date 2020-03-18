@@ -22,12 +22,12 @@ function createSlides(obj, xmlDocDiff, sbmlDocOld, sbmlDocNew) {
 
 	var deleted = deletes.iterateNext();
   var first = true;
-
-	while(deleted){
+var c = 3
+	while(deleted && c > 0){
     if(!deleted.attributes.triggeredBy){
       var noNamespace = getLocalXPath(deleted.attributes.oldPath.value);
       console.log(noNamespace);
-      var xPathResult = sbmlDocOld.evaluate(noNamespace, sbmlDocOld, null, XPathResult.ANY_TYPE, null);
+      var xPathResult = sbmlDocOld.evaluate("/*:sbml[1]/*:model[1]/*:listOfSpecies[1]/*:species[1]/*:annotation[1]/*:COPASI[1]/*:RDF[1]/*:Description[1]/*:created[1]", sbmlDocOld, null, XPathResult.ANY_TYPE,null);
       var xmlSnippet = xPathResult.iterateNext();
       console.log(xmlSnippet);
     }
@@ -61,6 +61,7 @@ function createSlides(obj, xmlDocDiff, sbmlDocOld, sbmlDocNew) {
 		deleted = deletes.iterateNext();
 
 
+    c--;
 	}
 
 	var insert = inserts.iterateNext();
@@ -91,11 +92,10 @@ function getLocalXPath(path){
   var returnPath = "";
 	path = path.substr(1);
 	pathArray = path.split("/");
-	for(j = 0; j < pathArray.length; j++){
-		var splitArr = pathArray[j].split("[");
-		returnPath += "/*[local-name()='" + splitArr[0] + "'][" + splitArr[1];
+	for(j = 0; j < pathArray.length-1; j++){
+		returnPath += '/*:' + pathArray[j];
 	}
-  //returnPath += '/*:' + pathArray[pathArray.length-1];
+  returnPath += '/*:' + pathArray[pathArray.length-1];
 
 	return returnPath;
 }
