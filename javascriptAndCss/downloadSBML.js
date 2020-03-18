@@ -3,92 +3,56 @@ function downloadSBML(obj, xmlDocDiff, xmlDocSbmlOld, xmlDocSbmlNew) {
 	console.log(xmlDocDiff, "new Doc", xmlDocSbmlNew, "old Doc",  xmlDocSbmlOld);
 	var xDiff, xSbml;
 
-	var deletes = xmlDocDiff.evaluate("//delete/child::node()", xmlDocDiff, null, XPathResult.ANY_TYPE,null);
-	var inserts = xmlDocDiff.evaluate("//insert/child::node()", xmlDocDiff, null, XPathResult.ANY_TYPE,null);
-	var updates = xmlDocDiff.evaluate("//update/child::node()", xmlDocDiff, null, XPathResult.ANY_TYPE,null);
-	var moves = xmlDocDiff.evaluate("//move/child::node()", xmlDocDiff, null, XPathResult.ANY_TYPE,null);
 
-	console.log(deletes.iterateNext(), moves.iterateNext(), inserts.iterateNext(), updates.iterateNext());
+	xDiff = xmlDocDiff.getElementsByTagName("delete")[0].getElementsByTagName("node");
+	console.log(xDiff.length);
+	for(i=0; i < xDiff.length; i++){
 
-	var deleted = deletes.iterateNext();
-	while(deleted != null){
-		// present deleted element
-	//	console.log(deleted)//, xmlDocSbmlOld.evaluate(deleted.t, xmlDocSbmlOld, null, XPathResult.ANY_TYPE, null));
-		deleted = deletes.iterateNext();
+		//console.log(xDiff[i], xDiff[i].getAttribute("oldParent"), xDiff[i].getAttribute("newParent"));
+		getXmlElement(xmlDocSbmlOld, xDiff[i].getAttribute("oldParent"));
+
+
+		if(!xDiff[i].hasAttribute("triggeredBy")){
+			var newPath, pathArray, nextSibling, oldObject, parent;
+
+			newPath = xDiff[i].getAttribute("oldPath");
+			pathArray =  splitXmlPath(newPath);
+			console.log(pathArray);
+			console.log("it worked how often?");
+
+			parent = xmlDocSbmlNew;
+			oldObject = xmlDocSbmlOld;
+
+			for(k=0; k < pathArray.length-1; k++){
+
+				if(parent != undefined) parent = parent.getElementsByTagName(pathArray[k][0])[pathArray[k][1]-1];
+				else console.log("parent was undefined");
+
+				if(oldObject != undefined) oldObject = oldObject.getElementsByTagName(pathArray[k][0])[pathArray[k][1]-1];
+				else console.log("oldObject was undefined");
+			}
+
+
+			console.log(oldObject, parent);
+
+			if(parent != undefined && oldObject != undefined){
+				nextSibling = parent.getElementsByTagName(pathArray[pathArray.length-1][0])[pathArray[pathArray.length-1][1]];
+				console.log(oldObject);
+				oldObject = oldObject.getElementsByTagName(pathArray[pathArray.length-1][0])[pathArray[pathArray.length-1][1]-1];
+
+				if(nextSibling != undefined && oldObject != undefined){
+					console.log("nextSibling", nextSibling, "oldObject", oldObject);
+					nextSibling.parentNode.insertBefore(oldObject, nextSibling); // is the xml manipulated or just
+					console.log(oldObject.ownerDocument);
+				} else {
+					console.log("parent", parent, "parentTag", parent.tagName, "oldO", oldObject);
+					if(oldObject != undefined) parent.appendChild(oldObject);
+					else console.log("undefined oldObject");
+
+				}
+			} else console.log("undefined parent or object");
+		}
 	}
-
-	var insert = inserts.iterateNext();
-	while(insert != null){
-		// present inserted element
-
-		insert = inserts.iterateNext();
-	}
-
-	var update = updates.iterateNext();
-	while(update != null){
-		// present updated content
-
-		
-		update = updates.iterateNext();
-	}
-
-	var move = moves.iterateNext();
-	while(move != null){
-		// present moved content
-
-		move = moves.iterateNext();
-	}
-
-	//xDiff = xmlDocDiff.getElementsByTagName("delete")[0].getElementsByTagName("node");
-	//console.log(xDiff.length);
-
-	// for(i=0; i < xDiff.length; i++){
-	//
-	// 	//console.log(xDiff[i], xDiff[i].getAttribute("oldParent"), xDiff[i].getAttribute("newParent"));
-	// 	getXmlElement(xmlDocSbmlOld, xDiff[i].getAttribute("oldParent"));
-	//
-	//
-	// 	if(!xDiff[i].hasAttribute("triggeredBy")){
-	// 		var newPath, pathArray, nextSibling, oldObject, parent;
-	//
-	// 		newPath = xDiff[i].getAttribute("oldPath");
-	// 		pathArray =  splitXmlPath(newPath);
-	// 		console.log(pathArray);
-	// 		console.log("it worked how often?");
-	//
-	// 		parent = xmlDocSbmlNew;
-	// 		oldObject = xmlDocSbmlOld;
-	//
-	// 		for(k=0; k < pathArray.length-1; k++){
-	//
-	// 			if(parent != undefined) parent = parent.getElementsByTagName(pathArray[k][0])[pathArray[k][1]-1];
-	// 			else console.log("parent was undefined");
-	//
-	// 			if(oldObject != undefined) oldObject = oldObject.getElementsByTagName(pathArray[k][0])[pathArray[k][1]-1];
-	// 			else console.log("oldObject was undefined");
-	// 		}
-	//
-	//
-	// 		//console.log(oldObject, parent);
-	//
-	// 		if(parent != undefined && oldObject != undefined){
-	// 			nextSibling = parent.getElementsByTagName(pathArray[pathArray.length-1][0])[pathArray[pathArray.length-1][1]];
-	// 			console.log(oldObject);
-	// 			oldObject = oldObject.getElementsByTagName(pathArray[pathArray.length-1][0])[pathArray[pathArray.length-1][1]-1];
-	//
-	// 			if(nextSibling != undefined && oldObject != undefined){
-	// 				console.log("nextSibling", nextSibling, "oldObject", oldObject);
-	// 				nextSibling.parentNode.insertBefore(oldObject, nextSibling); // is the xml manipulated or just
-	// 				console.log(oldObject.ownerDocument);
-	// 			} else {
-	// 				console.log("parent", parent, "parentTag", parent.tagName, "oldO", oldObject);
-	// 				if(oldObject != undefined) parent.appendChild(oldObject);
-	// 				else console.log("undefined oldObject");
-	//
-	// 			}
-	// 		} else console.log("undefined parent or object");
-	// 	}
-	// }
 
 	//check and download
 	var blob = new Blob([(new XMLSerializer).serializeToString(xmlDocSbmlNew)], {type: "text/xml;charset=utf-8"}); //xmlDocSbmlNew
