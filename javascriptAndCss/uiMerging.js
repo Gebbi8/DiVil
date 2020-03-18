@@ -25,34 +25,11 @@ function createSlides(obj, xmlDocDiff, sbmlDocOld, sbmlDocNew) {
 
 	while(deleted){
     if(!deleted.attributes.triggeredBy){
-
-
       var noNamespace = getLocalXPath(deleted.attributes.oldPath.value);
-      //console.log(noNamespace);
+      console.log(noNamespace);
       var xPathResult = sbmlDocOld.evaluate(noNamespace, sbmlDocOld, null, XPathResult.ANY_TYPE, null);
       var xmlSnippet = xPathResult.iterateNext();
-
-      if(xmlSnippet == null ) {
-				console.log("find a solution for XPath: " + noNamespace);
-			}
-
-			var carouselItem = '<div class="carousel-item ';
-			if(first){
-				carouselItem += 'active';
-				first = false;
-			}
-			carouselItem += '">';
-
-// put the xml stuff where	//highlight XmlDiff
-	// $("#highlightXmlDiff").text($.parseJSON (data).xmlDiff);
-	//   $('#highlightXmlDiff').each(function(i, block) {
-	// 	hljs.highlightBlock(block);
-	// });
-			console.log(xmlSnippet);
-			carouselItem += hljs.highlightBlock(xmlSnippet);
-			carouselItem += '</div>';
-
-			console.log(carouselItem);
+      console.log(xmlSnippet);
     }
     //console.log(deleted.triggeredBy);
   //  console.log(deleted.childNodes[0].nodeValue);
@@ -116,10 +93,7 @@ function getLocalXPath(path){
 	pathArray = path.split("/");
 	for(j = 0; j < pathArray.length; j++){
 		var splitArr = pathArray[j].split("[");
-
-		if(splitArr[0] == "text()"){
-			returnPath += '/' + splitArr[0] + '[' + splitArr[1];
-		} else 	returnPath += "/*[local-name()='" + splitArr[0] + "'][" + splitArr[1];
+		returnPath += "/*[local-name()='" + splitArr[0] + "'][" + splitArr[1];
 	}
   //returnPath += '/*:' + pathArray[pathArray.length-1];
 

@@ -6,7 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="javascriptAndCss/style.css">
 	<script type="text/javascript" src="thirdParty/d3.min.js"></script>
-	<script type="text/javascript" src="thirdParty/highlight.pack.js"></script>
 	<script type="text/javascript" src="thirdParty/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/sboTermMapping.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/showSbgn.js"></script>
