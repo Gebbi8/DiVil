@@ -43,8 +43,6 @@ var width = 1000,
 	// register click-listeners to the download button
 	$("#download").click (function (){download (obj);});
 
-
-
 	//get nodes and links
 	var nodes = obj.nodes;
 	console.log(nodes);

@@ -18,7 +18,6 @@
 	<script type="text/javascript" src="javascriptAndCss/sbmlParser.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/xmlDiffParser.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/arrowsOnNodes.js"></script>
-	<script type="text/javascript" src="javascriptAndCss/uiMerging.js"></script>
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -27,9 +26,7 @@
 
 </head>
 <body>
-<div class="container">
-	<div class="row">
-<div class ="col" id="left">
+<div id="left">
 	<h4>Merger Proto</h4>
 	<div id="modelSelection">
 	<h1> Select two model versions </h1>
@@ -81,7 +78,7 @@
 	</div>
 </div>
 
-<div class ="col-6" id="bivesGraph">
+<div id="bivesGraph">
 	<form>
 		Toggle process node ports
 		<input type="checkbox" id="portToggle">
@@ -92,27 +89,10 @@
 	<div id="buttons">
 		<button id="sbmlDownload">Download SBML</button>
 	</div>
-	<div id="buttons">
-		<button id="createSlides">Create UI for merging</button>
 	</div>
 
-</div>
-
-<div class="col-4"
-	<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-	  <div class="carousel-inner" id="innerCarousel">
-
-	  </div>
-	</div>
-</div>
-
-
 
 </div>
-</div>
-
-
-
 <div id="bivesReport">
 </div>
 <div id="demo">
@@ -122,7 +102,20 @@
 
 
 
-
+	<!-- Bootstrap -->
+	<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+	  <div class="carousel-inner">
+	    <div class="carousel-item active">
+	        <img src="" class="d-block w-100" alt="">
+	    </div>
+	    <div class="carousel-item">
+	      <img src="" class="d-block w-100" alt="">
+	    </div>
+	    <div class="carousel-item">
+	      <img src="" class="d-block w-100" alt="">
+	    </div>
+	  </div>
+	</div>
 
 
 
