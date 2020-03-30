@@ -97,6 +97,12 @@ Black elements show entities that did not change between the two versions. Updat
 Based on the D3 capabilities the user can interact with the visualization to improve the layout or focus on specific parts of the model.
 Nodes and compartments can be dragged. There is also a zoom functionality and the complete visualization can be moved by dragging the canvas.
 
+### Overview of UI functionalities
+* move & fix nodes by drag and drop
+* release fixed nodes with a single click
+* Zooming (under construction)
+* dragging compartment (under construction)
+
 ## Download the visualization
 With the help of the FileSaver.js Library (https://github.com/eligrey/FileSaver.js) the visualization can be saved in the SBGN-ML format by clicking the download button.
 
