@@ -210,18 +210,33 @@ function createCompartments() {
 		})
 		.entries(nodes);
 
-
 	compartments = svg
 		.selectAll("compartments")
-		.data(nodesByCompartment)
-		.enter().append("path")
-		.attr("class", "	compartment")
+		.data(nodesByCompartment.filter(function (d) {
+			var filter = nodes.filter(
+				function (n) {
+					return d.key == n.id;
+				});
+			return filter > [];
+		}))
+		.enter().append("g")
+		.attr("class", "compartment")
 		.attr("id", function (d) {
-			return d.key
-		})
+			return d.key;
+		});
+	compartments.append("path")
 		.attr("stroke-width", 3)
 		.attr("stroke", "black")
 		.attr("fill", "none");
+	compartments
+		.append("text")
+		.style("text-anchor", "bottom") //text attr
+		.style("stroke", "none")
+		.style("font-size", "14px")
+		.attr('dy', "0.25em")
+		.text(function (d) {
+			return "ENTER COMPARTMENT LABEL";
+		});
 
 	/* 	compartments = svg.append("g")
 			.data(nodesByCompartment)
@@ -254,7 +269,7 @@ function ticked() {
 		return "translate(" + d.x + "," + d.y + ")";
 	});
 
-	compartments.attr("d", function (d) {
+	compartments.select("path").attr("d", function (d) {
 		//alert("test");
 		return compartmentFlex(d);
 	});
@@ -373,46 +388,44 @@ function compartmentFlex(c) {
 
 
 	//console.log(d.compartment, d.compartment == id);
-	c.values.forEach(function (v) {
 
-		var element = d3.select("#" + v.id).node();
-		var halfElementWidth = 0;
-		var halfElementHeight = 0;
-		if (element != null) {
-			var boundingClientRect = element.getBoundingClientRect();
-			halfElementWidth = boundingClientRect.width / 2 / currentZoom;
-			halfElementHeight = boundingClientRect.height / 2 / currentZoom;
-		}
-		xMin = d3.min(c.values, function (d) {
-			return d.x - halfElementWidth
-		});
-		xMax = d3.max(c.values, function (d) {
-			return d.x + halfElementWidth
-		});
-		yMin = d3.min(c.values, function (d) {
-			return d.y - halfElementHeight
-		});
-		yMax = d3.max(c.values, function (d) {
-			return d.y + halfElementHeight
-		});
-	})
 
+
+	xMin = d3.min(c.values, function (d) {
+		halfElementWidth = d3.select("#" + d.id).node().getBBox().width / 2;
+		return d.x - halfElementWidth;
+	});
+	xMax = d3.max(c.values, function (d) {
+		halfElementWidth = d3.select("#" + d.id).node().getBBox().width / 2;
+		return d.x + halfElementWidth;
+	});
+	yMin = d3.min(c.values, function (d) {
+		halfElementHeight = d3.select("#" + d.id).node().getBBox().height / 2;
+		return d.y - halfElementHeight;
+	});
+	yMax = d3.max(c.values, function (d) {
+		halfElementHeight = d3.select("#" + d.id).node().getBBox().height / 2;
+		return d.y + halfElementHeight;
+	});
 
 	if (xMin == Infinity) {
 		console.log("infinity");
 		return;
-	} else console.log("not returning");
+	}
 	//console.log(xMin, xMax, yMin, yMax);
-	var x = (-xMin + xMax) / 3;
-	var y = (yMin + yMax) * 0.05;
+	var x;
+	if (xMin < 0 && xMax < 0) x = (xMin - xMax) / 3;
+	else if (xMin < 0) x = (-xMin + xMax) / 3;
+	else x = (-xMin + xMax) / 3;
+
 	return "M " + xMin + " " + yMin +
-		" Q " + (xMin + x / 2) + " " + (yMin - 8) + " " + (xMin + x) + " " + (yMin - 8) +
-		" H " + (xMin + 2 * x) +
-		" Q " + (xMax - x / 2) + " " + (yMin - 8) + " " + xMax + " " + (yMin) +
+		" q " + x / 3 + " " + "-14" + " " + x + " " + "-14" +
+		" h " + x +
+		" q " + x / 3 + " " + 0 + " " + x + " " + 14 +
 		" V " + yMax +
-		" Q " + (xMax - x / 2) + " " + (yMax + 8) + " " + (xMax - x) + " " + (yMax + 8) +
-		" H " + (xMin + x) +
-		" Q " + (xMin + x / 2) + " " + (yMax + 8) + " " + (xMin) + " " + (yMax) +
+		" q " + (-x / 3) + " " + 14 + " " + (-x) + " " + 14 +
+		" h " + (-x) +
+		" q " + (-x / 3) + " " + 0 + " " + (-x) + " " + (-14) +
 		" z ";
 };
 
