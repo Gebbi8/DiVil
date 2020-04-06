@@ -264,14 +264,14 @@
     <listOfReactions>
       <reaction id="Reaction1" metaid="_175121" reversible="false" sboTerm="SBO:0000205">
         <listOfReactants>
-          <speciesReference species="EmptySet" metaid="_372744"/>
+			<speciesReference species="v"/>
         </listOfReactants>
         <listOfProducts>
 			<speciesReference species="z" metaid="_372756"/>
         </listOfProducts>
 		<listOfModifiers>
 			<modifierSpeciesReference species="z" metaid="_372756"/>
-			<modifierSpeciesReference species="v"/>
+			<modifierSpeciesReference species="v" metaid="_175119"/>
         </listOfModifiers>
         <kineticLaw metaid="_372768">
           <math xmlns="http://www.w3.org/1998/Math/MathML">          
