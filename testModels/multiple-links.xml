@@ -268,7 +268,6 @@
         </listOfReactants>
         <listOfProducts>
 			<speciesReference species="z" metaid="_372756"/>
-		<speciesReference species="EmptySet" metaid="_372744"/>
         </listOfProducts>
 		<listOfModifieres>
 			<speciesReference species="z" metaid="_372756"/>
