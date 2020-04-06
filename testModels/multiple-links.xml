@@ -270,7 +270,8 @@
 			<speciesReference species="z" metaid="_372756"/>
         </listOfProducts>
 		<listOfModifiers>
-			<speciesReference species="z" metaid="_372756"/>
+			<modifierSpeciesReference species="z" metaid="_372756"/>
+			<modifierSpeciesReference species="v"/>
         </listOfModifiers>
         <kineticLaw metaid="_372768">
           <math xmlns="http://www.w3.org/1998/Math/MathML">          
