@@ -266,12 +266,8 @@
         <listOfReactants>
 			<speciesReference species="v"/>
         </listOfReactants>
-        <listOfProducts>
-			<speciesReference species="z" metaid="_372756"/>
-        </listOfProducts>
-		<listOfModifiers>
-			<modifierSpeciesReference species="z" metaid="_372756"/>
-			<modifierSpeciesReference species="v" metaid="_175119"/>
+        <listOfModifiers>
+          <modifierSpeciesReference species="z"/>
         </listOfModifiers>
         <kineticLaw metaid="_372768">
           <math xmlns="http://www.w3.org/1998/Math/MathML">          
