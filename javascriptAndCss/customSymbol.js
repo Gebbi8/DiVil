@@ -21,7 +21,6 @@ function customSymbol(node, nodeSize) {
 		" a " + size * 0.7 + " " + size * 0.7 + " 0 1 0 " + size * 0.7 * 2 + " 0" +
 		" a " + size * 0.7 + " " + size * 0.7 + " 0 1 0 -" + size * 0.7 * 2 + " 0" +
 		" m -" + size * 0.3 + " 0" +
-		//" m 0 " + size/2 +
 		" h -" + size / 2 +
 		" m " + size * 3 + " 0" +
 		" h -" + size / 2;

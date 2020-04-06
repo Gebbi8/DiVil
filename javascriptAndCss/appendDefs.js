@@ -222,7 +222,6 @@ function appendDefs() {
 		.attr("class", "arrowHead");
 
 	defs.append("marker")
-
 		.attr("id", "catalysis")
 		.attr("viewBox", "0 -6 11 12")
 		.attr("stroke", "black")

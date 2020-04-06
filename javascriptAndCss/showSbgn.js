@@ -1,5 +1,5 @@
 var currentZoom, width, height, size, marker, svg, obj, nodes, links, node, link, nodeShape, nodeLabel, compartments, nodesByCompartment;
-var nodeSize = 70;
+var nodeSize = 50;
 
 function showSbgn(data) {
 
@@ -7,7 +7,7 @@ function showSbgn(data) {
 	obj = JSON.parse(data);
 	nodes = obj.nodes;
 	links = obj.links;
-	console.log(nodes);
+	console.log(links);
 	//delete current graph and show graph tab and download button
 	d3.selectAll("#bivesGraph").selectAll("svg").remove();
 
@@ -20,8 +20,8 @@ function showSbgn(data) {
 
 	//set size and zoom variables
 	currentZoom = 1;
-	width = 1000;
-	height = 800;
+	width = 1600;
+	height = 1400;
 	size = (width - 50) / 10;
 	marker = width / 100;
 
@@ -150,11 +150,14 @@ function updateForces() {
 
 function createGraph() {
 	link = svg.append("g")
-		.attr("stroke", "black")
+		//.attr("stroke", "black")
 		.attr("stroke-opacity", 1)
 		.selectAll("line")
 		.data(links)
 		.enter().append("path")
+		.attr("stroke", function (d) {
+			return strokeColor(d.bivesClass);
+		})
 		.attr("stroke-width", 3)
 		.style("marker-end", function (d) {
 			return "url(#" + sboSwitchArc(d.class) + "" + d.bivesClass + ")"
@@ -223,32 +226,32 @@ function createCompartments() {
 		.attr("class", "compartment")
 		.attr("id", function (d) {
 			return d.key;
+		})
+		.attr("name", function (d) {
+
 		});
+
 	compartments.append("path")
 		.attr("stroke-width", 3)
 		.attr("stroke", "black")
-		.attr("fill", "none");
+		.attr("fill", "none")
+		.attr("id", function (d) {
+			return d.key + "-path";
+		});
+
 	compartments
 		.append("text")
-		.style("text-anchor", "bottom") //text attr
+		.style("text-anchor", "middle") //text attr
 		.style("stroke", "none")
 		.style("font-size", "14px")
 		.attr('dy', "0.25em")
-		.text(function (d) {
-			return "ENTER COMPARTMENT LABEL";
-		});
+		.text(function (c) {
 
-	/* 	compartments = svg.append("g")
-			.data(nodesByCompartment)
-			.enter()
-			.attr("id", function (d) {
-				return d.key
-			})
-			.enter()
-			.attr("class", "node")
-			.append("path")
-			.attr("id", n.key + "asd")
-			.attr("stroke-width", 3); */
+			var cNode = nodes.filter(function (d) {
+				return c.key == d.id;
+			});
+			return cNode[0].label;
+		});
 }
 ///////////////////////////////////////
 
@@ -272,6 +275,10 @@ function ticked() {
 	compartments.select("path").attr("d", function (d) {
 		//alert("test");
 		return compartmentFlex(d);
+	});
+
+	compartments.select("text").attr("transform", function (d) {
+		return compartmentText(d);
 	});
 }
 
@@ -310,10 +317,7 @@ function dragended(d) {
 function clicked(d) {
 	d.fx = null;
 	d.fy = null;
-	console.log("click");
 	if (d3.event.defaultPrevented) return; // dragged
-
-	//d3.select(this).classed("fixed", d.fixed = false);
 }
 
 /*	var dragCompartment = d3.behavior.drag()
@@ -384,12 +388,6 @@ function compartmentFlex(c) {
 		xMax = -Infinity,
 		yMin = Infinity,
 		yMax = -Infinity;
-	//console.log(id);
-
-
-	//console.log(d.compartment, d.compartment == id);
-
-
 
 	xMin = d3.min(c.values, function (d) {
 		halfElementWidth = d3.select("#" + d.id).node().getBBox().width / 2;
@@ -408,11 +406,6 @@ function compartmentFlex(c) {
 		return d.y + halfElementHeight;
 	});
 
-	if (xMin == Infinity) {
-		console.log("infinity");
-		return;
-	}
-	//console.log(xMin, xMax, yMin, yMax);
 	var x;
 	if (xMin < 0 && xMax < 0) x = (xMin - xMax) / 3;
 	else if (xMin < 0) x = (-xMin + xMax) / 3;
@@ -429,17 +422,38 @@ function compartmentFlex(c) {
 		" z ";
 };
 
+function compartmentText(c) {
+	var bBox = d3.select("#" + c.key + "-path").node().getBBox();
+	var xMid = bBox.x + bBox.width / 2;
+	var y = bBox.y + 15;
+
+	return "translate(" + xMid + "," + y + ")";
+}
+
 function changeProcessNode(size) {
-	console.log("call for change", size);
 	var size = size * 0.15;
 	if (document.getElementById("portToggle").checked) {
 		d3.selectAll(".node.process").selectAll("path")
 			.attr("d", "m -" + size * 0.5 + " -" + size * 0.5 + " h " + size + " v " + size + " h -" + size + " z ");
-		console.log("changed");
 	} else {
 		d3.selectAll(".node.process").selectAll("path")
 			.attr("d", "m -" + size * 0.5 + " -" + size * 0.5 + " h " + size + " v " + size + " h -" + size + " z " + " m 0 " + size / 2 + " h -" + size / 2 + " m " + size * 2 + " 0" + " h -" + size / 2);
 	}
+}
+
+function strokeColor(bives) {
+	switch (bives) {
+		case 'nothing':
+			return "black";
+		case 'delete':
+			return "red";
+		case 'insert':
+			return "green";
+		case 'move':
+			return "blue";
+		case 'update':
+			return "orange";
+	};
 }
 
 function updateAll() {

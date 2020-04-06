@@ -5,7 +5,7 @@ function tickArrows(d) {
 		y2 = d.target.y,
 		x2 = d.target.x;
 
-	var element = d3.select("#" + d.target.id).node();
+	var element = d3.select("#" + d.target.id).select("path").node();
 	var boundingBox = element.getBoundingClientRect();
 	//console.log(boundingBox);
 	var halfElementWidth = boundingBox.width / 2; ///currentZoom;
@@ -19,7 +19,7 @@ function tickArrows(d) {
 		if (elementClass == "consumption") {
 			x2 = d.target.x - halfElementWidth;
 		} else if (elementClass == "production") {
-			var sourceWidth = d3.select("#" + d.source.id).node();
+			var sourceWidth = d3.select("#" + d.source.id).select("path").node();
 			if (sourceWidth != null) {
 				sourceWidth = sourceWidth.getBoundingClientRect().width / 2 / currentZoom;
 			} else sourceWidth = 0;
@@ -234,11 +234,15 @@ function tickArrows(d) {
 	var yr = 20;
 	//var distance = distanceHack(sboSwitch(d.target.class), size);
 
-	switch (d.bivesClass) {
-		//case "insert": return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,1 " + (x2) + "," + y2; break;
-		//case "delete": return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,0 " + (x2) + "," + y2; break;
+	switch (d.arc) {
+		case 1:
+			return; //side 1
+		case 2:
+			return; //side 2
+			//case "insert": return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,1 " + (x2) + "," + y2; break;
+			//case "delete": return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,0 " + (x2) + "," + y2; break;
 		default:
-			return "M" + x1 + "," + y1 + "L" + (x2) + "," + y2;
+			return "M" + x1 + "," + y1 + "L" + (x2) + "," + y2; //straight
 	}
 
 	//return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,1 " + x2 + "," + y2;
