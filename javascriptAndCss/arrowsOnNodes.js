@@ -135,7 +135,7 @@ function tickArrows(d) {
 
 	if (targetClass == "complex" || targetClass == "macromolecule") {
 		var m = (d.target.y - d.source.y) / (d.target.x - d.source.x);
-		var rectWidth = halfElemhalfWidth;
+		var rectWidth = halfElementWidth;
 		var rectHeight = halfElementHeight;
 		var rectM = rectHeight / rectWidth;
 		var rectY, rectX;
