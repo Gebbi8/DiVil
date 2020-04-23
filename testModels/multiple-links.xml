@@ -36,7 +36,7 @@
           </rdf:RDF>
         </annotation>
       </species>
-      <species id="z" initialAmount="0" hasOnlySubstanceUnits="true" metaid="_808285" boundaryCondition="true" sboTerm="SBO:0000297" compartment="cell">
+      <species id="z" initialAmount="0" hasOnlySubstanceUnits="true" metaid="_808285" boundaryCondition="true" sboTerm="SBO:0000248" compartment="cell">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
             <rdf:Description rdf:about="#_808285">
@@ -49,7 +49,7 @@
           </rdf:RDF>
         </annotation>
       </species>
-      <species id="v" initialAmount="0" hasOnlySubstanceUnits="true" metaid="_175119" boundaryCondition="true" sboTerm="SBO:0000297" compartment="cell">
+      <species id="v" initialAmount="0" hasOnlySubstanceUnits="true" metaid="_175119" boundaryCondition="true" sboTerm="SBO:0000200" compartment="cell">
         <annotation>
           <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
             <rdf:Description rdf:about="#_175119">

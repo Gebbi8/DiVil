@@ -1,9 +1,10 @@
 function appendDefs() {
 	var defs = d3.select("svg").append("defs");
 	var refX = 12;
-	var marker = 12;
+	var marker = 10;
 	var refXProduction = 10;
 	var refXModulation = 10.5;
+	var strokeWidth = 1;
 
 
 	defs.append("marker")
@@ -89,7 +90,7 @@ function appendDefs() {
 		.attr("id", "modulationnothing")
 		.attr("viewBox", "0 -6 11 12")
 		.attr("fill", "white")
-		.attr("stroke-width", "0.5")
+		.attr("stroke-width", strokeWidth)
 		.attr("refX", refXModulation)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
@@ -106,7 +107,7 @@ function appendDefs() {
 		.attr("id", "modulationupdate")
 		.attr("viewBox", "0 -6 11 12")
 		.attr("fill", "white")
-		.attr("stroke-width", "0.5")
+		.attr("stroke-width", strokeWidth)
 		.attr("refX", refXModulation)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
@@ -123,7 +124,7 @@ function appendDefs() {
 		.attr("id", "modulationdelete")
 		.attr("viewBox", "0 -6 11 12")
 		.attr("fill", "white")
-		.attr("stroke-width", "0.5")
+		.attr("stroke-width", strokeWidth)
 		.attr("refX", refXModulation)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
@@ -140,7 +141,7 @@ function appendDefs() {
 		.attr("id", "modulationinsert")
 		.attr("viewBox", "0 -6 11 12")
 		.attr("fill", "white")
-		.attr("stroke-width", "0.5")
+		.attr("stroke-width", strokeWidth)
 		.attr("refX", refXModulation)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
@@ -157,9 +158,9 @@ function appendDefs() {
 		.attr("id", "stimulationnothing")
 		.attr("viewBox", "0 -6 11 12")
 		.attr("stroke", "black")
-		.attr("stroke-width", "0.5")
+		.attr("stroke-width", strokeWidth)
 		.attr("fill", "white")
-		.attr("refX", refX)
+		.attr("refX", refXProduction)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -174,9 +175,9 @@ function appendDefs() {
 
 		.attr("id", "stimulationupdate")
 		.attr("viewBox", "0 -6 11 12")
-		.attr("stroke-width", "0.5")
+		.attr("stroke-width", strokeWidth)
 		.attr("fill", "white")
-		.attr("refX", refX)
+		.attr("refX", refXProduction)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -191,9 +192,9 @@ function appendDefs() {
 
 		.attr("id", "stimulationdelete")
 		.attr("viewBox", "0 -6 11 12")
-		.attr("stroke-width", "0.5")
+		.attr("stroke-width", strokeWidth)
 		.attr("fill", "white")
-		.attr("refX", refX)
+		.attr("refX", refXProduction)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -208,9 +209,9 @@ function appendDefs() {
 
 		.attr("id", "stimulationinsert")
 		.attr("viewBox", "0 -6 11 12")
-		.attr("stroke-width", "0.5")
+		.attr("stroke-width", strokeWidth)
 		.attr("fill", "white")
-		.attr("refX", refX)
+		.attr("refX", refXProduction)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -225,7 +226,7 @@ function appendDefs() {
 		.attr("id", "catalysis")
 		.attr("viewBox", "0 -6 11 12")
 		.attr("stroke", "black")
-		.attr("stroke-width", "0.5")
+		.attr("stroke-width", strokeWidth)
 		.attr("fill", "white")
 		.attr("refX", refX)
 		.attr("refY", "0")
@@ -338,7 +339,7 @@ function appendDefs() {
 
 		.attr("id", "necessarystimulationnothing")
 		.attr("viewBox", "0 -6 11 12")
-		.attr("stroke-width", "0.5")
+		.attr("stroke-width", strokeWidth)
 		.attr("stroke", "black")
 		.attr("fill", "white")
 		.attr("refX", refX)
@@ -356,7 +357,7 @@ function appendDefs() {
 
 		.attr("id", "necessarystimulationinsert")
 		.attr("viewBox", "0 -6 11 12")
-		.attr("stroke-width", "0.5")
+		.attr("stroke-width", strokeWidth)
 		.attr("stroke", "black")
 		.attr("fill", "white")
 		.attr("refX", refX)
@@ -374,7 +375,7 @@ function appendDefs() {
 
 		.attr("id", "necessarystimulation")
 		.attr("viewBox", "0 -6 11 12")
-		.attr("stroke-width", "0.5")
+		.attr("stroke-width", strokeWidth)
 		.attr("stroke", "black")
 		.attr("fill", "white")
 		.attr("refX", refX)

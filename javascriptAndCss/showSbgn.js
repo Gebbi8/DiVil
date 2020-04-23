@@ -1,13 +1,63 @@
 var currentZoom, width, height, size, marker, svg, obj, nodes, links, node, link, nodeShape, nodeLabel, compartments, nodesByCompartment;
+var sameLinks;
 var nodeSize = 50;
 
 function showSbgn(data) {
+
+
 
 	//parse the data
 	obj = JSON.parse(data);
 	nodes = obj.nodes;
 	links = obj.links;
 	console.log(links);
+
+	//////same source/link combination/////
+
+	var sameIndex = 0;
+	sameLinks = [];
+
+	links.forEach(function (l, i) {
+		var sameCount = 0;
+		console.log(l);
+		links.forEach(function (link, n) {
+
+			if (n > i && link.sameIndex == null) {
+				if (l.source == link.source && l.target == link.target) {
+					sameCount++;
+
+					if (sameLinks[sameIndex] != null) sameLinks[sameIndex]++;
+					else {
+						sameLinks[sameIndex] = 1;
+						l.multiIndex = sameIndex;
+						l.multiPos = 0;
+						l.invert = false;
+					}
+					link.multiIndex = sameIndex;
+					link.multiPos = sameCount;
+					link.invert = false;
+				} else if (l.source == link.target && l.target == link.source) {
+					sameCount++;
+
+					if (sameLinks[sameIndex] != null) sameLinks[sameIndex]++;
+					else {
+						sameLinks[sameIndex] = 1;
+						l.multiIndex = sameIndex;
+						l.multiPos = 0;
+						l.invert = false;
+					}
+					link.multiIndex = sameIndex;
+					link.multiPos = sameCount;
+
+					link.invert = true;
+				}
+			}
+		});
+		if (sameCount > 0) sameIndex++;
+	});
+
+	console.log(links, sameLinks);
+	///////////////////////////////////////
 	//delete current graph and show graph tab and download button
 	d3.selectAll("#bivesGraph").selectAll("svg").remove();
 
@@ -158,7 +208,8 @@ function createGraph() {
 		.attr("stroke", function (d) {
 			return strokeColor(d.bivesClass);
 		})
-		.attr("stroke-width", 3)
+		.attr("stroke-width", 2)
+		.attr("fill", "none")
 		.style("marker-end", function (d) {
 			return "url(#" + sboSwitchArc(d.class) + "" + d.bivesClass + ")"
 		});
@@ -183,7 +234,7 @@ function createGraph() {
 			return d.id
 		})
 		.style("stroke", "black")
-		.style("stroke-width", 3)
+		.style("stroke-width", 2)
 		.attr("fill", "white")
 		.call(d3.drag()
 			.on("start", dragstarted)
@@ -253,7 +304,6 @@ function createCompartments() {
 			return cNode[0].label;
 		});
 }
-///////////////////////////////////////
 
 function ticked() {
 	node.attr("cx", function (d) {

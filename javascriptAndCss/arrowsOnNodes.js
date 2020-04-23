@@ -131,9 +131,7 @@ function tickArrows(d) {
 			}
 
 		}
-	}
-
-	if (targetClass == "complex" || targetClass == "macromolecule") {
+	} else if (targetClass == "macromolecule") {
 		var m = (d.target.y - d.source.y) / (d.target.x - d.source.x);
 		var rectWidth = halfElementWidth;
 		var rectHeight = halfElementHeight;
@@ -159,9 +157,54 @@ function tickArrows(d) {
 			y2 = d.target.y + rectY;
 			x2 = d.target.x + rectX;
 		}
-	}
+	} else if (targetClass == "complex") {
+		var m = (d.source.y - d.target.y) / (d.source.x - d.target.x);
+		var n = d.target.y - m * d.target.x;
 
-	if ((targetClass == "process" || targetClass == "inhibition" || targetClass == "conusmption" || targetClass == "production" ||
+		//
+		var absM = Math.abs(m);
+
+		if (0.5 < absM && absM < 2) {
+			var nR;
+
+			if (m < 0) {
+				if (d.target.x > d.source.x) { //3. Q
+					nR = (d.target.y + 0.5 * halfElementHeight) - (d.target.x - halfElementWidth);
+				} else { //1. Q
+					nR = (d.target.y - 0.5 * halfElementHeight) - (d.target.x + halfElementWidth);
+				}
+				x2 = (nR - n) / (m - 1);
+				y2 = m * x2 + n;
+			} else {
+				if (d.target.x > d.source.x) { //2. Q
+					nR = (d.target.y - 0.5 * halfElementHeight) + (d.target.x - halfElementWidth);
+				} else { //4. Q
+					nR = (d.target.y + 0.5 * halfElementHeight) + (d.target.x + halfElementWidth);
+				}
+				x2 = (nR - n) / (m + 1);
+				y2 = m * x2 + n;
+
+			}
+
+
+
+		} else if (absM < 0.5) {
+
+			if (d.target.x > d.source.x) {
+				x2 = d.target.x - halfElementWidth;
+			} else {
+				x2 = d.target.x + halfElementWidth;
+			}
+			y2 = m * x2 + n;
+		} else {
+			if (d.target.y > d.source.y) {
+				y2 = d.target.y - halfElementHeight;
+			} else {
+				y2 = d.target.y + halfElementHeight;
+			}
+			x2 = (y2 - n) / m;
+		}
+	} else if ((targetClass == "process" || targetClass == "inhibition" || targetClass == "conusmption" || targetClass == "production" ||
 			targetClass == "modulation" || targetClass == "stimulation" || targetClass == "catalysis" || targetClass == "necessary stimulation") && elementClass != "consumption" && elementClass != "production") {
 
 
@@ -192,9 +235,7 @@ function tickArrows(d) {
 			}
 			y2 = m * x2 + n;
 		}
-	}
-
-	if (targetClass == "unspecified entity") {
+	} else if (targetClass == "unspecified entity") {
 
 
 		var m = (d.target.y - d.source.y) / (d.target.x - d.source.x);
@@ -230,19 +271,23 @@ function tickArrows(d) {
 
 
 	var dr = Math.sqrt((x2 - d.source.x) * (x2 - d.source.x) + (y2 - d.source.y) * (y2 - d.source.y));
-	var xr = 20;
-	var yr = 20;
-	//var distance = distanceHack(sboSwitch(d.target.class), size);
+	//var dr = Math.sqrt((d.target.x - d.source.x) * (d.target.x - d.source.x) + (d.target.y - d.source.y) * (d.target.y - d.source.y));
 
-	switch (d.arc) {
-		case 1:
-			return; //side 1
-		case 2:
-			return; //side 2
-			//case "insert": return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,1 " + (x2) + "," + y2; break;
-			//case "delete": return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,0 " + (x2) + "," + y2; break;
-		default:
-			return "M" + x1 + "," + y1 + "L" + (x2) + "," + y2; //straight
+	if (d.multiIndex != null && !(sameLinks[d.multiIndex] % 2 == 0 && sameLinks[d.multiIndex] == d.multiPos)) { // bend lines
+		//even number of lines && uneven excluding the last one
+		var bendFactor = Math.ceil((d.multiPos + 1) / 2);
+		if ((d.multiPos % 2 == 0 && !d.invert) || d.invert)
+			return "M" + x1 + "," + y1 + "A" + bendFactor * dr + "," + bendFactor * dr + " 0 0,1 " + (x2) + "," + y2;
+		else
+			return "M" + x1 + "," + y1 + "A" + bendFactor * dr + "," + bendFactor * dr + " 0 0,0 " + (x2) + "," + y2;
+		//return; //side 1
+		//case 2:
+		//case "insert": return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,1 " + (x2) + "," + y2; break;
+		//case "delete": return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,0 " + (x2) + "," + y2; break;
+		//default:
+
+	} else {
+		return "M" + x1 + "," + y1 + "L" + x2 + "," + y2; //straight line
 	}
 
 	//return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,1 " + x2 + "," + y2;

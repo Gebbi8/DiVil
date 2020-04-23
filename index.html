@@ -252,22 +252,21 @@
 		//document.getElementById("sbmlDownload").onclick = function() {console.log(obj); downloadSBML(obj)};
 		//showSbgn(obj);
 		// console.log("http://localhost/SBI-Rep/divil/testModels/000006/" + document.getElementById("selection")[0].text + "",
-		//  						"http://localhost/SBI-Rep/divil/testModels/000006/" + document.getElementById("selection")[1].text + "",
-		// 						["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations"]);};
+		//  			"http://localhost/SBI-Rep/divil/testModels/000006/" + document.getElementById("selection")[1].text + "",
+		//				["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations"]);};
 		//document.getElementById("compareModels").onclick = function() {obj = getBivesData("http://localhost/SBI-Rep/masterthesis_tom/implementation/testModels/BioModel7/Novak1997_CellCycle-R3", "http://localhost/SBI-Rep/masterthesis_tom/implementation/testModels/BioModel7/Novak1997_CellCycle-R37", "reactionsSbgnJson");};
 
 		var x = document.getElementById("selection");
 		var option = document.createElement("option");
-		option.text = "model_MOR_AC";
+		option.text = "original";
 		x.add(option);
 		option = document.createElement("option");
-		option.text = "model_MOR_AC";
+		option.text = "multiple-links";
 		x.add(option);
 
-
-
-		getBivesData("http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "model_MOR_AC" + ".xml",
-			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "model_MOR_AC" + ".xml",
+		getBivesData(
+			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "2012-11-10" + ".xml",
+			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "2012-11-11" + ".xml",
 			["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations"]);
 	</script>
 </body>

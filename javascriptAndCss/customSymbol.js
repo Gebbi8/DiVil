@@ -61,14 +61,14 @@ function customSymbol(node, nodeSize) {
 
 	var complex =
 		"m -" + size * 0.5 + " -" + size * 0.5 +
-		" m " + size * 0.1 + " 0" +
-		" l " + size * 0.8 + " 0" +
-		" l " + size * 0.1 + " " + size * 0.1 +
-		" l 0 " + size * 0.8 +
-		" l -" + size * 0.1 + " " + size * 0.1 +
-		" l -" + size * 0.8 + " 0" +
-		" l -" + size * 0.1 + " -" + size * 0.1 +
-		" l 0 -" + size * 0.8 +
+		" m " + size * 0.25 + " 0" +
+		" l " + size * 0.5 + " 0" +
+		" l " + size * 0.25 + " " + size * 0.25 +
+		" l 0 " + size * 0.5 +
+		" l -" + size * 0.25 + " " + size * 0.25 +
+		" l -" + size * 0.5 + " 0" +
+		" l -" + size * 0.25 + " -" + size * 0.25 +
+		" l 0 -" + size * 0.5 +
 		" z ";
 
 	var perturbingAgent =
