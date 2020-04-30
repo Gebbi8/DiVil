@@ -32,6 +32,9 @@
 				<div id="modelSelection">
 					<h1> Select two model versions </h1>
 					<select id="versionChoice" class="box" size="10">
+						<optgroup label="Test Fake Models">
+							<option class="opt" value="test">allGlyphsAndArcs</option>
+						</optgroup>
 						<optgroup label="PK Cycle">
 							<option class="opt" value="test">model_MOR_AC</option>
 							<option class="opt" value="test">model_PKA_cycle</option>
@@ -51,7 +54,7 @@
 							<option class="opt" value="test">symbols</option>
 							<option class="opt" value="test">updates</option>
 							<option class="opt" value="test">deletion</option>
-							<option class="opt" value="test">multiple-links</option>
+							<option class="opt" value="test">multiple</option>
 						</optgroup>
 						<optgroup label="BioModel7/Novak1997_CellCycle">
 							<option class="opt" value="test">R3</option>
@@ -261,7 +264,7 @@
 		option.text = "original";
 		x.add(option);
 		option = document.createElement("option");
-		option.text = "multiple-links";
+		option.text = "multiple";
 		x.add(option);
 
 		getBivesData(
