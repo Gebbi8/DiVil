@@ -46,6 +46,19 @@ function customSymbol(node, nodeSize) {
 		" a " + size * 0.1 + " " + size * 0.1 + " " + size * 0.02 + " 0 0 -" + size * 0.1 + " -" + size * 0.1 +
 		" z ";
 
+	var macromoleculeMultimer =
+		"m -" + size * 0.5 + " -" + size * 0.5 +
+		" m " + size * 0.1 + " 0" +
+		" a " + size * 0.1 + " " + size * 0.1 + " " + size * 0.02 + " 0 0 -" + size * 0.1 + " " + size * 0.1 +
+		" l 0 " + size * 0.8 +
+		" a " + size * 0.1 + " " + size * 0.1 + " " + size * 0.02 + " 0 0 " + size * 0.1 + " " + size * 0.1 +
+		" l " + size * 0.8 + " 0" +
+		" a " + size * 0.1 + " " + size * 0.1 + " " + size * 0.02 + " 0 0 " + size * 0.1 + " -" + size * 0.1 +
+		" l 0 -" + size * 0.8 +
+		" a " + size * 0.1 + " " + size * 0.1 + " " + size * 0.02 + " 0 0 -" + size * 0.1 + " -" + size * 0.1 +
+		" l " + size * -0.8 + " 0" +
+		" m " + size * 0.9 + " " + size * 0.1;
+
 	var unspecifiedEntity =
 		"m -" + size + " -" + size * 0 +
 		" a " + size * 0.5 + " " + size + " -90 0 1 " + size * 2 + " 0" +

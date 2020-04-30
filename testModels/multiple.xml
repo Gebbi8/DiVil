@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<sbml xmlns="http://www.sbml.org/sbml/level2/version4" level="2" metaid="_000000" version="4">
+  <model id="BIOMD0000000006" name="Tyson1991 - Cell Cycle 2 var" metaid="_000001">
+      <listOfCompartments>
+      <compartment id="cell" metaid="_000002" size="1">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#_000002">
+              <bqbiol:is>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/obo.go/GO:0005623"/>
+                </rdf:Bag>
+              </bqbiol:is>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </compartment>
+    </listOfCompartments>
+    <listOfSpecies>
+      <species id="EmptySet" initialAmount="1" hasOnlySubstanceUnits="true" metaid="_808249" boundaryCondition="true" sboTerm="SBO:0000291" compartment="cell"/>
+      <species id="u" initialAmount="0" hasOnlySubstanceUnits="true" metaid="_808265" boundaryCondition="true" sboTerm="SBO:0000297" compartment="cell">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#_808265">
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/obo.go/GO:0004693"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+              <bqbiol:isVersionOf>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/obo.go/GO:0031387"/>
+                </rdf:Bag>
+              </bqbiol:isVersionOf>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="z" initialAmount="0" hasOnlySubstanceUnits="true" metaid="_808285" boundaryCondition="true" sboTerm="SBO:0000248" compartment="cell">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#_808285">
+              <bqbiol:hasVersion>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/uniprot/P04551"/>
+                </rdf:Bag>
+              </bqbiol:hasVersion>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+      <species id="v" initialAmount="0" hasOnlySubstanceUnits="true" metaid="_175119" boundaryCondition="true" sboTerm="SBO:0000200" compartment="cell">
+        <annotation>
+          <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bqmodel="http://biomodels.net/model-qualifiers/" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+            <rdf:Description rdf:about="#_175119">
+              <bqbiol:hasVersion>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/uniprot/P04551"/>
+                </rdf:Bag>
+              </bqbiol:hasVersion>
+              <bqbiol:hasVersion>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/obo.go/GO:0031387"/>
+                </rdf:Bag>
+              </bqbiol:hasVersion>
+              <bqbiol:hasProperty>
+                <rdf:Bag>
+                  <rdf:li rdf:resource="http://identifiers.org/obo.go/GO:0004693"/>
+                </rdf:Bag>
+              </bqbiol:hasProperty>
+            </rdf:Description>
+          </rdf:RDF>
+        </annotation>
+      </species>
+    </listOfSpecies>
+
+    <listOfReactions>
+      <reaction id="Reaction1" metaid="_175121" reversible="false" sboTerm="SBO:0000205">
+        <listOfReactants>
+			<speciesReference species="v"/>
+        </listOfReactants>
+        <listOfModifiers>
+          <modifierSpeciesReference species="z"/>
+        </listOfModifiers>
+        <kineticLaw metaid="_372768">
+          <math xmlns="http://www.w3.org/1998/Math/MathML">          
+            <ci> kappa </ci>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Reaction2" metaid="_175122" reversible="false" sboTerm="SBO:0000179">
+        <listOfReactants>
+          <speciesReference species="u" metaid="_372780"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="EmptySet" metaid="_372792"/>
+        </listOfProducts>
+        <kineticLaw metaid="_372804">
+          <math xmlns="http://www.w3.org/1998/Math/MathML">          
+            <apply>
+              <times/>
+              <ci> k6 </ci>
+              <ci> u </ci>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+      <reaction id="Reaction3" metaid="_175123" reversible="false" sboTerm="SBO:0000176">
+        <listOfReactants>
+          <speciesReference species="z" metaid="_372816"/>
+        </listOfReactants>
+        <listOfProducts>
+          <speciesReference species="u" metaid="_372828"/>
+        </listOfProducts>
+        <kineticLaw metaid="_372840">
+          <math xmlns="http://www.w3.org/1998/Math/MathML">          
+            <apply>
+              <times/>
+              <ci> k4 </ci>
+              <ci> z </ci>
+              <apply>
+                <plus/>
+                <apply>
+                  <divide/>
+                  <ci> k4prime </ci>
+                  <ci> k4 </ci>
+                </apply>
+                <apply>
+                  <power/>
+                  <ci> u </ci>
+                  <cn type="integer"> 2 </cn>
+                </apply>
+              </apply>
+            </apply>
+          </math>
+        </kineticLaw>
+      </reaction>
+    </listOfReactions>
+  </model>
+</sbml>
