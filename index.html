@@ -261,15 +261,15 @@
 
 		var x = document.getElementById("selection");
 		var option = document.createElement("option");
-		option.text = "original";
+		option.text = "allGlyphsAndArcs";
 		x.add(option);
 		option = document.createElement("option");
 		option.text = "multiple";
 		x.add(option);
 
 		getBivesData(
-			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "2012-11-10" + ".xml",
-			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "2012-11-11" + ".xml",
+			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "allGlyphsAndArcs" + ".xml",
+			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "allGlyphsAndArcs" + ".xml",
 			["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations"]);
 	</script>
 </body>

@@ -46,7 +46,7 @@
 			</reaction>
 			<reaction id="v5" name="lacz degr">
 				<listOfReactants>
-					<speciesReference species="complex"/>
+					<speciesReference species="com"/>
 				</listOfReactants>
 				<listOfModifiers>
 					<modifierSpeciesReference species="nuc"/>
