@@ -10,7 +10,7 @@ function showSbgn(data) {
 	obj = JSON.parse(data);
 	nodes = obj.nodes;
 	links = obj.links;
-	console.log(links);
+	console.log(nodes);
 
 	//////same source/link combination/////
 

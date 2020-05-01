@@ -34,6 +34,8 @@
 					<select id="versionChoice" class="box" size="10">
 						<optgroup label="Test Fake Models">
 							<option class="opt" value="test">allGlyphsAndArcs</option>
+							<option class="opt" value="test">GlyphsAndArcs</option>
+							<option class="opt" value="test">GlyphsAndArcs_noTypo</option>
 						</optgroup>
 						<optgroup label="PK Cycle">
 							<option class="opt" value="test">model_MOR_AC</option>
@@ -261,15 +263,15 @@
 
 		var x = document.getElementById("selection");
 		var option = document.createElement("option");
-		option.text = "allGlyphsAndArcs";
+		option.text = "GlyphsAndArcs_noTypo";
 		x.add(option);
 		option = document.createElement("option");
-		option.text = "multiple";
+		option.text = "GlyphsAndArcs_noTypo";
 		x.add(option);
 
 		getBivesData(
-			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "allGlyphsAndArcs" + ".xml",
-			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "allGlyphsAndArcs" + ".xml",
+			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "GlyphsAndArcs_noTypo" + ".xml",
+			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "GlyphsAndArcs_noTypo" + ".xml",
 			["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations"]);
 	</script>
 </body>
