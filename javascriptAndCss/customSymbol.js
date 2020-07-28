@@ -35,15 +35,23 @@ function customSymbol(node, nodeSize) {
 		" h -" + size / 2;
 
 	var macromolecule =
-		"m -" + size * 0.5 + " -" + size * 0.5 +
-		" m " + size * 0.1 + " 0" +
-		" a " + size * 0.1 + " " + size * 0.1 + " " + size * 0.02 + " 0 0 -" + size * 0.1 + " " + size * 0.1 +
-		" l 0 " + size * 0.8 +
-		" a " + size * 0.1 + " " + size * 0.1 + " " + size * 0.02 + " 0 0 " + size * 0.1 + " " + size * 0.1 +
-		" l " + size * 0.8 + " 0" +
-		" a " + size * 0.1 + " " + size * 0.1 + " " + size * 0.02 + " 0 0 " + size * 0.1 + " -" + size * 0.1 +
-		" l 0 -" + size * 0.8 +
-		" a " + size * 0.1 + " " + size * 0.1 + " " + size * 0.02 + " 0 0 -" + size * 0.1 + " -" + size * 0.1 +
+		"m -" + size * 0.8 + " -" + size * 0.3 +
+		" a " + size * 0.1 + " " + size * 0.1 + " 0 0 1 " + size * 0.1 + " " + -size * 0.1 +
+		" l " + size * 1.4 + " 0" +
+		" a " + size * 0.1 + " " + size * 0.1 + " 0 0 1 " + size * 0.1 + " " + size * 0.1 +
+		" l 0 " + size * 0.6 +
+		" a " + size * 0.1 + " " + size * 0.1 + " 0 0 1 " + -size * 0.1 + " " + size * 0.1 +
+		" l " + -size * 1.4 + " 0" +
+		" a " + size * 0.1 + " " + size * 0.1 + " 0 0 1 " + -size * 0.1 + " " + -size * 0.1 +
+		" z ";
+
+	var nucleicAcidFeature =
+		"m -" + size * 0.8 + " -" + size * 0.3 +
+		" l " + size * 1.5 + " 0" +
+		" l 0 " + size * 0.6 +
+		" a " + size * 0.1 + " " + size * 0.1 + " 0 0 1 " + -size * 0.1 + " " + size * 0.1 +
+		" l " + -size * 1.5 + " 0" +
+		" a " + size * 0.1 + " " + size * 0.1 + " 0 0 1 " + -size * 0.1 + " " + -size * 0.1 +
 		" z ";
 
 	var macromoleculeMultimer =
@@ -98,6 +106,17 @@ function customSymbol(node, nodeSize) {
 		" a " + size / 2 + " " + size / 2 + " 0 1 0 " + size + " 0" +
 		" a " + size / 2 + " " + size / 2 + " 0 1 0 -" + size + " 0";
 
+	var simpleChemicalMulti =
+		"m -" + size / 2 + " 0" +
+		" a " + size / 2 + " " + size / 2 + " 0 1 0 " + size + " 0" +
+		" a " + size / 2 + " " + size / 2 + " 0 1 0 -" + size + " 0" +
+		" m " + size / 8.69565 + " " + size / 3.125 +
+		" a " + size / 2 + " " + size / 2 + " 0 1 0 " + size * 0.9 + " " + -size / 2 +
+		" a " + size / 2 + " " + size / 2 + " 0 0 0 " + -size / 6.6667 + " " + -size / 6.25; //+
+	//" a " + size / 2 + " " + size / 2 + " 0 1 0 " + 7 * size / 8 + " -" + size / 2; // +
+	//" a " + size / 2 + " " + size / 2 + " 0 1 0 -" + size + " 0";
+
+
 	var missingNode =
 		"m -" + size * 0.5 + " -" + size * 0.5 +
 		"l " + size + " " + size +
@@ -121,6 +140,9 @@ function customSymbol(node, nodeSize) {
 		case 'macromolecule':
 			return macromolecule;
 			break;
+		case 'nucleic acid feature':
+			return nucleicAcidFeature;
+			break;
 		case 'unspecified entity':
 			return unspecifiedEntity;
 			break;
@@ -132,6 +154,9 @@ function customSymbol(node, nodeSize) {
 			break;
 		case 'perturbing agent':
 			return perturbingAgent;
+			break;
+		case 'simple chemical multimer':
+			return simpleChemicalMulti;
 			break;
 		default:
 			console.log("missing node: " + node);

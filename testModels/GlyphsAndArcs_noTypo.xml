@@ -8,7 +8,7 @@
 		<listOfSpecies>
 			<species id="x" name="unspecEnt" compartment="compartment1" initialConcentration="0"/>
 			<species id="mac" name="macroMolecule" compartment="compartment1" initialConcentration="0" sboTerm="SBO:0000248"/>
-			<species id="nuc" name="nucleicAcidFeat" compartment="compartment1" initialConcentration="0" sboTerm="SBO:0000250"/>
+			<species id="nuc" name="nucleicAcidFeat" compartment="compartment1" initialConcentration="0" sboTerm="SBO:0000354"/>
 			<species id="sim" name="simpleChem" compartment="compartment1" initialConcentration="0" sboTerm="SBO:0000247"/>
 			<species id="com" name="complex" compartment="compartment1" initialConcentration="0" sboTerm="SBO:0000248"/>
 			<species id="pert" name="pertubingAgent" compartment="compartment1" initialConcentration="0" sboTerm="SBO:0000405"/>
