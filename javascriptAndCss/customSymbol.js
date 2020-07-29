@@ -46,13 +46,28 @@ function customSymbol(node, nodeSize) {
 		" z ";
 
 	var nucleicAcidFeature =
-		"m -" + size * 0.8 + " -" + size * 0.3 +
+		"m -" + size + " -" + size * 0.4 +
 		" l " + size * 1.5 + " 0" +
 		" l 0 " + size * 0.6 +
 		" a " + size * 0.1 + " " + size * 0.1 + " 0 0 1 " + -size * 0.1 + " " + size * 0.1 +
 		" l " + -size * 1.5 + " 0" +
 		" a " + size * 0.1 + " " + size * 0.1 + " 0 0 1 " + -size * 0.1 + " " + -size * 0.1 +
 		" z ";
+
+	var nucleicAcidFeatureMultimer =
+		"m -" + size * 0.75 + " -" + size * 0.4 +
+		" l " + size * 1.5 + " 0" +
+		" l 0 " + size * 0.6 +
+		" a " + size * 0.1 + " " + size * 0.1 + " 0 0 1 " + -size * 0.1 + " " + size * 0.1 +
+		" l " + -size * 1.3 + " 0" +
+		" a " + size * 0.1 + " " + size * 0.1 + " 0 0 1 " + -size * 0.1 + " " + -size * 0.1 +
+		" z " +
+		" m " + 1.5 * size + " " + 0.1 * size +
+		" l " + size * 0.1 + " 0" +
+		" l 0 " + size * 0.6 +
+		" a " + size * 0.1 + " " + size * 0.1 + " 0 0 1 " + -size * 0.1 + " " + size * 0.1 +
+		" l " + -size * 1.3 + " 0" +
+		" a " + size * 0.1 + " " + size * 0.1 + " 0 0 1 " + -size * 0.1 + " " + -size * 0.1;
 
 	var macromoleculeMultimer =
 		"m -" + size * 0.5 + " -" + size * 0.5 +
@@ -157,6 +172,9 @@ function customSymbol(node, nodeSize) {
 			break;
 		case 'simple chemical multimer':
 			return simpleChemicalMulti;
+			break;
+		case 'nucleic acid feature multimer':
+			return nucleicAcidFeatureMultimer;
 			break;
 		default:
 			console.log("missing node: " + node);
