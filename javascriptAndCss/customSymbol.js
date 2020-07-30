@@ -100,14 +100,14 @@ function customSymbol(node, nodeSize) {
 		" l " + 2 * emptySize + " -" + 2 * emptySize;
 
 	var complex =
-		"m -" + size * 1.25 + " -" + size * 0.5 +
-		" l " + size * 0.75 + " 0" +
-		" l " + size * 0.25 + " " + size * 0.25 +
+		"m " + -0.25 * size + " " + 0.5 * size +
+		" l " + 0.5 * size + " 0" +
+		" l " + size * 0.25 + " " + size * -0.25 +
+		" l 0 " + size * -0.5 +
+		" l " + size * -0.25 + " " + size * -0.25 +
+		" l " + size * -0.5 + " 0" +
+		" l " + size * -0.25 + " " + size * 0.25 +
 		" l 0 " + size * 0.5 +
-		" l -" + size * 0.25 + " " + size * 0.25 +
-		" l -" + size * 0.5 + " 0" +
-		" l -" + size * 0.25 + " -" + size * 0.25 +
-		" l 0 -" + size * 0.5 +
 		" z ";
 
 	var perturbingAgent =
@@ -135,15 +135,20 @@ function customSymbol(node, nodeSize) {
 	//" a " + size / 2 + " " + size / 2 + " 0 1 0 -" + size + " 0";
 
 	var complexMulti =
-		"m -" + size * 1.25 + " -" + size * 0.5 +
-		" l " + size * 0.75 + " 0" +
-		" l " + size * 0.25 + " " + size * 0.25 +
+		"m " + -0.25 * size + " " + 0.5 * size +
+		" l " + 0.5 * size + " 0" +
+		" l " + size * 0.25 + " " + size * -0.25 +
+		" l 0 " + size * -0.5 +
+		" l " + size * -0.25 + " " + size * -0.25 +
+		" l " + size * -0.5 + " 0" +
+		" l " + size * -0.25 + " " + size * 0.25 +
 		" l 0 " + size * 0.5 +
-		" l -" + size * 0.25 + " " + size * 0.25 +
-		" l -" + size * 0.5 + " 0" +
-		" l -" + size * 0.25 + " -" + size * 0.25 +
-		" l 0 -" + size * 0.5 +
-		" z ";
+		" l " + size * 0.35 + " " + size * 0.35 +
+		" l " + 0.5 * size + " 0" +
+		" l " + size * 0.25 + " " + size * -0.25 +
+		" l 0 " + size * -0.5 +
+		" l " + size * -0.1 + " " + size * -0.1;
+	//" z ";
 
 	var missingNode =
 		"m -" + size * 0.5 + " -" + size * 0.5 +
@@ -192,7 +197,7 @@ function customSymbol(node, nodeSize) {
 		case 'nucleic acid feature multimer':
 			return nucleicAcidFeatureMultimer;
 			break;
-		case 'multimer of complexes':
+		case 'complex multimer':
 			return complexMulti;
 			break;
 		default:
