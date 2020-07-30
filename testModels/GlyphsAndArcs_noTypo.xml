@@ -10,7 +10,7 @@
 			<species id="mac" name="macroMolecule" compartment="compartment1" initialConcentration="0" sboTerm="SBO:0000248"/>
 			<species id="nuc" name="nucleicAcidFeat" compartment="compartment1" initialConcentration="0" sboTerm="SBO:0000354"/>
 			<species id="sim" name="simpleChem" compartment="compartment1" initialConcentration="0" sboTerm="SBO:0000247"/>
-			<species id="com" name="complex" compartment="compartment1" initialConcentration="0" sboTerm="SBO:0000248"/>
+			<species id="com" name="complex" compartment="compartment1" initialConcentration="0" sboTerm="SBO:0000526"/>
 			<species id="pert" name="pertubingAgent" compartment="compartment1" initialConcentration="0" sboTerm="SBO:0000405"/>
 			<species id="macMulti" name="mac multimer" compartment="compartment1" initialConcentration="0" sboTerm="SBO:0000420"/>
 			<species id="simMulti" name="simple Multimer" compartment="compartment1" initialConcentration="0" sboTerm="SBO:0000421"/>

@@ -78,7 +78,7 @@ function customSymbol(node, nodeSize) {
 		" a " + size * 0.1 + " " + size * 0.1 + " 0 0 1 " + -size * 0.1 + " " + size * 0.1 +
 		" l " + -size * 1.3 + " 0" +
 		" a " + size * 0.1 + " " + size * 0.1 + " 0 0 1 " + -size * 0.1 + " " + -size * 0.1 +
-		" z " + 
+		" z " +
 		"m " + size * 1.5 + " 0" +
 		" a " + size * 0.1 + " " + size * 0.1 + " 0 0 1 " + size * 0.1 + " " + size * 0.1 +
 		" l 0 " + size * 0.6 +
@@ -100,8 +100,7 @@ function customSymbol(node, nodeSize) {
 		" l " + 2 * emptySize + " -" + 2 * emptySize;
 
 	var complex =
-		"m -" + size * 1.5 + " -" + size * 0.5 +
-		" m " + size * 0.25 + " 0" +
+		"m -" + size * 1.25 + " -" + size * 0.5 +
 		" l " + size * 0.75 + " 0" +
 		" l " + size * 0.25 + " " + size * 0.25 +
 		" l 0 " + size * 0.5 +
@@ -135,6 +134,16 @@ function customSymbol(node, nodeSize) {
 	//" a " + size / 2 + " " + size / 2 + " 0 1 0 " + 7 * size / 8 + " -" + size / 2; // +
 	//" a " + size / 2 + " " + size / 2 + " 0 1 0 -" + size + " 0";
 
+	var complexMulti =
+		"m -" + size * 1.25 + " -" + size * 0.5 +
+		" l " + size * 0.75 + " 0" +
+		" l " + size * 0.25 + " " + size * 0.25 +
+		" l 0 " + size * 0.5 +
+		" l -" + size * 0.25 + " " + size * 0.25 +
+		" l -" + size * 0.5 + " 0" +
+		" l -" + size * 0.25 + " -" + size * 0.25 +
+		" l 0 -" + size * 0.5 +
+		" z ";
 
 	var missingNode =
 		"m -" + size * 0.5 + " -" + size * 0.5 +
@@ -182,6 +191,9 @@ function customSymbol(node, nodeSize) {
 			break;
 		case 'nucleic acid feature multimer':
 			return nucleicAcidFeatureMultimer;
+			break;
+		case 'multimer of complexes':
+			return complexMulti;
 			break;
 		default:
 			console.log("missing node: " + node);
