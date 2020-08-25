@@ -32,6 +32,11 @@
 				<div id="modelSelection">
 					<h1> Select two model versions </h1>
 					<select id="versionChoice" class="box" size="10">
+						<optgroup label="Liebal from BioModels">
+							<option class="opt" value="test">Liebal1-BIOMD0000000461.xml</option>
+							<option class="opt" value="test">Liebal2-BIOMD0000000461.xml</option>
+							<option class="opt" value="test">Liebal3-BIOMD0000000461.xml</option>
+						</optgroup>
 						<optgroup label="Test Fake Models">
 							<option class="opt" value="test">allGlyphsAndArcs</option>
 							<option class="opt" value="test">GlyphsAndArcs</option>
@@ -270,8 +275,8 @@
 		x.add(option);
 
 		getBivesData(
-			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "GlyphsAndArcs_noTypo" + ".xml",
-			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "GlyphsAndArcs_noTypo" + ".xml",
+			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "Liebal1-BIOMD0000000461.xml" + ".xml",
+			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "Liebal2-BIOMD0000000461.xml" + ".xml",
 			["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations"]);
 	</script>
 </body>
