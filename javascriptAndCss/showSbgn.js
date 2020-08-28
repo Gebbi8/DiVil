@@ -233,8 +233,10 @@ function createGraph() {
 		.attr("id", function (d) {
 			return d.id
 		})
-		.style("stroke", "black")
-		.style("stroke-width", 2)
+		.attr("stroke", function (d) {
+			return strokeColor(d.bivesClass);
+		})
+		.attr("stroke-width", 2)
 		.attr("fill", "white")
 		.call(d3.drag()
 			.on("start", dragstarted)

@@ -22,7 +22,7 @@ function getBivesData(v1, v2, command, callback){
 		{
 			console.log(data);
 			//obj = showSbgn(JSON.parse(data).reactionsSbgnJson);
-		//	$("#demo2").text($.parseJSON (data).xmlDiff);
+			//$("#xmlDiff").text($.parseJSON (data).xmlDiff);
 				var dataJson = $.parseJSON (data);
 				document.getElementById("sbgnMLdownload").onclick = function() {download(data)};
 				parser = new DOMParser();
@@ -43,9 +43,10 @@ function getBivesData(v1, v2, command, callback){
 
 
 
-	//			$("#demo2").text(xmlDiffToXmlJson($.parseJSON (data).xmlDiff));
-	//		$("#bivesReport").html ($.parseJSON (data).reportHtml);
+			$("#bivesReport").html ($.parseJSON (data).reportHtml);
 			var sbgnJson = $.parseJSON (data).reactionsSbgnJson;
+			$("#sbgnJson").text(sbgnJson);
+
 			//console.log(xmlDocDiff, xmlDocSbml);
 			showSbgn(sbgnJson);
 
