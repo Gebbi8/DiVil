@@ -25,7 +25,7 @@ function appendDefs() {
 
 		.attr("id", "productionupdate")
 		.attr("viewBox", "0 -6 11 12")
-		.attr("fill", "orange")
+		.attr("fill", "#D6D287")
 		.attr("stroke-width", "0")
 		.attr("refX", refXProduction)
 		.attr("refY", "0")
@@ -41,7 +41,7 @@ function appendDefs() {
 
 		.attr("id", "productiondelete")
 		.attr("viewBox", "0 -6 11 12")
-		.attr("fill", "red")
+		.attr("fill", "#D66A56")
 		.attr("stroke-width", "0")
 		.attr("refX", refXProduction)
 		.attr("refY", "0")
@@ -57,7 +57,7 @@ function appendDefs() {
 
 		.attr("id", "productioninsert")
 		.attr("viewBox", "0 -6 11 12")
-		.attr("fill", "green")
+		.attr("fill", "#76D6AF")
 		.attr("stroke-width", "0")
 		.attr("refX", refXProduction)
 		.attr("refY", "0")
@@ -73,7 +73,7 @@ function appendDefs() {
 
 		.attr("id", "productionmove")
 		.attr("viewBox", "0 -6 11 12")
-		.attr("fill", "blue")
+		.attr("fill", "#8E67D6")
 		.attr("stroke-width", "0")
 		.attr("refX", refXProduction)
 		.attr("refY", "0")
@@ -114,7 +114,7 @@ function appendDefs() {
 		.attr("markerHeight", marker)
 		.attr("orient", "auto")
 
-		.style("stroke", "orange")
+		.style("stroke", "#D6D287")
 		.append("svg:path")
 		.attr("d", "M0,0L5,5L10,0L5,-5Z")
 		.attr("class", "arrowHead");
@@ -131,7 +131,7 @@ function appendDefs() {
 		.attr("markerHeight", marker)
 		.attr("orient", "auto")
 
-		.style("stroke", "red")
+		.style("stroke", "#D66A56")
 		.append("svg:path")
 		.attr("d", "M0,0L5,5L10,0L5,-5Z")
 		.attr("class", "arrowHead");
@@ -148,7 +148,7 @@ function appendDefs() {
 		.attr("markerHeight", marker)
 		.attr("orient", "auto")
 
-		.style("stroke", "green")
+		.style("stroke", "#76D6AF")
 		.append("svg:path")
 		.attr("d", "M0,0L5,5L10,0L5,-5Z")
 		.attr("class", "arrowHead");
@@ -183,7 +183,7 @@ function appendDefs() {
 		.attr("markerHeight", marker)
 		.attr("orient", "auto")
 
-		.style("stroke", "orange")
+		.style("stroke", "#D6D287")
 		.append("svg:path")
 		.attr("d", "M1,-5L1,4L10,0Z")
 		.attr("class", "arrowHead");
@@ -200,7 +200,7 @@ function appendDefs() {
 		.attr("markerHeight", marker)
 		.attr("orient", "auto")
 
-		.style("stroke", "red")
+		.style("stroke", "#D66A56")
 		.append("svg:path")
 		.attr("d", "M1,-5L1,4L10,0Z")
 		.attr("class", "arrowHead");
@@ -217,7 +217,7 @@ function appendDefs() {
 		.attr("markerHeight", marker)
 		.attr("orient", "auto")
 
-		.style("stroke", "green")
+		.style("stroke", "#76D6AF")
 		.append("svg:path")
 		.attr("d", "M1,-5L1,4L10,0Z")
 		.attr("class", "arrowHead");
@@ -274,7 +274,7 @@ function appendDefs() {
 		.attr("orient", "auto")
 
 		.append("svg:path")
-		.style("stroke", "green")
+		.style("stroke", "#76D6AF")
 		.attr("d", "M0,-5L0,5")
 		.attr("class", "arrowHead");
 
@@ -293,7 +293,7 @@ function appendDefs() {
 		.attr("orient", "auto")
 
 		.append("svg:path")
-		.style("stroke", "orange")
+		.style("stroke", "#D6D287")
 		.attr("d", "M0,-5L0,5")
 		.attr("class", "arrowHead");
 
@@ -312,7 +312,7 @@ function appendDefs() {
 		.attr("orient", "auto")
 
 		.append("svg:path")
-		.style("stroke", "red")
+		.style("stroke", "#D66A56")
 		.attr("d", "M0,-5L0,5")
 		.attr("class", "arrowHead");
 
@@ -331,7 +331,7 @@ function appendDefs() {
 		.attr("orient", "auto")
 
 		.append("svg:path")
-		.style("stroke", "blue")
+		.style("stroke", "#8E67D6")
 		.attr("d", "M0,-5L0,5")
 		.attr("class", "arrowHead");
 
@@ -367,7 +367,7 @@ function appendDefs() {
 		.attr("orient", "auto")
 
 		.append("svg:path")
-		.style("stroke", "green")
+		.style("stroke", "#76D6AF")
 		.attr("d", "M1,-5L1,105M2,-4L2,4L10,0L2,-4")
 		.attr("class", "arrowHead");
 

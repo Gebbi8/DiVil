@@ -1,4 +1,49 @@
 /* stroke color by bives class */
 .nothing {
-    stroke: black;
+    stroke: pink;
 }
+
+
+
+/*TAKEN FROM MOST*/
+#bivesReport {
+    padding: 10px;
+    background: lightcoral;
+}
+
+#bivesReport tr:nth-child(even) {
+    background: #e6f2ff
+}
+
+#bivesReport tr:nth-child(odd) {
+    background: #fff
+}
+
+#bivesReport th,
+#bivesReport td.highlighttd {
+    color: white;
+    background-color: #004A99;
+}
+
+#bivesReport .attr {
+    color: #004A99;
+}
+
+#bivesReport .delete {
+    color: #ff4141;
+}
+
+#bivesReport .insert {
+    color: #31c149;
+}
+
+#bivesReport .modified {
+    color: #db8838;
+}
+
+#bivesReport td,
+#bivesReport th {
+    padding: 5px;
+}
+
+/******/
