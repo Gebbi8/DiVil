@@ -262,9 +262,12 @@ function createCompartments() {
 
 	nodesByCompartment = d3.nest()
 		.key(function (d) {
+			console.log(d.compartment)
 			return d.compartment;
 		})
 		.entries(nodes);
+
+		console.log(nodesByCompartment); 
 
 	compartments = svg
 		.selectAll("compartments")
@@ -498,13 +501,13 @@ function strokeColor(bives) {
 		case 'nothing':
 			return "black";
 		case 'delete':
-			return "red";
+			return "#D66A56";
 		case 'insert':
-			return "green";
+			return "#76D6AF";
 		case 'move':
-			return "blue";
+			return "#8E67D6";
 		case 'update':
-			return "orange";
+			return "#D6D287";
 	};
 }
 

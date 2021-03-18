@@ -31,8 +31,8 @@ function tickArrows(d) {
 
 	var targetClass = sboSwitch(d.target.class);
 
-
-	if ((targetClass == "simple chemical" && halfElementWidth * 2 <= 35.1) || targetClass == "source and sink" || ((targetClass == "dissociation" || targetClass == "association") && elementClass != "consumption")) {
+	//for strechted simpleChem -> targetClass == "simple chemical" && halfElementWidth * 2 <= 35.1)
+	if (targetClass == "simple chemical" || targetClass == "source and sink" || ((targetClass == "dissociation" || targetClass == "association") && elementClass != "consumption")) {
 		var m = (d.target.y - d.source.y) / (d.target.x - d.source.x);
 		var rQuad = Math.pow(halfElementWidth, 2);
 		var deter = Math.sqrt(rQuad / (1 + Math.pow((d.target.y - d.source.y) / (d.target.x - d.source.x), 2)));
@@ -133,8 +133,8 @@ function tickArrows(d) {
 		}
 	} else if (targetClass == "macromolecule") {
 		var m = (d.target.y - d.source.y) / (d.target.x - d.source.x);
-		var rectWidth = halfElementWidth;
-		var rectHeight = halfElementHeight;
+		var rectWidth = halfElementWidth * 2;
+		var rectHeight = halfElementHeight * 2;
 		var rectM = rectHeight / rectWidth;
 		var rectY, rectX;
 
