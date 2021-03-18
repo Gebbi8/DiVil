@@ -1,10 +1,10 @@
 function appendDefs() {
 	var defs = d3.select("svg").append("defs");
-	var refX = 12;
-	var marker = 10;
-	var refXProduction = 10;
-	var refXModulation = 10.5;
-	var strokeWidth = 1;
+	var refX = "12";
+	var marker = "10";
+	var refXProduction = "10";
+	var refXModulation = "10.5";
+	var strokeWidth = "1";
 
 
 	defs.append("marker")
@@ -13,10 +13,11 @@ function appendDefs() {
 		.attr("fill", "black")
 		.attr("stroke-width", "0")
 		.attr("refX", refXProduction)
-		.attr("refY", 0)
+		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
 		.attr("orient", "auto")
+
 		.append("svg:path")
 		.attr("d", "M0,-5L10,0L0,5")
 		.attr("class", "arrowHead");

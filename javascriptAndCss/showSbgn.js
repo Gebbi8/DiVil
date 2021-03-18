@@ -70,8 +70,8 @@ function showSbgn(data) {
 
 	//set size and zoom variables
 	currentZoom = 1;
-	width = 1600;
-	height = 1400;
+	width = 1200;
+	height = 1000;
 	size = (width - 50) / 10;
 	marker = width / 100;
 
