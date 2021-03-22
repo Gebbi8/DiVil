@@ -274,12 +274,28 @@ function tickArrows(d) {
 	//var dr = Math.sqrt((d.target.x - d.source.x) * (d.target.x - d.source.x) + (d.target.y - d.source.y) * (d.target.y - d.source.y));
 
 	if (d.multiIndex != null && !(sameLinks[d.multiIndex] % 2 == 0 && sameLinks[d.multiIndex] == d.multiPos)) { // bend lines
+		//arcsin(b/c)
 		//even number of lines && uneven excluding the last one
 		var bendFactor = Math.ceil((d.multiPos + 1) / 2);
+		//var angle = arcsin(x2-x1)+90;
+		
+		//just for testing fixing links to node center
+		//x1 = d.source.x; x2 = d.target.x, y1 = d.source.y; y2 = d.target.y;
+
+		var middleX = x1 + (x2-x1)/2;
+		var middleY = y1 + (y2-y1)/2;
+
+		var orthY = -(x2-x1)/2;
+		var orthX = (y2-y1)/2;
+		var lengthFaktor = 1/Math.sqrt(Math.pow(orthX, 2) + Math.pow(orthY, 2));
+			
+		middleX = middleX - 20 * lengthFaktor * orthX;
+		middleY = middleY - 20 * lengthFaktor * orthY;
+		
 		if ((d.multiPos % 2 == 0 && !d.invert) || d.invert)
-			return "M" + x1 + "," + y1 + "A" + bendFactor * dr + "," + bendFactor * dr + " 0 0,1 " + (x2) + "," + y2;
+			return "M" + x1 + " " + y1 + " Q" + middleX + " " + middleY + " " + (x2) + " " + y2;
 		else
-			return "M" + x1 + "," + y1 + "A" + bendFactor * dr + "," + bendFactor * dr + " 0 0,0 " + (x2) + "," + y2;
+			return "M" + x1 + " " + y1 + " Q" + middleX + " " + middleY + " Q" + (x2) + " " + y2;
 		//return; //side 1
 		//case 2:
 		//case "insert": return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,1 " + (x2) + "," + y2; break;
