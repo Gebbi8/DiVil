@@ -52,6 +52,20 @@
 					<modifierSpeciesReference species="nuc"/>
 				</listOfModifiers>
 			</reaction>
+			<reaction id="v6" name="multiple_links">
+				<listOfReactants>
+					<speciesReference species="x"/>
+				</listOfReactants>
+				<listOfProducts>
+					<speciesReference species="x"/>
+				</listOfProducts>
+				<listOfModifiers>
+					<modifierSpeciesReference species="x" sboTerm="SBO:0000535"/>
+					<modifierSpeciesReference species="x" sboTerm="SBO:0000536"/>
+					<modifierSpeciesReference species="x" sboTerm="SBO:0000460"/>
+					<modifierSpeciesReference species="x" sboTerm="SBO:0000411"/>
+				</listOfModifiers>
+			</reaction>
 		</listOfReactions>
 		</model>
 </sbml>

@@ -116,6 +116,7 @@ function initializeSimulation() {
 // values for all forces
 forceProperties = {
 	center: {
+		enabled: true,
 		x: 0.5,
 		y: 0.5
 	},
@@ -132,12 +133,12 @@ forceProperties = {
 		radius: nodeSize
 	},
 	forceX: {
-		enabled: false,
+		enabled: true,
 		strength: .1,
 		x: .5
 	},
 	forceY: {
-		enabled: false,
+		enabled: true,
 		strength: .1,
 		y: .5
 	},
