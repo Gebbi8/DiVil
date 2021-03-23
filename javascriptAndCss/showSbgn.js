@@ -19,10 +19,10 @@ function showSbgn(data) {
 
 	links.forEach(function (l, i) {
 		var sameCount = 0;
-		console.log(l);
+		//console.log(l);
 		links.forEach(function (link, n) {
 
-			if (n > i && link.sameIndex == null) {
+			if (n > i && link.multiIndex == null) {
 				if (l.source == link.source && l.target == link.target) {
 					sameCount++;
 
@@ -56,7 +56,8 @@ function showSbgn(data) {
 		if (sameCount > 0) sameIndex++;
 	});
 
-	console.log(links, sameLinks);
+	console.log(links);
+	console.log(sameLinks);
 	///////////////////////////////////////
 	//delete current graph and show graph tab and download button
 	d3.selectAll("#bivesGraph").selectAll("svg").remove();
