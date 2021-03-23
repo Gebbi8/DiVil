@@ -270,8 +270,6 @@ function tickArrows(d) {
 
 
 	if (d.multiIndex != null) { // bend lines
-
-		//
 		var pos = d.multiPos;
 		if(sameLinks[d.multiIndex] % 2 == 1) pos++;
 
@@ -282,9 +280,6 @@ function tickArrows(d) {
 		var orthX = (y2-y1)/2;
 		var lengthFaktor = 1/Math.sqrt(Math.pow(orthX, 2) + Math.pow(orthY, 2));
 			
-
-		
-		console.log(d.multiPos, d.invert)
 		if ((d.multiPos % 2 == 0 && !d.invert) || (d.multiPos % 2 == 1 && d.invert)){
 			middleX = middleX - pos * 25 * lengthFaktor * orthX;
 			middleY = middleY - pos * 25 * lengthFaktor * orthY;

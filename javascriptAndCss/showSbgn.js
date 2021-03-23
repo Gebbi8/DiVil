@@ -207,6 +207,7 @@ function createGraph() {
 		.selectAll("line")
 		.data(links)
 		.enter().append("path")
+		.attr("class", "link")
 		.attr("stroke", function (d) {
 			return strokeColor(d.bivesClass);
 		})

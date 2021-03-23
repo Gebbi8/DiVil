@@ -10,6 +10,11 @@ function download(obj) {
 	//loop over glyphs
 
 	for(i = 0; i<data.nodes.length; i++){
+		var svgNode = d3.select("#" + data.nodes[i].id);
+		var bBox = svgNode._groups[0][0].getBBox();
+		var svgData = svgNode.data()[0];
+		console.log(svgData, bBox);
+
 		xml = xml + '\t\t<glyph ';
 
 		var compartment = data.nodes[i].compartment;
@@ -39,31 +44,29 @@ function download(obj) {
 		//clonmarker optional
 
 		//bounding box mandatory
-		if(d3.selectAll("g.node")[0][i] != undefined){
-			var bbox = d3.selectAll("g.node")[0][i].getBBox();
-			xml = xml + '\t\t\t<bbox x="' + d3.selectAll("g.node").data()[i].x + '" y="' + d3.selectAll("g.node").data()[i].y + '" w="' + bbox.width + '" h="' + bbox.height + '"' + '/>\n';
-		}
-
+		//if(d3.select("#"+data.nodes[i].id)._groups[0][i] != undefined){
+			xml = xml + '\t\t\t<bbox x="' + svgData.x + '" y="' + svgData.y + '" w="' + bBox.width + '" h="' + bBox.height + '"' + '/>\n';
+		//}
 
 		xml = xml + '\t\t</glyph>\n';
 	}
 
 	//loop over arcs
-	for(i = 0; i<data.links.length; i++){
+/*	for(i = 0; i<data.links.length; i++){
 		xml = xml + '\t\t<arc id="arc' + i + '" class="' + sboSwitch(data.links[i].class) + '" ';
 
 		xml = xml + 'source="' + data.links[i].source.id + '" target="' + data.links[i].target.id + '"'
 
 		xml = xml + '>\n';
-console.log(d3.selectAll(".link")[0][i].animatedPathSegList);
-		xml = xml + '\t\t\t<note color="' + d3.selectAll(".link")[0][i].style.stroke + '"/>\n'
 
-		xml = xml + '\t\t\t<start x="' + d3.selectAll(".link")[0][i].animatedPathSegList[0].x + '" y="' + d3.selectAll(".link")[0][i].animatedPathSegList[0].y + '"/>\n';
+		xml = xml + '\t\t\t<note color="' + d3.selectAll(".link")[i].style.stroke + '"/>\n'
 
-		xml = xml + '\t\t\t<end x="' + d3.selectAll(".link")[0][i].animatedPathSegList[1].x + '" y="' + d3.selectAll(".link")[0][i].animatedPathSegList[1].y + '"/>\n';
+		xml = xml + '\t\t\t<start x="' + d3.selectAll(".link")[i].animatedPathSegList[0].x + '" y="' + d3.selectAll(".link")[0][i].animatedPathSegList[0].y + '"/>\n';
+
+		xml = xml + '\t\t\t<end x="' + d3.selectAll(".link")[i].animatedPathSegList[1].x + '" y="' + d3.selectAll(".link")[0][i].animatedPathSegList[1].y + '"/>\n';
 
 		xml = xml + '\t\t</arc>\n';
-	}
+	}*/
 
 	xml = xml + '\t' + '</map>\n';
 	xml = xml + "</sbgn>";
