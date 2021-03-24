@@ -3,6 +3,18 @@ function downloadSBGNML(data) {
 	var xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<sbgn xmlns="http://sbgn.org/libsbgn/0.2">\n';
 	xml = xml + '\t<map language="process description">\n';
 
+	xml = xml + '\t\t<extensions>\n';
+	xml = xml + '\t\t\<renderInformation xlmns="http://www.sbml.org/sbml/level3/version1/render/version1" id="renderInformation">\n';
+	xml = xml + '\t\t\t<listOfColorDefinitions>\n';
+	xml = xml + '\t\t\t\t<colorDefinition id="nothing" value="black"/>\n';
+	xml = xml + '\t\t\t\t<colorDefinition id="update" value="#D6D287"/>\n';
+	xml = xml + '\t\t\t\t<colorDefinition id="delete" value="#D66A56"/>\n';
+	xml = xml + '\t\t\t\t<colorDefinition id="insert" value="#76D6AF"/>\n';
+	xml = xml + '\t\t\t\t<colorDefinition id="move" value="#8E67D6"/>\n';
+	xml = xml + '\t\t\t</listOfColorDefinitions>\n';
+	xml =xml + '\t\t</renderInformation>\n';
+	xml = xml + '\t\t</extensions>\n';
+
 	//loop over glyphs
 
 	for(i = 0; i<data.nodes.length; i++){
