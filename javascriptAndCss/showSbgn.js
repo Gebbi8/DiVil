@@ -8,9 +8,18 @@ function showSbgn(data) {
 
 	//parse the data
 	obj = JSON.parse(data);
+
+
+	obj.links.forEach(function (l, i){
+		l.id = "link" + i;
+	});
+
+	//assign dowload function with data to button
+	document.getElementById("sbgnMLdownload").onclick = function() {downloadSBGNML(obj)};
+
 	nodes = obj.nodes;
 	links = obj.links;
-	console.log(nodes);
+	console.log(links);
 
 	//////same source/link combination/////
 
@@ -208,6 +217,9 @@ function createGraph() {
 		.data(links)
 		.enter().append("path")
 		.attr("class", "link")
+		.attr("id", function(d, i){
+			return "link" + i;
+		})
 		.attr("stroke", function (d) {
 			return strokeColor(d.bivesClass);
 		})

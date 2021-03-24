@@ -1,8 +1,4 @@
-function download(obj) {
-	console.log(obj);
-
-	var data = $.parseJSON(obj);
-
+function downloadSBGNML(data) {
 	console.log(data);
 	var xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<sbgn xmlns="http://sbgn.org/libsbgn/0.2">\n';
 	xml = xml + '\t<map language="process description">\n';
@@ -45,28 +41,34 @@ function download(obj) {
 
 		//bounding box mandatory
 		//if(d3.select("#"+data.nodes[i].id)._groups[0][i] != undefined){
-			xml = xml + '\t\t\t<bbox x="' + svgData.x + '" y="' + svgData.y + '" w="' + bBox.width + '" h="' + bBox.height + '"' + '/>\n';
+			xml = xml + '\t\t\t<bbox x="' + (svgData.x - bBox.width/2) + '" y="' + (svgData.y - bBox.height/2) + '" w="' + bBox.width + '" h="' + bBox.height + '"' + '/>\n';
 		//}
 
 		xml = xml + '\t\t</glyph>\n';
 	}
 
 	//loop over arcs
-/*	for(i = 0; i<data.links.length; i++){
-		xml = xml + '\t\t<arc id="arc' + i + '" class="' + sboSwitch(data.links[i].class) + '" ';
+	console.log(data.links);
+	for(i = 0; i<data.links.length; i++){
+		var node = d3.select("#" + data.links[i].id);
+		var path = node.attr("d");
+		var cl = sboSwitch(data.links[i].class);
+		if(cl == "necessarystimulation") cl = "necessary stimulation";
+
+		xml = xml + '\t\t<arc id="' + data.links[i].id + '" class="' + cl + '" ';
 
 		xml = xml + 'source="' + data.links[i].source.id + '" target="' + data.links[i].target.id + '"'
 
 		xml = xml + '>\n';
 
-		xml = xml + '\t\t\t<note color="' + d3.selectAll(".link")[i].style.stroke + '"/>\n'
+		xml = xml + '\t\t\t<note color="' + node.attr("stroke") + '"/>\n'
 
-		xml = xml + '\t\t\t<start x="' + d3.selectAll(".link")[i].animatedPathSegList[0].x + '" y="' + d3.selectAll(".link")[0][i].animatedPathSegList[0].y + '"/>\n';
+		xml = xml + '\t\t\t<start x="' + svgPathCoordinate('start', 'x', path) + '" y="' + svgPathCoordinate('start', 'y', path) + '"/>\n';
 
-		xml = xml + '\t\t\t<end x="' + d3.selectAll(".link")[i].animatedPathSegList[1].x + '" y="' + d3.selectAll(".link")[0][i].animatedPathSegList[1].y + '"/>\n';
+		xml = xml + '\t\t\t<end x="' + svgPathCoordinate('end', 'x', path) + '" y="' + svgPathCoordinate('end', 'y', path) + '"/>\n';
 
 		xml = xml + '\t\t</arc>\n';
-	}*/
+	}
 
 	xml = xml + '\t' + '</map>\n';
 	xml = xml + "</sbgn>";
@@ -74,4 +76,24 @@ function download(obj) {
 
 	var blob = new Blob([xml], {type: "text/plain;charset=utf-8"});
 	saveAs(blob, "merged-models.sbgnml");
+}
+
+function svgPathCoordinate(point, axis, path){
+	console.log(path);
+	//Q Path
+	var coordinates = path.split(" ");
+	var p;
+	var x,y;
+
+	console.log(coordinates);
+
+	if(point == "start") p = coordinates[0].split(',');
+	else if(coordinates.length == 2){
+		p = coordinates[1].split(',');
+	} else 
+	p = coordinates[2].split(',');
+
+	if(axis == 'x') return p[0].substr(1);
+	else return p[1];
+
 }

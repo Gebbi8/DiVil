@@ -283,11 +283,11 @@ function tickArrows(d) {
 		if ((d.multiPos % 2 == 0 && !d.invert) || (d.multiPos % 2 == 1 && d.invert)){
 			middleX = middleX - pos * 25 * lengthFaktor * orthX;
 			middleY = middleY - pos * 25 * lengthFaktor * orthY;
-			return "M" + x1 + " " + y1 + " Q" + middleX + " " + middleY + " " + (x2) + " " + y2;
+			return "M" + x1 + "," + y1 + " Q" + middleX + "," + middleY + " " + x2 + "," + y2;
 		} else {
 			middleX = middleX + pos * 25 * lengthFaktor * orthX;
 			middleY = middleY + pos * 25 * lengthFaktor * orthY;
-			return "M" + x1 + " " + y1 + " Q" + middleX + " " + middleY + " " + (x2) + " " + y2;
+			return "M" + x1 + "," + y1 + " Q" + middleX + "," + middleY + " " + x2 + "," + y2;
 		}
 		//return; //side 1
 		//case 2:
@@ -296,7 +296,7 @@ function tickArrows(d) {
 		//default:
 
 	} else {
-		return "M" + x1 + "," + y1 + "L" + x2 + "," + y2; //straight line
+		return "M" + x1 + "," + y1 + " L" + x2 + "," + y2; //straight line
 	}
 
 	//return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,1 " + x2 + "," + y2;
@@ -310,5 +310,5 @@ function tickArrows(d) {
 
 function positionLink_old(d) {
 	return "M" + d.source.x + "," + d.source.y +
-		"L" + d.target.x + "," + d.target.y;
+		" L" + d.target.x + "," + d.target.y;
 }
