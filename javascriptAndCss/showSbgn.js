@@ -238,7 +238,9 @@ function createGraph() {
 			return d.id;
 		})
 		.attr("class", "node")
-		.on("click", clicked);
+		.on('mouseover', highlight)
+		.on("dblclick", dblclicked)
+		.on("click", highlight);
 
 	nodeShape = enterNode.append("path")
 		.attr("d", function (d) {
@@ -353,20 +355,6 @@ function ticked() {
 }
 
 
-//zoom the whole svg
-/* var zoom = d3.zoom()
-	.scaleExtent([0.1, 10])
-	.on("zoom", zoomed); */
-
-//var container = svg.append("g");
-
-/* function zoomed() {
-ticked	container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-	ticked();
-} */
-
-
-
 function dragstarted(d) {
 	if (!d3.event.active) forceSimulation.alphaTarget(0.5).restart();
 	d.fx = d.x;
@@ -384,54 +372,29 @@ function dragended(d) {
 	d.fy = d3.event.y;
 }
 
-function clicked(d) {
-	d.fx = null;
-	d.fy = null;
-	if (d3.event.defaultPrevented) return; // dragged
+
+
+function highlight(d){
+	console.log()
+	node.style('stroke-opacity', o => (isConnected(this, o)));
+		this.setAttribute("stroke-opacity", 0.5);
+	link.style('stroke-opacity', o => (console.log(this, o), o.source.id === d.id || o.target.id === d.id ? 1 : 0.5));
+	//console.log(d);
+	//console.log("trying to highlight");
+	//return 	node.style('stroke-opacity', 0.5);
 }
 
-/*	var dragCompartment = d3.behavior.drag()
-		.on("dragstart", function() {forceSimulation.start(); d3.event.sourceEvent.stopPropagation();})
-		.on("drag", function(d, i){
+function isConnected(main, other){
+	link.forEach(){
+		
+	}
+}
 
-			var key = d.key;
-			var selection = d3.selectAll("#bivesGraphSvg").selectAll("g.node")
-				.filter(function(d){return d.compartment == key});
-
-			selection.each(
-					function(d){
-						d3.select(this).classed("fixed", d.fixed = true);
-						d.x = d.x + d3.event.dx;
-						d.y = d.y + d3.event.dy;
-						d3.select(this).attr("transform", function(d,i){
-							return "translate(" + [ d.x,d.y ] + ")"
-						})
-						x=d.x; y=d.y;
-						d.px=d.x; d.py=d.y;
-					}
-				);
-			tick();
-		}) */
-
-/* var nested_data = d3.nest()
-	.key(function (d) {
-		return d.compartment;
-	})
-	.entries(obj.nodes); */
-
-/*	 var link = container.selectAll(".link")
-		  .data(obj.links)
-		.enter().append("path")
-		  .attr("marker-end", function(d) {
-				var elementClass;
-				return "url(#" + sboSwitchArc(d.class) + "" + d.bivesClass + ")";
-			})
-		  .attr("id", function(d) {return d.id})
-		  .attr("class", function(d) { return "link " + d.bivesClass;})
-		  .style("stroke-width", 1)
-		  .style("fill", "none")
-		  .style("stroke", function(d) { return getColor(d.bivesClass);})
-*/
+function dblclicked(d) {
+	d.fx = null;
+	d.fy = null;
+	//if (d3.event.defaultPrevented) return; // dragged
+}
 
 function getColor(bivesColor) {
 	switch (bivesColor) {
