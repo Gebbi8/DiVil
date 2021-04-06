@@ -1,4 +1,4 @@
-var currentZoom, width, height, size, marker, svg, obj, nodes, links, node, link, nodeShape, nodeLabel, compartments, nodesByCompartment;
+var currentZoom, width, height, size, marker, svg, obj, nodes, links, node, link, nodeShape, nodeLabel, compartments, nodesByCompartment, enterNode;
 var sameLinks;
 var nodeSize = 50;
 
@@ -232,13 +232,14 @@ function createGraph() {
 	node = svg.selectAll("g")
 		.data(nodes);
 
-	var enterNode = node.enter()
+	enterNode = node.enter()
 		.append("g")
 		.attr("id", function (d) {
 			return d.id;
 		})
 		.attr("class", "node")
 		.on('mouseover', highlight)
+		.on('mouseout', resetOpacity)
 		.on("dblclick", dblclicked)
 		.on("click", highlight);
 
@@ -375,19 +376,24 @@ function dragended(d) {
 
 
 function highlight(d){
-	console.log()
-	node.style('stroke-opacity', o => (isConnected(this, o)));
-		this.setAttribute("stroke-opacity", 0.5);
-	link.style('stroke-opacity', o => (console.log(this, o), o.source.id === d.id || o.target.id === d.id ? 1 : 0.5));
-	//console.log(d);
-	//console.log("trying to highlight");
-	//return 	node.style('stroke-opacity', 0.5);
+	enterNode.style('stroke-opacity', o => (isConnected(this, o) ? 1 : 0.5));
+	enterNode.select("text").style('opacity', o => (isConnected(this, o) ? 1 : 0.5));
+	//this.setAttribute("stroke-opacity", 1);
+	link.style('opacity', o => (o.source.id === d.id || o.target.id === d.id ? 1 : 0.5));
+}
+
+function resetOpacity(){
+	enterNode.style('stroke-opacity', 1);
+	enterNode.select("text").style('opacity', 1);
+	link.style('opacity', 1);
 }
 
 function isConnected(main, other){
-	link.forEach(){
-		
+	for(var i = 0; i < links.length; i++){
+			//console.log(l.source.id, main.id, l.target.id, other.id, l.target.id, main.id, l.source.id, other.id);
+			if((links[i].source.id == main.id && links[i].target.id == other.id) || (links[i].target.id == main.id && links[i].source.id == other.id) || main.id == other.id) return true;
 	}
+	return false;
 }
 
 function dblclicked(d) {
