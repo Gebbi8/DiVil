@@ -1,10 +1,10 @@
 var currentZoom, width, height, size, marker, svg, obj, nodes, links, node, link, nodeShape, nodeLabel, compartments, nodesByCompartment, enterNode;
 var sameLinks;
 var nodeSize = 50;
+var dimmOpacity = 0.25;
+
 
 function showSbgn(data) {
-
-
 
 	//parse the data
 	obj = JSON.parse(data);
@@ -376,10 +376,10 @@ function dragended(d) {
 
 
 function highlight(d){
-	enterNode.style('stroke-opacity', o => (isConnected(this, o) ? 1 : 0.5));
-	enterNode.select("text").style('opacity', o => (isConnected(this, o) ? 1 : 0.5));
+	enterNode.style('stroke-opacity', o => (isConnected(this, o) ? 1 : dimmOpacity));
+	enterNode.select("text").style('opacity', o => (isConnected(this, o) ? 1 : dimmOpacity));
 	//this.setAttribute("stroke-opacity", 1);
-	link.style('opacity', o => (o.source.id === d.id || o.target.id === d.id ? 1 : 0.5));
+	link.style('opacity', o => (o.source.id === d.id || o.target.id === d.id ? 1 : dimmOpacity));
 }
 
 function resetOpacity(){
@@ -497,5 +497,4 @@ function strokeColor(bives) {
 
 function updateAll() {
 	updateForces();
-	//updateDisplay();
 }

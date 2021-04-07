@@ -12,7 +12,30 @@ function downloadSBGNML(data) {
 	xml = xml + '\t\t\t\t<colorDefinition id="insert" value="#76D6AF"/>\n';
 	xml = xml + '\t\t\t\t<colorDefinition id="move" value="#8E67D6"/>\n';
 	xml = xml + '\t\t\t</listOfColorDefinitions>\n';
-	xml =xml + '\t\t</renderInformation>\n';
+	xml = xml + '\t\t\t<listOfStyles>\n';
+
+	xml = xml + '\t\t\t\t<style id="noChange" roleList="noChange_style">\n';
+	xml = xml + '\t\t\t\t\t<g stroke="nothing"/>\n';
+	xml = xml + '\t\t\t\t</style>\n';
+
+	xml = xml + '\t\t\t\t<style id="updateChange" roleList="updateChange_style">\n';
+	xml = xml + '\t\t\t\t\t<g stroke="update"/>\n';
+	xml = xml + '\t\t\t\t</style>\n';
+
+	xml = xml + '\t\t\t\t<style id="insertChange" roleList="insertChange_style">\n';
+	xml = xml + '\t\t\t\t\t<g stroke="insert"/>\n';
+	xml = xml + '\t\t\t\t</style>\n';
+
+	xml = xml + '\t\t\t\t<style id="deleteChange" roleList="deleteChange_style">\n';
+	xml = xml + '\t\t\t\t\t<g stroke="delete"/>\n';
+	xml = xml + '\t\t\t\t</style>\n';
+
+	xml = xml + '\t\t\t\t<style id="moveChange" roleList="moveChange_style">\n';
+	xml = xml + '\t\t\t\t\t<g stroke="move"/>\n';
+	xml = xml + '\t\t\t\t</style>\n';
+
+	xml = xml + '\t\t\t</listOfStyles>\n'
+	xml = xml + '\t\t</renderInformation>\n';
 	xml = xml + '\t\t</extensions>\n';
 
 	//loop over glyphs
@@ -86,6 +109,7 @@ function downloadSBGNML(data) {
 	xml = xml + "</sbgn>";
 	console.log(xml);
 
+	alert();
 	var blob = new Blob([xml], {type: "text/plain;charset=utf-8"});
 	saveAs(blob, "merged-models.sbgnml");
 }
