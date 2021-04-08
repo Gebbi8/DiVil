@@ -14,23 +14,60 @@ function downloadSBGNML(data) {
 	xml = xml + '\t\t\t</listOfColorDefinitions>\n';
 	xml = xml + '\t\t\t<listOfStyles>\n';
 
-	xml = xml + '\t\t\t\t<style id="noChange" roleList="noChange_style">\n';
+	//compute change idLists
+	var idListNothing = '';
+	var idListInsert ='';
+	var idListUpdate = ''; 
+	var idListDelete = '';
+	var idListMove = '';
+
+	fillIdList(data.nodes);
+	fillIdList(data.links);
+	
+	function fillIdList(arr){
+		arr.forEach(e => {
+			switch (e.bivesClass) { //adapt after backend update
+				case 'nothing':
+					idListNothing += e.id + ' ';
+					break;
+				case 'insert':
+					idListInsert += e.id + ' ';
+					break;
+				case 'delete':
+					idListDelete += e.id + ' ';
+					break;
+				case 'update':
+					idListUpdate += e.id + ' ';
+					break;
+				case 'move':
+					idListMove += e.id + ' ';
+					break;
+				default:
+					break;
+			}
+		});
+	}
+
+
+	console.log(idListNothing);
+
+	xml = xml + '\t\t\t\t<style id="noChange" idList="' + idListNothing + '">\n';
 	xml = xml + '\t\t\t\t\t<g stroke="nothing"/>\n';
 	xml = xml + '\t\t\t\t</style>\n';
 
-	xml = xml + '\t\t\t\t<style id="updateChange" roleList="updateChange_style">\n';
+	xml = xml + '\t\t\t\t<style id="updateChange" idList="' + idListUpdate + '">\n';
 	xml = xml + '\t\t\t\t\t<g stroke="update"/>\n';
 	xml = xml + '\t\t\t\t</style>\n';
 
-	xml = xml + '\t\t\t\t<style id="insertChange" roleList="insertChange_style">\n';
+	xml = xml + '\t\t\t\t<style id="insertChange" idList="' + idListInsert + '">\n';
 	xml = xml + '\t\t\t\t\t<g stroke="insert"/>\n';
 	xml = xml + '\t\t\t\t</style>\n';
 
-	xml = xml + '\t\t\t\t<style id="deleteChange" roleList="deleteChange_style">\n';
+	xml = xml + '\t\t\t\t<style id="deleteChange" idList="' + idListDelete + '">\n';
 	xml = xml + '\t\t\t\t\t<g stroke="delete"/>\n';
 	xml = xml + '\t\t\t\t</style>\n';
 
-	xml = xml + '\t\t\t\t<style id="moveChange" roleList="moveChange_style">\n';
+	xml = xml + '\t\t\t\t<style id="moveChange" idList="' + idListMove + '">\n';
 	xml = xml + '\t\t\t\t\t<g stroke="move"/>\n';
 	xml = xml + '\t\t\t\t</style>\n';
 
@@ -44,7 +81,7 @@ function downloadSBGNML(data) {
 		var svgNode = d3.select("#" + data.nodes[i].id);
 		var bBox = svgNode._groups[0][0].getBBox();
 		var svgData = svgNode.data()[0];
-		console.log(svgData, bBox);
+		//console.log(svgData, bBox);
 
 		xml = xml + '\t\t<glyph ';
 
@@ -64,13 +101,12 @@ function downloadSBGNML(data) {
 		}
 
 		//color
-		var color;
-		if(d3.selectAll("g").data()[i] == undefined) color = "black";
+/* 		if(d3.selectAll("g").data()[i] == undefined) color = "black";
 		else color = $("#" + d3.selectAll("g").data()[i].id).css("stroke")
 		if(color == "rgb(255, 165, 0)"){
 			color = "orange";
 		}
-		xml = xml + '\t\t\t<note color="' + color + '"/>\n'
+		xml = xml + '\t\t\t<note color="' + color + '"/>\n' */
 
 		//clonmarker optional
 
@@ -83,7 +119,7 @@ function downloadSBGNML(data) {
 	}
 
 	//loop over arcs
-	console.log(data.links);
+	//console.log(data.links);
 	for(i = 0; i<data.links.length; i++){
 		var node = d3.select("#" + data.links[i].id);
 		var path = node.attr("d");
@@ -115,13 +151,13 @@ function downloadSBGNML(data) {
 }
 
 function svgPathCoordinate(point, axis, path){
-	console.log(path);
+	//console.log(path);
 	//Q Path
 	var coordinates = path.split(" ");
 	var p;
 	var x,y;
 
-	console.log(coordinates);
+	//console.log(coordinates);
 
 	if(point == "start") p = coordinates[0].split(',');
 	else if(coordinates.length == 2){
