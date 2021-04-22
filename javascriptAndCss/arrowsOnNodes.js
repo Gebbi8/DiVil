@@ -15,17 +15,17 @@ function tickArrows(d) {
 	elementClass = sboSwitchArc(d.class);
 
 	//for process nodes: connect arcs to reactant and product ports if ports are activated
-	if (document.getElementById("portToggle").checked) {
-		if (elementClass == "consumption") {
-			x2 = d.target.x - halfElementWidth;
-		} else if (elementClass == "production") {
-			var sourceWidth = d3.select("#" + d.source.id).select("path").node();
-			if (sourceWidth != null) {
-				sourceWidth = sourceWidth.getBoundingClientRect().width / 2 / currentZoom;
-			} else sourceWidth = 0;
-			x1 = d.source.x + sourceWidth;
-		}
-	}
+	//if (document.getElementById("portToggle").checked) {
+		// if (elementClass == "consumption") {
+		// 	x2 = d.target.x - halfElementWidth;
+		// } else if (elementClass == "production") {
+		// 	var sourceWidth = d3.select("#" + d.source.id).select("path").node();
+		// 	if (sourceWidth != null) {
+		// 		sourceWidth = sourceWidth.getBoundingClientRect().width / 2 / currentZoom;
+		// 	} else sourceWidth = 0;
+		// 	x1 = d.source.x + sourceWidth;
+		// }
+	//}
 
 
 

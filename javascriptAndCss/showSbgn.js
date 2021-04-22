@@ -4,7 +4,7 @@ var nodeSize = 50;
 var dimmOpacity = 0.25;
 
 
-function showSbgn(data) {
+function showSbgn(data, annotations) {
 
 	//parse the data
 	obj = JSON.parse(data);
@@ -15,12 +15,11 @@ function showSbgn(data) {
 	});
 
 	//assign dowload function with data to button
-	document.getElementById("sbgnMLdownload").onclick = function() {downloadSBGNML(obj)};
+	//document.getElementById("sbgnMLdownload").onclick = function() {downloadSBGNML(obj)};
 
 	nodes = obj.nodes;
 	links = obj.links;
-	console.log(links);
-
+	console.log(obj);
 	//////same source/link combination/////
 
 	var sameIndex = 0;
@@ -79,16 +78,20 @@ function showSbgn(data) {
 
 
 	//set size and zoom variables
+	console.log(d3.select("#container").node().getBoundingClientRect());
 	currentZoom = 1;
-	width = 1200;
-	height = 1000;
-	size = (width - 50) / 10;
-	marker = width / 100;
+	width = d3.select("#container").node().getBoundingClientRect().width;
+	height = d3.select("#container").node().getBoundingClientRect().height;
+	size = (1200 - 50) / 10;
+//	marker = width / 100;
 
 
 	//append clean svg
-	svg = d3.select("#bivesGraph").append("svg")
-		.attr("id", 'bivesGraphSvg')
+	svg = d3.select("div#container").append("svg")
+		//.attr("id", 'bivesGraphSvg')
+		.attr("preserveAspectRatio", "xMinYMin meet")
+		//.attr("viewBox", "0 0 " + width + " " +  height)
+		.classed("svg-content", true)
 		.attr("height", height)
 		.attr("width", width);
 	//	.call(zoom);

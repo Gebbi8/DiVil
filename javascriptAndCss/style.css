@@ -1,8 +1,40 @@
+/* override styling */
+.row{
+    --bs-gutter-y: 0.2rem;
+    --bs-gutter-x: 0rem
+}
+
+/* svg style */
+#bivesGraph{
+    max-height: inherit;
+}
+
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    vertical-align: top;
+    /* overflow: hidden; */
+}
+.svg-content {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
 /* stroke color by bives class */
 .nothing {
     stroke: pink;
 }
 
+/* logo */
+#logo{
+    max-width: inherit;
+    max-height: 100px;
+}
 
 
 /*TAKEN FROM MOST*/

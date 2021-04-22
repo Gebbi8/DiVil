@@ -20,101 +20,40 @@
 	<script type="text/javascript" src="javascriptAndCss/xmlDiffParser.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/arrowsOnNodes.js"></script>
 
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+	<link rel="stylesheet" href="javascriptAndCss/style.css">
 </head>
 
 <body>
-	<div class="containter">
-		<div class="row">
-			<div class="col-2" id="left">
-				<h4>DiVil</h4>
-				<div id="modelSelection">
-					<h1> Select two model versions </h1>
-					<select id="versionChoice" class="box" size="10">
-						<optgroup label="Kummer2000 from BioModels">
-							<option class="opt" value="test">Kumm2000-v1</option>
-							<option class="opt" value="test">Kummer2000-v2</option>
-						</optgroup>
-						<optgroup label="Liebal from BioModels">
-							<option class="opt" value="test">Kummer2000/2011-09-01/BIOMD0000000329</option>
-							<option class="opt" value="test">Kummer2000/2012-02-08/BIOMD0000000329</option>
-							<option class="opt" value="test">Kummer2000/2012-05-20/BIOMD0000000329</option>
-							<option class="opt" value="test">Kummer2000/2012-08-11/BIOMD0000000329</option>
-							<option class="opt" value="test">Kummer2000/2012-12-12/BIOMD0000000329</option>
-							<option class="opt" value="test">Kummer2000/2015-04-16/BIOMD0000000329</option>
-							<option class="opt" value="test">Kummer2000/2017-06-26/BIOMD0000000329</option>
-						</optgroup>
-						<optgroup label="Liebal from BioModels">
-							<option class="opt" value="test">Liebal1-BIOMD0000000461</option>
-							<option class="opt" value="test">Liebal2-BIOMD0000000461</option>
-							<option class="opt" value="test">Liebal3-BIOMD0000000461</option>
-						</optgroup>
-						<optgroup label="Test Fake Models">
-							
-							<option class="opt" value="test">GlyphsAndArcs</option>
-							<option class="opt" value="test">GlyphsAndArcs_noTypo1</option>
-						</optgroup>
-						<optgroup label="PK Cycle">
-							<option class="opt" value="test">model_MOR_AC</option>
-							<option class="opt" value="test">model_PKA_cycle</option>
-						</optgroup>
-						<optgroup label="PK Cycle">
-							<option class="opt" value="test">PKA_cycle_l2v5</option>
-							<option class="opt" value="test">PKA_cycle_MOR_l2v4</option>
-						</optgroup>
-						<optgroup label="Schroebel2002 vs Chen2009">
-							<option class="opt" value="test">BIOMD0000000019</option>
-							<option class="opt" value="test">BIOMD0000000255</option>
-						</optgroup>
-						<optgroup label="Tyson1991 - Cell Cycle 2 var (BioModel 6)">
-							<option class="opt" value="test">original</option>
-						</optgroup>
-						<optgroup label="modified Tyson1991 - Cell Cycle 2 var (BioModel 6)">
-							<option class="opt" value="test">symbols</option>
-							<option class="opt" value="test">updates</option>
-							<option class="opt" value="test">deletion</option>
-							<option class="opt" value="test">multiple</option>
-						</optgroup>
-						<optgroup label="BioModel7/Novak1997_CellCycle">
-							<option class="opt" value="test">R3</option>
-							<option class="opt" value="test">R37</option>
-						</optgroup>
-						<optgroup label="BSA-laczsynth">
-							<option class="opt" value="test">2012-11-10</option>
-							<option class="opt" value="test">2012-11-11</option>
-						</optgroup>
-						<optgroup label="Diff different models - Test">
-							<option class="opt" value="test">BIOM348</option>
-							<option class="opt" value="test">BIOM349</option>
-						</optgroup>
-					</select>
-					<button id="selectVersion">select</button>
-					<button id="removeVersion">remove</button>
+	<div class="main">
+		<div class="row d-flex flex-wrap">
+			<div class=" col-md-2" id="left">
+				<div class="row">
+						<img class="col-lg-12 col-lg-4" id="logo" src="img/divil_logo.svg">
+						<div class="col-lg-12 col-lg-4" id="modelSelection">
+								<div class="mb-3">
+										<label for="formFiles" class="form-label">Select two model versions</label>
+										<input class="form-control form-control-sm" id="formFileSm" type="file">
+										<input class="form-control form-control-sm" id="formFileSm" type="file">
+								</div>
+						</div>
+						<div class="col-lg-12 col-lg-4">
+							<div class="row">
+								<button id="compareModels" type="button" class="btn btn-primary">compare</button>
+							</div>
+							<div class="row">
+								<button id="sbgnMLdownload" type="button" class="btn btn-primary">Download SBGN-ML</button>
+							</div>
+						</div>
 				</div>
 
-				<div id="selectionDiv">
-					<h1>Selection</h1>
-					<select id="selection" class="box" size="2"></select>
-				</div>
-				<div>
-					<button id="compareModels">compare</button>
-				</div>
 			</div>
 
-			<div class="col-8" id="bivesGraph">
-				<form>
-					Toggle process node ports
-					<input type="checkbox" id="portToggle">
-				</form>
-				<div id="buttons">
-					<button id="sbgnMLdownload">Download SBGN-ML</button>
-				</div>
-				<div id="buttons">
-					<button id="sbmlDownload">Download SBML</button>
-				</div>
+			<div class=" col-md-10" id="bivesGraph">
+					<div id="container" class="svg-container"></div>
 			</div>
-			<div class="col-2" id="forceControls">
+<!-- 
+			<div class="col-2 " id="forceControls">
 				<div class="force alpha">
 					<p><label>alpha</label> Simulation activity</p>
 					<div class="alpha_bar" onclick="updateAll();">
@@ -244,36 +183,23 @@
 							oninput="d3.select('#link_IterationsSliderOutput').text(value); forceProperties.link.iterations=value; updateAll();">
 					</label>
 				</div>
-			</div>
+			</div> -->
 		</div>
-		<div class="row" id="xmlDiff"></div>
+		<!-- <div class="row" id="xmlDiff"></div>
 		<div class="row" id="bivesReport"></div>
-		<div class="row" id="sbgnJson"></div>
+		<div class="row" id="sbgnJson"></div> -->
 	</div>
 	<script>
 		var obj;
 
-		document.getElementById("selectVersion").onclick = function () {
-			var x = document.getElementById("selection");
-			var y = document.getElementById("versionChoice");
+		// document.getElementById("compareModels").onclick = function () {
 
-			var option = document.createElement("option");
-			option.text = y[y.selectedIndex].text;
-			x.add(option);
-		};
-		document.getElementById("removeVersion").onclick = function () {
-			var x = document.getElementById("selection");
-			x.remove(x.selectedIndex);
-		}
-
-		document.getElementById("compareModels").onclick = function () {
-
-			obj = getBivesData("http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + document
-				.getElementById("selection")[0].text + ".xml",
-				"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + document.getElementById(
-					"selection")[1].text + ".xml",
-				["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations"]);
-		}
+		// 	obj = getBivesData("http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + document
+		// 		.getElementById("selection")[0].text + ".xml",
+		// 		"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + document.getElementById(
+		// 			"selection")[1].text + ".xml",
+		// 		["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations", "inclAnnotations"]);
+		// }
 		//document.getElementById("sbgnMLdownload").onclick = function() {console.log(obj); download(obj)};
 		//document.getElementById("sbmlDownload").onclick = function() {console.log(obj); downloadSBML(obj)};
 		//showSbgn(obj);
@@ -282,18 +208,11 @@
 		//				["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations"]);};
 		//document.getElementById("compareModels").onclick = function() {obj = getBivesData("http://localhost/SBI-Rep/masterthesis_tom/implementation/testModels/BioModel7/Novak1997_CellCycle-R3", "http://localhost/SBI-Rep/masterthesis_tom/implementation/testModels/BioModel7/Novak1997_CellCycle-R37", "reactionsSbgnJson");};
 
-		var x = document.getElementById("selection");
-		var option = document.createElement("option");
-		option.text = "GlyphsAndArcs_noTypo1";
-		x.add(option);
-		option = document.createElement("option");
-		option.text = "GlyphsAndArcs_noTypo1";
-		x.add(option);
 
 		getBivesData(
 			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "GlyphsAndArcs_noTypo1" + ".xml",
 			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "GlyphsAndArcs_noTypo1" + ".xml",
-			["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations"]);
+			["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations", "inclAnnotations"]);
 	</script>
 </body>
 
