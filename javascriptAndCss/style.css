@@ -1,31 +1,35 @@
 /* override styling */
-/* .row{
+.row {
     --bs-gutter-y: 0.2rem;
     --bs-gutter-x: 0rem
-} */
+}
 
-.navbar{
+.navbar {
     min-height: 75px
 }
 
+.navbar-brand {
+    background-color: unset;
+    box-shadow: unset;
+}
+
 /* specific styles */
-#left{
+#left {
     padding: 5px
 }
 
-#sidebarMenu{
+#sidebarMenu {
     padding-top: 64px;
 }
 
-#bivesGraph {
-    position: absolute;
-    bottom: 0;
-    top: 0;
-}
-
 /* svg style */
-#bivesGraph{
-    max-height: inherit;
+#bivesGraph {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-top: 64px
 }
 
 .svg-container {
@@ -36,6 +40,7 @@
     vertical-align: top;
     /* overflow: hidden; */
 }
+
 .svg-content {
     display: inline-block;
     position: absolute;
@@ -50,8 +55,7 @@
 }
 
 /* logo */
-#logo{
-    max-width: inherit;
+#logo {
     max-height: 100px;
 }
 
