@@ -1,7 +1,26 @@
 /* override styling */
-.row{
+/* .row{
     --bs-gutter-y: 0.2rem;
     --bs-gutter-x: 0rem
+} */
+
+.navbar{
+    min-height: 75px
+}
+
+/* specific styles */
+#left{
+    padding: 5px
+}
+
+#sidebarMenu{
+    padding-top: 64px;
+}
+
+#bivesGraph {
+    position: absolute;
+    bottom: 0;
+    top: 0;
 }
 
 /* svg style */
@@ -13,7 +32,7 @@
     display: inline-block;
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     vertical-align: top;
     /* overflow: hidden; */
 }

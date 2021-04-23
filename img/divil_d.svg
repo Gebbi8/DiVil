@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="58.248886mm"
+   height="33.907928mm"
+   viewBox="0 0 58.248884 33.907929"
+   version="1.1"
+   id="svg1147"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)"
+   sodipodi:docname="divil_logo.svg">
+  <defs
+     id="defs1141">
+    <clipPath
+       id="clip1-5-8-5-2">
+      <path
+         id="path5283-7-3-9"
+         d="M 0,0 H 73.304688 V 73.304688 H 0 Z m 0,0"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+    <clipPath
+       id="clip2-6-3-4-4">
+      <path
+         id="path5286-5-0-8-8"
+         d="M 17,0 H 73.304688 V 57 H 17 Z m 0,0"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+    <clipPath
+       id="clip3-1-7-5-5">
+      <path
+         id="path5289-5-8-7"
+         d="M 0,0 H 67 V 73.304688 H 0 Z m 0,0"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+    <clipPath
+       id="clip4-7-1-0-6">
+      <path
+         id="path5292-8-5-9-4"
+         d="M 6,0 H 73.304688 V 67 H 6 Z m 0,0"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+    <clipPath
+       id="clip5-7-4-6-5">
+      <path
+         id="path5295-8-7-7"
+         d="M 0,6 H 73.304688 V 73.304688 H 0 Z m 0,0"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="14.710708"
+     inkscape:cy="100.74288"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g9254"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1149"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata1144">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-30.709977,-82.535272)">
+    <g
+       id="g9254">
+      <path
+         sodipodi:nodetypes="cccc"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1099.67px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.028818px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 65.099995,93.552355 -0.155561,2.372925 c 0.40276,-0.570795 0.894645,-0.671209 1.437923,-0.500493 z"
+         id="path7291"
+         inkscape:connector-curvature="0" />
+      <path
+         sodipodi:nodetypes="cccccccccc"
+         inkscape:connector-curvature="0"
+         id="path2880-9"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48.2347px;line-height:1.25;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0270168"
+         d="m 80.607542,100.12929 v -2.615692 l 2.343546,2.615692 v 0 z m 0,9.00131 v -7.00213 h 2.343546 v 7.00213 z" />
+      <path
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1099.67px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#d40000;fill-opacity:1;stroke:none;stroke-width:0.028818"
+         d="m 49.946186,82.535359 c 0.90836,2.795355 2.093806,4.278715 0.339682,6.268184 -1.965,-0.737786 -4.400747,-1.106735 -7.307326,-1.106735 H 36.128896 V 107.6524 l 3.334032,-3.08088 V 90.436706 h 4.027311 c 3.400101,0 5.886902,0.770213 7.460404,2.310723 1.584508,1.529475 2.376734,3.94479 2.376734,7.24583 0,3.323081 -0.794907,5.752081 -2.376734,7.295331 -1.576183,1.53775 -4.094198,1.83196 -7.460404,2.31078 -1.567349,0.22293 -2.74653,0.0888 -4.702048,0.66884 -2.069479,0.6138 -5.006143,3.22552 -5.006143,3.22552 l -0.01552,-1.67612 -3.056551,4.62559 5.481489,-2.07848 -1.992884,-0.50357 c 0,0 3.060531,-1.4491 4.786405,-1.47105 l 3.993529,-0.0509 c 4.753158,-0.0605 8.252658,-0.99582 10.497368,-2.98743 2.24474,-1.99165 3.367081,-5.11116 3.367081,-9.358521 0,-4.225346 -1.11681,-7.328323 -3.350514,-9.308959 -0.296559,-0.264414 -0.615781,-0.511076 -0.957129,-0.740382 l 0.100641,0.0087 c 3.435914,-2.033439 1.181523,-4.519112 -2.689804,-7.417336 z"
+         id="path2863"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="ccsccccscsssscccccccsscccc" />
+      <path
+         sodipodi:nodetypes="cccccccccc"
+         inkscape:connector-curvature="0"
+         id="path2880"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48.2347px;line-height:1.25;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0270168"
+         d="m 59.172087,100.12929 v -2.615692 l 2.343573,2.615692 v 0 z m 0,9.00131 v -7.00213 h 2.343573 v 7.00213 z" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path2886"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48.2347px;line-height:1.25;font-family:'Liberation Sans';-inkscape-font-specification:'Liberation Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#d40000;fill-opacity:1;stroke:none;stroke-width:0.0270168"
+         d="M 86.615263,109.1306 V 85.440272 l 2.343602,2.313178 v 21.37715 z"
+         sodipodi:nodetypes="ccccc" />
+      <circle
+         r="2.9106081"
+         cy="90.405769"
+         cx="78.159904"
+         id="path2924"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.432269;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path2926"
+         d="m 75.07641,93.719826 6.167007,-6.628074"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.432269;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.432269;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="m 69.339481,105.95645 h 3.13309 v 3.14313 h -3.13309 z"
+         id="rect2919"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path2932"
+         d="m 72.672554,107.528 h 0.948803 l 4.105995,-14.029098"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.432269;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         sodipodi:nodetypes="ccc" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path2932-8"
+         d="M 69.139498,107.528 H 68.190696 L 65.516866,95.053721"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.432269;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         sodipodi:nodetypes="ccc" />
+      <circle
+         cy="90.405769"
+         cx="64.480675"
+         id="path2924-9"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#d40000;stroke-width:0.432269;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         r="2.9106083" />
+      <g
+         id="g9309"
+         inkscape:export-filename="/var/www/html/GitRepos/DiVil/favicon.ico.png"
+         inkscape:export-xdpi="25.399996"
+         inkscape:export-ydpi="25.399996">
+        <rect
+           style="fill:#000000;fill-opacity:0;fill-rule:evenodd;stroke:none;stroke-width:0.721919;stroke-opacity:0.044578;paint-order:markers stroke fill;stop-color:#000000"
+           id="rect9305"
+           width="32"
+           height="32"
+           x="-40.751663"
+           y="66.394859" />
+        <path
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1099.67px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#d40000;fill-opacity:1;stroke:none;stroke-width:0.0262694"
+           d="m -19.127576,66.940346 c 0.828028,2.548143 1.908637,3.900319 0.309642,5.713845 -1.791222,-0.672538 -4.011558,-1.008858 -6.661089,-1.008858 h -6.243885 v 18.19078 l 3.039181,-2.808415 V 74.142923 h 3.671149 c 3.099406,0 5.366282,0.702098 6.800628,2.106369 1.444379,1.394213 2.166544,3.595925 2.166544,6.605032 0,3.029198 -0.724608,5.243384 -2.166544,6.650153 -1.436791,1.401757 -3.73212,1.669948 -6.800628,2.106422 -1.428738,0.203215 -2.503636,0.08095 -4.286214,0.60969 -1.886461,0.559519 -4.563416,2.940265 -4.563416,2.940265 l -0.01415,-1.527889 -2.786239,4.216518 4.996723,-1.894666 -1.81664,-0.459036 c 0,0 2.789868,-1.320946 4.363111,-1.340955 l 3.640353,-0.0464 c 4.332804,-0.05515 7.522818,-0.907752 9.569014,-2.72323 2.046222,-1.815515 3.069306,-4.659145 3.069306,-8.530883 0,-3.85167 -1.018043,-6.680229 -3.054205,-8.485703 -0.270331,-0.241031 -0.561322,-0.465878 -0.872483,-0.674905 l 0.09174,0.0079 c 3.132053,-1.853608 1.077032,-4.119456 -2.451926,-6.76137 z"
+           id="path2863-2"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="ccsccccscsssscccccccsscccc"
+           inkscape:export-filename="/var/www/html/GitRepos/DiVil/favicon.ico.png"
+           inkscape:export-xdpi="26.296337"
+           inkscape:export-ydpi="26.296337" />
+      </g>
+    </g>
+  </g>
+</svg>
