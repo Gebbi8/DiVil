@@ -11,6 +11,7 @@
 	<script type="text/javascript" src="javascriptAndCss/showSbgn.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/customSymbol.js"></script>
 	<script type="text/javascript" src="bives/bivesTool.js"></script>
+	<script type="text/javascript" src="javascriptAndCss/localFiles.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/download.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/downloadSBML.js"></script>
 	<script type="text/javascript" src="thirdParty/FileSaver.js"></script>
@@ -33,23 +34,23 @@
 				<img class="navbar-brand me-0 px-3" id="logo" src="img/divil_icon.svg">
 			</div>
 				<div class="col-10 d-md-none d-lg-none d-xl-none">
-						<div class="row">
+						<form action="javascript:;" onsubmit="submitLocalFiles(this);" class="row">
 								<div class="col-9">
 								<h6 class="sidebar-heading d-flex mb-1 text-muted">
 										<span>Select model versions</span>
 									</h6>
 									  <div class="form-group">
 											  <div class="custom-file">
-												  <input class="form-control form-control-sm mb-1" id="formFileSm" type="file">
-												  <input class="form-control form-control-sm" id="formFileSm" type="file">
+												  <input class="form-control form-control-sm mb-1" id="formFile1" type="file">
+												  <input class="form-control form-control-sm" id="formFile2" type="file">
 											  </div>
 										  </div>
 								</div>
 								<div class="col-3 justify-content-center p-1 row">
-								  <button id="compareModels" type="button" class="btn btn-primary">compare</button>
+								  <button id="compareModels" type="submit" class="btn btn-primary">compare</button>
 								  <button id="sbgnMLdownload" type="button" class="btn btn-primary disabled">SBGN-ML</button>
 								</div>
-						</div>
+							</form>
 					</div>
 			</div>
 

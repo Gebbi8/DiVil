@@ -1,6 +1,6 @@
 //Info-Content
-function getBivesData(v1, v2, command, callback){
-	var data;
+function getBivesData(v1, v2, callback){
+	var command = ["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations", "inclAnnotations"];
 	console.log(v1, v2);
 
 	var bivesJob = {
