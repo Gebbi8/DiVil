@@ -15,7 +15,7 @@ function showSbgn(data, annotations) {
 	});
 
 	//assign dowload function with data to button
-	//document.getElementById("sbgnMLdownload").onclick = function() {downloadSBGNML(obj)};
+	document.getElementById("sbgnMLdownload").onclick = function() {downloadSBGNML(obj)};
 
 	nodes = obj.nodes;
 	links = obj.links;
@@ -110,6 +110,7 @@ function showSbgn(data, annotations) {
 
 	createGraph();
 	initializeSimulation();
+	document.getElementById("sbgnMLdownload").classList.remove("disabled");
 
 }
 

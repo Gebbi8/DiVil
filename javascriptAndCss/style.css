@@ -22,6 +22,14 @@
     padding-top: 64px;
 }
 
+.icon {
+    height: 32px;
+}
+
+.icon:hover {
+    filter: invert(.5) sepia(1) saturate(5) hue-rotate(175deg);
+}
+
 /* svg style */
 #bivesGraph {
     position: fixed;
@@ -29,7 +37,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding-top: 64px
+    padding-top: 100px
 }
 
 .svg-container {

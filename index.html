@@ -27,13 +27,13 @@
 
 <body>
 		<header class="navbar sticky-top flex-md-nowrap p-0 shadow">
-			<div class=" col-3 justify-content-center d-none d-md-flex p-1 row">
-				<img class="navbar-brand me-0 px-3" id="logo" src="img/divil_logo.svg">
+			<div class=" col-2 justify-content-center d-none d-md-flex p-1 row">
+				<img class="me-0 px-3" id="logo" src="img/divil_logo.svg">
 			</div>
 			<div class=" col-2 justify-content-center  d-md-none d-lg-none d-xl-none  row">
-				<img class="navbar-brand me-0 px-3" id="logo" src="img/divil_icon.svg">
+				<img class="me-0 px-3" id="logo" src="img/divil_icon.svg">
 			</div>
-				<div class="col-10 col-md-9 col-lg-9 col-xl-9">
+				<div class="col-10 col-md-9 col-lg-9 col-xl-9 row">
 						<form action="javascript:;" onsubmit="submitLocalFiles(this);" class="row">
 								<div class="col-9">
 								<h6 class="sidebar-heading d-flex mb-1 text-muted">
@@ -51,6 +51,12 @@
 								  <button id="sbgnMLdownload" type="button" class="btn btn-primary disabled">SBGN-ML</button>
 								</div>
 							</form>
+					</div>
+					<div class="col-1 row">
+						<a class="row justify-content-center" href="https://github.com/Gebbi8/DiVil"><img class="icon" id="github-logo" src="img/GitHub-Mark.svg"></a>
+						<a class="row justify-content-center">
+							<img class="icon" id="info"  data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample"src="img/info-icon.svg">
+						</a>
 					</div>
 			</div>
 
@@ -222,6 +228,32 @@
 		<div class="row" id="bivesReport"></div>
 		<div class="row" id="sbgnJson"></div> -->
 	</div>
+	<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+		<div class="offcanvas-header">
+		  <h5 class="offcanvas-title" id="offcanvasExampleLabel">Difference Visualisation</h5>
+		  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		</div>
+		<div class="offcanvas-body">
+		  <div>
+			This prototype showcases our method to visualise differences between version of biochemical models in a standardized format.
+			
+		  </div>
+		  <div>
+			  Select two model versions from your local system with the menu at the top or choose examples from below.
+		 </div>
+		 <ul>
+			 <li>
+				 E1
+			 </li>
+			 <li>
+				 E2
+			 </li>
+		 </ul>
+		<div>
+			This project relies on D3 and DiVil. Styling and Layout is based on Bootstrap 5.
+		</div>
+	  </div>
+	<script src="javascriptAndCss/bootstrap.bundle.min.js"></script>
 	<script>
 		var obj;
 
