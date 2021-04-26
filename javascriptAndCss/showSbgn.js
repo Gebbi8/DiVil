@@ -85,10 +85,11 @@ function showSbgn(data, annotations) {
 
 	//append clean svg
 	svg = d3.select("div#container").append("svg")
-		//.attr("id", 'bivesGraphSvg')
+		.attr("id", 'bivesGraphSvg')
 		.attr("preserveAspectRatio", "xMinYMin meet")
 		//.attr("viewBox", "0 0 " + width + " " +  height)
 		.classed("svg-content", true)
+		.attr("xmlns", "http://www.w3.org/2000/svg")
 		.attr("height", height)
 		.attr("width", width);
 	//	.call(zoom);
@@ -111,6 +112,8 @@ function showSbgn(data, annotations) {
 	//assign dowload function with data to button
 	document.getElementById("downloadBtn").classList.remove("disabled");
 	document.getElementById("sbgnMlDownload").onclick = function() {downloadSBGNML(obj)};
+	document.getElementById("pngDownload").onclick = function(){ downloadPNGfromSVG("bivesGraphSvg")};
+	document.getElementById("svgDownload").onclick = function() {downloadSvg("bivesGraphSvg")};
 
 }
 

@@ -145,7 +145,6 @@ function downloadSBGNML(data) {
 	xml = xml + "</sbgn>";
 	console.log(xml);
 
-	alert();
 	var blob = new Blob([xml], {type: "text/plain;charset=utf-8"});
 	saveAs(blob, "merged-models.sbgnml");
 }
