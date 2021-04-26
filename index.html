@@ -12,8 +12,9 @@
 	<script type="text/javascript" src="javascriptAndCss/customSymbol.js"></script>
 	<script type="text/javascript" src="bives/bivesTool.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/localFiles.js"></script>
-	<script type="text/javascript" src="javascriptAndCss/download.js"></script>
-	<script type="text/javascript" src="javascriptAndCss/downloadSBML.js"></script>
+	<script type="text/javascript" src="javascriptAndCss/downloadSBGNML.js"></script>
+	<script type="text/javascript" src="javascriptAndCss/downloadSVG.js"></script>
+	<script type="text/javascript" src="javascriptAndCss/downloadPNG.js"></script>
 	<script type="text/javascript" src="thirdParty/FileSaver.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/appendDefs.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/sbmlParser.js"></script>
@@ -47,8 +48,18 @@
 										  </div>
 								</div>
 								<div class="col-3 justify-content-center p-1 row">
-								  <button id="compareModels" type="submit" class="btn btn-primary">compare</button>
-								  <button id="sbgnMLdownload" type="button" class="btn btn-primary  dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" disabled>SBGN-ML</button>
+								  <button id="compareModels" type="submit" class="btn btn-primary menuBtn">compare</button>
+								  <div class="dropdown menuBtn d-flex justify-content-end">
+								  	<button class="btn btn-secondary dropdown-toggle disabled" type="button" id="downloadBtn" data-bs-toggle="dropdown" aria-expanded="false">
+										Download
+									</button>
+								  
+									<ul class="dropdown-menu" aria-labelledby="downloadBtn">
+										<li><a class="dropdown-item" id="sbgnMlDownload" href="#">SBGN-ML</a></li>
+										<li><a class="dropdown-item" id="svgDownload" href="#">SVG</a></li>
+										<li><a class="dropdown-item" id="pngDownload" href="#">PNG</a></li>
+									</ul>
+								  </div>
 								</div>
 							</form>
 					</div>

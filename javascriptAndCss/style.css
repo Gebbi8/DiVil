@@ -30,6 +30,10 @@
     filter: invert(.5) sepia(1) saturate(5) hue-rotate(175deg);
 }
 
+.menuBtn{
+    max-width: 66%;
+}
+
 /* svg style */
 #bivesGraph {
     position: fixed;
