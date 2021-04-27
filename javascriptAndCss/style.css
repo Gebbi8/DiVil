@@ -24,6 +24,7 @@
 
 .icon {
     height: 32px;
+    z-index: 1;
 }
 
 .icon:hover {
