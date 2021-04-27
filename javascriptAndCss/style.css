@@ -34,6 +34,10 @@
     max-width: 66%;
 }
 
+#offcanvasFooter{
+    flex-grow: unset;s
+}
+
 /* svg style */
 #bivesGraph {
     position: fixed;

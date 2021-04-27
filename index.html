@@ -246,23 +246,60 @@
 		</div>
 		<div class="offcanvas-body">
 		  <div>
-			This prototype showcases our method to visualise differences between version of biochemical models in a standardized format.
-			
+			This prototype showcases our method to visualise differences between versions of biochemical models in a standardized format.
 		  </div>
 		  <div>
 			  Select two model versions from your local system with the menu at the top or choose examples from below.
 		 </div>
-		 <ul>
-			 <li>
-				 E1
-			 </li>
-			 <li>
-				 E2
-			 </li>
-		 </ul>
+		 <div class="accordion accordion-flush" id="accordionFlushExample">
+			<div class="accordion-item">
+			  <h2 class="accordion-header" id="flush-headingOne">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+				  Example #1 - Oscillation model
+				</button>
+			  </h2>
+			  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+				<div class="accordion-body">
+					<button id="e1Kummer" type="button" class="btn btn-outline-primary btn-sm">Compute</button>
+				</div>
+			  </div>
+			</div>
+			<div class="accordion-item">
+			  <h2 class="accordion-header" id="flush-headingTwo">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+				  Example #2 - Liebal1-BIOMD0000000461
+				</button>
+			  </h2>
+			  <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+				<div class="accordion-body">
+					<button id="e2Liebal" type="button" class="btn btn-outline-primary btn-sm">Compute</button>
+				</div>
+			  </div>
+			</div>
+			<!-- <div class="accordion-item">
+			  <h2 class="accordion-header" id="flush-headingThree">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+				  Accordion Item #3
+				</button>
+			  </h2>
+			  <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+				<div class="accordion-body">
+					<button id="e1Kummer" type="button" class="btn btn-outline-primary btn-sm">Compute</button>
+				</div>
+				
+			  </div>
+			</div> -->
+		  </div>
 		<div>
-			This project relies on D3 and DiVil. Styling and Layout is based on Bootstrap 5.
+			This project relies on D3 and BiVeS. Styling and Layout is based on Bootstrap 5.
 		</div>
+
+	  </div>
+	  <div class="offcanvas-body mt-auto" id="offcanvasFooter">
+		This was started as part of SEMS (funded by the German Federal Ministry of Education and Research in the e:Bio programme SEMS, FKZ 031 6194). 
+		Maintenance and further development were part of INCOME (funded by the German Federal Ministry of Education and Research in the e:Med programme FKZ 01ZX1705C) 
+		and EU-Stands4PM (funded by the Horizon2020 framework programme, Grant Agreement #825843).
+	</div>
 	  </div>
 	<script src="javascriptAndCss/bootstrap.bundle.min.js"></script>
 	<script>
@@ -289,6 +326,18 @@
 			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "GlyphsAndArcs_noTypo1" + ".xml",
 			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "GlyphsAndArcs_noTypo1" + ".xml",
 			["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations", "inclAnnotations"]);
+
+		//assign examples from local files
+			document.getElementById("e1Kummer").onclick = function() {assignExamples("Kummer2000/2012-12-12/BIOMD0000000329", "Kummer2000/2015-04-16/BIOMD0000000329")};
+			document.getElementById("e2Liebal").onclick = function() {assignExamples("Liebal1-BIOMD0000000461", "Liebal3-BIOMD0000000461")};
+			//document.getElementById("e1Kummer").onclick = function() {assignExamples("", "")};
+
+		function assignExamples(file1, file2){
+			getBivesData(
+			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + file1 + ".xml",
+			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + file2 + ".xml",
+			["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations", "inclAnnotations"]);
+		}
 	</script>
 </body>
 
