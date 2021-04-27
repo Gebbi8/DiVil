@@ -30,12 +30,18 @@
     filter: invert(.5) sepia(1) saturate(5) hue-rotate(175deg);
 }
 
-.menuBtn{
-    max-width: 66%;
+.menuBtn {
+    min-width: 80%;
+    max-width: 100%;
+    z-index: -1;
 }
 
-#offcanvasFooter{
-    flex-grow: unset;s
+#downloadBtn {
+    width: 100%;
+}
+
+#offcanvasFooter {
+    flex-grow: unset;
 }
 
 /* svg style */
