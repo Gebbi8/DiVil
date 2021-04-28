@@ -34,8 +34,12 @@
     max-width: 66%;
 }
 
+#compareModels{
+    flex: unset;
+}
+
 #offcanvasFooter{
-    flex-grow: unset;s
+    flex-grow: unset;
 }
 
 /* svg style */
