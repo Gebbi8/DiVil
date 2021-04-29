@@ -25,10 +25,11 @@ function getBivesData(v1, v2, callback){
 			var sbgnJson = $.parseJSON (data).reactionsSbgnJson;
 			var comodiAnnotation = $.parseJSON(data).separateAnnotations;
 			//$("#sbgnJson").text(sbgnJson);
-			var xmlDiff = $.parseJSON (data).xmlDiff
-			console.log(xmlDiff);
+			var xmlDiff = $.parseJSON (data).xmlDiff;
+			//console.log(xmlDiff);
 			//console.log(xmlDocDiff, xmlDocSbml);
 			showSbgn(sbgnJson, comodiAnnotation);
+			//console.log(sbgnJson);
 		}
 	);
 }
