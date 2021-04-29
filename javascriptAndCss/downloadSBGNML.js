@@ -26,7 +26,7 @@ function downloadSBGNML(data) {
 	
 	function fillIdList(arr){
 		arr.forEach(e => {
-			switch (e.bivesChange) { //adapt after backend update
+			switch (e.bivesClass) { //adapt after backend update
 				case 'nothing':
 					idListNothing += e.id + ' ';
 					break;
@@ -89,8 +89,8 @@ function downloadSBGNML(data) {
 		if(compartment != "null")	xml = xml + ' compartmentRef="' + data.nodes[i].compartment + '" ';
 
 		//class optional, id mandatory
-		if(data.nodes[i].sboTerm != null){
-			xml = xml + 'class="' + sboSwitch(data.nodes[i].sboTerm) + '" ';
+		if(data.nodes[i].class != null){
+			xml = xml + 'class="' + sboSwitch(data.nodes[i].class) + '" ';
 			xml = xml + 'id="' + data.nodes[i].id + '"';
 		}
 		xml = xml + '>\n';
@@ -123,7 +123,7 @@ function downloadSBGNML(data) {
 	for(i = 0; i<data.links.length; i++){
 		var node = d3.select("#" + data.links[i].id);
 		var path = node.attr("d");
-		var cl = sboSwitch(data.links[i].sboTerm);
+		var cl = sboSwitch(data.links[i].class);
 		if(cl == "necessarystimulation") cl = "necessary stimulation";
 
 		xml = xml + '\t\t<arc id="' + data.links[i].id + '" class="' + cl + '" ';
