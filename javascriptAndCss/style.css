@@ -1,0 +1,124 @@
+/* override styling */
+.row {
+    --bs-gutter-y: 0.2rem;
+    --bs-gutter-x: 0rem
+}
+
+.navbar {
+    min-height: 75px
+}
+
+.navbar-brand {
+    background-color: unset;
+    box-shadow: unset;
+}
+
+/* specific styles */
+#left {
+    padding: 5px
+}
+
+#sidebarMenu {
+    padding-top: 64px;
+}
+
+.icon {
+    height: 32px;
+}
+
+.icon:hover {
+    filter: invert(.5) sepia(1) saturate(5) hue-rotate(175deg);
+}
+
+.menuBtn {
+    max-width: 66%;
+}
+
+#compareModels {
+    flex: unset;
+}
+
+#offcanvasFooter {
+    flex-grow: unset;
+}
+
+/* svg style */
+#bivesGraph {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-top: 100px
+}
+
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    vertical-align: top;
+    /* overflow: hidden; */
+}
+
+.svg-content {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+/* stroke color by bives class */
+.nothing {
+    stroke: pink;
+}
+
+/* logo */
+#logo {
+    max-height: 100px;
+}
+
+
+/*TAKEN FROM MOST*/
+#bivesReport {
+    padding: 10px;
+    background: lightcoral;
+}
+
+#bivesReport tr:nth-child(even) {
+    background: #e6f2ff
+}
+
+#bivesReport tr:nth-child(odd) {
+    background: #fff
+}
+
+#bivesReport th,
+#bivesReport td.highlighttd {
+    color: white;
+    background-color: #004A99;
+}
+
+#bivesReport .attr {
+    color: #004A99;
+}
+
+#bivesReport .delete {
+    color: #ff4141;
+}
+
+#bivesReport .insert {
+    color: #31c149;
+}
+
+#bivesReport .modified {
+    color: #db8838;
+}
+
+#bivesReport td,
+#bivesReport th {
+    padding: 5px;
+}
+
+/******/
