@@ -1,0 +1,9 @@
+{"nodes":[{"sboTerm":"SBO:0000290","compartment":"null","id":"c1","label":"compartment","bivesChange":"nothing"},
+{"sboTerm":"","compartment":"c1","id":"s1","label":"unspecEnt","bivesChange":"nothing"},
+{"sboTerm":"SBO:0000248","compartment":"c1","id":"s2","label":"macroMolecule","bivesChange":"nothing"},
+{"sboTerm":"SBO:0000205","compartment":"c1","id":"r1","label":null,"bivesChange":"update"}],"links":[{"sboTerm":"SBO:0000015","source":"s2","bivesChange":"nothing","target":"r1"},
+{"sboTerm":"SBO:0000393","source":"r1","bivesChange":"update","target":"s1"},
+{"sboTerm":"SBO:0000535","source":"s1","bivesChange":"nothing","target":"r1"},
+{"sboTerm":"SBO:0000536","source":"s1","bivesChange":"nothing","target":"r1"},
+{"sboTerm":"SBO:0000460","source":"s1","bivesChange":"delete","target":"r1"},
+{"sboTerm":"SBO:0000411","source":"s1","bivesChange":"nothing","target":"r1"}]}

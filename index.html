@@ -327,9 +327,9 @@
 		// 	"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "GlyphsAndArcs_noTypo1" + ".xml",
 		// 	["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations", "inclAnnotations"]);
 
-
-		//var data = jQuery.getJSON("testModels/testJson/Kummer5vs6.json", 'text');
-		$.get("testModels/testJson/Kummer5vs6.json", function(data){
+		//let testJson = "testModels/testJson/Kummer5vs6.json";
+		let testJson = "testModels/testJson/toyModel-same.json";
+		$.get(testJson, function(data){
 			showSbgn(data);
 		}, 'text');
 		
