@@ -20,6 +20,7 @@
 	<script type="text/javascript" src="javascriptAndCss/sbmlParser.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/xmlDiffParser.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/arrowsOnNodes.js"></script>
+	<script type="text/javascript" src="javascriptAndCss/xmlParser.js"></script>
 
 	<link href="javascriptAndCss/bootstrap.min.css" rel="stylesheet">
 	<link href="javascriptAndCss/bootstrap-dashboard.css" rel="stylesheet">
@@ -344,6 +345,11 @@
 			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + file2 + ".xml",
 			["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations", "inclAnnotations"]);
 		}
+
+
+		//test xml parser
+		var xml = "/testModels/testJson/testJson+Comodi/ex1_Comodi.xml";
+		deleteTriggered(xml);
 	</script>
 </body>
 
