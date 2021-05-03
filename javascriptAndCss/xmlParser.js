@@ -1,0 +1,157 @@
+function deleteTriggered(xmlTest_){
+
+    var xmlTest = `<?xml version="1.0" encoding="UTF-8"?>
+<bives type="fullDiff" id="bivesPatch">
+  <!--BiVeS compiled with: [BiVeS Core v1.9.2] [BiVeS SBML v1.9.1] -->
+  <update />
+  <delete>
+    <attribute name="sbo" id="1" oldValue="SBO:0000248" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[2]" />
+    <node id="3" oldParent="/sbml[1]/model[1]/listOfSpecies[1]" oldChildNo="3" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[3]" oldTag="species" />
+    <attribute name="compartment" id="4" triggeredBy="3" oldValue="compartment1" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[3]" />
+    <attribute name="id" id="5" triggeredBy="3" oldValue="nuc" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[3]" />
+    <attribute name="initialConcentration" id="6" triggeredBy="3" oldValue="0" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[3]" />
+    <attribute name="name" id="7" triggeredBy="3" oldValue="nucleicAcidFeat" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[3]" />
+    <attribute name="sbo" id="8" triggeredBy="3" oldValue="SBO:0000250" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[3]" />
+    <node id="9" oldParent="/sbml[1]/model[1]/listOfSpecies[1]" oldChildNo="4" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[4]" oldTag="species" />
+    <attribute name="compartment" id="10" triggeredBy="9" oldValue="compartment1" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[4]" />
+    <attribute name="id" id="11" triggeredBy="9" oldValue="sim" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[4]" />
+    <attribute name="initialConcentration" id="12" triggeredBy="9" oldValue="0" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[4]" />
+    <attribute name="name" id="13" triggeredBy="9" oldValue="simpleChem" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[4]" />
+    <attribute name="sbo" id="14" triggeredBy="9" oldValue="SBO:0000247" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[4]" />
+    <node id="15" oldParent="/sbml[1]/model[1]/listOfSpecies[1]" oldChildNo="5" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[5]" oldTag="species" />
+    <attribute name="compartment" id="16" triggeredBy="15" oldValue="compartment1" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[5]" />
+    <attribute name="id" id="17" triggeredBy="15" oldValue="com" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[5]" />
+    <attribute name="initialConcentration" id="18" triggeredBy="15" oldValue="0" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[5]" />
+    <attribute name="name" id="19" triggeredBy="15" oldValue="complex" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[5]" />
+    <attribute name="sbo" id="20" triggeredBy="15" oldValue="SBO:0000248" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[5]" />
+    <node id="21" oldParent="/sbml[1]/model[1]/listOfSpecies[1]" oldChildNo="6" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[6]" oldTag="species" />
+    <attribute name="compartment" id="22" triggeredBy="21" oldValue="compartment1" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[6]" />
+    <attribute name="id" id="23" triggeredBy="21" oldValue="pert" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[6]" />
+    <attribute name="initialConcentration" id="24" triggeredBy="21" oldValue="0" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[6]" />
+    <attribute name="name" id="25" triggeredBy="21" oldValue="pertubingAgent" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[6]" />
+    <attribute name="sbo" id="26" triggeredBy="21" oldValue="SBO:0000405" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[6]" />
+    <node id="27" oldParent="/sbml[1]/model[1]/listOfSpecies[1]" oldChildNo="7" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[7]" oldTag="species" />
+    <attribute name="compartment" id="28" triggeredBy="27" oldValue="compartment1" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[7]" />
+    <attribute name="id" id="29" triggeredBy="27" oldValue="macMulti" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[7]" />
+    <attribute name="initialConcentration" id="30" triggeredBy="27" oldValue="0" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[7]" />
+    <attribute name="name" id="31" triggeredBy="27" oldValue="mac multimer" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[7]" />
+    <attribute name="sbo" id="32" triggeredBy="27" oldValue="SBO:0000420" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[7]" />
+    <node id="33" oldParent="/sbml[1]/model[1]/listOfSpecies[1]" oldChildNo="8" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[8]" oldTag="species" />
+    <attribute name="compartment" id="34" triggeredBy="33" oldValue="compartment1" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[8]" />
+    <attribute name="id" id="35" triggeredBy="33" oldValue="simMulti" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[8]" />
+    <attribute name="initialConcentration" id="36" triggeredBy="33" oldValue="0" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[8]" />
+    <attribute name="name" id="37" triggeredBy="33" oldValue="simple Multimer" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[8]" />
+    <attribute name="sbo" id="38" triggeredBy="33" oldValue="SBO:0000421" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[8]" />
+    <node id="39" oldParent="/sbml[1]/model[1]/listOfSpecies[1]" oldChildNo="9" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[9]" oldTag="species" />
+    <attribute name="compartment" id="40" triggeredBy="39" oldValue="compartment1" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[9]" />
+    <attribute name="id" id="41" triggeredBy="39" oldValue="nucMulti" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[9]" />
+    <attribute name="initialConcentration" id="42" triggeredBy="39" oldValue="0" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[9]" />
+    <attribute name="name" id="43" triggeredBy="39" oldValue="nucMulti" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[9]" />
+    <attribute name="sbo" id="44" triggeredBy="39" oldValue="SBO:0000419" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[9]" />
+    <node id="45" oldParent="/sbml[1]/model[1]/listOfSpecies[1]" oldChildNo="10" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[10]" oldTag="species" />
+    <attribute name="compartment" id="46" triggeredBy="45" oldValue="compartment1" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[10]" />
+    <attribute name="id" id="47" triggeredBy="45" oldValue="compMulti" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[10]" />
+    <attribute name="initialConcentration" id="48" triggeredBy="45" oldValue="0" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[10]" />
+    <attribute name="name" id="49" triggeredBy="45" oldValue="compMulti" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[10]" />
+    <attribute name="sbo" id="50" triggeredBy="45" oldValue="SBO:0000418" oldPath="/sbml[1]/model[1]/listOfSpecies[1]/species[10]" />
+    <node id="51" oldParent="/sbml[1]/model[1]/listOfReactions[1]" oldChildNo="1" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[1]" oldTag="reaction" />
+    <attribute name="id" id="52" triggeredBy="51" oldValue="v1" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[1]" />
+    <attribute name="name" id="53" triggeredBy="51" oldValue="sigb syn" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[1]" />
+    <node id="54" triggeredBy="51" oldParent="/sbml[1]/model[1]/listOfReactions[1]/reaction[1]" oldChildNo="1" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[1]/listOfProducts[1]" oldTag="listOfProducts" />
+    <node id="55" triggeredBy="54" oldParent="/sbml[1]/model[1]/listOfReactions[1]/reaction[1]/listOfProducts[1]" oldChildNo="1" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[1]/listOfProducts[1]/speciesReference[1]" oldTag="speciesReference" />
+    <attribute name="species" id="56" triggeredBy="55" oldValue="x" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[1]/listOfProducts[1]/speciesReference[1]" />
+    <node id="57" triggeredBy="51" oldParent="/sbml[1]/model[1]/listOfReactions[1]/reaction[1]" oldChildNo="2" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[1]/listOfModifiers[1]" oldTag="listOfModifiers" />
+    <node id="58" triggeredBy="57" oldParent="/sbml[1]/model[1]/listOfReactions[1]/reaction[1]/listOfModifiers[1]" oldChildNo="1" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[1]/listOfModifiers[1]/modifierSpeciesReference[1]" oldTag="modifierSpeciesReference" />
+    <attribute name="species" id="59" triggeredBy="58" oldValue="mac" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[1]/listOfModifiers[1]/modifierSpeciesReference[1]" />
+    <node id="60" oldParent="/sbml[1]/model[1]/listOfReactions[1]" oldChildNo="2" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[2]" oldTag="reaction" />
+    <attribute name="id" id="61" triggeredBy="60" oldValue="v2" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[2]" />
+    <attribute name="name" id="62" triggeredBy="60" oldValue="lacz syn" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[2]" />
+    <node id="63" triggeredBy="60" oldParent="/sbml[1]/model[1]/listOfReactions[1]/reaction[2]" oldChildNo="1" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[2]/listOfProducts[1]" oldTag="listOfProducts" />
+    <node id="64" triggeredBy="63" oldParent="/sbml[1]/model[1]/listOfReactions[1]/reaction[2]/listOfProducts[1]" oldChildNo="1" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[2]/listOfProducts[1]/speciesReference[1]" oldTag="speciesReference" />
+    <attribute name="species" id="65" triggeredBy="64" oldValue="mac" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[2]/listOfProducts[1]/speciesReference[1]" />
+    <node id="66" triggeredBy="60" oldParent="/sbml[1]/model[1]/listOfReactions[1]/reaction[2]" oldChildNo="2" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[2]/listOfModifiers[1]" oldTag="listOfModifiers" />
+    <node id="67" triggeredBy="66" oldParent="/sbml[1]/model[1]/listOfReactions[1]/reaction[2]/listOfModifiers[1]" oldChildNo="1" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[2]/listOfModifiers[1]/modifierSpeciesReference[1]" oldTag="modifierSpeciesReference" />
+    <attribute name="species" id="68" triggeredBy="67" oldValue="compMulti" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[2]/listOfModifiers[1]/modifierSpeciesReference[1]" />
+    <node id="69" oldParent="/sbml[1]/model[1]/listOfReactions[1]" oldChildNo="3" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[3]" oldTag="reaction" />
+    <attribute name="id" id="70" triggeredBy="69" oldValue="v3" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[3]" />
+    <attribute name="name" id="71" triggeredBy="69" oldValue="x syn" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[3]" />
+    <node id="72" triggeredBy="69" oldParent="/sbml[1]/model[1]/listOfReactions[1]/reaction[3]" oldChildNo="1" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[3]/listOfProducts[1]" oldTag="listOfProducts" />
+    <node id="73" triggeredBy="72" oldParent="/sbml[1]/model[1]/listOfReactions[1]/reaction[3]/listOfProducts[1]" oldChildNo="1" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[3]/listOfProducts[1]/speciesReference[1]" oldTag="speciesReference" />
+    <attribute name="species" id="74" triggeredBy="73" oldValue="compMulti" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[3]/listOfProducts[1]/speciesReference[1]" />
+    <node id="75" oldParent="/sbml[1]/model[1]/listOfReactions[1]" oldChildNo="4" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[4]" oldTag="reaction" />
+    <attribute name="id" id="76" triggeredBy="75" oldValue="v4" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[4]" />
+    <attribute name="name" id="77" triggeredBy="75" oldValue="sigb degr" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[4]" />
+    <node id="78" triggeredBy="75" oldParent="/sbml[1]/model[1]/listOfReactions[1]/reaction[4]" oldChildNo="1" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[4]/listOfReactants[1]" oldTag="listOfReactants" />
+    <node id="79" triggeredBy="78" oldParent="/sbml[1]/model[1]/listOfReactions[1]/reaction[4]/listOfReactants[1]" oldChildNo="1" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[4]/listOfReactants[1]/speciesReference[1]" oldTag="speciesReference" />
+    <attribute name="species" id="80" triggeredBy="79" oldValue="pert" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[4]/listOfReactants[1]/speciesReference[1]" />
+    <node id="81" oldParent="/sbml[1]/model[1]/listOfReactions[1]" oldChildNo="5" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[5]" oldTag="reaction" />
+    <attribute name="id" id="82" triggeredBy="81" oldValue="v5" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[5]" />
+    <attribute name="name" id="83" triggeredBy="81" oldValue="lacz degr" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[5]" />
+    <node id="84" triggeredBy="81" oldParent="/sbml[1]/model[1]/listOfReactions[1]/reaction[5]" oldChildNo="1" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[5]/listOfReactants[1]" oldTag="listOfReactants" />
+    <node id="85" triggeredBy="84" oldParent="/sbml[1]/model[1]/listOfReactions[1]/reaction[5]/listOfReactants[1]" oldChildNo="1" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[5]/listOfReactants[1]/speciesReference[1]" oldTag="speciesReference" />
+    <attribute name="species" id="86" triggeredBy="85" oldValue="com" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[5]/listOfReactants[1]/speciesReference[1]" />
+    <node id="87" triggeredBy="81" oldParent="/sbml[1]/model[1]/listOfReactions[1]/reaction[5]" oldChildNo="2" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[5]/listOfModifiers[1]" oldTag="listOfModifiers" />
+    <node id="88" triggeredBy="87" oldParent="/sbml[1]/model[1]/listOfReactions[1]/reaction[5]/listOfModifiers[1]" oldChildNo="1" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[5]/listOfModifiers[1]/modifierSpeciesReference[1]" oldTag="modifierSpeciesReference" />
+    <attribute name="species" id="89" triggeredBy="88" oldValue="nuc" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[5]/listOfModifiers[1]/modifierSpeciesReference[1]" />
+    <node id="91" oldParent="/sbml[1]/model[1]/listOfReactions[1]/reaction[6]/listOfReactants[1]" oldChildNo="1" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[6]/listOfReactants[1]/speciesReference[1]" oldTag="speciesReference" />
+    <attribute name="species" id="92" triggeredBy="91" oldValue="x" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[6]/listOfReactants[1]/speciesReference[1]" />
+  </delete>
+  <insert>
+    <attribute name="sboTerm" id="2" newValue="SBO:0000248" newPath="/sbml[1]/model[1]/listOfSpecies[1]/species[2]" />
+    <node id="93" newParent="/sbml[1]/model[1]/listOfReactions[1]/reaction[1]/listOfReactants[1]" newChildNo="1" newPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[1]/listOfReactants[1]/speciesReference[1]" newTag="speciesReference" />
+    <attribute name="species" id="94" triggeredBy="93" newValue="mac" newPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[1]/listOfReactants[1]/speciesReference[1]" />
+  </insert>
+  <move>
+    <node id="90" oldParent="/sbml[1]/model[1]/listOfReactions[1]" newParent="/sbml[1]/model[1]/listOfReactions[1]" oldChildNo="6" newChildNo="1" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[6]" newPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[1]" />
+  </move>
+</bives>`;
+
+    const splitLines = str => str.split(/\r?\n/);
+
+    var strLines = splitLines(xmlTest);
+    var dataByKeys = {doc1:{}, doc2:{}};
+    // produce double key array based on change + path. vlaue comodi term
+    var key1 = null;
+
+    strLines.forEach(line => {
+        if(line.includes("triggeredBy=")) return;
+        if(line.includes("insert>")){
+            key1 = "insert";
+            return;
+        } 
+        else if(line.includes("delete>")){
+            key1 = "delete";
+            return;
+        } 
+        else if(line.includes("update>")){
+            key1 = "update";
+            return;
+        } 
+        else if(line.includes("move>")){
+            key1 = "move";
+            return;
+        } if(line.includes("bives>")){
+            key1 = null;
+            return;
+        } 
+
+        else if(key1 != null){ //v mit old bzw newPath belegen+
+            var k = "";
+            var v = "hier kommt dann comodi rein";
+            var subKey = "";
+            if(key1 == "delete"){
+                k = "doc1";
+                subKey = line.match(/oldPath=\".*?\"/g)
+            } else {
+                k = "doc2"
+                subKey = line.match(/newPath=\".*?\"/g)
+            }
+            
+            dataByKeys[k][subKey] = v;
+        }
+
+        
+    });
+    console.log(dataByKeys);
+
+}
