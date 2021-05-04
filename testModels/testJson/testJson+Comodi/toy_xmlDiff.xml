@@ -102,4 +102,3 @@
   <move>
     <node id="90" oldParent="/sbml[1]/model[1]/listOfReactions[1]" newParent="/sbml[1]/model[1]/listOfReactions[1]" oldChildNo="6" newChildNo="1" oldPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[6]" newPath="/sbml[1]/model[1]/listOfReactions[1]/reaction[1]" />
   </move>
-</bives>

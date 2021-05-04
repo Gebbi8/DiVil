@@ -250,13 +250,10 @@ function createGraph() {
 
 		console.log(node);
 
-var count = 0;
 
 	enterNode = node.enter()
 		.append("g")
 		.attr("id", function (d) {
-			count++;
-			console.log(count, d);
 			return d.id;
 		})
 		.attr("class", "node")
@@ -314,7 +311,6 @@ function createCompartments() {
 		.data(nodesByCompartment.filter(function (d) {
 			var filter = nodes.filter(
 				function (n) {
-					console.log(d, n);
 					return d.key == n.id;
 				});
 			return filter > [];

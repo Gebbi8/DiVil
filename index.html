@@ -329,7 +329,7 @@
 		// 	["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations", "inclAnnotations"]);
 
 		//let testJson = "testModels/testJson/Kummer5vs6.json";
-		let testJson = "testModels/testJson/toyModel-same.json";
+		let testJson = "testModels/testJson/testJson+Comodi/toyModel.json";
 		$.get(testJson, function(data){
 			showSbgn(data);
 		}, 'text');
@@ -343,7 +343,7 @@
 			getBivesData(
 			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + file1 + ".xml",
 			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + file2 + ".xml",
-			["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations", "inclAnnotations"]);
+			["reportHtml", "reactionsSbgnJson", "xmlDiff", "inclAnnotations"]);
 		}
 
 
