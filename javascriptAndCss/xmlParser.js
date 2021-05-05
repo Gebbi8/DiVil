@@ -1,10 +1,11 @@
 function comodiAdder(data, changeType, path){
+    //console.log(data, changeType, path);
     return data[changeType][path];
 }
 
-function comodiParser(xmlDiff, comodi){
+function getComodiObj(xmlDiff, comodi){
 
-    const splitLines = str => str.split(/\r?\n/);
+    const splitLines = str => xmlDiff.split(/\r?\n/);
 
     var strLines = splitLines(xmlDiff);
     var dataByKeys = {delete:{}, insert:{}, update:{}, move:{}};
@@ -54,7 +55,7 @@ function comodiParser(xmlDiff, comodi){
 
     arr.forEach(pair => {
         Object.entries(dataByKeys[pair[0]]).forEach(data => {
-            dataByKeys[pair[0]][data[0]] = grep(comodi, pair[1], data[1]);
+            dataByKeys[pair[0]][data[0]] = grep(comodi, data[1]);
         });
     });
 
@@ -62,10 +63,13 @@ function comodiParser(xmlDiff, comodi){
     return dataByKeys;
 }
 //irgendwie noch regex nur abhängig von id
-function grep(comodi, changeType, id){
-    //     <comodi:(.*?) rdf:about="#1".*?\1>
+function grep(comodi, id){
+
     id = id.slice(4,-1);
-    let regex = new RegExp('<comodi:' + '(.*?)' + ' rdf:about="#' + id + '".*?\\1>', "si");
+    //being as precise as possible improves the regex performance
+    //<comodi:((?:insertion|deletion|move|update|PermutationOfEntities)) rdf:about="#1".*?\1>
+    let regex = new RegExp('<comodi:' + '((?:insertion|deletion|move|update|PermutationOfEntities))' + ' rdf:about="file://bives-differences.patch#' + id + '".*?\\1>', "si");
+
     return comodi.match(regex)[0];
 
 }

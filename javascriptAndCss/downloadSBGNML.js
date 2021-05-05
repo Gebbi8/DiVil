@@ -1,5 +1,5 @@
-function downloadSBGNML(data) {
-	console.log(data);
+function downloadSBGNML(data, structeredComodi) {
+	console.log(data, structeredComodi);
 	var xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<sbgn xmlns="http://sbgn.org/libsbgn/0.2">\n';
 	xml = xml + '\t<map language="process description">\n';
 
@@ -115,6 +115,14 @@ function downloadSBGNML(data) {
 			xml = xml + '\t\t\t<bbox x="' + (svgData.x - bBox.width/2) + '" y="' + (svgData.y - bBox.height/2) + '" w="' + bBox.width + '" h="' + bBox.height + '"' + '/>\n';
 		//}
 
+		//add annotaion for comodi
+		xml += '\t\t\t<extension>\n';
+		// comodiAdder(data, changeType, path)
+		xml += comodiAdder(structeredComodi, data.nodes[i].bivesChange, data.nodes[i].path);
+		xml += '\t\t\t</extension>\n';
+		
+		
+
 		xml = xml + '\t\t</glyph>\n';
 	}
 
@@ -137,6 +145,12 @@ function downloadSBGNML(data) {
 		xml = xml + '\t\t\t<start x="' + svgPathCoordinate('start', 'x', path) + '" y="' + svgPathCoordinate('start', 'y', path) + '"/>\n';
 
 		xml = xml + '\t\t\t<end x="' + svgPathCoordinate('end', 'x', path) + '" y="' + svgPathCoordinate('end', 'y', path) + '"/>\n';
+
+		//add annotaion for comodi
+		xml += '\t\t\t<extension>\n';
+		// comodiAdder(data, changeType, path)
+		xml += comodiAdder(structeredComodi, data.nodes[i].bivesChange, data.nodes[i].path);
+		xml += '\t\t\t</extension>\n';
 
 		xml = xml + '\t\t</arc>\n';
 	}
