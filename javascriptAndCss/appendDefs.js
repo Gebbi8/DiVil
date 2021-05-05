@@ -6,11 +6,18 @@ function appendDefs() {
 	var refXModulation = "10.5";
 	var strokeWidth = "1";
 
+	//colours
+	var nothingC = 	"black";
+	var updateC = 	"#D6D287";
+	var insertC = 	"#76D6AF";
+	var deleteC = 	"#D66A56";
+	var moveC = 		"#8E67D6";
+
 
 	defs.append("marker")
 		.attr("id", "productionnothing")
 		.attr("viewBox", "0 -6 11 12")
-		.attr("fill", "black")
+		.attr("fill", nothingC)
 		.attr("stroke-width", "0")
 		.attr("refX", refXProduction)
 		.attr("refY", "0")
@@ -26,7 +33,7 @@ function appendDefs() {
 
 		.attr("id", "productionupdate")
 		.attr("viewBox", "0 -6 11 12")
-		.attr("fill", "#D6D287")
+		.attr("fill", updateC)
 		.attr("stroke-width", "0")
 		.attr("refX", refXProduction)
 		.attr("refY", "0")
@@ -42,7 +49,7 @@ function appendDefs() {
 
 		.attr("id", "productiondelete")
 		.attr("viewBox", "0 -6 11 12")
-		.attr("fill", "#D66A56")
+		.attr("fill", deleteC)
 		.attr("stroke-width", "0")
 		.attr("refX", refXProduction)
 		.attr("refY", "0")
@@ -58,7 +65,7 @@ function appendDefs() {
 
 		.attr("id", "productioninsert")
 		.attr("viewBox", "0 -6 11 12")
-		.attr("fill", "#76D6AF")
+		.attr("fill", insertC)
 		.attr("stroke-width", "0")
 		.attr("refX", refXProduction)
 		.attr("refY", "0")
@@ -74,7 +81,7 @@ function appendDefs() {
 
 		.attr("id", "productionmove")
 		.attr("viewBox", "0 -6 11 12")
-		.attr("fill", "#8E67D6")
+		.attr("fill",  moveC)
 		.attr("stroke-width", "0")
 		.attr("refX", refXProduction)
 		.attr("refY", "0")
@@ -98,7 +105,7 @@ function appendDefs() {
 		.attr("markerHeight", marker)
 		.attr("orient", "auto")
 
-		.style("stroke", "black")
+		.style("stroke", nothingC)
 		.append("svg:path")
 		.attr("d", "M0,0L5,5L10,0L5,-5Z")
 		.attr("class", "arrowHead");
@@ -115,7 +122,7 @@ function appendDefs() {
 		.attr("markerHeight", marker)
 		.attr("orient", "auto")
 
-		.style("stroke", "#D6D287")
+		.style("stroke", updateC)
 		.append("svg:path")
 		.attr("d", "M0,0L5,5L10,0L5,-5Z")
 		.attr("class", "arrowHead");
@@ -132,7 +139,7 @@ function appendDefs() {
 		.attr("markerHeight", marker)
 		.attr("orient", "auto")
 
-		.style("stroke", "#D66A56")
+		.style("stroke", deleteC)
 		.append("svg:path")
 		.attr("d", "M0,0L5,5L10,0L5,-5Z")
 		.attr("class", "arrowHead");
@@ -149,7 +156,23 @@ function appendDefs() {
 		.attr("markerHeight", marker)
 		.attr("orient", "auto")
 
-		.style("stroke", "#76D6AF")
+		.style("stroke", insertC)
+		.append("svg:path")
+		.attr("d", "M0,0L5,5L10,0L5,-5Z")
+		.attr("class", "arrowHead");
+
+	defs.append("marker")
+		.attr("id", "modulationmove")
+		.attr("viewBox", "0 -6 11 12")
+		.attr("fill", "white")
+		.attr("stroke-width", strokeWidth)
+		.attr("refX", refXModulation)
+		.attr("refY", "0")
+		.attr("markerWidth", marker)
+		.attr("markerHeight", marker)
+		.attr("orient", "auto")
+
+		.style("stroke", moveC)
 		.append("svg:path")
 		.attr("d", "M0,0L5,5L10,0L5,-5Z")
 		.attr("class", "arrowHead");
@@ -158,7 +181,6 @@ function appendDefs() {
 
 		.attr("id", "stimulationnothing")
 		.attr("viewBox", "0 -6 11 12")
-		.attr("stroke", "black")
 		.attr("stroke-width", strokeWidth)
 		.attr("fill", "white")
 		.attr("refX", refXProduction)
@@ -167,7 +189,7 @@ function appendDefs() {
 		.attr("markerHeight", marker)
 		.attr("orient", "auto")
 
-		.style("stroke", "black")
+		.style("stroke", nothingC)
 		.append("svg:path")
 		.attr("d", "M1,-5L1,4L10,0Z")
 		.attr("class", "arrowHead");
@@ -184,7 +206,7 @@ function appendDefs() {
 		.attr("markerHeight", marker)
 		.attr("orient", "auto")
 
-		.style("stroke", "#D6D287")
+		.style("stroke", updateC)
 		.append("svg:path")
 		.attr("d", "M1,-5L1,4L10,0Z")
 		.attr("class", "arrowHead");
@@ -201,7 +223,7 @@ function appendDefs() {
 		.attr("markerHeight", marker)
 		.attr("orient", "auto")
 
-		.style("stroke", "#D66A56")
+		.style("stroke", deleteC)
 		.append("svg:path")
 		.attr("d", "M1,-5L1,4L10,0Z")
 		.attr("class", "arrowHead");
@@ -218,13 +240,30 @@ function appendDefs() {
 		.attr("markerHeight", marker)
 		.attr("orient", "auto")
 
-		.style("stroke", "#76D6AF")
+		.style("stroke", insertC)
 		.append("svg:path")
 		.attr("d", "M1,-5L1,4L10,0Z")
 		.attr("class", "arrowHead");
 
 	defs.append("marker")
-		.attr("id", "catalysis")
+
+		.attr("id", "stimulationmove")
+		.attr("viewBox", "0 -6 11 12")
+		.attr("stroke-width", strokeWidth)
+		.attr("fill", "white")
+		.attr("refX", refXProduction)
+		.attr("refY", "0")
+		.attr("markerWidth", marker)
+		.attr("markerHeight", marker)
+		.attr("orient", "auto")
+
+		.style("stroke", moveC)
+		.append("svg:path")
+		.attr("d", "M1,-5L1,4L10,0Z")
+		.attr("class", "arrowHead");
+
+	defs.append("marker")
+		.attr("id", "catalysisnothing")
 		.attr("viewBox", "0 -6 11 12")
 		.attr("stroke", "black")
 		.attr("stroke-width", strokeWidth)
@@ -239,16 +278,77 @@ function appendDefs() {
 		.attr("d", "M1,0A1,1,0,0,1,9,0A1,1,0,0,1,1,0")
 		.attr("class", "arrowHead");
 
-	// catalysis ...
+	defs.append("marker")
+		.attr("id", "catalysisdelete")
+		.attr("viewBox", "0 -6 11 12")
+		.attr("stroke", deleteC)
+		.attr("stroke-width", strokeWidth)
+		.attr("fill", "white")
+		.attr("refX", refX)
+		.attr("refY", "0")
+		.attr("markerWidth", marker)
+		.attr("markerHeight", marker)
+		.attr("orient", "auto")
+
+		.append("svg:path")
+		.attr("d", "M1,0A1,1,0,0,1,9,0A1,1,0,0,1,1,0")
+		.attr("class", "arrowHead");
+
+	defs.append("marker")
+		.attr("id", "catalysisinsert")
+		.attr("viewBox", "0 -6 11 12")
+		.attr("stroke", insertC)
+		.attr("stroke-width", strokeWidth)
+		.attr("fill", "white")
+		.attr("refX", refX)
+		.attr("refY", "0")
+		.attr("markerWidth", marker)
+		.attr("markerHeight", marker)
+		.attr("orient", "auto")
+
+		.append("svg:path")
+		.attr("d", "M1,0A1,1,0,0,1,9,0A1,1,0,0,1,1,0")
+		.attr("class", "arrowHead");
+
+	defs.append("marker")
+		.attr("id", "catalysisupdate")
+		.attr("viewBox", "0 -6 11 12")
+		.attr("stroke", updateC)
+		.attr("stroke-width", strokeWidth)
+		.attr("fill", "white")
+		.attr("refX", refX)
+		.attr("refY", "0")
+		.attr("markerWidth", marker)
+		.attr("markerHeight", marker)
+		.attr("orient", "auto")
+
+		.append("svg:path")
+		.attr("d", "M1,0A1,1,0,0,1,9,0A1,1,0,0,1,1,0")
+		.attr("class", "arrowHead");
+	
+	defs.append("marker")
+		.attr("id", "catalysismove")
+		.attr("viewBox", "0 -6 11 12")
+		.attr("stroke", moveC)
+		.attr("stroke-width", strokeWidth)
+		.attr("fill", "white")
+		.attr("refX", refX)
+		.attr("refY", "0")
+		.attr("markerWidth", marker)
+		.attr("markerHeight", marker)
+		.attr("orient", "auto")
+
+		.append("svg:path")
+		.attr("d", "M1,0A1,1,0,0,1,9,0A1,1,0,0,1,1,0")
+		.attr("class", "arrowHead");
 
 	defs.append("marker")
 
 		.attr("id", "inhibitionnothing")
 		.attr("viewBox", "0 -6 11 12")
-		.attr("stroke", "black")
-		.attr("stroke-width", "1")
+		.attr("stroke-width", "4")
 		.attr("fill", "white")
-		.attr("refX", refX - 6)
+		.attr("refX", 2)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -256,7 +356,7 @@ function appendDefs() {
 		.attr("orient", "auto")
 
 		.append("svg:path")
-		.style("stroke", "black")
+		.style("stroke", nothingC)
 		.attr("d", "M0,-5L0,5")
 		.attr("class", "arrowHead");
 
@@ -264,10 +364,9 @@ function appendDefs() {
 
 		.attr("id", "inhibitioninsert")
 		.attr("viewBox", "0 -6 11 12")
-		.attr("stroke", "black")
-		.attr("stroke-width", "1")
+		.attr("stroke-width", "4")
 		.attr("fill", "white")
-		.attr("refX", refX - 6)
+		.attr("refX", 2)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -275,7 +374,7 @@ function appendDefs() {
 		.attr("orient", "auto")
 
 		.append("svg:path")
-		.style("stroke", "#76D6AF")
+		.style("stroke", insertC)
 		.attr("d", "M0,-5L0,5")
 		.attr("class", "arrowHead");
 
@@ -283,10 +382,9 @@ function appendDefs() {
 
 		.attr("id", "inhibitionupdate")
 		.attr("viewBox", "0 -6 11 12")
-		.attr("stroke", "black")
-		.attr("stroke-width", "1")
+		.attr("stroke-width", "4")
 		.attr("fill", "white")
-		.attr("refX", refX - 6)
+		.attr("refX", 2)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -294,7 +392,7 @@ function appendDefs() {
 		.attr("orient", "auto")
 
 		.append("svg:path")
-		.style("stroke", "#D6D287")
+		.style("stroke", updateC)
 		.attr("d", "M0,-5L0,5")
 		.attr("class", "arrowHead");
 
@@ -302,10 +400,9 @@ function appendDefs() {
 
 		.attr("id", "inhibitiondelete")
 		.attr("viewBox", "0 -6 11 12")
-		.attr("stroke", "black")
-		.attr("stroke-width", "1")
+		.attr("stroke-width", "4")
 		.attr("fill", "white")
-		.attr("refX", refX - 6)
+		.attr("refX", 2)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -313,7 +410,7 @@ function appendDefs() {
 		.attr("orient", "auto")
 
 		.append("svg:path")
-		.style("stroke", "#D66A56")
+		.style("stroke", deleteC)
 		.attr("d", "M0,-5L0,5")
 		.attr("class", "arrowHead");
 
@@ -321,10 +418,9 @@ function appendDefs() {
 
 		.attr("id", "inhibitionmove")
 		.attr("viewBox", "0 -6 11 12")
-		.attr("stroke", "black")
-		.attr("stroke-width", "1")
+		.attr("stroke-width", "4")
 		.attr("fill", "white")
-		.attr("refX", refX - 6)
+		.attr("refX", 2)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -332,16 +428,15 @@ function appendDefs() {
 		.attr("orient", "auto")
 
 		.append("svg:path")
-		.style("stroke", "#8E67D6")
+		.style("stroke", moveC)
 		.attr("d", "M0,-5L0,5")
 		.attr("class", "arrowHead");
 
 	defs.append("marker")
 
 		.attr("id", "necessarystimulationnothing")
-		.attr("viewBox", "0 -6 11 12")
+		.attr("viewBox", "-2 -6 13 12")
 		.attr("stroke-width", strokeWidth)
-		.attr("stroke", "black")
 		.attr("fill", "white")
 		.attr("refX", refX)
 		.attr("refY", "0")
@@ -350,16 +445,15 @@ function appendDefs() {
 		.attr("orient", "auto")
 
 		.append("svg:path")
-		.style("stroke", "black")
-		.attr("d", "M1,-5L1,105M2,-4L2,4L10,0L2,-4")
+		.style("stroke", nothingC)
+		.attr("d", "M-1,-5l0,10M2,-4L2,4L10,0L2,-4")
 		.attr("class", "arrowHead");
 
 	defs.append("marker")
 
 		.attr("id", "necessarystimulationinsert")
-		.attr("viewBox", "0 -6 11 12")
+		.attr("viewBox", "-2 -6 13 12")
 		.attr("stroke-width", strokeWidth)
-		.attr("stroke", "black")
 		.attr("fill", "white")
 		.attr("refX", refX)
 		.attr("refY", "0")
@@ -368,16 +462,15 @@ function appendDefs() {
 		.attr("orient", "auto")
 
 		.append("svg:path")
-		.style("stroke", "#76D6AF")
-		.attr("d", "M1,-5L1,105M2,-4L2,4L10,0L2,-4")
+		.style("stroke", insertC)
+		.attr("d", "M-1,-5l0,10M2,-4L2,4L10,0L2,-4")
 		.attr("class", "arrowHead");
 
-	defs.append("marker")
+		defs.append("marker")
 
-		.attr("id", "necessarystimulation")
-		.attr("viewBox", "0 -6 11 12")
+		.attr("id", "necessarystimulationdelete")
+		.attr("viewBox", "-2 -6 13 12")
 		.attr("stroke-width", strokeWidth)
-		.attr("stroke", "black")
 		.attr("fill", "white")
 		.attr("refX", refX)
 		.attr("refY", "0")
@@ -386,7 +479,45 @@ function appendDefs() {
 		.attr("orient", "auto")
 
 		.append("svg:path")
-		.style("stroke", "black")
-		.attr("d", "M1,-5L1,105M2,-4L2,4L10,0L2,-4")
+		.style("stroke", deleteC)
+		.attr("d", "M-1,-5l0,10M2,-4L2,4L10,0L2,-4")
 		.attr("class", "arrowHead");
+
+		defs.append("marker")
+
+		.attr("id", "necessarystimulationmove")
+		.attr("viewBox", "-2 -6 13 12")
+		.attr("stroke-width", strokeWidth)
+		.attr("fill", "white")
+		.attr("refX", refX)
+		.attr("refY", "0")
+		.attr("markerWidth", marker)
+		.attr("markerHeight", marker)
+		.attr("orient", "auto")
+
+		.append("svg:path")
+		.style("stroke", moveC)
+		.attr("d", "M-1,-5l0,10M2,-4L2,4L10,0L2,-4")
+		.attr("class", "arrowHead");
+
+		defs.append("marker")
+
+		.attr("id", "necessarystimulationupdate")
+		.attr("viewBox", "-2 -6 13 12")
+		.attr("stroke-width", strokeWidth)
+		.attr("fill", "white")
+		.attr("refX", refX)
+		.attr("refY", "0")
+		.attr("markerWidth", marker)
+		.attr("markerHeight", marker)
+		.attr("orient", "auto")
+
+		.append("svg:path")
+		.style("stroke", updateC)
+		.attr("d", "M-1,-5l0,10M2,-4L2,4L10,0L2,-4")
+		.attr("class", "arrowHead");
+
+
+
+
 }

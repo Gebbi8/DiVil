@@ -329,7 +329,8 @@
 		// 	["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations", "inclAnnotations"]);
 
 		//let testJson = "testModels/testJson/Kummer5vs6.json";
-		let testJson = "testModels/testJson/testJson+Comodi/toyModel.json";
+		let testJson = "testModels/testJson/toyModel-same.json";
+		//let testJson = "testModels/testJson/testJson+Comodi/toyModel.json";
 		$.get(testJson, function(data){
 			showSbgn(data);
 		}, 'text');
@@ -349,7 +350,7 @@
 
 		//test xml parser
 		var xml = "/testModels/testJson/testJson+Comodi/ex1_Comodi.xml";
-		deleteTriggered(xml);
+		//deleteTriggered(xml);
 	</script>
 </body>
 
