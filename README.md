@@ -15,19 +15,19 @@ The network information is provided by a JSON Object in the following format:
 {
 	"nodes":[
 		{
-		"bivesChange":"...",
+		"bivesClass":"...",
 		"compartment":"...",
 		"id":"...",
 		"label":"...",
-		"sboTerm":"..."
+		"class":"..."
 		},
 		...
 	],
 	"links":[
 		{
-		"bivesChange":"...",
+		"bivesClass":"...",
 		"source":"...",
-		"sboTerm":"...",
+		"class":"...",
 		"target":"..."
 		},
 		...
@@ -37,16 +37,16 @@ The network information is provided by a JSON Object in the following format:
 
 The object contains a list of nodes and a list of links which values are obtained from the Bives output. Nodes may have different attributes.
 Supported attributes for nodes are:
-* bivesChange: update/move/insert/delete
+* bivesClass: update/move/insert/delete
 * comparment: ID of one containter
 * id: own ID
 * label: name of the node
-* sboTerm: SBO term (http://www.ebi.ac.uk/sbo/main/tree;jsessionid=C3708F6D884984AC240A7FFE222773D1?expandAll=exp&nodeId=1)
+* class: SBO term (http://www.ebi.ac.uk/sbo/main/tree;jsessionid=C3708F6D884984AC240A7FFE222773D1?expandAll=exp&nodeId=1)
 
 Supported attributes for links are:
-* bivesChange: update/move/insert/delete
+* bivesclass: update/move/insert/delete
 * source: id of a input node
-* sboTerm: SBO term (http://www.ebi.ac.uk/sbo/main/tree;jsessionid=C3708F6D884984AC240A7FFE222773D1?expandAll=exp&nodeId=1)
+* class: SBO term (http://www.ebi.ac.uk/sbo/main/tree;jsessionid=C3708F6D884984AC240A7FFE222773D1?expandAll=exp&nodeId=1)
 * target: id of an output node
 
 
@@ -88,7 +88,7 @@ According to the SBGN PD specification a process node has one port for all ingoi
 The SBO terms are supported by SBGN. However, the SBO term follows a specific hierarchy and multiple SBO terms can relate to one SBGN entity. Consequently, a mapping for each term to a SBGN PD class is provided.
 
 ## Highlighting differences
-Based on the bivesChange the differences between two versions of a model can be highlighted.
+Based on the bivesClass the differences between two versions of a model can be highlighted.
 For the following, we consider that the first version is prior to the second version.
 Black elements show entities that did not change between the two versions. Updated elements are orange, moved ones are blue and elements that are found only in the first version (e.g, entities present in the first version but deleted in the second version) are red while the ones that are only part of the second version (e.g, entities absent in the first version and created in the second version) are green.
 
