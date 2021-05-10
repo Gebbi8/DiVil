@@ -4,7 +4,7 @@ var nodeSize = 50;
 var dimmOpacity = 0.25;
 
 
-function showSbgn(data, annotations) {
+function showSbgn(data, xmlDiff, comodiAnnotation) {
 
 	//parse the data
 	obj = JSON.parse(data);
@@ -108,10 +108,12 @@ function showSbgn(data, annotations) {
 
 	createGraph();
 	initializeSimulation();
+
+	var structeredComodi = getComodiObj(xmlDiff, comodiAnnotation);
 	
 	//assign dowload function with data to button
 	document.getElementById("downloadBtn").classList.remove("disabled");
-	document.getElementById("sbgnMlDownload").onclick = function() {downloadSBGNML(obj)};
+	document.getElementById("sbgnMlDownload").onclick = function() {downloadSBGNML(obj, structeredComodi)};
 	document.getElementById("pngDownload").onclick = function(){ downloadPNGfromSVG("bivesGraphSvg")};
 	document.getElementById("svgDownload").onclick = function() {downloadSvg("bivesGraphSvg")};
 
@@ -236,8 +238,14 @@ function createGraph() {
 			return "url(#" + sboSwitchArc(d.class) + "" + d.bivesClass + ")"
 		});
 
-	node = svg.selectAll("g")
-		.data(nodes);
+
+	////////// nodes ////////
+
+	node = svg.selectAll("g.nodes")
+		.data(nodesFilterComp);
+
+		//console.log(node);
+
 
 	enterNode = node.enter()
 		.append("g")

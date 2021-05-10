@@ -1,0 +1,639 @@
+  <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:comodi="http://purl.uni-rostock.de/comodi/comodi#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:ore="http://www.openarchives.org/ore/terms/" xmlns:pav="http://purl.org/pav/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <prov:Activity rdf:about="#createPatch">
+      <prov:generated>
+        <ore:Aggregation rdf:about="#bivesPatch">
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#29">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityIdentifier" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy>
+                <comodi:Deletion rdf:about="#27">
+                  <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#SpeciesSetup" />
+                  <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+                </comodi:Deletion>
+              </comodi:wasTriggeredBy>
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#18">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#SpeciesSetup" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy>
+                <comodi:Deletion rdf:about="#15">
+                  <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#SpeciesSetup" />
+                  <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+                </comodi:Deletion>
+              </comodi:wasTriggeredBy>
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#44">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy>
+                <comodi:Deletion rdf:about="#39">
+                  <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#SpeciesSetup" />
+                  <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+                </comodi:Deletion>
+              </comodi:wasTriggeredBy>
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#87">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ReactionNetworkDefinition" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+              <comodi:wasTriggeredBy>
+                <comodi:Deletion rdf:about="#81">
+                  <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ReactionDefinition" />
+                  <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+                </comodi:Deletion>
+              </comodi:wasTriggeredBy>
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#53">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityName" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy>
+                <comodi:Deletion rdf:about="#51">
+                  <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ReactionDefinition" />
+                  <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+                </comodi:Deletion>
+              </comodi:wasTriggeredBy>
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#64">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ParticipantDefinition" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+              <comodi:wasTriggeredBy>
+                <comodi:Deletion rdf:about="#63">
+                  <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ReactionNetworkDefinition" />
+                  <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+                  <comodi:wasTriggeredBy>
+                    <comodi:Deletion rdf:about="#60">
+                      <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ReactionDefinition" />
+                      <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+                    </comodi:Deletion>
+                  </comodi:wasTriggeredBy>
+                </comodi:Deletion>
+              </comodi:wasTriggeredBy>
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#75">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ReactionDefinition" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#3">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#SpeciesSetup" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#41">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityIdentifier" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#39" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#9">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#SpeciesSetup" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#19">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityName" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#15" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#50">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy>
+                <comodi:Deletion rdf:about="#45">
+                  <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#SpeciesSetup" />
+                  <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+                </comodi:Deletion>
+              </comodi:wasTriggeredBy>
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#61">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityIdentifier" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#60" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#47">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityIdentifier" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#45" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates rdf:resource="#63" />
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#49">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityName" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#45" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#35">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityIdentifier" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy>
+                <comodi:Deletion rdf:about="#33">
+                  <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#SpeciesSetup" />
+                  <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+                </comodi:Deletion>
+              </comodi:wasTriggeredBy>
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#37">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityName" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#33" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#8">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#3" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Insertion rdf:about="#93">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ParticipantDefinition" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+            </comodi:Insertion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#23">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityIdentifier" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy>
+                <comodi:Deletion rdf:about="#21">
+                  <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#SpeciesSetup" />
+                  <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+                </comodi:Deletion>
+              </comodi:wasTriggeredBy>
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#32">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#27" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#12">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#SpeciesSetup" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#9" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates rdf:resource="#81" />
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#78">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ReactionNetworkDefinition" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+              <comodi:wasTriggeredBy rdf:resource="#75" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#20">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#15" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#55">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ParticipantDefinition" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+              <comodi:wasTriggeredBy>
+                <comodi:Deletion rdf:about="#54">
+                  <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ReactionNetworkDefinition" />
+                  <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+                  <comodi:wasTriggeredBy rdf:resource="#51" />
+                </comodi:Deletion>
+              </comodi:wasTriggeredBy>
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#66">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ReactionNetworkDefinition" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+              <comodi:wasTriggeredBy rdf:resource="#60" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#28">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#27" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#17">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityIdentifier" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#15" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#86">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ParticipantDefinition" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy>
+                <comodi:Deletion rdf:about="#85">
+                  <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ParticipantDefinition" />
+                  <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+                  <comodi:wasTriggeredBy>
+                    <comodi:Deletion rdf:about="#84">
+                      <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ReactionNetworkDefinition" />
+                      <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+                      <comodi:wasTriggeredBy rdf:resource="#81" />
+                    </comodi:Deletion>
+                  </comodi:wasTriggeredBy>
+                </comodi:Deletion>
+              </comodi:wasTriggeredBy>
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#52">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityIdentifier" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#51" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <rdf:type rdf:resource="http://www.w3.org/ns/prov#Entity" />
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#72">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ReactionNetworkDefinition" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+              <comodi:wasTriggeredBy>
+                <comodi:Deletion rdf:about="#69">
+                  <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ReactionDefinition" />
+                  <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+                </comodi:Deletion>
+              </comodi:wasTriggeredBy>
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#74">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ParticipantDefinition" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy>
+                <comodi:Deletion rdf:about="#73">
+                  <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ParticipantDefinition" />
+                  <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+                  <comodi:wasTriggeredBy rdf:resource="#72" />
+                </comodi:Deletion>
+              </comodi:wasTriggeredBy>
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates rdf:resource="#69" />
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#58">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ParticipantDefinition" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+              <comodi:wasTriggeredBy>
+                <comodi:Deletion rdf:about="#57">
+                  <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ReactionNetworkDefinition" />
+                  <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+                  <comodi:wasTriggeredBy rdf:resource="#51" />
+                </comodi:Deletion>
+              </comodi:wasTriggeredBy>
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Insertion rdf:about="#2">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ReactionNetworkDefinition" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+            </comodi:Insertion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#40">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#39" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates rdf:resource="#60" />
+          <ore:aggregates rdf:resource="#51" />
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#46">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#45" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#62">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityName" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#60" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#48">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#SpeciesSetup" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#45" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#34">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#33" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#5">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityIdentifier" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#3" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#43">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityName" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#39" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#7">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityName" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#3" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#92">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ParticipantDefinition" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy>
+                <comodi:Deletion rdf:about="#91">
+                  <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ParticipantDefinition" />
+                  <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+                </comodi:Deletion>
+              </comodi:wasTriggeredBy>
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#89">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ParticipantDefinition" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy>
+                <comodi:Deletion rdf:about="#88">
+                  <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ParticipantDefinition" />
+                  <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+                  <comodi:wasTriggeredBy rdf:resource="#87" />
+                </comodi:Deletion>
+              </comodi:wasTriggeredBy>
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#22">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#21" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#31">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityName" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#27" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#11">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityIdentifier" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#9" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#80">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ParticipantDefinition" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy>
+                <comodi:Deletion rdf:about="#79">
+                  <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ParticipantDefinition" />
+                  <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+                  <comodi:wasTriggeredBy rdf:resource="#78" />
+                </comodi:Deletion>
+              </comodi:wasTriggeredBy>
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#77">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityName" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#75" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates rdf:resource="#39" />
+          <ore:aggregates rdf:resource="#88" />
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#25">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityName" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#21" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates rdf:resource="#27" />
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#14">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#9" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#83">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityName" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#81" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#16">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#15" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates rdf:resource="#85" />
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#71">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityName" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#69" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates rdf:resource="#73" />
+          <ore:aggregates rdf:resource="#57" />
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#68">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ParticipantDefinition" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy>
+                <comodi:Deletion rdf:about="#67">
+                  <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ParticipantDefinition" />
+                  <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+                  <comodi:wasTriggeredBy rdf:resource="#66" />
+                </comodi:Deletion>
+              </comodi:wasTriggeredBy>
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#59">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ParticipantDefinition" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#58" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:PermutationOfEntities rdf:about="#90">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ReactionDefinition" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlNode" />
+            </comodi:PermutationOfEntities>
+          </ore:aggregates>
+          <ore:aggregates rdf:resource="#45" />
+          <ore:aggregates rdf:resource="#54" />
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#65">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ParticipantDefinition" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#64" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates rdf:resource="#33" />
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#4">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#3" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#42">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#SpeciesSetup" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#39" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#6">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#SpeciesSetup" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#3" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates rdf:resource="#91" />
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#30">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#SpeciesSetup" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#27" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#1">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#36">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#SpeciesSetup" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#33" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#38">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#33" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Insertion rdf:about="#94">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ParticipantDefinition" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#93" />
+            </comodi:Insertion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#24">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#SpeciesSetup" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#21" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#26">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#21" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#13">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityName" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#9" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#82">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityIdentifier" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#81" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates rdf:resource="#15" />
+          <ore:aggregates rdf:resource="#84" />
+          <ore:aggregates rdf:resource="#79" />
+          <ore:aggregates rdf:resource="#21" />
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#70">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityIdentifier" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#69" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#10">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#9" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#56">
+              <comodi:affects rdf:resource="http://purl.uni-rostock.de/comodi/comodi#ParticipantDefinition" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#55" />
+            </comodi:Deletion>
+          </ore:aggregates>
+          <ore:aggregates rdf:resource="#67" />
+          <ore:aggregates>
+            <comodi:Deletion rdf:about="#76">
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#EntityIdentifier" />
+              <comodi:appliesTo rdf:resource="http://purl.uni-rostock.de/comodi/comodi#XmlAttribute" />
+              <comodi:wasTriggeredBy rdf:resource="#75" />
+            </comodi:Deletion>
+          </ore:aggregates>
+        </ore:Aggregation>
+      </prov:generated>
+      <prov:wasAssociatedWith>
+        <prov:SoftwareAgent rdf:about="#bives">
+          <pav:version>BiVeS compiled with: [BiVeS Core v1.9.2] [BiVeS SBML v1.9.1]</pav:version>
+          <rdfs:label>BiVeS</rdfs:label>
+        </prov:SoftwareAgent>
+      </prov:wasAssociatedWith>
+    </prov:Activity>
+  </rdf:RDF>
+</bives>
