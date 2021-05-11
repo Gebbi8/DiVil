@@ -322,6 +322,7 @@
 		//				["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations"]);};
 		//document.getElementById("compareModels").onclick = function() {obj = getBivesData("http://localhost/SBI-Rep/masterthesis_tom/implementation/testModels/BioModel7/Novak1997_CellCycle-R3", "http://localhost/SBI-Rep/masterthesis_tom/implementation/testModels/BioModel7/Novak1997_CellCycle-R37", "reactionsSbgnJson");};
 
+
 		// getBivesData(
 		// 	"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "GlyphsAndArcs_noTypo1" + ".xml",
 		// 	"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + "GlyphsAndArcs_noTypo1" + ".xml",
@@ -333,7 +334,7 @@
 		$.get(testJson, function(data){
 			showSbgn(data);
 		}, 'text');
-	
+		
 		//assign examples from local files
 			document.getElementById("e1Kummer").onclick = function() {assignExamples("Kummer2000/2012-12-12/BIOMD0000000329", "Kummer2000/2015-04-16/BIOMD0000000329")};
 			document.getElementById("e2Liebal").onclick = function() {assignExamples("Liebal1-BIOMD0000000461", "Liebal3-BIOMD0000000461")};

@@ -15,8 +15,10 @@ function showSbgn(data, xmlDiff, comodiAnnotation) {
 	});
 
 	nodes = obj.nodes;
+	nodesFilterComp = nodes.filter(function (d) {return sboSwitch(d.sboTerm) != "compartment"});
 	links = obj.links;
 	console.log(obj);
+	console.log(nodesFilterComp);
 	//////same source/link combination/////
 
 	var sameIndex = 0;
@@ -61,8 +63,8 @@ function showSbgn(data, xmlDiff, comodiAnnotation) {
 		if (sameCount > 0) sameIndex++;
 	});
 
-	console.log(links);
-	console.log(sameLinks);
+	//console.log(links);
+	//console.log(sameLinks);
 	///////////////////////////////////////
 	//delete current graph and show graph tab and download button
 	d3.selectAll("#bivesGraph").selectAll("svg").remove();
@@ -127,7 +129,7 @@ var forceSimulation = d3.forceSimulation();
 
 // set up the forceSimulation and event to update locations after each tick
 function initializeSimulation() {
-	forceSimulation.nodes(nodes);
+	forceSimulation.nodes(nodesFilterComp);
 	initializeForces();
 	forceSimulation.on("tick", ticked);
 }
@@ -219,6 +221,8 @@ function updateForces() {
 
 
 function createGraph() {
+
+	///////// Links ////////
 	link = svg.append("g")
 		//.attr("stroke", "black")
 		.attr("stroke-opacity", 1)
@@ -230,21 +234,23 @@ function createGraph() {
 			return "link" + i;
 		})
 		.attr("stroke", function (d) {
-			return strokeColor(d.bivesClass);
+			return strokeColor(d.bivesChange);
 		})
 		.attr("stroke-width", 2)
 		.attr("fill", "none")
 		.style("marker-end", function (d) {
-			return "url(#" + sboSwitchArc(d.class) + "" + d.bivesClass + ")"
+			//console.log(d.sboTerm, sboSwitchArc(d.sboTerm));
+			//if(d.sboTerm == "") console.log(d.source, d.target);
+			if(sboSwitchArc(d.sboTerm) == "consumption") return "none";
+			return "url(#" + sboSwitchArc(d.sboTerm) + "" + d.bivesChange + ")"
 		});
-
 
 	////////// nodes ////////
 
 	node = svg.selectAll("g.nodes")
 		.data(nodesFilterComp);
 
-		//console.log(node);
+		console.log(node);
 
 
 	enterNode = node.enter()
@@ -260,14 +266,14 @@ function createGraph() {
 
 	nodeShape = enterNode.append("path")
 		.attr("d", function (d) {
-			var nodeType = sboSwitch(d.class);
+			var nodeType = sboSwitch(d.sboTerm);
 			return customSymbol(nodeType, nodeSize);
 		})
 		.attr("id", function (d) {
 			return d.id
 		})
 		.attr("stroke", function (d) {
-			return strokeColor(d.bivesClass);
+			return strokeColor(d.bivesChange);
 		})
 		.attr("stroke-width", 2)
 		.attr("fill", "white")
@@ -295,10 +301,10 @@ function createCompartments() {
 
 	nodesByCompartment = d3.nest()
 		.key(function (d) {
-			console.log(d.compartment)
+		//	console.log(d.compartment)
 			return d.compartment;
 		})
-		.entries(nodes);
+		.entries(nodesFilterComp);
 
 		console.log(nodesByCompartment); 
 
@@ -322,7 +328,9 @@ function createCompartments() {
 
 	compartments.append("path")
 		.attr("stroke-width", 3)
-		.attr("stroke", "black")
+		.attr("stroke", function(d){
+			return strokeColor(getCompAttr(d.key, "bivesChange"));
+		})
 		.attr("fill", "none")
 		.attr("id", function (d) {
 			return d.key + "-path";
@@ -444,6 +452,7 @@ function compartmentFlex(c) {
 		yMax = -Infinity;
 
 	xMin = d3.min(c.values, function (d) {
+
 		halfElementWidth = d3.select("#" + d.id).node().getBBox().width / 2;
 		return d.x - halfElementWidth;
 	});
@@ -493,6 +502,15 @@ function changeProcessNode(size) {
 		d3.selectAll(".node.process").selectAll("path")
 			.attr("d", "m -" + size * 0.5 + " -" + size * 0.5 + " h " + size + " v " + size + " h -" + size + " z " + " m 0 " + size / 2 + " h -" + size / 2 + " m " + size * 2 + " 0" + " h -" + size / 2);
 	}
+}
+
+function getCompAttr(id, attr){
+	for(let i = 0; i < obj.nodes.length; i++){
+		if(obj.nodes[i].id == id){
+			if(attr == "bivesChange") return obj.nodes[i].bivesChange;
+		}
+	}
+	return "getAttr Failed";
 }
 
 function strokeColor(bives) {

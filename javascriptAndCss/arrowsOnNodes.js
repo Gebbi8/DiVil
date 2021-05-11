@@ -12,7 +12,7 @@ function tickArrows(d) {
 	var halfElementHeight = boundingBox.height / 2; ///currentZoom;
 
 
-	elementClass = sboSwitchArc(d.class);
+	elementClass = sboSwitchArc(d.sboTerm);
 
 	//for process nodes: connect arcs to reactant and product ports if ports are activated
 	//if (document.getElementById("portToggle").checked) {
@@ -29,7 +29,8 @@ function tickArrows(d) {
 
 
 
-	var targetClass = sboSwitch(d.target.class);
+	var targetClass = sboSwitch(d.target.sboTerm);
+	//console.log(elementClass);
 
 	//for strechted simpleChem -> targetClass == "simple chemical" && halfElementWidth * 2 <= 35.1)
 	if (targetClass == "simple chemical" || targetClass == "source and sink" || ((targetClass == "dissociation" || targetClass == "association") && elementClass != "consumption")) {
@@ -227,7 +228,6 @@ function tickArrows(d) {
 			x2 = (y2 - n) / m;
 
 		} else {
-
 			if (d.target.x > d.source.x) {
 				x2 = d.target.x - halfElementWidth;
 			} else {
@@ -302,7 +302,7 @@ function tickArrows(d) {
 	//return "M" + x1 + "," + y1 + "A" + dr + "," + dr + " 0 0,1 " + x2 + "," + y2;
 
 
-	//    link.filter(function(d){return sboSwitch(d.class) != 'consumption'})
+	//    link.filter(function(d){return sboSwitch(d.sboTerm) != 'consumption'})
 	//     .attr("stroke-dasharray", function(d) {
 	//            return this.getTotalLength() - 5;
 	//          })
