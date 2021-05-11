@@ -30,9 +30,9 @@
     filter: invert(.5) sepia(1) saturate(5) hue-rotate(175deg);
 }
 
-.menuBtn {
+/* .menuBtn {
     max-width: 66%;
-}
+} */
 
 #compareModels {
     flex: unset;
