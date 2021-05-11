@@ -1,6 +1,6 @@
 //Info-Content
 function getBivesData(v1, v2, callback){
-	var command = ["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations"];
+	var command = ["reportHtml", "reactionsSbgnJson", "xmlDiff", "inclAnnotations"];
 	console.log(v1, v2);
 
 	var bivesJob = {
@@ -28,7 +28,7 @@ function getBivesData(v1, v2, callback){
 			var xmlDiff = $.parseJSON (data).xmlDiff;
 			console.log(xmlDiff);
 			//console.log(xmlDocDiff, xmlDocSbml);
-			showSbgn(sbgnJson, xmlDiff, comodiAnnotation);
+			showSbgn(sbgnJson, comodiAnnotation);
 			//console.log(sbgnJson);
 		}
 	);

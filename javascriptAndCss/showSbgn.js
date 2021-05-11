@@ -4,7 +4,7 @@ var nodeSize = 50;
 var dimmOpacity = 0.25;
 
 
-function showSbgn(data, xmlDiff, comodiAnnotation) {
+function showSbgn(data, annotations) {
 
 	//parse the data
 	obj = JSON.parse(data);
@@ -108,12 +108,10 @@ function showSbgn(data, xmlDiff, comodiAnnotation) {
 
 	createGraph();
 	initializeSimulation();
-
-	var structeredComodi = getComodiObj(xmlDiff, comodiAnnotation);
 	
 	//assign dowload function with data to button
 	document.getElementById("downloadBtn").classList.remove("disabled");
-	document.getElementById("sbgnMlDownload").onclick = function() {downloadSBGNML(obj, structeredComodi)};
+	document.getElementById("sbgnMlDownload").onclick = function() {downloadSBGNML(obj)};
 	document.getElementById("pngDownload").onclick = function(){ downloadPNGfromSVG("bivesGraphSvg")};
 	document.getElementById("svgDownload").onclick = function() {downloadSvg("bivesGraphSvg")};
 
