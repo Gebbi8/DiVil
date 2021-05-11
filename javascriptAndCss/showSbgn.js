@@ -17,8 +17,8 @@ function showSbgn(data, xmlDiff, comodiAnnotation) {
 	nodes = obj.nodes;
 	nodesFilterComp = nodes.filter(function (d) {return sboSwitch(d.sboTerm) != "compartment"});
 	links = obj.links;
-	console.log(obj);
-	console.log(nodesFilterComp);
+	//console.log(obj);
+	//console.log(nodesFilterComp);
 	//////same source/link combination/////
 
 	var sameIndex = 0;

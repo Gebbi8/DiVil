@@ -1,5 +1,7 @@
 function comodiAdder(data, changeType, path){
-    //console.log(data, changeType, path);
+    
+    if(changeType == "delete") path = 'oldPath="' + path + '"';
+    else path = 'newPath="' + path + '"';
     return data[changeType][path];
 }
 
