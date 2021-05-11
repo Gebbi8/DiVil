@@ -26,7 +26,7 @@ function downloadSBGNML(data, structeredComodi) {
 	
 	function fillIdList(arr){
 		arr.forEach(e => {
-			switch (e.bivesClass) { //adapt after backend update
+			switch (e.bivesChange) { //adapt after backend update
 				case 'nothing':
 					idListNothing += e.id + ' ';
 					break;
@@ -47,9 +47,6 @@ function downloadSBGNML(data, structeredComodi) {
 			}
 		});
 	}
-
-
-	console.log(idListNothing);
 
 	xml = xml + '\t\t\t\t<style id="noChange" idList="' + idListNothing + '">\n';
 	xml = xml + '\t\t\t\t\t<g stroke="nothing"/>\n';
@@ -79,6 +76,8 @@ function downloadSBGNML(data, structeredComodi) {
 
 	for(i = 0; i<data.nodes.length; i++){
 		var svgNode = d3.select("#" + data.nodes[i].id);
+		console.log( data.nodes[i], svgNode);
+		if(svgNode._groups[0][0] == null) continue; //deleted departement that has no species assigned is not visualised. all species it contained are no associated with another compartment
 		var bBox = svgNode._groups[0][0].getBBox();
 		var svgData = svgNode.data()[0];
 		//console.log(svgData, bBox);
@@ -89,8 +88,8 @@ function downloadSBGNML(data, structeredComodi) {
 		if(compartment != "null")	xml = xml + ' compartmentRef="' + data.nodes[i].compartment + '" ';
 
 		//class optional, id mandatory
-		if(data.nodes[i].class != null){
-			xml = xml + 'class="' + sboSwitch(data.nodes[i].class) + '" ';
+		if(data.nodes[i].sboTerm != null){
+			xml = xml + 'class="' + sboSwitch(data.nodes[i].sboTerm) + '" ';
 			xml = xml + 'id="' + data.nodes[i].id + '"';
 		}
 		xml = xml + '>\n';
@@ -110,15 +109,15 @@ function downloadSBGNML(data, structeredComodi) {
 
 		//clonmarker optional
 
-		//bounding box mandatory
+		//bounding box mandatory for glyphs (not compartments)
 		//if(d3.select("#"+data.nodes[i].id)._groups[0][i] != undefined){
-			xml = xml + '\t\t\t<bbox x="' + (svgData.x - bBox.width/2) + '" y="' + (svgData.y - bBox.height/2) + '" w="' + bBox.width + '" h="' + bBox.height + '"' + '/>\n';
+			if( sboSwitch(data.nodes[i].sboTerm) != "compartment") xml = xml + '\t\t\t<bbox x="' + (svgData.x - bBox.width/2) + '" y="' + (svgData.y - bBox.height/2) + '" w="' + bBox.width + '" h="' + bBox.height + '"' + '/>\n';
 		//}
 
 		//add annotaion for comodi
 		xml += '\t\t\t<extension>\n';
 		// comodiAdder(data, changeType, path)
-		xml += comodiAdder(structeredComodi, data.nodes[i].bivesChange, data.nodes[i].path);
+		xml += '\t\t\t' + comodiAdder(structeredComodi, data.nodes[i].bivesChange, data.nodes[i].path) + '\n';
 		xml += '\t\t\t</extension>\n';
 		
 		
@@ -131,7 +130,7 @@ function downloadSBGNML(data, structeredComodi) {
 	for(i = 0; i<data.links.length; i++){
 		var node = d3.select("#" + data.links[i].id);
 		var path = node.attr("d");
-		var cl = sboSwitch(data.links[i].class);
+		var cl = sboSwitch(data.links[i].sboTerm);
 		if(cl == "necessarystimulation") cl = "necessary stimulation";
 
 		xml = xml + '\t\t<arc id="' + data.links[i].id + '" class="' + cl + '" ';
@@ -149,7 +148,7 @@ function downloadSBGNML(data, structeredComodi) {
 		//add annotaion for comodi
 		xml += '\t\t\t<extension>\n';
 		// comodiAdder(data, changeType, path)
-		xml += comodiAdder(structeredComodi, data.nodes[i].bivesChange, data.nodes[i].path);
+		xml += '\t\t\t' + comodiAdder(structeredComodi, data.nodes[i].bivesChange, data.nodes[i].path) + '\n';
 		xml += '\t\t\t</extension>\n';
 
 		xml = xml + '\t\t</arc>\n';
