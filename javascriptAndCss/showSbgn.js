@@ -109,6 +109,8 @@ function showSbgn(data, xmlDiff, comodiAnnotation) {
 		}); */
 
 	createGraph();
+	//add legend
+	addLegend();
 	initializeSimulation();
 
 	var structeredComodi = getComodiObj(xmlDiff, comodiAnnotation);
@@ -511,6 +513,37 @@ function getCompAttr(id, attr){
 		}
 	}
 	return "getAttr Failed";
+}
+
+function addLegend(){
+	var legendSize = 10, legendSpacing = 10;
+
+	var color = d3.scaleOrdinal()
+		.domain(["no change", "exclusivly in first verions", "exclusivly in second version", "changed position in document", "changed attribute"])
+		.range(["black", "#D66A56", "#76D6AF", "#8E67D6", "#D6D287"]);
+
+	var legend = svg.append('g')
+		.selectAll("g")
+		.data(color.domain())
+		.enter()
+		.append('g')
+		  .attr('class', 'legend')
+		  .attr('transform', function(d, i) {
+			var x = 0;
+			var y = i * legendSize + 20 + i * 5;
+			return 'translate(' + x + ',' + y + ')';
+		});
+	
+	legend.append('rect')
+		.attr('width', legendSize)
+		.attr('height', legendSize)
+		.style('fill', color)
+		.style('stroke', color);
+	
+	legend.append('text')
+		.attr('x', legendSize + legendSpacing)
+		.attr('y', legendSize - legendSize/5)
+		.text(function(d) { return d; });
 }
 
 function strokeColor(bives) {
