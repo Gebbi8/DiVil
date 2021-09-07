@@ -6,6 +6,10 @@ var dimmOpacity = 0.25;
 
 function showSbgn(data, xmlDiff, comodiAnnotation) {
 
+	//split diff into lines
+	const splitLines = str => xmlDiff.split(/\r?\n/);
+	var xmlLines = splitLines(xmlDiff);
+	
 	//parse the data
 	obj = JSON.parse(data);
 
@@ -113,7 +117,8 @@ function showSbgn(data, xmlDiff, comodiAnnotation) {
 	addLegend();
 	initializeSimulation();
 
-	var structeredComodi = getComodiObj(xmlDiff, comodiAnnotation);
+	var structeredComodi = getComodiObj(xmlLines, comodiAnnotation);
+	var htmlChanges = getHtmlChanges(xmlLines);
 	
 	//assign dowload function with data to button
 	document.getElementById("downloadBtn").classList.remove("disabled");

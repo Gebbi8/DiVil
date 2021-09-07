@@ -5,16 +5,15 @@ function comodiAdder(data, changeType, path){
     return data[changeType][path];
 }
 
-function getComodiObj(xmlDiff, comodi){
 
-    const splitLines = str => xmlDiff.split(/\r?\n/);
+function getComodiObj(xmlLines, comodi){
 
-    var strLines = splitLines(xmlDiff);
+
     var dataByKeys = {delete:{}, insert:{}, update:{}, move:{}};
     // produce double key array based on change + path. vlaue comodi term
     var key1 = null;
 
-    strLines.forEach(line => {
+    xmlLines.forEach(line => {
         if(line.includes("triggeredBy=")) return;
         if(line.includes("insert>")){
             key1 = "insert";
@@ -64,7 +63,24 @@ function getComodiObj(xmlDiff, comodi){
     console.log(dataByKeys);
     return dataByKeys;
 }
-//irgendwie noch regex nur abhängig von id
+
+function getHtmlChanges(xmlLines){
+    //return id map with html coded changes for pop up overlay
+    // structure: element id, list of changes: changid, change
+
+
+
+    xmlLines.forEach(line => {
+
+        //filter triggeredby
+        if(line.includes("triggeredBy=")) return;
+
+        
+    });
+
+}
+
+
 function grep(comodi, id){
 
     id = id.slice(4,-1);

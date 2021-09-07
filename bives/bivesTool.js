@@ -21,12 +21,14 @@ function getBivesData(v1, v2, callback){
 		function (data)
 		{
 			//console.log(data);
-			//$("#bivesReport").html ($.parseJSON (data).reportHtml);
+			//var report = $.parseJSON (data).reportHtml;
 			var sbgnJson = $.parseJSON (data).reactionsSbgnJson;
 			var comodiAnnotation = $.parseJSON(data).separateAnnotations;
 			//$("#sbgnJson").text(sbgnJson);
 			var xmlDiff = $.parseJSON (data).xmlDiff;
 			console.log(xmlDiff);
+			//console.log(comodiAnnotation);
+			//console.log(report);
 			//console.log(xmlDocDiff, xmlDocSbml);
 			showSbgn(sbgnJson, xmlDiff, comodiAnnotation);
 			//console.log(sbgnJson);
