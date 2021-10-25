@@ -1,18 +1,33 @@
-var currentZoom, width, height, size, marker, svg, obj, nodes, links, node, link, nodeShape, nodeLabel, compartments, nodesByCompartment, enterNode;
+var currentZoom, width, height, size, marker, svg, obj, nodes, links, node, link, nodeShape, nodeLabel, compartments, nodesByCompartment, enterNode, structeredData;
 var sameLinks;
+var docDeb; //for debugging
 var nodeSize = 50;
 var dimmOpacity = 0.25;
 
 
-function showSbgn(data, xmlDiff, comodiAnnotation) {
+function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
 
 	//split diff into lines
 	const splitLines = str => xmlDiff.split(/\r?\n/);
-	var xmlLines = splitLines(xmlDiff);
+	var xmlLines = splitLines(xmlDiff);	
 	
 	//parse the data
 	obj = JSON.parse(data);
+	// var idMap = {delete:{}, insert:{}, update:{}, move:{}};
 
+	// obj.nodes.forEach(node => {
+	// 	var path;
+	// 	if(node.bivesChange == "delete") path = 'oldPath="';
+	// 	else path = 'newPath="';
+	// 	path = path + node.path + '"';
+
+	// 	idMap[node.bivesChange][path] = node.id;
+	// });
+
+	// console.log(idMap);
+
+	// path + change to id map
+	console.log(obj);
 
 	obj.links.forEach(function (l, i){
 		l.id = "link" + i;
@@ -76,8 +91,10 @@ function showSbgn(data, xmlDiff, comodiAnnotation) {
 	//check if graph data is available
 	if (data == "" || data == undefined) {
 		$('#graphTab').hide();
+		alert("No data for graph available.")
 		return;
 	}
+
 
 
 	//set size and zoom variables
@@ -115,14 +132,21 @@ function showSbgn(data, xmlDiff, comodiAnnotation) {
 	createGraph();
 	//add legend
 	addLegend();
+
+	//add tooltip
+	d3.select("body").append("div")	
+    .attr("class", "tooltip")
+	.attr("id", "popup")				
+    .style("opacity", 0);
+
 	initializeSimulation();
 
-	var structeredComodi = getComodiObj(xmlLines, comodiAnnotation);
-	var htmlChanges = getHtmlChanges(xmlLines);
-	
+	structeredData = getStructeredData(xmlLines, comodiAnnotation, v1, v2);
+
+	console.log(structeredData);
 	//assign dowload function with data to button
 	document.getElementById("downloadBtn").classList.remove("disabled");
-	document.getElementById("sbgnMlDownload").onclick = function() {downloadSBGNML(obj, structeredComodi)};
+	document.getElementById("sbgnMlDownload").onclick = function() {downloadSBGNML(obj, structeredData)};
 	document.getElementById("pngDownload").onclick = function(){ downloadPNGfromSVG("bivesGraphSvg")};
 	document.getElementById("svgDownload").onclick = function() {downloadSvg("bivesGraphSvg")};
 
@@ -257,9 +281,6 @@ function createGraph() {
 	node = svg.selectAll("g.nodes")
 		.data(nodesFilterComp);
 
-		console.log(node);
-
-
 	enterNode = node.enter()
 		.append("g")
 		.attr("id", function (d) {
@@ -269,7 +290,34 @@ function createGraph() {
 		.on('mouseover', highlight)
 		.on('mouseout', resetOpacity)
 		.on("dblclick", dblclicked)
-		.on("click", highlight);
+		.on("click", function(d) {	
+
+			// console.log(d.bivesChange, d.path);
+			// console.log(structeredData[d.path]);
+
+			path = d.path;
+
+			console.log(structeredData[path]);
+
+            d3.select("#popup").transition()		
+                .duration(200)		
+                .style("opacity", .9);
+			d3.select("#popup").html("<ul>" + structeredData[path].popup + "</ul>") //getHtmlChanges from node id	
+                .style("left", (d3.event.pageX) + "px")		
+                .style("top", (d3.event.pageY - 28) + "px");	
+				//MathJax.Hub.Rerender(); //recall mathjax
+				ctop();
+				MathJax.typeset();//MathJax.Hub.Queue(["Typeset", MathJax.Hub]); 
+            })
+			//update tooltip with mathjax:
+			//updateMathContent();
+
+        // .on("mouseout", function(d) {		
+        //     div.transition()		
+        //         .duration(500)		
+        //         .style("opacity", 0);	
+        // })
+		;
 
 	nodeShape = enterNode.append("path")
 		.attr("d", function (d) {
@@ -358,6 +406,11 @@ function createCompartments() {
 		});
 }
 
+function updateMathContent(s) {
+	var math = MathJax.Hub.getAllJax("popup")[0];
+	MathJax.Hub.Queue(["Text", math, s]);
+}	
+
 function ticked() {
 	node.attr("cx", function (d) {
 			return d.x;
@@ -416,6 +469,10 @@ function resetOpacity(){
 	enterNode.style('stroke-opacity', 1);
 	enterNode.select("text").style('opacity', 1);
 	link.style('opacity', 1);
+}
+
+function changePopup(){
+
 }
 
 function isConnected(main, other){

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DiVil</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script type="text/javascript" src="thirdParty/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="javascriptAndCss/sboTermMapping.js"></script>
+    <script type="text/javascript" src="javascriptAndCss/showSbgn.js"></script>
+    <script type="text/javascript" src="javascriptAndCss/customSymbol.js"></script>
+    <script type="text/javascript" src="bives/bivesTool.js"></script>
+    <script type="text/javascript" src="javascriptAndCss/localFiles.js"></script>
+    <script type="text/javascript" src="javascriptAndCss/downloadSBGNML.js"></script>
+    <script type="text/javascript" src="javascriptAndCss/downloadSVG.js"></script>
+    <script type="text/javascript" src="javascriptAndCss/downloadPNG.js"></script>
+    <script type="text/javascript" src="thirdParty/FileSaver.js"></script>
+    <script type="text/javascript" src="javascriptAndCss/appendDefs.js"></script>
+    <script type="text/javascript" src="javascriptAndCss/sbmlParser.js"></script>
+    <script type="text/javascript" src="javascriptAndCss/xmlDiffParser.js"></script>
+    <script type="text/javascript" src="javascriptAndCss/arrowsOnNodes.js"></script>
+    <script type="text/javascript" src="javascriptAndCss/xmlParser.js"></script>
+
+    <script type="text/javascript" src="thirdParty/ctop.js">
+        ctop()
+    </script>
+
+    <!-- Mathjax-->
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>>
+</head>
+
+<body>
+    When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+    $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
+
+    Both \(1+x\) and
+    <math>
+        <mi>x</mi>
+        <mo>+</mo>
+        <mn>1</mn>
+    </math> are the same.
+
+    <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <declare>
+            <ci> A </ci>
+            <vector>
+                <ci> a </ci>
+                <ci> b </ci>
+                <ci> c </ci>
+            </vector>
+        </declare>
+    </math>
+</body>
+<script>
+    MathJax.typeset();
+</script>
+
+</html>
