@@ -30,6 +30,7 @@ function getStructeredData(xmlLines, comodi, v1, v2){
     //     alert();
     // };
     // request.send(null);
+    moveMap = {};
 
     var dataByNetwork = {}; //element id, changetype, changeinfo/changehtml
     var dataByKeys = {};
@@ -39,7 +40,24 @@ function getStructeredData(xmlLines, comodi, v1, v2){
 
     //debugging
     var i = 0;
-    // --
+    // -- create move map
+    let moveFlag = 0;
+    xmlLines.forEach(line => {
+        if(line.includes("<move>")){
+            moveFlag = 1;
+            return;
+        } 
+        if(line.includes("</move>")){
+            moveFlag = 0;
+            return;
+        } 
+        if(moveFlag){
+           // console.log(line)
+            let oldPath = regEx(line, "oldPath");
+            let newPath = regEx(line, "newPath");
+            moveMap[oldPath] = newPath;
+        }
+    })
 
     xmlLines.forEach(line => {
         //skip all changes that are irrelevant for the graph and child nodes of kinetic law
@@ -68,28 +86,40 @@ function getStructeredData(xmlLines, comodi, v1, v2){
 
         if(changeType != null){ //second key old bzw newPath belegen
 
+
             var id = line.match(/id=\".*?\"/g)[0];  //for comodi grep           
             
             elementType = line.match(/<.*? /g)[0].slice(1,-1);
 
+            // if(changeType == "move" && line.includes("oldPath")){   
+            //     console.log(line);
+            //     let oldPath = regEx(line, "oldPath");
+            //     let newPath = regEx(line, "newPath");
+            //     if(oldPath == newPath) return; //same path means there is no move (?), other elements might be inserted before thats it
+            //     moveMap[oldPath] = newPath;
+            //     //console.log(moveMap);
+            // }
 
-            var regex;
+            let path;
 
             if(line.includes("/annotation[")){           
 
                 if(changeType == "delete"){
-                    regex = new RegExp('oldPath="(.*?)\"', 'g');
+                     //= new RegExp('oldPath="(.*?)\"', 'g');
+                     path = regEx(line, "oldPath");
                    // path = line.match(/oldPath=\".*?\"/g)[0];
                 } else {
-                    regex = new RegExp('newPath="(.*?)\"', 'g');
+                   // regex = new RegExp('newPath="(.*?)\"', 'g');
+                    path = regEx(line, "newPath")
                     //path = line.match(/newPath=\".*?\"/g)[0];
                 }
     
-                var path = regex.exec(line)[1];
+                //var path = regex.exec(line)[1];
             
                 //alert(path);
                 //shorten path
                 path = path.substr(0, path.indexOf("/annotation"));
+                if(changeType == "delete" && moveMap[path]) path = moveMap[path]; //parent of deleted annotation was moved
 
                 if(dataByKeys[path] == null) changes = "";
                 else changes = dataByKeys[path].popup;
@@ -102,14 +132,14 @@ function getStructeredData(xmlLines, comodi, v1, v2){
             
 
             if(changeType == "delete"){
-                regex = new RegExp('oldPath="(.*?)\"', 'g');
+                path = regEx(line, "oldPath")
                // path = line.match(/oldPath=\".*?\"/g)[0];
             } else {
-                regex = new RegExp('newPath="(.*?)\"', 'g');
+                path = regEx(line, "newPath")
                 //path = line.match(/newPath=\".*?\"/g)[0];
             }
 
-            var path = regex.exec(line)[1];
+            //var path = regex.exec(line)[1];
            
            
             // if(path == "/sbml[1]/model[1]/listOfSpecies[1]/species[1]" && i > 0) {    
@@ -118,14 +148,17 @@ function getStructeredData(xmlLines, comodi, v1, v2){
             // }
 
             if(line.includes("/kineticLaw[1]")){
-                console.log(path);
+                //console.log(path);
                // alert(path);
                 path = path.substr(0, path.indexOf("/kineticLaw[1]"));
-                console.log("path shortend to be added correctly: ", path);
+                //console.log("path shortend to be added correctly: ", path);
             } 
             else if(line.includes("/listOfModifiers[1]")) path = path.substr(0, path.indexOf("/listOfModifiers[1]"));
             else if(line.includes("/listOfReactants[1]")) path = path.substr(0, path.indexOf("/listOfReactants[1]"));
             else if(line.includes("/listOfProducts[1]")) path = path.substr(0, path.indexOf("/listOfProducts[1]"));
+
+            //console.log("org: ", path);
+            if(changeType == "delete" && moveMap[path]) {path = moveMap[path];} //check weather the path was changed due to a move
 
             if(dataByKeys[path] == null) changes = "";
             else {
@@ -138,8 +171,8 @@ function getStructeredData(xmlLines, comodi, v1, v2){
                     //else alert(path);
                 }   
             }
-
-
+            //console.log("add: ", path);
+            //console.log(line);
 
             changes = changes + addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, path);
             //if(changes.includes("undefined")) alert(line);
@@ -268,9 +301,32 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
     // } 
 
     if(changeType == "move"){
-        if(regEx(line, "newPath") == regEx(line, "oldPath")) return ""; //only the order of elements changed -> irrelevant for graph
-        console.log("move", line);
-        alert("move");
+        let oldParent = regEx(line, "oldParent");
+        let newParent = regEx(line, "newParent");
+        if(newParent == oldParent || moveMap[oldParent] == newParent){
+            let oldPath = regEx(line, "oldPath"); 
+            let newPath = regEx(line, "newPath");
+            moveMap[oldPath] = newPath;
+            return ""; //only the order of elements changed -> irrelevant for graph
+        } 
+
+        while(oldParent.lastIndexOf("/") != -1){
+            oldParent = oldParent.substr(0, oldParent.lastIndexOf("/"));
+            newParent = newParent.substr(0, newParent.lastIndexOf("/"));
+            if(moveMap[oldParent] == newParent) return ""; //an ancestor was moved, most likely this move is triggered (but how to make sure?)
+        }
+        
+       // if(moveMap[oldParent] == newParent) return ""; //the parent move for some reason triggered a move of this node
+
+        if(newParent.includes("/math[")){ //display move 
+            alert("math move");
+            return "oldMath" +  "<<rarr" + "newMath";
+           
+        } 
+        //console.log("move", oldParent);
+        //console.log(moveMap);
+        alert("! unhandled move");
+        return "UNHANDLED MOVE: " + line;
     }
 
     let changeClass = "bives-default";
@@ -319,7 +375,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
             if(line.includes("listOfReactants[1]")) participantRole = "Reactant";
             else if(line.includes("listOfProducts[1]")) participantRole = "Product";
             else participantRole = "Modifier";
-            return  "<li> --->" + elementType + " <span class='" + changeClass + "><em><b>" + elementName + "</b></em></span> of Reactant <em><b>" + reactantName + "</b></em> was " + changeFill + ": <span class='" + changeClass + "'>" + oldValue + "</span></li>";
+            return  "<li>" + elementType + "<span class='" + changeClass + "'><em><b>" + elementName + "</b></em></span> of Reactant <em><b>" + reactantName + "</b></em> was " + changeFill + ": <span class='" + changeClass + "'>" + oldValue + "</span></li>";
         }
 
         //normal change
@@ -347,7 +403,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
                     htmlChange += "<li><em><b><span class='insert-color'>Reaction</span></b></em> was added</li>";
                     let newPath = regEx(line, "newPath");
                     //htmlChange += "<li><em><b>Kinetic law</em></b>:</li>";
-                    console.log(newPath, line);
+                    //console.log(newPath, line);
 
                     htmlChange += "<ul>" + getAllParticipant(newPath, newDoc, changeClass);
                     // console.log(htmlChange);
@@ -359,8 +415,9 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
                 }
             }
         }
-        console.log(regEx(line, docPath));
-        console.log(addPath, dataByKeys[addPath]);
+        // console.log(line, changeType, docPath);
+        // console.log(regEx(line, docPath));
+        // console.log(addPath, dataByKeys[addPath]);
         let nodeTag = regEx(line, tag);
         if(val == "listOfReactants" && dataByKeys[addPath].popup.includes("Reactants</span></b>:")) return "";
         if(val == "listOfProducts" && dataByKeys[addPath].popup.includes("Products</span></b>:")) return "";
@@ -368,8 +425,16 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
 
 
         if(line.includes("/math[")){
-            if(dataByKeys[addPath].popup.includes("Math</span></b>:")) return "";
-            else return htmlChange += "<li>Math added.</li> " + getMath(newPath, newDoc);
+            if(dataByKeys[addPath].popup.includes("<math xmlns=")) return ""; //math already added, e.g. modifier added
+            else{
+                console.log(dataByKeys[addPath].popup);
+                console.log(changeType, docPath)
+                console.log(line);
+               // alert("math stuff");
+                let path = regEx(line, docPath);
+                //console.log(path, docPath, line);
+                return htmlChange += "!!---><li><em><b><span class='" + changeClass + "'>Math</span></b></em> was " + changeFill + ":</li> " + getMath(path, doc);
+            } 
         }
 
 
@@ -385,17 +450,67 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
 
         if(val == "kineticLaw" && dataByKeys[addPath].popup.includes("Math</span></b>:")) return "";
         else {
-            console.log(val, dataByKeys[addPath]);
-            if(val == "kineticLaw") alert();
+            //console.log(val, dataByKeys[addPath]);
+            if(val == "kineticLaw") alert("kinetic law issue");
         }
-        return htmlChange += "<li><em><b><span class='" + changeClass + "'>" + oldValue[0].toUpperCase() + oldValue.substring(1) + "</span></b></em> was " + changeFill + "</li>";
+
+        if(line.includes("speciesReference") || line.includes("modifierSpeciesReference")){ //single Participant added/deleted u
+            
+            //console.log(line);
+            //elementName = regEx(line, "name");
+            //oldValue = regEx(line, value);
+            let path = getLocalXPath(regEx(line, docPath));
+            //console.log(path);
+            let reactant = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null);
+            let reactantName = reactant.iterateNext().attributes.species.value;
+            let participantRole;
+            if(line.includes("listOfReactants[1]")) participantRole = "Reactant";
+            else if(line.includes("listOfProducts[1]")) participantRole = "Product";
+            else participantRole = "Modifier";
+            return  "<li>" + participantRole + " <span class='" + changeClass + "'><em><b>" + reactantName + "</b></em></span> was " + changeFill + "</li>";
+        }
+
+        if(line.includes("listOfReactants") || line.includes("listOfProducts") || line.includes("listOfModifiers")){
+            let path = regEx(line, docPath);
+            //console.log(path);
+            //let reactant = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null);
+           //let reactantName = reactant.iterateNext().attributes.species.value;
+           if(line.includes("listOfModifiers")) path += "/modifierSpeciesReference";
+           else path += "/speciesReference";
+            let participantRole;
+            if(line.includes("listOfReactants[1]")) participantRole = "Reactant";
+            else if(line.includes("listOfProducts[1]")) participantRole = "Product";
+            else participantRole = "Modifier";
+            console.log(path);
+            alert();
+            let participantsList = getParticipants(path, doc);
+            return  "<li> List of  <span class='" + changeClass + "'><em><b>" + participantRole + "s</b></em></span> was " + changeFill + ":</li>" + participantsList;
+
+        }
+
+        //It seems that there is a bug in BiVeS: the dupreez example shows a move in the ATP to ADP reaction and also a deletion of the first reactant, as well as an insert of the first reactant. Both are ATP which seems buggy.
+        if(changeType == "delete" && oldValue == "speciesReference"){
+            return htmlChange += "<li>"+ line + "    HIER?<em><b><span class='" + changeClass + "'>" + oldValue[0].toUpperCase() + oldValue.substring(1) + "</span></b></em> was " + changeFill + "</li>";
+        }
+        if(changeType == "insert") {
+            
+            console.log(line);
+            alert("take care of insert");
+        }
+        return htmlChange += "<li>"+ line + "    HIER?<em><b><span class='" + changeClass + "'>" + oldValue[0].toUpperCase() + oldValue.substring(1) + "</span></b></em> was " + changeFill + "</li>";
 
     }
 
     if(line.includes("/math[")){
-        if(dataByKeys[addPath].popup.includes("Math</span></b>:")) return "";
-        else return htmlChange += "<li>Math added.</li> " + getMath(newPath, newDoc);
-    }
+        if(dataByKeys[addPath].popup.includes("<math xmlns=")) return "";
+        //else return htmlChange += "<li>Math added: " + getMath(newPath, newDoc) + "</li>";
+
+        console.log(changeType);
+        let path = regEx(line, docPath);
+        //console.log(path, docPath, line);
+        return htmlChange += "<li>hiiiieeer??????    Math " + changeFill + ":</li> " + getMath(path, doc);
+    } 
+    
 
     if(line.includes("/kineticLaw[")){
         //get path
@@ -415,7 +530,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
         //console.log(doc, path);
         var mathML = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null);
         var result = mathML.iterateNext().innerHTML;
-        console.log(result);
+        //console.log(result);
         
         return htmlChange += result + "<-----------------";
         // var updates = xmlDocDiff.evaluate(
@@ -436,9 +551,9 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
 }
 
 function getMath(path, doc){
-   // var path = regEx(line, "newPath");
-
-    // console.log(path, doc);
+    // var path = regEx(line, "newPath");
+    //console.log(path, path.indexOf("/kineticLaw[1]/math[1]/"));
+    if(path.indexOf("/kineticLaw[1]/math[1]/") != -1) path = path.substr(0, path.indexOf("/kineticLaw[1]/math[1]/"));
     path += "/kineticLaw[1]/math[1]";
     path = getLocalXPath(path);
     //var mathIndex = path.indexOf("/*[local-name()='math']");
@@ -448,8 +563,10 @@ function getMath(path, doc){
     //     path = path.substr(0, mathIndex + 23) + helpString.substr(0, helpString.indexOf("/"));
     // }
 
+    //console.log(path);
+
     var mathML = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null).iterateNext();
-    console.log(mathML);
+    //console.log(mathML);
 
     return mathML.outerHTML;//.iterateNext().innerHTML;
 }
@@ -466,7 +583,7 @@ function getParameters(path, doc, line){
     }
     if(parameterlist != "") parameterlist = "<ul>" + parameterlist + "</ul>";
     else parameterlist += "No parameters listed in the document";
-    console.log(parameters);
+    //console.log(parameters);
     //alert(parameters);
     return parameterlist;
 }
@@ -537,7 +654,7 @@ function getModifiers(path, doc, changeClass, changeFill){
         modifiersList += "<li><em><b>" + node.attributes.species.value + "</em></b></li>";
     }
     modifiersList += "</ul>";
-    console.log(modifiers);
+    //console.log(modifiers);
     return modifiersList;
 }
 
@@ -545,9 +662,9 @@ function getSingleModifier(path, doc, changeClass, changeFill){
     path = getLocalXPath(path);
     let modifier = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null);
     let mod = modifier.iterateNext();
-    console.log(mod);
+    //console.log(mod);
     let species =  mod.attributes.species.nodeValue;
-    console.log(species);
+    //console.log(species);
     return "<li>Modifier <span class='" + changeClass + "'><em><b>" + species + "</b></em></span> was " + changeFill + "</li>";
 }
 
