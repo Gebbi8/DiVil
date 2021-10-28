@@ -87,7 +87,6 @@ function getStructeredData(xmlLines, comodi, v1, v2){
 
         if(changeType != null){ //second key old bzw newPath belegen
 
-            console.log(line);
             var id = regEx(line, "id");  //for comodi grep           
             
             elementType = line.match(/<.*? /g)[0].slice(1,-1);
@@ -359,13 +358,13 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
             if(line.includes("/math[")){
                 alert(changeType + " on math attribute");
             } else if(line.includes("/parameter[") || line.includes("/localParameter[")){ // change on parameter attribute in kin. law //localParameter for SBML version 3
-                console.log(line);
+                //console.log(line);
                 //alert("To Handle: attribute change on local parameter");
                 let changeValue = regEx(line, value);
                 
                 //get node
                 let path = regEx(line, docPath);
-                console.log(path);
+                //console.log(path);
                 path = getLocalXPath(path);
                 let node = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null);
                 node =  node.iterateNext();
@@ -376,11 +375,11 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
                     parameterName = node.attributes.id.nodeValue;
                 } 
 
-                console.log(path, node, parameterName);
+                //console.log(path, node, parameterName);
                 //alert("jop");
                 return htmlChange += "<li>Attribute <span class='" + changeClass + "'><em><b>" + name + "</b></em></span> of local paramter <em><b>" + parameterName + "</b></em> was " + changeFill + ": <span class='" + changeClass + "'><em><b>" + changeValue + "</b></em></span></li>";
             } else {
-                console.log(line);
+                //console.log(line);
                 // alert("unidentified attribute change, delete");
                 return htmlChange += "<li>Attribute <em><b><span class='" + changeClass + "'>" + regEx(line, "name") + "</span></em></b> of kinetic law was " + changeFill + "</li>";
             }
@@ -391,10 +390,10 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
             elementName = regEx(line, "name");
             let val = regEx(line, value);
             let path = getLocalXPath(regEx(line, docPath));
-            console.log(path);
+            //console.log(path);
             let participant = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null);
             participant = participant.iterateNext();
-            console.log(participant);
+            //console.log(participant);
             let participantName = participant.attributes.species.value;
             let participantRole;
             if(line.includes("listOfReactants[1]")) participantRole = "Reactant";
@@ -474,6 +473,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
             return htmlChange += getModifiers(regEx(line, docPath), doc, changeClass, changeFill);
         }
         if(val == "modifierSpeciesReference"){          //single modifier changed
+            //console.log(line);
             return htmlChange += getSingleModifier(regEx(line, docPath), doc, changeClass, changeFill);
         }
         if(line.includes("oldValue=")) oldValue = regEx(line, value);
@@ -486,7 +486,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
         }
 
         if(line.includes("speciesReference") || line.includes("modifierSpeciesReference")){ //single Participant added/deleted u
-            
+            alert("okay :/");
             //console.log(line);
             //elementName = regEx(line, "name");
             //oldValue = regEx(line, value);
@@ -498,6 +498,11 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
             if(line.includes("listOfReactants[1]")) participantRole = "Reactant";
             else if(line.includes("listOfProducts[1]")) participantRole = "Product";
             else participantRole = "Modifier";
+
+                //grep name of species if available
+                let getName = doc.getElementById(participantName).attributes.name.value;
+                if (getName) participantName = getName;
+
             return  "<li>" + participantRole + " <span class='" + changeClass + "'><em><b>" + reactantName + "</b></em></span> was " + changeFill + "</li>";
         }
 
@@ -705,9 +710,12 @@ function getSingleModifier(path, doc, changeClass, changeFill){
     let modifier = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null);
     let mod = modifier.iterateNext();
     //console.log(mod);
-    let species =  mod.attributes.species.nodeValue;
+    let speciesName =  mod.attributes.species.nodeValue;
     //console.log(species);
-    return "<li>Modifier <span class='" + changeClass + "'><em><b>" + species + "</b></em></span> was " + changeFill + "</li>";
+    let getName = doc.getElementById(speciesName).attributes.name.value;
+    if (getName) speciesName = getName;
+
+    return "<li>Modifier <span class='" + changeClass + "'><em><b>" + speciesName + "</b></em></span> was " + changeFill + "</li>";
 }
 
 function getLocalXPath(path) {
@@ -731,7 +739,7 @@ function getLocalXPath(path) {
 }
 
 function regEx(line, attribute){
-    console.log(line, attribute);
+    //console.log(line, attribute);
     regex = new RegExp(attribute + '="(.*?)\"', 'g');
     return regex.exec(line)[1];
 }

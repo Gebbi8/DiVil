@@ -34,6 +34,7 @@ function getBivesData(v1, v2, callback){
 			var report = $.parseJSON (data).reportHtml;
 			console.log(report);
 			var sbgnJson = $.parseJSON (data).reactionsSbgnJson;
+			console.log(sbgnJson);
 			var comodiAnnotation = $.parseJSON(data).separateAnnotations;
 			//$("#sbgnJson").text(sbgnJson);
 			var xmlDiff = $.parseJSON (data).xmlDiff;
