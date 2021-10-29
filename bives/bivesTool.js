@@ -1,65 +1,6 @@
 //Info-Content
 function getBivesData(v1, v2, callback){
 
-	//callBives(v1, v2);
-
-		// 	check1 = checkFile(v1);
-		// 	check2 = checkFile(v2);
-
-		// 	console.log(check1, check2);
-		// 	if(check1 == "SBML" && check2 == "SBML") resolve("OK");
-		// 	else reject("ERROR");
-		// }
-	
-
-
-
-	var command = ["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations"];
-	//console.log(v1, v2);
-
-		// if(v1.includes("./testModels/")){
-		// 	v1 = loadTestFile(v1);
-		// 	//console.log(v1);
-		// }
-
-
-
-	// checkFile(v1);
-	// checkFile(v2);
-
-	// var bivesJob = {
-	// 	files:
-	// 	[
-	// 		v1,
-	// 		v2
-	// 	],
-	// 	commands:
-	// 		command
-	// };
-
-
-	// // call the bives wrapper script
-	// $.post (
-	// 	"bives/bives.php",
-	// 	"bivesJob=" + JSON.stringify (bivesJob),
-	// 	function (data)
-	// 	{
-	// 		//console.log(data);
-	// 		var report = $.parseJSON (data).reportHtml;
-	// 		console.log(report);
-	// 		var sbgnJson = $.parseJSON (data).reactionsSbgnJson;
-	// 		console.log(sbgnJson);
-	// 		var comodiAnnotation = $.parseJSON(data).separateAnnotations;
-	// 		//$("#sbgnJson").text(sbgnJson);
-	// 		var xmlDiff = $.parseJSON (data).xmlDiff;
-	// 		console.log(xmlDiff);
-	// 		//console.log(comodiAnnotation);
-	// 		//console.log(report);
-	// 		//console.log(xmlDocDiff, xmlDocSbml);
-	// 		showSbgn(sbgnJson, xmlDiff, comodiAnnotation, v1, v2);
-	// 		console.log($.parseJSON (sbgnJson));
-	// 	}
-	// );
 	const callBives = (file1, file2) => {
 		//first load test file from local storage (if they are testfiles)
 		const load = new Promise( (resolve, reject) => {
@@ -77,7 +18,7 @@ function getBivesData(v1, v2, callback){
 			if(f1 != null && f2 != null){
 				resolve([f1, f2]);
 			} 
-			else reject("Error occured");
+			else reject("File could not be loaded. Please contact: tom.gebhardt@uni-rostock.de.");
 		})
 	
 		load.then(([f1, f2]) => {
@@ -88,40 +29,21 @@ function getBivesData(v1, v2, callback){
 					if(f1Type) {
 						checkF(f2).then((type2) => {
 							if(type2) checked([type1, type2]);
-							else failed("failed on file 2");
+							else failed("The second file does not encode an SBML model.");
 						})
 
-					} else failed("failed on file 1");
-				})
-				.catch((error) => {
-					console.log(error)
-					alert("Error while file check!");
+					} else failed("The first file does not encide an SBML model.");
 				});
-				
-				// let f2Type = checkF(f2);
-				// if(f2Type) console.log(f2Type);
-
-
-				// console.log(f1Type, f2Type);
-				
-				// if(f1Type == "SBML" && f2Type == "SBML"){
-				// 	checked([f1Type, f2Type]);
-				// } else failed("Failed to check the files" + f1Type);
-				//if(f1Type)
 			})
 
 			check.then(([f1Type, f2Type]) => {
-				console.log(f1Type, f2Type);
+				//console.log(f1Type, f2Type);
 				if(f1Type == "SBML" && f2Type == "SBML"){
 					commands = ["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations"];
 					compareModels(f1, f2, commands);
 				}
-				console.log("nottin os far");
-
-			})
-			.catch((error) => {
-				console.log(error);
-				//alert("eee");
+			}).catch((error) => {
+				alert(error);
 			})
 			
 			//check files with bives (and mabye manually for type?)
@@ -130,6 +52,7 @@ function getBivesData(v1, v2, callback){
 			//console.log(f1Type, f2Type);
 		})
 		.catch((error) => {
+			alert(error);
 			console.log("load failed");
 		})
 	}
@@ -174,7 +97,7 @@ const checkF = (file) => {
 				let fileType = $.parseJSON(data).documentType;
 				console.log(fileType[1]);
 				
-				alert("check file");
+				//alert("check file");
 				if(fileType) resolve(fileType[1]);
 				else reject("meh");
 			}

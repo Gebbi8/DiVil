@@ -486,24 +486,24 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
         }
 
         if(line.includes("speciesReference") || line.includes("modifierSpeciesReference")){ //single Participant added/deleted u
-            alert("okay :/");
+            //alert("okay :/");
             //console.log(line);
             //elementName = regEx(line, "name");
             //oldValue = regEx(line, value);
             let path = getLocalXPath(regEx(line, docPath));
             //console.log(path);
-            let reactant = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null);
-            let reactantName = reactant.iterateNext().attributes.species.value;
+            let participant = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null);
+            let participantName = participant.iterateNext().attributes.species.value;
             let participantRole;
             if(line.includes("listOfReactants[1]")) participantRole = "Reactant";
             else if(line.includes("listOfProducts[1]")) participantRole = "Product";
             else participantRole = "Modifier";
 
-                //grep name of species if available
-                let getName = doc.getElementById(participantName).attributes.name.value;
-                if (getName) participantName = getName;
+            //grep name of species if available
+            let getName = doc.getElementById(participantName).attributes.name.value;
+            if (getName) participantName = getName;
 
-            return  "<li>" + participantRole + " <span class='" + changeClass + "'><em><b>" + reactantName + "</b></em></span> was " + changeFill + "</li>";
+            return  "<li>" + participantRole + " <span class='" + changeClass + "'><em><b>" + participantName + "</b></em></span> was " + changeFill + "</li>";
         }
 
         if(line.includes("listOfReactants") || line.includes("listOfProducts") || line.includes("listOfModifiers")){
@@ -517,8 +517,8 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
             if(line.includes("listOfReactants[1]")) participantRole = "Reactant";
             else if(line.includes("listOfProducts[1]")) participantRole = "Product";
             else participantRole = "Modifier";
-            console.log(path);
-            alert();
+            //console.log(path);
+            //alert();
             let participantsList = getParticipants(path, doc);
             return  "<li> List of  <span class='" + changeClass + "'><em><b>" + participantRole + "s</b></em></span> was " + changeFill + ":</li>" + participantsList;
 
