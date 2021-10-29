@@ -1,14 +1,14 @@
 function submitLocalFiles(formdata){
 
-    var myFile = $('#formFile1').prop('files');
-console.log(myFile);
+    console.log(formdata);
 
     let v1 = formdata.formFile1.files[0];
     let v2 = formdata.formFile2.files[0];
 
     let file1, file2;
 
-    console.log(v1);
+    console.log(v1, v2);
+
     if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
         alert('The File APIs are not fully supported in this browser.');
         return;
@@ -21,7 +21,7 @@ console.log(myFile);
       else if (!input.files) {
         alert("This browser doesn't seem to support the `files` property of file inputs.");
       }
-      else if (!input.files[0]) {
+      else if (!v1 || !v2) {
         alert("Please select a file before clicking 'Load'");               
       }
       else {
