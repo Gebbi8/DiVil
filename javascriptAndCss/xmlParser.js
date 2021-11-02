@@ -173,6 +173,12 @@ function getStructeredData(xmlLines, comodi, v1, v2){
             }
             //console.log("add: ", path);
             //console.log(line);
+            //!!! change path for deleted node so that theres no issue for change lists
+            
+            if(changeType == "delete" && elementType == "node"){
+                let oldTag = regEx(line, "oldTag");
+                if(oldTag == "species" || oldTag == "compartment" || oldTag == "reaction") path = "old-" + path;
+            }
 
             changes = changes + addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, path);
             //if(changes.includes("undefined")) alert(line);
@@ -462,8 +468,11 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
                 console.log(line);
                // alert("math stuff");
                 let path = regEx(line, docPath);
-                //console.log(path, docPath, line);
-                return htmlChange += "!!---><li><em><b><span class='" + changeClass + "'>Math</span></b></em> was " + changeFill + ":</li> " + getMath(path, doc);
+                console.log(path, docPath, line);
+                math = getMath(path, doc);
+                console.log(math);
+                alert("Math stuff");
+                return htmlChange += "!!---><li><em><b><span class='" + changeClass + "'>Math</span></b></em> was " + changeFill + ":</li> " + getMath(path, doc) + "<---";
             } 
         }
 
@@ -500,8 +509,9 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
             else participantRole = "Modifier";
 
             //grep name of species if available
-            let getName = doc.getElementById(participantName).attributes.name.value;
-            if (getName) participantName = getName;
+
+            let node = doc.getElementById(participantName);
+            if (node.hasAttribute("name")) participantName = node.attributes.name.value;
 
             return  "<li>" + participantRole + " <span class='" + changeClass + "'><em><b>" + participantName + "</b></em></span> was " + changeFill + "</li>";
         }
@@ -526,14 +536,15 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
 
         //It seems that there is a bug in BiVeS: the dupreez example shows a move in the ATP to ADP reaction and also a deletion of the first reactant, as well as an insert of the first reactant. Both are ATP which seems buggy.
         if(changeType == "delete" && oldValue == "speciesReference"){
-            return htmlChange += "<li>"+ line + "    HIER?<em><b><span class='" + changeClass + "'>" + oldValue[0].toUpperCase() + oldValue.substring(1) + "</span></b></em> was " + changeFill + "</li>";
+            console.log(line);
+            return htmlChange += "<li>"+ line + "<em><b><span class='" + changeClass + "'>" + oldValue[0].toUpperCase() + oldValue.substring(1) + "</span></b></em> was " + changeFill + "</li>";
         }
         if(changeType == "insert") {
             
             console.log(line);
             alert("take care of insert");
         }
-        return htmlChange += "<li>"+ line + "    HIER?<em><b><span class='" + changeClass + "'>" + oldValue[0].toUpperCase() + oldValue.substring(1) + "</span></b></em> was " + changeFill + "</li>";
+        return htmlChange += "<li><em><b><span class='" + changeClass + "'>" + oldValue[0].toUpperCase() + oldValue.substring(1) + "</span></b></em> was " + changeFill + "</li>";
 
     }
 
@@ -674,8 +685,8 @@ function getParticipants(path, doc, changeClass, changeFill){
     while(participant = participants.iterateNext()){
         let participantName = participant.attributes.species.nodeValue;
         //grep name of species if available
-        let getName = doc.getElementById(participantName).attributes.name.value;
-        if (getName) participantName = getName;
+        let node = doc.getElementById(participantName);
+        if (node.hasAttribute("name")) participantName = node.attributes.name.value;
         participantsList += "<li>" + participantName + "</li>";
     }
    

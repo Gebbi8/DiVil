@@ -1,6 +1,5 @@
 //Info-Content
 function getBivesData(v1, v2, callback){
-
 	const callBives = (file1, file2) => {
 		//first load test file from local storage (if they are testfiles)
 		const load = new Promise( (resolve, reject) => {
@@ -32,7 +31,7 @@ function getBivesData(v1, v2, callback){
 							else failed("The second file does not encode an SBML model.");
 						})
 
-					} else failed("The first file does not encide an SBML model.");
+					} else failed("The first file does not encode an SBML model.");
 				});
 			})
 

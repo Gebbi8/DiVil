@@ -296,9 +296,12 @@ function createGraph() {
 			// console.log(structeredData[d.path]);
 
 			path = d.path;
+			if(d.bivesChange == "delete") path = "old-" + d.path;
 
 			console.log(structeredData[path]);
+			console.log(path);
 
+			console.log
             d3.select("#popup").transition()		
                 .duration(200)		
                 .style("opacity", .9);
@@ -378,7 +381,24 @@ function createCompartments() {
 			return d.key;
 		})
 		.attr("name", function (d) {
+			return d.name;
+		})
+		.on("click", function(d) {
+			let node = nodes.find(node => node.id == d.key);
+			if(d.bivesChange == "delete") path = "old-" + node.path;
 
+			console.log(d, node);
+			//console.log(structeredData[path]);
+
+            d3.select("#popup").transition()		
+                .duration(200)		
+                .style("opacity", .9);
+			d3.select("#popup").html("<ul>" + structeredData[path].popup + "</ul>") //getHtmlChanges from node id	
+                .style("left", (d3.event.pageX) + "px")		
+                .style("top", (d3.event.pageY - 28) + "px");	
+				//MathJax.Hub.Rerender(); //recall mathjax
+				ctop();
+				MathJax.typeset();//MathJax.Hub.Queue(["Typeset", MathJax.Hub]); 
 		});
 
 	compartments.append("path")
