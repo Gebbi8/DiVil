@@ -461,18 +461,51 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
 
 
         if(line.includes("/math[")){
-            if(dataByKeys[addPath].popup.includes("<math xmlns=")) return ""; //math already added, e.g. modifier added
-            else{
-                console.log(dataByKeys[addPath].popup);
-                console.log(changeType, docPath)
-                console.log(line);
+            if(dataByKeys[addPath].popup.includes("<math xmlns=")){ //math already added, e.g. modifier added
+                console.log("multiple changes in one kinetic law");
+                //alert("Error: Change in a kinetic law that was already")
+                return "";
+            } 
+            else{ //hier changes inside kinetic law. no full delete or insert
+                // console.log(dataByKeys[addPath].popup);
+                // console.log(changeType, docPath)
+                // console.log(line);
                // alert("math stuff");
                 let path = regEx(line, docPath);
-                console.log(path, docPath, line);
+                //console.log(path, docPath, line);
                 math = getMath(path, doc);
-                console.log(math);
-                alert("Math stuff");
-                return htmlChange += "!!---><li><em><b><span class='" + changeClass + "'>Math</span></b></em> was " + changeFill + ":</li> " + getMath(path, doc) + "<---";
+                //console.log(math);
+                //alert("Math stuff");
+                
+                let oldMath, newMath;
+                console.log(path, moveMap);
+                
+                path = path.substr(0, path.indexOf("/kineticLaw"))
+                console.log(path);
+                //alert("!!");
+
+                if(changeType == "delete"){
+                    oldMath = getMath(path, doc);
+                    console.log(path);
+                    newMath = getMath(moveMap[path], newDoc);
+                } else {
+                    newMath = getMath(path, doc);
+                    //reverse moveMap?
+                    moveMap.forEach((move) => {
+                        if(move[1] == path) {
+                            oldMath = getMath(move[0], oldDoc);
+                            alert("wololo");
+                            return;
+                        }
+                    })
+                    if(oldMath == null){
+                        oldMath = getMath(path, oldDoc);
+                        alert("aha");
+                    } 
+                }
+               
+                return htmlChange += "Math changed: <span class='delete-color'>" + oldMath + "</span> &rarr;  <span class='insert-color'>" + newMath + "</span>";
+                //return htmlChange += "!!---><li><em><b><span class='" + changeClass + "'>Math</span></b></em> was " + changeFill + ":</li> " + getMath(path, doc) + "<---";
             } 
         }
 
@@ -539,11 +572,11 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
             console.log(line);
             return htmlChange += "<li>"+ line + "<em><b><span class='" + changeClass + "'>" + oldValue[0].toUpperCase() + oldValue.substring(1) + "</span></b></em> was " + changeFill + "</li>";
         }
-        if(changeType == "insert") {
+        // if(changeType == "insert") {
             
-            console.log(line);
-            alert("take care of insert");
-        }
+        //     console.log(line);
+        //     alert("take care of insert");
+        // }
         return htmlChange += "<li><em><b><span class='" + changeClass + "'>" + oldValue[0].toUpperCase() + oldValue.substring(1) + "</span></b></em> was " + changeFill + "</li>";
 
     }

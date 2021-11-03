@@ -308,19 +308,10 @@ function createGraph() {
 			d3.select("#popup").html("<ul>" + structeredData[path].popup + "</ul>") //getHtmlChanges from node id	
                 .style("left", (d3.event.pageX) + "px")		
                 .style("top", (d3.event.pageY - 28) + "px");	
-				//MathJax.Hub.Rerender(); //recall mathjax
 				ctop();
-				MathJax.typeset();//MathJax.Hub.Queue(["Typeset", MathJax.Hub]); 
+				MathJax.typeset();
             })
-			//update tooltip with mathjax:
-			//updateMathContent();
-
-        // .on("mouseout", function(d) {		
-        //     div.transition()		
-        //         .duration(500)		
-        //         .style("opacity", 0);	
-        // })
-		;
+			.on("mouseleave", hideTooltip);
 
 	nodeShape = enterNode.append("path")
 		.attr("d", function (d) {
@@ -385,21 +376,23 @@ function createCompartments() {
 		})
 		.on("click", function(d) {
 			let node = nodes.find(node => node.id == d.key);
-			if(d.bivesChange == "delete") path = "old-" + node.path;
-
-			console.log(d, node);
-			//console.log(structeredData[path]);
+			path = node.path;
+			if(getCompAttr(d.key, "bivesChange") == "delete") path = "old-" + path;
+			let popup;
+			if(!(popup = structeredData[path])) popup = "<li>This node element was not changed.</li>";
+			else popup = popup.popup;
 
             d3.select("#popup").transition()		
                 .duration(200)		
                 .style("opacity", .9);
-			d3.select("#popup").html("<ul>" + structeredData[path].popup + "</ul>") //getHtmlChanges from node id	
+			d3.select("#popup").html("<ul>" + popup + "</ul>") //getHtmlChanges from node id	
                 .style("left", (d3.event.pageX) + "px")		
                 .style("top", (d3.event.pageY - 28) + "px");	
 				//MathJax.Hub.Rerender(); //recall mathjax
 				ctop();
 				MathJax.typeset();//MathJax.Hub.Queue(["Typeset", MathJax.Hub]); 
-		});
+		})
+		.on("mouseleave", hideTooltip);
 
 	compartments.append("path")
 		.attr("stroke-width", 3)
@@ -491,8 +484,11 @@ function resetOpacity(){
 	link.style('opacity', 1);
 }
 
-function changePopup(){
-
+var hideTooltip = function (d){
+	d3.select("#popup")
+      .transition()
+      .duration(200)
+      .style("opacity", 0)
 }
 
 function isConnected(main, other){
@@ -601,8 +597,8 @@ function addLegend(){
 	var legendSize = 10, legendSpacing = 10;
 
 	var color = d3.scaleOrdinal()
-		.domain(["no change", "exclusivly in first verions", "exclusivly in second version", "changed position in document", "changed attribute"])
-		.range(["black", "#D66A56", "#76D6AF", "#8E67D6", "#D6D287"]);
+		.domain(["no change", "exclusivly in first verions", "exclusivly in second version", "changed attribute"]) //move:  "changed position in document",
+		.range(["black", "#D66A56", "#76D6AF", "#D6D287"]); //move: "#8E67D6",
 
 	var legend = svg.append('g')
 		.selectAll("g")

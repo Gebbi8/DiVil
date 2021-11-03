@@ -10,7 +10,6 @@ function ctop (){
 	for(var j=0;j<mm[i].childNodes.length; j++ ) {
 	    ctopAT(nn,mm[i].childNodes[j],0);
 	}
-    console.log(mm[i]);
 	mm[i].parentNode.replaceChild(nn,mm[i]); 
     }
 }
