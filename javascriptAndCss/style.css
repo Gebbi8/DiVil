@@ -42,12 +42,12 @@
     flex-grow: unset;
 }
 
-.offcanvas-header{
+.offcanvas-header {
     color: white;
     background-color: #314da6
 }
 
-#dismissCanvas{
+#dismissCanvas {
     color: white !important;
 }
 
@@ -77,7 +77,7 @@
     left: 0;
 }
 
-#offcanvasFooter{
+#offcanvasFooter {
     background-color: #314da6;
     color: white;
 }
@@ -90,6 +90,46 @@
 /* logo */
 #logo {
     max-height: 100px;
+}
+
+/* tooltip */
+div.tooltip {
+    position: absolute;
+    text-align: left;
+    /* width: 60px;
+    height: 28px;*/
+    padding: 2px;
+    margin: 2px;
+    font: 12px sans-serif;
+    color: black;
+    background: white;
+    border: 2px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+div.tooltip>ul {
+    margin: 2px;
+    padding-left: 1rem;
+}
+
+/*bives-colors*/
+.delete-color {
+    color: #D66A56;
+}
+
+.insert-color {
+    color: #76D6AF;
+}
+
+.move-color {
+    color: #8E67D6;
+}
+
+.update-color {
+    color: #D6D287;
 }
 
 

@@ -1,14 +1,33 @@
-var currentZoom, width, height, size, marker, svg, obj, nodes, links, node, link, nodeShape, nodeLabel, compartments, nodesByCompartment, enterNode;
+var currentZoom, width, height, size, marker, svg, obj, nodes, links, node, link, nodeShape, nodeLabel, compartments, nodesByCompartment, enterNode, structeredData;
 var sameLinks;
+var docDeb; //for debugging
 var nodeSize = 50;
 var dimmOpacity = 0.25;
 
 
-function showSbgn(data, xmlDiff, comodiAnnotation) {
+function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
 
+	//split diff into lines
+	const splitLines = str => xmlDiff.split(/\r?\n/);
+	var xmlLines = splitLines(xmlDiff);	
+	
 	//parse the data
 	obj = JSON.parse(data);
+	// var idMap = {delete:{}, insert:{}, update:{}, move:{}};
 
+	// obj.nodes.forEach(node => {
+	// 	var path;
+	// 	if(node.bivesChange == "delete") path = 'oldPath="';
+	// 	else path = 'newPath="';
+	// 	path = path + node.path + '"';
+
+	// 	idMap[node.bivesChange][path] = node.id;
+	// });
+
+	// console.log(idMap);
+
+	// path + change to id map
+	console.log(obj);
 
 	obj.links.forEach(function (l, i){
 		l.id = "link" + i;
@@ -72,8 +91,10 @@ function showSbgn(data, xmlDiff, comodiAnnotation) {
 	//check if graph data is available
 	if (data == "" || data == undefined) {
 		$('#graphTab').hide();
+		alert("No data for graph available.")
 		return;
 	}
+
 
 
 	//set size and zoom variables
@@ -109,13 +130,23 @@ function showSbgn(data, xmlDiff, comodiAnnotation) {
 		}); */
 
 	createGraph();
+	//add legend
+	addLegend();
+
+	//add tooltip
+	d3.select("body").append("div")	
+    .attr("class", "tooltip")
+	.attr("id", "popup")				
+    .style("opacity", 0);
+
 	initializeSimulation();
 
-	var structeredComodi = getComodiObj(xmlDiff, comodiAnnotation);
-	
+	structeredData = getStructeredData(xmlLines, comodiAnnotation, v1, v2);
+
+	console.log(structeredData);
 	//assign dowload function with data to button
 	document.getElementById("downloadBtn").classList.remove("disabled");
-	document.getElementById("sbgnMlDownload").onclick = function() {downloadSBGNML(obj, structeredComodi)};
+	document.getElementById("sbgnMlDownload").onclick = function() {downloadSBGNML(obj, structeredData)};
 	document.getElementById("pngDownload").onclick = function(){ downloadPNGfromSVG("bivesGraphSvg")};
 	document.getElementById("svgDownload").onclick = function() {downloadSvg("bivesGraphSvg")};
 
@@ -250,9 +281,6 @@ function createGraph() {
 	node = svg.selectAll("g.nodes")
 		.data(nodesFilterComp);
 
-		console.log(node);
-
-
 	enterNode = node.enter()
 		.append("g")
 		.attr("id", function (d) {
@@ -262,7 +290,28 @@ function createGraph() {
 		.on('mouseover', highlight)
 		.on('mouseout', resetOpacity)
 		.on("dblclick", dblclicked)
-		.on("click", highlight);
+		.on("click", function(d) {	
+
+			// console.log(d.bivesChange, d.path);
+			// console.log(structeredData[d.path]);
+
+			path = d.path;
+			if(d.bivesChange == "delete") path = "old-" + d.path;
+
+			console.log(structeredData[path]);
+			console.log(path);
+
+			console.log
+            d3.select("#popup").transition()		
+                .duration(200)		
+                .style("opacity", .9);
+			d3.select("#popup").html("<ul>" + structeredData[path].popup + "</ul>") //getHtmlChanges from node id	
+                .style("left", (d3.event.pageX) + "px")		
+                .style("top", (d3.event.pageY - 28) + "px");	
+				ctop();
+				MathJax.typeset();
+            })
+			.on("mouseleave", hideTooltip);
 
 	nodeShape = enterNode.append("path")
 		.attr("d", function (d) {
@@ -323,8 +372,27 @@ function createCompartments() {
 			return d.key;
 		})
 		.attr("name", function (d) {
+			return d.name;
+		})
+		.on("click", function(d) {
+			let node = nodes.find(node => node.id == d.key);
+			path = node.path;
+			if(getCompAttr(d.key, "bivesChange") == "delete") path = "old-" + path;
+			let popup;
+			if(!(popup = structeredData[path])) popup = "<li>This node element was not changed.</li>";
+			else popup = popup.popup;
 
-		});
+            d3.select("#popup").transition()		
+                .duration(200)		
+                .style("opacity", .9);
+			d3.select("#popup").html("<ul>" + popup + "</ul>") //getHtmlChanges from node id	
+                .style("left", (d3.event.pageX) + "px")		
+                .style("top", (d3.event.pageY - 28) + "px");	
+				//MathJax.Hub.Rerender(); //recall mathjax
+				ctop();
+				MathJax.typeset();//MathJax.Hub.Queue(["Typeset", MathJax.Hub]); 
+		})
+		.on("mouseleave", hideTooltip);
 
 	compartments.append("path")
 		.attr("stroke-width", 3)
@@ -350,6 +418,11 @@ function createCompartments() {
 			return cNode[0].label;
 		});
 }
+
+function updateMathContent(s) {
+	var math = MathJax.Hub.getAllJax("popup")[0];
+	MathJax.Hub.Queue(["Text", math, s]);
+}	
 
 function ticked() {
 	node.attr("cx", function (d) {
@@ -409,6 +482,13 @@ function resetOpacity(){
 	enterNode.style('stroke-opacity', 1);
 	enterNode.select("text").style('opacity', 1);
 	link.style('opacity', 1);
+}
+
+var hideTooltip = function (d){
+	d3.select("#popup")
+      .transition()
+      .duration(200)
+      .style("opacity", 0)
 }
 
 function isConnected(main, other){
@@ -511,6 +591,37 @@ function getCompAttr(id, attr){
 		}
 	}
 	return "getAttr Failed";
+}
+
+function addLegend(){
+	var legendSize = 10, legendSpacing = 10;
+
+	var color = d3.scaleOrdinal()
+		.domain(["no change", "exclusivly in first verions", "exclusivly in second version", "changed attribute"]) //move:  "changed position in document",
+		.range(["black", "#D66A56", "#76D6AF", "#D6D287"]); //move: "#8E67D6",
+
+	var legend = svg.append('g')
+		.selectAll("g")
+		.data(color.domain())
+		.enter()
+		.append('g')
+		  .attr('class', 'legend')
+		  .attr('transform', function(d, i) {
+			var x = 0;
+			var y = i * legendSize + 20 + i * 5;
+			return 'translate(' + x + ',' + y + ')';
+		});
+	
+	legend.append('rect')
+		.attr('width', legendSize)
+		.attr('height', legendSize)
+		.style('fill', color)
+		.style('stroke', color);
+	
+	legend.append('text')
+		.attr('x', legendSize + legendSpacing)
+		.attr('y', legendSize - legendSize/5)
+		.text(function(d) { return d; });
 }
 
 function strokeColor(bives) {

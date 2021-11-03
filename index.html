@@ -22,55 +22,73 @@
 	<script type="text/javascript" src="javascriptAndCss/arrowsOnNodes.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/xmlParser.js"></script>
 
+	<script type="text/javascript" src="thirdParty/ctop.js"></script>
+
+	<!-- Mathjax-->
+	<script>
+		MathJax = {
+			startup: {
+				typeset: false
+			}
+			// your configuration here, if needed
+		};
+	</script>
+	<script type="text/javascript" id="MathJax-script" async
+		src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/mml-chtml.js">
+	</script>
+
 	<link href="javascriptAndCss/bootstrap.min.css" rel="stylesheet">
 	<link href="javascriptAndCss/bootstrap-dashboard.css" rel="stylesheet">
 	<link rel="stylesheet" href="javascriptAndCss/style.css">
 </head>
 
 <body>
-		<header class="navbar sticky-top flex-md-nowrap p-0 shadow">
-			<div class=" col-2 justify-content-center d-none d-md-flex p-1 row">
-				<img class="me-0 px-2" id="logo" src="img/divil_logo.svg">
-			</div>
-			<div class=" col-1 justify-content-center  d-md-none d-lg-none d-xl-none  row">
-				<img class="me-0 px-1" id="logo" src="img/divil_icon.svg">
-			</div>
-				<div class="col-10 col-md-9 col-lg-9 col-xl-9 row">
-						<form action="javascript:;" onsubmit="submitLocalFiles(this);" class="row">
-								<div class="col-9 p-1">
-									  <div class="form-group">
-											  <div class="custom-file">
-												  <input class="form-control form-control-sm mb-1" id="formFile1" type="file">
-												  <input class="form-control form-control-sm" id="formFile2" type="file">
-											  </div>
-										  </div>
-								</div>
-								<div class="col-3 justify-content-center p-1 btn-group-vertical">
-								  <button id="compareModels" type="submit" class="btn btn-primary menuBtn">compare</button>
-								  <div class="dropdown btn-group menuBtn d-flex justify-content-end">
-								  	<button class="btn btn-secondary dropdown-toggle disabled" type="button" id="downloadBtn" data-bs-toggle="dropdown" aria-expanded="false">
-										Download
-									</button>
-								  
-									<ul class="dropdown-menu" aria-labelledby="downloadBtn">
-										<li><a class="dropdown-item" id="sbgnMlDownload" href="#">SBGN-ML</a></li>
-										<li><a class="dropdown-item" id="svgDownload" href="#">SVG</a></li>
-										<li><a class="dropdown-item" id="pngDownload" href="#">PNG</a></li>
-									</ul>
-								  </div>
-								</div>
-							</form>
+	<header class="navbar sticky-top flex-md-nowrap p-0 shadow">
+		<div class=" col-2 justify-content-center d-none d-md-flex p-1 row">
+			<img class="me-0 px-2" id="logo" src="img/divil_logo.svg">
+		</div>
+		<div class=" col-1 justify-content-center  d-md-none d-lg-none d-xl-none  row">
+			<img class="me-0 px-1" id="logo" src="img/divil_icon.svg">
+		</div>
+		<div class="col-10 col-md-9 col-lg-9 col-xl-9 row">
+			<form action="javascript:;" onsubmit="submitLocalFiles(this);" class="row">
+				<div class="col-9 p-1">
+					<div class="form-group">
+						<div class="custom-file">
+							<input class="form-control form-control-sm mb-1" id="formFile1" type="file">
+							<input class="form-control form-control-sm" id="formFile2" type="file">
+						</div>
 					</div>
-					<div class="col-1 row">
-						<a class="row justify-content-center" href="https://github.com/Gebbi8/DiVil"><img class="icon" id="github-logo" src="img/GitHub-Mark.svg"></a>
-						<a class="row justify-content-center">
-							<img class="icon" id="info"  data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample"src="img/info-icon.svg">
-						</a>
-					</div>
-			</div>
+				</div>
+				<div class="col-3 justify-content-center p-1 btn-group-vertical">
+					<button id="compareModels" type="submit" class="btn btn-primary menuBtn">compare</button>
+					<div class="dropdown btn-group menuBtn d-flex justify-content-end">
+						<button class="btn btn-secondary dropdown-toggle disabled" type="button" id="downloadBtn"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							Download
+						</button>
 
-			  		</div>
-			  </header>
+						<ul class="dropdown-menu" aria-labelledby="downloadBtn">
+							<li><a class="dropdown-item" id="sbgnMlDownload" href="#">SBGN-ML</a></li>
+							<li><a class="dropdown-item" id="svgDownload" href="#">SVG</a></li>
+							<li><a class="dropdown-item" id="pngDownload" href="#">PNG</a></li>
+						</ul>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="col-1 row">
+			<a class="row justify-content-center" href="https://github.com/Gebbi8/DiVil"><img class="icon"
+					id="github-logo" src="img/GitHub-Mark.svg"></a>
+			<a class="row justify-content-center">
+				<img class="icon" id="info" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+					aria-controls="offcanvasExample" src="img/info-icon.svg">
+			</a>
+		</div>
+		</div>
+
+		</div>
+	</header>
 
 	<div class="container-fluid">
 		<div class="row">
@@ -96,11 +114,11 @@
 						  </ul>
 						</div>
 				</nav> -->
-				<main id="bivesGraph" class="ms-sm-auto px-md-4">
-						<div id="container" class="svg-container"></div>
+			<main id="bivesGraph" class="ms-sm-auto px-md-4">
+				<div id="container" class="svg-container"></div>
 
-				</main>
-<!-- 
+			</main>
+			<!-- //force controls
 			<div class="col-2 " id="forceControls">
 				<div class="force alpha">
 					<p><label>alpha</label> Simulation activity</p>
@@ -239,48 +257,74 @@
 	</div>
 	<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
 		<div class="offcanvas-header">
-		  <h5 class="offcanvas-title" id="offcanvasExampleLabel">Difference Visualisation</h5>
-		  <button id="dismissCanvas" type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+			<h5 class="offcanvas-title" id="offcanvasExampleLabel">Difference Visualisation</h5>
+			<button id="dismissCanvas" type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+				aria-label="Close"></button>
 		</div>
 		<div class="offcanvas-body">
-		  <p>
-			This prototype showcases our method to visualise differences between versions of biochemical models in a standardized format.
-		  </p>
-		  <p>
-			  Select two model versions from your local system with the menu at the top or choose examples from below.
-		  </p>
-		 <div class="accordion accordion-flush" id="accordionFlushExample">
-			<div class="accordion-item">
-			  <h2 class="accordion-header" id="flush-headingOne">
-				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-				  Example #1 - Oscillation
-				</button>
-			  </h2>
-			  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-				<div class="accordion-body">
-					<p>Kummer2000 - Oscillations in Calcium Signalling
-					<br>BioModel: <a href="https://www.ebi.ac.uk/biomodels/BIOMD0000000329">000329</a>
-					</p>
-					<button id="e1Kummer" type="button" class="btn btn-outline-primary btn-sm">Compute</button>
+			<p>
+				This prototype showcases our method to visualise differences between versions of biochemical models in a
+				standardized format.
+			</p>
+			<p>
+				Select two model versions from your local system with the menu at the top or choose examples from below.
+			</p>
+			<div class="accordion accordion-flush" id="accordionFlushExample">
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="flush-headingOne">
+						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+							data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+							Example #1 - Oscillation
+						</button>
+					</h2>
+					<div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+						data-bs-parent="#accordionFlushExample">
+						<div class="accordion-body">
+							<p>Kummer2000 - Oscillations in Calcium Signalling
+								<br>BioModel: <a href="https://www.ebi.ac.uk/biomodels/BIOMD0000000329">000329</a>
+							</p>
+							<button id="e1Kummer" type="button" class="btn btn-outline-primary btn-sm">Compute</button>
+						</div>
+					</div>
 				</div>
-			  </div>
-			</div>
-			<div class="accordion-item">
-			  <h2 class="accordion-header" id="flush-headingTwo">
-				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-				  Example #2 - B.subtilis transcription
-				</button>
-			  </h2>
-			  <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-				<div class="accordion-body">
-					<p>Liebal2012 - B.subtilis transcription inhibition model							
-					<br>BioModel: <a href="https://www.ebi.ac.uk/biomodels/BIOMD0000000461">000461</a>
-					</p>
-					<button id="e2Liebal" type="button" class="btn btn-outline-primary btn-sm">Compute</button>
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="flush-headingTwo">
+						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+							data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+							Example #2 - B.subtilis transcription
+						</button>
+					</h2>
+					<div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+						data-bs-parent="#accordionFlushExample">
+						<div class="accordion-body">
+							<p>Liebal2012 - B.subtilis transcription inhibition model
+								<br>BioModel: <a href="https://www.ebi.ac.uk/biomodels/BIOMD0000000461">000461</a>
+							</p>
+							<button id="e2Liebal" type="button" class="btn btn-outline-primary btn-sm">Compute</button>
+						</div>
+					</div>
 				</div>
-			  </div>
-			</div>
-			<!-- <div class="accordion-item">
+				<div class="accordion-item">
+					<h2 class="accordion-header" id="flush-headingThree">
+						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+							data-bs-target="#flush-collapseThree" aria-expanded="false"
+							aria-controls="flush-collapseThree">
+							Example #3 - Dupreez models
+						</button>
+					</h2>
+					<div id="flush-collapseThree" class="accordion-collapse collapse"
+						aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+						<div class="accordion-body">
+							<p>Comparison of the Dupreez models 6 and 7
+								<br>JWS Online: <a
+									href="https://jjj.biochem.sun.ac.za/models/?id=dupreez&organism=&process=&jwsmodel__model_type=">Dupreez
+									models</a>
+							</p>
+							<button id="e3Dupreez" type="button" class="btn btn-outline-primary btn-sm">Compute</button>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="accordion-item">
 			  <h2 class="accordion-header" id="flush-headingThree">
 				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
 				  Accordion Item #3
@@ -293,21 +337,26 @@
 				
 			  </div>
 			</div> -->
-		  </div>
-		<p>
-			This project relies on <a href="https://d3js.org/">D3</a> and <a href="http://bives.bio.informatik.uni-rostock.de/">BiVeS</a>. Styling and Layout is based on Bootstrap 5.
-		</p>
+			</div>
+			<p>
+				This project relies on <a href="https://d3js.org/">D3</a> and <a
+					href="http://bives.bio.informatik.uni-rostock.de/">BiVeS</a>. Styling and Layout is based on
+				Bootstrap 5.
+			</p>
 
-	  </div>
-	  <div class="offcanvas-body mt-auto" id="offcanvasFooter">
-		<p>Contact: <a class="text-light" href="https://www.sbi.uni-rostock.de/team/detail/tom-gebhardt">Tom Gebhardt</a>, University of Rostock, SBI
-		<br>E-Mail: tom.gebhardt@uni-rostock.de</p>
-		<div id="foot">This was started as part of SEMS (funded by the German Federal Ministry of Education and Research in the e:Bio programme SEMS, FKZ 031 6194). 
-		Maintenance and further development were part of INCOME (funded by the German Federal Ministry of Education and Research in the e:Med programme FKZ 01ZX1705C) 
-		and EU-Stands4PM (funded by the Horizon2020 framework programme, Grant Agreement #825843).
+		</div>
+		<div class="offcanvas-body mt-auto" id="offcanvasFooter">
+			<p>Contact: <a class="text-light" href="https://www.sbi.uni-rostock.de/team/detail/tom-gebhardt">Tom
+					Gebhardt</a>, University of Rostock, SBI
+				<br>E-Mail: tom.gebhardt@uni-rostock.de</p>
+			<div id="foot">This was started as part of SEMS (funded by the German Federal Ministry of Education and
+				Research in the e:Bio programme SEMS, FKZ 031 6194).
+				Maintenance and further development were part of INCOME (funded by the German Federal Ministry of
+				Education and Research in the e:Med programme FKZ 01ZX1705C)
+				and EU-Stands4PM (funded by the Horizon2020 framework programme, Grant Agreement #825843).
+			</div>
 		</div>
 	</div>
-	  </div>
 	<script src="javascriptAndCss/bootstrap.bundle.min.js"></script>
 	<script>
 		var obj;
@@ -340,23 +389,37 @@
 		// $.get(testJson, function(data){
 		// 	showSbgn(data);
 		// }, 'text');
-		
+
 		//assign examples from local files
-			document.getElementById("e1Kummer").onclick = function() {assignExamples("Kummer2000/2012-12-12/BIOMD0000000329", "Kummer2000/2015-04-16/BIOMD0000000329")};
-			document.getElementById("e2Liebal").onclick = function() {assignExamples("Liebal1-BIOMD0000000461", "Liebal3-BIOMD0000000461")};
-			//document.getElementById("e1Kummer").onclick = function() {assignExamples("", "")};
+		document.getElementById("e1Kummer").onclick = function () {
+			assignExamples("Kummer2000/2012-12-12/BIOMD0000000329.xml", "Kummer2000/2015-04-16/BIOMD0000000329.xml")
+		};
+		document.getElementById("e2Liebal").onclick = function () {
+			assignExamples("Liebal1-BIOMD0000000461.xml", "Liebal3-BIOMD0000000461.xml")
+		};
+		document.getElementById("e3Dupreez").onclick = function () {
+			assignExamples("dupreez/dupreez6.xml", "dupreez/dupreez7.xml")
+		};
 
-		function assignExamples(file1, file2){
+		function assignExamples(file1, file2) {
 			getBivesData(
-			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + file1 + ".xml",
-			"http://hopper.informatik.uni-rostock.de/GitRepos/DiVil/testModels/" + file2 + ".xml",
-			["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations"]);
+				"./testModels/" + file1, // + ".xml",
+				"./testModels/" + file2, // + ".xml",
+				["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations"]);
 		}
 
-		window.onload = function(){
+		var hiddenTests = {
+			"omex": ["sarma2012/BIOMD0000000444-v1.omex", "sarma2012/BIOMD0000000444-v2.omex"],
+			"xml": ["sarma2012/BIOMD0000000444-v1.xml.origin", "sarma2012/BIOMD0000000444-v2.xml"],
+			"paths": ["gitCompare/Liebal3-BIOMD0000000461.xml", "gitCompare/Liebal-fake-test2.xml"]
+		}
+
+		window.onload = function () {
 			document.getElementById("e1Kummer").click();
+			//assignExamples(hiddenTests["omex"][0], hiddenTests["omex"][1]);
+			//assignExamples(hiddenTests["xml"][0], hiddenTests["xml"][1]);
+			//assignExamples(hiddenTests["paths"][0], hiddenTests["paths"][1]);
 		}
-
 	</script>
 </body>
 
