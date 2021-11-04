@@ -1,11 +1,3 @@
-function comodiAdder(data, changeType, path){
-    
-    if(changeType == "delete") path = 'oldPath="' + path + '"';
-    else path = 'newPath="' + path + '"';
-    return data[changeType][path];
-}
-
-
 function getStructeredData(xmlLines, comodi, v1, v2){
 
     //files
@@ -37,6 +29,7 @@ function getStructeredData(xmlLines, comodi, v1, v2){
     // produce double key array based on change + path. vlaue comodi term
     var changeType = null;
     var changes = "";
+    var ids = "";
 
     //debugging
     var i = 0;
@@ -121,12 +114,19 @@ function getStructeredData(xmlLines, comodi, v1, v2){
                 path = path.substr(0, path.indexOf("/annotation"));
                 if(changeType == "delete" && moveMap[path]) path = moveMap[path]; //parent of deleted annotation was moved
 
-                if(dataByKeys[path] == null) changes = "";
-                else changes = dataByKeys[path].popup;
+                if(dataByKeys[path] == null){
+                     changes = "";
+                     ids = [];
+                }
+                else{
+                     changes = dataByKeys[path].popup;
+                     ids = dataByKeys[path].comodi;
+                }
                 if(changes.includes("<li>Annotations were changed,")) return;
 
+                ids.push(id);
                 changes += "<li>Annotations were changed, which is not displayed here.</li>"
-                dataByKeys[path] = {"comodi": id, "popup": changes};
+                dataByKeys[path] = {"comodi": ids, "popup": changes};
                return;
             }
             
@@ -160,9 +160,14 @@ function getStructeredData(xmlLines, comodi, v1, v2){
             //console.log("org: ", path);
             if(changeType == "delete" && moveMap[path]) {path = moveMap[path];} //check weather the path was changed due to a move
 
-            if(dataByKeys[path] == null) changes = "";
+            if(dataByKeys[path] == null){
+                 changes = "";
+                 ids = [id];
+            }
             else {
                 changes = dataByKeys[path].popup;
+                ids = dataByKeys[path].comodi;
+                ids.push(id);
                // return;
                 if(line.includes("/kineticLaw[1]")){              //path already handled -> math already added
 
@@ -176,13 +181,14 @@ function getStructeredData(xmlLines, comodi, v1, v2){
             //!!! change path for deleted node so that theres no issue for change lists
             
             if(changeType == "delete" && elementType == "node"){
+               
                 let oldTag = regEx(line, "oldTag");
                 if(oldTag == "species" || oldTag == "compartment" || oldTag == "reaction") path = "old-" + path;
             }
 
             changes = changes + addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, path);
             //if(changes.includes("undefined")) alert(line);
-            dataByKeys[path] = {"comodi": id, "popup": changes};
+            dataByKeys[path] = {"comodi": ids, "popup": changes};
 
             //  console.log(dataByKeys);
             // if(path == "/sbml[1]/model[1]/listOfSpecies[1]/species[1]") {
@@ -202,10 +208,14 @@ function getStructeredData(xmlLines, comodi, v1, v2){
 
    // arr.forEach(pair => {
         Object.entries(dataByKeys).forEach(data => {
-            //console.log(data);
-            comodiGrep = "COMODI todo"; // grep(comodi, data[1].comodi);
-            
-            dataByKeys[data[0]].comodi = comodiGrep; //!!!!!!!!!!!!!! add all changes
+            console.log(data);
+           // comodiGrep = grep(comodi, comodiID);
+            //alert("!");
+            let comodiChanges = ""
+            data[1].comodi.forEach(id => {
+                comodiChanges += grep(comodi, id);
+            })
+            dataByKeys[data[0]].comodi = comodiChanges; //add all changes
         });
    // });
 
@@ -324,14 +334,14 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
         
        // if(moveMap[oldParent] == newParent) return ""; //the parent move for some reason triggered a move of this node
 
-        if(newParent.includes("/math[")){ //display move 
-            alert("math move");
-            return "oldMath" +  "<<rarr" + "newMath";
+        // if(newParent.includes("/math[")){ //display move 
+        //     alert("math move");
+        //     return "oldMath" +  "<<rarr" + "newMath";
            
-        } 
+        // } 
         //console.log("move", oldParent);
         //console.log(moveMap);
-        alert("! unhandled move");
+        alert("A change (move) occured that is currently not handled by DiVil. Please contact tom.gebhardt@uni-rostock.de. At best you already attach you files to the mail.");
         return "UNHANDLED MOVE: " + line;
     }
 
@@ -789,12 +799,22 @@ function regEx(line, attribute){
 }
 
 function grep(comodi, id){
+    let regex = new RegExp('<comodi:' + '((?:Insertion|Deletion|Move|Update|PermutationOfEntities))' + ' rdf:about="file://bives-differences.patch#' + id + '".*?\\1>', "si");
+    let comodiSnippet = comodi.match(regex)[0];
 
-    id = id.slice(4,-1);
-    //being as precise as possible improves the regex performance
-    //<comodi:((?:insertion|deletion|move|update|PermutationOfEntities)) rdf:about="#1".*?\1>
-    let regex = new RegExp('<comodi:' + '((?:insertion|deletion|move|update|PermutationOfEntities))' + ' rdf:about="file://bives-differences.patch#' + id + '".*?\\1>', "si");
+    
+    let type = comodiSnippet.substring(8, comodiSnippet.indexOf(" "));
+    let firstSpace = comodiSnippet.indexOf(" ");
 
-    return comodi.match(regex)[0];
+    comodiSnippet = 
+        `<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+            xmlns:comodi="http://purl.uni-rostock.de/comodi/comodi#">
+                <rdf:Description rdf:about ="#` + id + '">' + comodiSnippet +  
+                `</rdf:Description>
+          </rdf:RDF>`;
+    return comodiSnippet;
+}
 
+function stringInsert(string, pos, insert){
+    return string.substring(0, pos) + insert + string.substring(pos) ;
 }
