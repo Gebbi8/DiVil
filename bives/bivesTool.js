@@ -124,18 +124,18 @@ function compareModels(f1, f2, command){
 	 	{
 	 		//console.log(data);
 	 		var report = $.parseJSON (data).reportHtml;
-	 		console.log(report);
+	 		//console.log(report);
 	 		var sbgnJson = $.parseJSON (data).reactionsSbgnJson;
-	 		console.log(sbgnJson);
+	 		//console.log(sbgnJson);
 	 		var comodiAnnotation = $.parseJSON(data).separateAnnotations;
 	 		//$("#sbgnJson").text(sbgnJson);
 	 		var xmlDiff = $.parseJSON (data).xmlDiff;
-	 		console.log(xmlDiff);
+	 		//console.log(xmlDiff);
 	 		//console.log(comodiAnnotation);
 	 		//console.log(report);
 	 		//console.log(xmlDocDiff, xmlDocSbml);
 	 		showSbgn(sbgnJson, xmlDiff, comodiAnnotation, f1, f2);
-	 		console.log($.parseJSON (sbgnJson));
+	 		//console.log($.parseJSON (sbgnJson));
 	 	}
 	 );
 }
