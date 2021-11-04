@@ -8,18 +8,18 @@ function getBivesData(v1, v2, callback){
 				console.log(f1);
 				//alert("japp");
 			} else f1 = file1;
-	
+
 			let f2 = loadTestFile(file2);
 			if(f2){
 				//alert("jippi");
 			} else f2 = file2;
-	
+
 			if(f1 != null && f2 != null){
 				resolve([f1, f2]);
-			} 
+			}
 			else reject("File could not be loaded. Please contact: tom.gebhardt@uni-rostock.de.");
 		})
-	
+
 		load.then(([f1, f2]) => {
 			const check = new Promise((checked, failed) => {
 				let f1Type;
@@ -44,7 +44,7 @@ function getBivesData(v1, v2, callback){
 			}).catch((error) => {
 				alert(error);
 			})
-			
+
 			//check files with bives (and mabye manually for type?)
 
 
@@ -64,7 +64,7 @@ function getBivesData(v1, v2, callback){
 	// 		console.log("promis recjected");
 	// 	})
 
-	
+
 }
 
 function loadTestFile(filePath) {
@@ -86,7 +86,7 @@ const checkF = (file) => {
 			files:	[file],
 			commands: ["documentType"]
 		};
-	
+
 		$.post (
 			"bives/bives.php",
 			"bivesJob=" + JSON.stringify (bivesJob),
@@ -95,7 +95,7 @@ const checkF = (file) => {
 				console.log(data);
 				let fileType = $.parseJSON(data).documentType;
 				console.log(fileType[1]);
-				
+
 				//alert("check file");
 				if(fileType) resolve(fileType[1]);
 				else reject("meh");
@@ -139,7 +139,7 @@ function compareModels(f1, f2, command){
 	 	}
 	 );
 }
-		
+
 		// let xmlhttp = new XMLHttpRequest();
 		// xmlhttp.addEventListener("readystatechange", () => {
 		// 	if (request.readyState === 4 && request.status === 200) {
@@ -147,7 +147,7 @@ function compareModels(f1, f2, command){
 		// 		resolve(data);
 		// 	} else if (request.readyState === 4) {
 		// 		reject("error getting resources");
-			
+
 		// 	}
 		// })
 		// xmlhttp.open("GET", filePath, false);
@@ -155,5 +155,3 @@ function compareModels(f1, f2, command){
 		// if (xmlhttp.status==200) {
 		//   result = xmlhttp.responseText;
 		// }
-	
-

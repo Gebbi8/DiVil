@@ -117,7 +117,7 @@ function downloadSBGNML(data, structeredComodi) {
 		//add annotaion for comodi
 		xml += '\t\t\t<extension>\n';
 		// comodiAdder(data, changeType, path)
-		xml += '\t\t\t' + comodiAdder(structeredComodi, data.nodes[i].bivesChange, data.nodes[i].path) + '\n';
+		xml += '\t\t\t\t' + comodiAdder(structeredComodi, data.nodes[i].bivesChange, data.nodes[i].path) + '\n';
 		xml += '\t\t\t</extension>\n';
 		
 		
@@ -156,10 +156,18 @@ function downloadSBGNML(data, structeredComodi) {
 
 	xml = xml + '\t' + '</map>\n';
 	xml = xml + "</sbgn>";
-	console.log(xml);
 
-	var blob = new Blob([xml], {type: "text/plain;charset=utf-8"});
-	saveAs(blob, "merged-models.sbgnml");
+	console.log(xml);
+	//beautify and download
+	const beautifiedXmlText = new XmlBeautify().beautify(xml,  {
+		indent: "\t", //indent pattern like white spaces
+		useSelfClosingElement: true //true:use self-closing element when empty element.
+	});
+
+	console.log(beautifiedXmlText);
+
+	var blob = new Blob([beautifiedXmlText], {type: "text/plain;charset=utf-8"});
+	saveAs(blob, "verion-comparison.sbgnml");
 }
 
 function svgPathCoordinate(point, axis, path){
@@ -180,4 +188,13 @@ function svgPathCoordinate(point, axis, path){
 	if(axis == 'x') return p[0].substr(1);
 	else return p[1];
 
+}
+
+function comodiAdder(data, changeType, path){
+    console.log(changeType, path);
+    console.log(data);
+   
+    if(changeType == "delete") path = 'old-' + path;
+    console.log(path,data[path]);
+    return data[path].comodi;
 }
