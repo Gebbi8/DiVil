@@ -148,7 +148,8 @@ function downloadSBGNML(data, structeredComodi) {
 		//add annotaion for comodi
 		xml += '\t\t\t<extension>\n';
 		// comodiAdder(data, changeType, path)
-		xml += '\t\t\t' + comodiAdder(structeredComodi, data.nodes[i].bivesChange, data.nodes[i].path) + '\n';
+		//console.log(data.links[i]);
+		xml += '\t\t\t' + comodiAdder(structeredComodi, data.links[i].bivesChange, data.links[i].path) + '\n';
 		xml += '\t\t\t</extension>\n';
 
 		xml = xml + '\t\t</arc>\n';
@@ -196,5 +197,6 @@ function comodiAdder(data, changeType, path){
    
     if(changeType == "delete") path = 'old-' + path;
     console.log(path,data[path]);
+	if(!data[path]) return "";
     return data[path].comodi;
 }
