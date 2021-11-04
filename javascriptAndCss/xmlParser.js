@@ -227,15 +227,50 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
     var oldValue, newValue;
     var elementName = "";
 
+    let changeClass = "bives-default";
+    let changeFill = "nothing";
+    let tag, doc, docPath;
+
+    if(changeType == "delete") {
+        changeClass = "delete-color";
+        changeFill = "deleted";
+        doc = oldDoc;
+        docPath = "oldPath";
+        value = "oldValue";
+        tag = "oldTag";
+    } else if (changeType == "insert") {
+        changeClass = "insert-color";
+        changeFill = "added";
+        doc = newDoc;
+        docPath = "newPath";
+        value = "newValue";
+        tag = "newTag";
+    } else if (changeType == "update"){
+        changeClass = "update-color";
+    }
+
     elementType = elementType[0].toUpperCase() + elementType.substring(1);
 
     if(changeType == "update"){
         if(line.includes("/kineticLaw[")){
-            //get path
             var oldPath = regEx(line, "oldPath");
             oldPath = getLocalXPath(oldPath);
             var newPath = regEx(line, "newPath");
             newPath = getLocalXPath(newPath);
+            if(line.includes("/listOfParam")){ //update of local Parameter
+                console.log(line);
+                let changedAttr = regEx(line, "name");
+                let oldVal = regEx(line, "oldValue");
+                let newVal = regEx(line, "newValue");
+                // let oldParameter = oldDoc.evaluate(oldPath, oldDoc, null, XPathResult.ANY_TYPE, null).iterateNext();
+                 let newParameter = newDoc.evaluate(newPath, newDoc, null, XPathResult.ANY_TYPE, null).iterateNext();
+                
+                console.log(newParameter);
+                return htmlChange += "<li>Attribute <em><b><span class='" + changeClass + "'>" + changedAttr + "</span></b></em> of local parameter <b><em>" + newParameter.attributes.name.value + "</em></b> changed: " + oldVal + " &rarr; " + newVal;
+                alert("!");
+            }
+            //get path
+
             var mathIndexOld = oldPath.indexOf("/*[local-name()='math']");
             var mathIndexNew = newPath.indexOf("/*[local-name()='math']");
 
@@ -255,10 +290,10 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
             console.log(resultOld);
 
             var mathMLNew = newDoc.evaluate(newPath, newDoc, null, XPathResult.ANY_TYPE, null);
-            var resultNew = mathMLNew.iterateNext().innerHT<ML;
+            var resultNew = mathMLNew.iterateNext().innerHTML;
             console.log(resultNew);
             
-            return htmlChange += resultOld + " -> " + resultNew;
+            return htmlChange += resultOld + " &rarr; " + resultNew;
             // var updates = xmlDocDiff.evaluate(
             //     "/bives/update/*",
             //     xmlDocDiff,
@@ -343,26 +378,6 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
         //console.log(moveMap);
         alert("A change (move) occured that is currently not handled by DiVil. Please contact tom.gebhardt@uni-rostock.de. At best you already attach you files to the mail.");
         return "UNHANDLED MOVE: " + line;
-    }
-
-    let changeClass = "bives-default";
-    let changeFill = "nothing";
-    let tag, doc, docPath;
-
-    if(changeType == "delete") {
-        changeClass = "delete-color";
-        changeFill = "deleted";
-        doc = oldDoc;
-        docPath = "oldPath";
-        value = "oldValue";
-        tag = "oldTag";
-    } else if (changeType == "insert") {
-        changeClass = "insert-color";
-        changeFill = "added";
-        doc = newDoc;
-        docPath = "newPath";
-        value = "newValue";
-        tag = "newTag";
     }
 
     if(elementType == "Attribute"){
