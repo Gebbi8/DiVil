@@ -304,8 +304,19 @@ function createGraph() {
 			console.log
             d3.select("#popup").transition()		
                 .duration(200)		
-                .style("opacity", .9);
-			d3.select("#popup").html("<ul>" + structeredData[path].popup + "</ul>") //getHtmlChanges from node id	
+                .style("opacity", function(d){
+					if(structeredData[path]) return 0.9;
+					else return 0;
+				});
+			d3.select("#popup").html(
+					function (d) {
+						if(structeredData[path]){
+							return "<ul>" + structeredData[path].popup + "</ul>";
+						} else {
+							return "";
+						}
+					}
+				) //getHtmlChanges from node id	
                 .style("left", (d3.event.pageX) + "px")		
                 .style("top", (d3.event.pageY - 28) + "px");	
 				ctop();
@@ -378,16 +389,25 @@ function createCompartments() {
 			let node = nodes.find(node => node.id == d.key);
 			path = node.path;
 			if(getCompAttr(d.key, "bivesChange") == "delete") path = "old-" + path;
-			let popup;
-			if(!(popup = structeredData[path])) popup = "<li>This node element was not changed.</li>";
-			else popup = popup.popup;
+			// let popup;
+			// if(!(popup = structeredData[path])) popup = "<li>This node element was not changed.</li>";
+			// else popup = popup.popup;
 
-            d3.select("#popup").transition()		
-                .duration(200)		
-                .style("opacity", .9);
-			d3.select("#popup").html("<ul>" + popup + "</ul>") //getHtmlChanges from node id	
-                .style("left", (d3.event.pageX) + "px")		
-                .style("top", (d3.event.pageY - 28) + "px");	
+			d3.select("#popup").transition()		
+			.duration(200)		
+			.style("opacity", function(d){
+				if(structeredData[path]) return 0.9;
+				else return 0;
+			});
+			d3.select("#popup").html(
+					function (d) {
+						if(structeredData[path]){
+							return "<ul>" + structeredData[path].popup + "</ul>";
+						} else {
+							return "";
+						}
+					}
+				)	
 				//MathJax.Hub.Rerender(); //recall mathjax
 				ctop();
 				MathJax.typeset();//MathJax.Hub.Queue(["Typeset", MathJax.Hub]); 
