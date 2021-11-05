@@ -617,7 +617,7 @@ function addLegend(){
 	var legendSize = 10, legendSpacing = 10;
 
 	var color = d3.scaleOrdinal()
-		.domain(["no change", "exclusivly in first verions", "exclusivly in second version", "changed attribute"]) //move:  "changed position in document",
+		.domain(["no change", "exclusively in first verion", "exclusively in second version", "changed attribute"]) //move:  "changed position in document",
 		.range(["black", "#D66A56", "#76D6AF", "#D6D287"]); //move: "#8E67D6",
 
 	var legend = svg.append('g')
