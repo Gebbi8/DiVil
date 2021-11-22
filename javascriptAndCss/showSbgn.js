@@ -147,7 +147,8 @@ function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
 	//assign dowload function with data to button
 	document.getElementById("downloadBtn").classList.remove("disabled");
 	document.getElementById("sbgnMlDownload").onclick = function() {downloadSBGNML(obj, structeredData)};
-	document.getElementById("pngDownload").onclick = function(){ downloadPNGfromSVG("bivesGraphSvg")};
+	//document.getElementById("pngDownload").onclick = function(){ downloadPNGfromSVG("bivesGraphSvg")};
+	document.getElementById("pngDownload").onclick = function(){ downloadPNG("bivesGraphSvg")};
 	document.getElementById("svgDownload").onclick = function() {downloadSvg("bivesGraphSvg")};
 
 }
