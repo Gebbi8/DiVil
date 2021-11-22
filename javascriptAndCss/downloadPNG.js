@@ -22,7 +22,7 @@ function downloadPNG(svgID) {
 
 
     var dlLink = document.createElement('a');
-    dlLink.download = "image";
+    dlLink.download = "divil.png";
     dlLink.href = imgURL;
     dlLink.dataset.downloadurl = ["image/png", dlLink.download, dlLink.href].join(':');
 

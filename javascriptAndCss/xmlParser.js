@@ -312,7 +312,9 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
             oldValue = regEx(line, "oldText");
             newValue = regEx(line, "newText");
         }
-        return htmlChange += "<li>" + elementType + " <em><b>" + elementName + "</b></em>" + " has changed: <span class='delete-color'>" + oldValue + "</span> &rarr;  <span class='insert-color'>" + newValue + "</span></li>";
+        let effectedNode = regEx(line, "newPath");
+        effectedNode = effectedNode.substring(effectedNode.lastIndexOf("/")+1, effectedNode.lastIndexOf("["));
+        return htmlChange += "<li>" + elementType + " <em><b>" + elementName + "</b></em> of <em><b>" + effectedNode + "</b></em> has changed: <span class='delete-color'>" + oldValue + "</span> &rarr;  <span class='insert-color'>" + newValue + "</span></li>";
     }
 
     // if(changeType == "insert"){
