@@ -1,17 +1,19 @@
 function appendDefs() {
 	var defs = d3.select("svg").append("defs");
 	var refX = "12";
+	var refXCat = "9";
+	var refXInh = "2";
 	var marker = "10";
-	var refXProduction = "10";
-	var refXModulation = "10.5";
+	var refXProduction = "9";
+	var refXModulation = "10";
 	var strokeWidth = "1";
 
 	//colours
-	var nothingC = 	"black";
-	var updateC = 	"#D6D287";
-	var insertC = 	"#76D6AF";
-	var deleteC = 	"#D66A56";
-	var moveC = 		"#8E67D6";
+	var nothingC = "black";
+	var updateC = "#D6D287";
+	var insertC = "#76D6AF";
+	var deleteC = "#D66A56";
+	var moveC = "#8E67D6";
 
 
 	defs.append("marker")
@@ -81,7 +83,7 @@ function appendDefs() {
 
 		.attr("id", "productionmove")
 		.attr("viewBox", "0 -6 11 12")
-		.attr("fill",  moveC)
+		.attr("fill", moveC)
 		.attr("stroke-width", "0")
 		.attr("refX", refXProduction)
 		.attr("refY", "0")
@@ -268,7 +270,7 @@ function appendDefs() {
 		.attr("stroke", "black")
 		.attr("stroke-width", strokeWidth)
 		.attr("fill", "white")
-		.attr("refX", refX)
+		.attr("refX", refXCat)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -284,7 +286,7 @@ function appendDefs() {
 		.attr("stroke", deleteC)
 		.attr("stroke-width", strokeWidth)
 		.attr("fill", "white")
-		.attr("refX", refX)
+		.attr("refX", refXCat)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -300,7 +302,7 @@ function appendDefs() {
 		.attr("stroke", insertC)
 		.attr("stroke-width", strokeWidth)
 		.attr("fill", "white")
-		.attr("refX", refX)
+		.attr("refX", refXCat)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -316,7 +318,7 @@ function appendDefs() {
 		.attr("stroke", updateC)
 		.attr("stroke-width", strokeWidth)
 		.attr("fill", "white")
-		.attr("refX", refX)
+		.attr("refX", refXCat)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -325,14 +327,14 @@ function appendDefs() {
 		.append("svg:path")
 		.attr("d", "M1,0A1,1,0,0,1,9,0A1,1,0,0,1,1,0")
 		.attr("class", "arrowHead");
-	
+
 	defs.append("marker")
 		.attr("id", "catalysismove")
 		.attr("viewBox", "0 -6 11 12")
 		.attr("stroke", moveC)
 		.attr("stroke-width", strokeWidth)
 		.attr("fill", "white")
-		.attr("refX", refX)
+		.attr("refX", refXCat)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -348,7 +350,7 @@ function appendDefs() {
 		.attr("viewBox", "0 -6 11 12")
 		.attr("stroke-width", "4")
 		.attr("fill", "white")
-		.attr("refX", 2)
+		.attr("refX", refXInh)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -366,7 +368,7 @@ function appendDefs() {
 		.attr("viewBox", "0 -6 11 12")
 		.attr("stroke-width", "4")
 		.attr("fill", "white")
-		.attr("refX", 2)
+		.attr("refX", refXInh)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -384,7 +386,7 @@ function appendDefs() {
 		.attr("viewBox", "0 -6 11 12")
 		.attr("stroke-width", "4")
 		.attr("fill", "white")
-		.attr("refX", 2)
+		.attr("refX", refXInh)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -402,7 +404,7 @@ function appendDefs() {
 		.attr("viewBox", "0 -6 11 12")
 		.attr("stroke-width", "4")
 		.attr("fill", "white")
-		.attr("refX", 2)
+		.attr("refX", refXInh)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -420,7 +422,7 @@ function appendDefs() {
 		.attr("viewBox", "0 -6 11 12")
 		.attr("stroke-width", "4")
 		.attr("fill", "white")
-		.attr("refX", 2)
+		.attr("refX", refXInh)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -438,7 +440,7 @@ function appendDefs() {
 		.attr("viewBox", "-2 -6 13 12")
 		.attr("stroke-width", strokeWidth)
 		.attr("fill", "white")
-		.attr("refX", refX)
+		.attr("refX", refXCat)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -455,7 +457,7 @@ function appendDefs() {
 		.attr("viewBox", "-2 -6 13 12")
 		.attr("stroke-width", strokeWidth)
 		.attr("fill", "white")
-		.attr("refX", refX)
+		.attr("refX", refXCat)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -466,13 +468,13 @@ function appendDefs() {
 		.attr("d", "M-1,-5l0,10M2,-4L2,4L10,0L2,-4")
 		.attr("class", "arrowHead");
 
-		defs.append("marker")
+	defs.append("marker")
 
 		.attr("id", "necessarystimulationdelete")
 		.attr("viewBox", "-2 -6 13 12")
 		.attr("stroke-width", strokeWidth)
 		.attr("fill", "white")
-		.attr("refX", refX)
+		.attr("refX", refXCat)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -483,13 +485,13 @@ function appendDefs() {
 		.attr("d", "M-1,-5l0,10M2,-4L2,4L10,0L2,-4")
 		.attr("class", "arrowHead");
 
-		defs.append("marker")
+	defs.append("marker")
 
 		.attr("id", "necessarystimulationmove")
 		.attr("viewBox", "-2 -6 13 12")
 		.attr("stroke-width", strokeWidth)
 		.attr("fill", "white")
-		.attr("refX", refX)
+		.attr("refX", refXCat)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -500,7 +502,7 @@ function appendDefs() {
 		.attr("d", "M-1,-5l0,10M2,-4L2,4L10,0L2,-4")
 		.attr("class", "arrowHead");
 
-		defs.append("marker")
+	defs.append("marker")
 
 		.attr("id", "necessarystimulationupdate")
 		.attr("viewBox", "-2 -6 13 12")

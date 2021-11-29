@@ -463,7 +463,6 @@ function ticked() {
 	});
 
 	compartments.select("path").attr("d", function (d) {
-		//alert("test");
 		return compartmentFlex(d);
 	});
 
@@ -553,7 +552,6 @@ function compartmentFlex(c) {
 		yMax = -Infinity;
 
 	xMin = d3.min(c.values, function (d) {
-
 		halfElementWidth = d3.select("#" + d.id).node().getBBox().width / 2;
 		return d.x - halfElementWidth;
 	});
