@@ -11,28 +11,42 @@ function customSymbol(node, nodeSize) {
 		" v " + reactionSize +
 		" h -" + reactionSize +
 		" z ";
+	
+	var omittedProcess = 
+		"m -" + reactionSize * 0.5 + " -" + reactionSize * 0.5 +
+		" h " + reactionSize +
+		" v " + reactionSize +
+		" h -" + reactionSize +
+		" z " + 
+		" m " + 0.2 * reactionSize + " " + 0.8 * reactionSize +
+		" l " + 0.2 * reactionSize + " -" + 0.6 * reactionSize + 
+		" m " + 0.2 * reactionSize + " " + 0.6 * reactionSize +
+		" l " + 0.2 * reactionSize + " -" + 0.6 * reactionSize;
 
 	var dissociation =
-		"m -" + size * 0.5 + " -" + size * 0.5 +
-		" m -" + size * 0.5 + " " + size * 0.5 +
-		" a " + size + " " + size + " 0 1 0 " + size * 2 + " 0" +
-		" a " + size + " " + size + " 0 1 0 -" + size * 2 + " 0" +
-		" m " + size * 0.3 + " 0" +
-		" a " + size * 0.7 + " " + size * 0.7 + " 0 1 0 " + size * 0.7 * 2 + " 0" +
-		" a " + size * 0.7 + " " + size * 0.7 + " 0 1 0 -" + size * 0.7 * 2 + " 0" +
-		" m -" + size * 0.3 + " 0" +
-		" h -" + size / 2 +
-		" m " + size * 3 + " 0" +
-		" h -" + size / 2;
+		"m -" + reactionSize * 0.2 + " -" + reactionSize * 0.2 +
+		" m -" + reactionSize * 0.2 + " " + reactionSize * 0.2 +
+		" a " + reactionSize + " " + reactionSize + " 0 1 0 " + reactionSize * 2 + " 0" +
+		" a " + reactionSize + " " + reactionSize + " 0 1 0 -" + reactionSize * 2 + " 0" +
+		" m " + reactionSize * 0.3 + " 0" +
+		" a " + reactionSize * 0.7 + " " + reactionSize * 0.7 + " 0 1 0 " + reactionSize * 0.7 * 2 + " 0" +
+		" a " + reactionSize * 0.7 + " " + reactionSize * 0.7 + " 0 1 0 -" + reactionSize * 0.7 * 2 + " 0" +
+		" m -" + reactionSize * 0.3 + " 0" +
+		" h -" + reactionSize / 2 +
+		" m " + reactionSize * 3 + " 0" +
+		" h -" + reactionSize / 2;
 
 	var association =
-		"m -" + size * 0.5 + " -" + size * 0.5 +
-		" m -" + size * 0.5 + " " + size * 0.5 +
-		" a " + size + " " + size + " 0 1 0 " + size * 2 + " 0" +
-		" a " + size + " " + size + " 0 1 0 -" + size * 2 + " 0" +
-		" h -" + size / 2 +
-		" m " + size * 3 + " 0" +
-		" h -" + size / 2;
+		"m -" + reactionSize * 0.25 + " -" + reactionSize * 0.25 +
+		" m -" + reactionSize * 0.25 + " " + reactionSize * 0.25 +
+		" a " + reactionSize * 0.5 + " " + reactionSize * 0.5 + " 0 1 0 " + reactionSize * 1 + " 0" +
+		" a " + reactionSize * 0.5 + " " + reactionSize * 0.5 + " 0 1 0 -" + reactionSize * 1 + " 0";
+
+		//would add antennas
+		//  +
+		// " h -" + reactionSize * 0.25 +
+		// " m " + reactionSize  * 1.25 + " 0 " +
+		// " h " + reactionSize * 0.25;
 
 	var macromolecule =
 		"m -" + size * 0.8 + " -" + size * 0.3 +
@@ -150,6 +164,15 @@ function customSymbol(node, nodeSize) {
 		" l " + size * -0.1 + " " + size * -0.1;
 	//" z ";
 
+	var phenotype =
+	"m -" + size  + " -" + size *0.25 +
+	" l " + size * 2 + " 0 " +
+	" l " + size * 0.25 + " " + size * 0.25 +
+	" l -" + size * 0.25 + " " + size * 0.25 +
+	" l -" + size * 2 + " 0 " +
+	" l -" + size * 0.25 + " -" + size * 0.25 +
+	" z ";
+
 	var missingNode =
 		"m -" + size * 0.5 + " -" + size * 0.5 +
 		"l " + size + " " + size +
@@ -161,6 +184,7 @@ function customSymbol(node, nodeSize) {
 			return simpleChemical;
 			break;
 		case 'reaction':
+		case 'necessarystimulation': console.log("missing process node: necessarystimulation")
 		case 'process':
 			return reaction;
 			break;
@@ -199,6 +223,12 @@ function customSymbol(node, nodeSize) {
 			break;
 		case 'complex multimer':
 			return complexMulti;
+			break;
+		case 'omitted process':
+			return omittedProcess;
+			break;
+		case 'phenotype':
+			return phenotype;
 			break;
 		default:
 			console.log("missing node: " + node);

@@ -267,7 +267,6 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
                 
                 console.log(newParameter);
                 return htmlChange += "<li>Attribute <em><b><span class='" + changeClass + "'>" + changedAttr + "</span></b></em> of local parameter <b><em>" + newParameter.attributes.name.value + "</em></b> changed: " + oldVal + " &rarr; " + newVal;
-                alert("!");
             }
             //get path
 
