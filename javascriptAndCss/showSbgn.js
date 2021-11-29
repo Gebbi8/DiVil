@@ -292,7 +292,7 @@ function createGraph() {
 		.on('mouseout', resetOpacity)
 		.on("dblclick", dblclicked)
 		.on("click", function(d) {	
-
+			//forceSimulation.stop();
 			// console.log(d.bivesChange, d.path);
 			// console.log(structeredData[d.path]);
 
@@ -473,9 +473,10 @@ function ticked() {
 
 
 function dragstarted(d) {
-	if (!d3.event.active) forceSimulation.alphaTarget(0.5).restart();
-	d.fx = d.x;
-	d.fy = d.y;
+	console.log("drag start");
+	if (!d3.event.active) forceSimulation.alphaTarget(0.1).restart();
+	//d.fx = d.x;
+	//d.fy = d.y;
 }
 
 function dragged(d) {
@@ -484,7 +485,8 @@ function dragged(d) {
 }
 
 function dragended(d) {
-	if (!d3.event.active) forceSimulation.alphaTarget(0);
+	//if (!d3.event.active) forceSimulation.alphaTarget(0);
+	if (!d3.event.active) forceSimulation.stop();
 	d.fx = d3.event.x;
 	d.fy = d3.event.y;
 }

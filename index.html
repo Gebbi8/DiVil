@@ -91,33 +91,6 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<!--	<nav id="sidebarMenu" class="col-md-3 col-lg-3 d-md-block bg-light sidebar collapse">
-						<div class="position-sticky pt-3">
-						  <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-							<span>Select model versions</span>
-						  </h6>
-						  <ul class="nav flex-column mb-2">
-							  <li class="nav-item">
-								<div class="form-group">
-										<div class="custom-file">
-											<input class="form-control form-control-sm" id="formFileSm" type="file">
-											<input class="form-control form-control-sm" id="formFileSm" type="file">
-											<button id="compareModels" type="button" class="btn btn-primary">compare</button>
-										</div>
-									</div>
-								</li>
-								<li class="nav-item">
-										<button id="sbgnMLdownload" type="button" class="btn btn-primary disabled">Download SBGN-ML</button>
-
-								</li>
-						  </ul>
-						</div>
-				</nav> -->
-			<main id="bivesGraph" class="ms-sm-auto px-md-4">
-				<div id="container" class="svg-container"></div>
-
-			</main>
-			<!-- //force controls
 			<div class="col-2 " id="forceControls">
 				<div class="force alpha">
 					<p><label>alpha</label> Simulation activity</p>
@@ -140,6 +113,7 @@
 							oninput="d3.select('#center_YSliderOutput').text(value); forceProperties.center.y=value; updateAll();">
 					</label>
 				</div>
+				<hr>
 
 				<div class="force">
 					<p><label><input type="checkbox" checked
@@ -165,6 +139,7 @@
 							oninput="d3.select('#charge_distanceMaxSliderOutput').text(value); forceProperties.charge.distanceMax=value; updateAll();">
 					</label>
 				</div>
+				<hr>
 
 				<div class="force">
 					<p><label><input type="checkbox" checked
@@ -190,6 +165,7 @@
 							oninput="d3.select('#collide_iterationsSliderOutput').text(value); forceProperties.collide.iterations=value; updateAll();">
 					</label>
 				</div>
+				<hr>
 
 				<div class="force">
 					<p><label><input type="checkbox"
@@ -209,6 +185,7 @@
 							oninput="d3.select('#forceX_XSliderOutput').text(value); forceProperties.forceX.x=value; updateAll();">
 					</label>
 				</div>
+				<hr>
 
 				<div class="force">
 					<p><label><input type="checkbox"
@@ -228,7 +205,7 @@
 							oninput="d3.select('#forceY_YSliderOutput').text(value); forceProperties.forceY.y=value; updateAll();">
 					</label>
 				</div>
-
+				<hr>
 				<div class="force">
 					<p><label><input type="checkbox" checked
 								onchange="forceProperties.link.enabled = this.checked; updateAll();"> link</label> Sets
@@ -248,7 +225,19 @@
 							oninput="d3.select('#link_IterationsSliderOutput').text(value); forceProperties.link.iterations=value; updateAll();">
 					</label>
 				</div>
-			</div> -->
+			</div> 
+
+
+			<main id="bivesGraph" class="col-10 ms-sm-auto px-md-4">
+				<div id="container" class="svg-container"></div>
+
+			</main>
+			
+			<!--<main id="bivesGraph" class="col-10 ms-sm-auto px-md-4">
+				<div id="container" class="svg-container"></div>
+
+			</main>-->
+			
 		</div>
 		<!-- <div class="row" id="xmlDiff"></div>
 		<div class="row" id="bivesReport"></div>
