@@ -7,10 +7,22 @@ var dimmOpacity = 0.25;
 
 function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
 
+
+
+	let info = document.getElementById("infoPopup");
+	info.style.display = "none";
+	info.innerHTML = '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+
+	//override dismiss to not remove div
+	$('.alert').on('close.bs.alert', function (event) {
+		event.preventDefault();
+		$(this).hide();
+	  });
+
 	//split diff into lines
 	const splitLines = str => xmlDiff.split(/\r?\n/);
-	var xmlLines = splitLines(xmlDiff);	
-	
+	var xmlLines = splitLines(xmlDiff);
+
 	//parse the data
 	obj = JSON.parse(data);
 	// var idMap = {delete:{}, insert:{}, update:{}, move:{}};
@@ -29,14 +41,16 @@ function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
 	// path + change to id map
 	console.log(obj);
 
-	obj.links.forEach(function (l, i){
+	obj.links.forEach(function (l, i) {
 		l.id = "link" + i;
 	});
 
 	nodes = obj.nodes;
-	nodesFilterComp = nodes.filter(function (d) {return sboSwitch(d.sboTerm) != "compartment"});
+	nodesFilterComp = nodes.filter(function (d) {
+		return sboSwitch(d.sboTerm) != "compartment"
+	});
 	links = obj.links;
-	//console.log(obj);
+	console.log(links);
 	//console.log(nodesFilterComp);
 	//////same source/link combination/////
 
@@ -103,7 +117,7 @@ function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
 	width = d3.select("#container").node().getBoundingClientRect().width;
 	height = d3.select("#container").node().getBoundingClientRect().height;
 	size = (1200 - 50) / 10;
-//	marker = width / 100;
+	//	marker = width / 100;
 
 
 	//append clean svg
@@ -134,10 +148,10 @@ function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
 	addLegend();
 
 	//add tooltip
-	d3.select("body").append("div")	
-    .attr("class", "tooltip")
-	.attr("id", "popup")				
-    .style("opacity", 0);
+	d3.select("body").append("div")
+		.attr("class", "tooltip")
+		.attr("id", "popup")
+		.style("opacity", 0);
 
 	initializeSimulation();
 
@@ -146,10 +160,16 @@ function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
 	console.log(structeredData);
 	//assign dowload function with data to button
 	document.getElementById("downloadBtn").classList.remove("disabled");
-	document.getElementById("sbgnMlDownload").onclick = function() {downloadSBGNML(obj, structeredData)};
+	document.getElementById("sbgnMlDownload").onclick = function () {
+		downloadSBGNML(obj, structeredData)
+	};
 	//document.getElementById("pngDownload").onclick = function(){ downloadPNGfromSVG("bivesGraphSvg")};
-	document.getElementById("pngDownload").onclick = function(){ downloadPNG("bivesGraphSvg")};
-	document.getElementById("svgDownload").onclick = function() {downloadSvg("bivesGraphSvg")};
+	document.getElementById("pngDownload").onclick = function () {
+		downloadPNG("bivesGraphSvg")
+	};
+	document.getElementById("svgDownload").onclick = function () {
+		downloadSvg("bivesGraphSvg")
+	};
 
 }
 
@@ -175,15 +195,15 @@ forceProperties = {
 	},
 	charge: {
 		enabled: true,
-		strength: -30,
-		distanceMin: 1,
+		strength: -500,
+		distanceMin: 50,
 		distanceMax: 2000
 	},
 	collide: {
 		enabled: true,
-		strength: .7,
+		strength: .5,
 		iterations: 1,
-		radius: nodeSize
+		radius: 40
 	},
 	forceX: {
 		enabled: true,
@@ -192,12 +212,12 @@ forceProperties = {
 	},
 	forceY: {
 		enabled: true,
-		strength: .1,
+		strength: .25,
 		y: .5
 	},
 	link: {
-		enabled: true,
-		distance: 30,
+		enabled: false,
+		distance: 50,
 		iterations: 1
 	}
 }
@@ -206,10 +226,10 @@ forceProperties = {
 function initializeForces() {
 	// add forces and associate each with a name
 	forceSimulation
-		.force("link", d3.forceLink())
-		.force("charge", d3.forceManyBody())
-		.force("collide", d3.forceCollide())
 		.force("center", d3.forceCenter())
+		.force("link", d3.forceLink(links).id(function(n) {return n.id; }))
+		.force("charge", d3.forceManyBody(-200))
+		.force("collide", d3.forceCollide().strength(0))
 		.force("forceX", d3.forceX())
 		.force("forceY", d3.forceY());
 	// apply properties to each of the forces
@@ -218,6 +238,7 @@ function initializeForces() {
 
 // apply new force properties
 function updateForces() {
+	console.log(forceSimulation.force);
 	// get each force by name and update the properties
 	forceSimulation.force("center")
 		.x(width * forceProperties.center.x)
@@ -237,12 +258,14 @@ function updateForces() {
 		.strength(forceProperties.forceY.strength * forceProperties.forceY.enabled)
 		.y(height * forceProperties.forceY.y);
 	forceSimulation.force("link")
-		.id(function (d) {
-			return d.id;
-		})
+		// .id(function (d) {
+		// 	console.log(d.id, forceProperties);
+		// 	return d.id;
+		// })
 		.distance(forceProperties.link.distance)
 		.iterations(forceProperties.link.iterations)
-		.links(forceProperties.link.enabled ? links : []);
+		//.links(forceProperties.link.enabled ? links : [])
+		;
 
 	// updates ignored until this is run
 	// restarts the simulforceSimulationation (important if forceSimulation has already slowed down)
@@ -262,7 +285,7 @@ function createGraph() {
 		.data(links)
 		.enter().append("path")
 		.attr("class", "link")
-		.attr("id", function(d, i){
+		.attr("id", function (d, i) {
 			return "link" + i;
 		})
 		.attr("stroke", function (d) {
@@ -273,7 +296,7 @@ function createGraph() {
 		.style("marker-end", function (d) {
 			//console.log(d.sboTerm, sboSwitchArc(d.sboTerm));
 			//if(d.sboTerm == "") console.log(d.source, d.target);
-			if(sboSwitchArc(d.sboTerm) == "consumption") return "none";
+			if (sboSwitchArc(d.sboTerm) == "consumption") return "none";
 			return "url(#" + sboSwitchArc(d.sboTerm) + "" + d.bivesChange + ")"
 		});
 
@@ -291,39 +314,38 @@ function createGraph() {
 		.on('mouseover', highlight)
 		.on('mouseout', resetOpacity)
 		.on("dblclick", dblclicked)
-		.on("click", function(d) {	
-
+		.on("click", function (d) {
+			//forceSimulation.stop();
 			// console.log(d.bivesChange, d.path);
 			// console.log(structeredData[d.path]);
 
 			path = d.path;
-			if(d.bivesChange == "delete") path = "old-" + d.path;
+			if (d.bivesChange == "delete") path = "old-" + d.path;
 
 			console.log(structeredData[path]);
 			console.log(path);
 
-			console.log
-            d3.select("#popup").transition()		
-                .duration(200)		
-                .style("opacity", function(d){
-					if(structeredData[path]) return 0.9;
+			d3.select("#popup").transition()
+				.duration(200)
+				.style("opacity", function (d) {
+					if (structeredData[path]) return 0.9;
 					else return 0;
 				});
 			d3.select("#popup").html(
 					function (d) {
-						if(structeredData[path]){
+						if (structeredData[path]) {
 							return "<ul>" + structeredData[path].popup + "</ul>";
 						} else {
 							return "";
 						}
 					}
 				) //getHtmlChanges from node id	
-                .style("left", (d3.event.pageX) + "px")		
-                .style("top", (d3.event.pageY - 28) + "px");	
-				ctop();
-				MathJax.typeset();
-            })
-			.on("mouseleave", hideTooltip);
+				.style("left", (d3.event.pageX) + "px")
+				.style("top", (d3.event.pageY - 28) + "px");
+			ctop();
+			MathJax.typeset();
+		})
+		.on("mouseleave", hideTooltip);
 
 	nodeShape = enterNode.append("path")
 		.attr("d", function (d) {
@@ -362,12 +384,12 @@ function createCompartments() {
 
 	nodesByCompartment = d3.nest()
 		.key(function (d) {
-		//	console.log(d.compartment)
+			//	console.log(d.compartment)
 			return d.compartment;
 		})
 		.entries(nodesFilterComp);
 
-		console.log(nodesByCompartment); 
+	console.log(nodesByCompartment);
 
 	compartments = svg
 		.selectAll("compartments")
@@ -376,6 +398,7 @@ function createCompartments() {
 				function (n) {
 					return d.key == n.id;
 				});
+				console.log(filter);
 			return filter > [];
 		}))
 		.enter().append("g")
@@ -386,38 +409,38 @@ function createCompartments() {
 		.attr("name", function (d) {
 			return d.name;
 		})
-		.on("click", function(d) {
+		.on("click", function (d) {
 			let node = nodes.find(node => node.id == d.key);
 			path = node.path;
-			if(getCompAttr(d.key, "bivesChange") == "delete") path = "old-" + path;
+			if (getCompAttr(d.key, "bivesChange") == "delete") path = "old-" + path;
 			// let popup;
 			// if(!(popup = structeredData[path])) popup = "<li>This node element was not changed.</li>";
 			// else popup = popup.popup;
 
-			d3.select("#popup").transition()		
-			.duration(200)		
-			.style("opacity", function(d){
-				if(structeredData[path]) return 0.9;
-				else return 0;
-			});
+			d3.select("#popup").transition()
+				.duration(200)
+				.style("opacity", function (d) {
+					if (structeredData[path]) return 0.9;
+					else return 0;
+				});
 			d3.select("#popup").html(
-					function (d) {
-						if(structeredData[path]){
-							return "<ul>" + structeredData[path].popup + "</ul>";
-						} else {
-							return "";
-						}
+				function (d) {
+					if (structeredData[path]) {
+						return "<ul>" + structeredData[path].popup + "</ul>";
+					} else {
+						return "";
 					}
-				)	
-				//MathJax.Hub.Rerender(); //recall mathjax
-				ctop();
-				MathJax.typeset();//MathJax.Hub.Queue(["Typeset", MathJax.Hub]); 
+				}
+			)
+			//MathJax.Hub.Rerender(); //recall mathjax
+			ctop();
+			MathJax.typeset(); //MathJax.Hub.Queue(["Typeset", MathJax.Hub]); 
 		})
 		.on("mouseleave", hideTooltip);
 
 	compartments.append("path")
 		.attr("stroke-width", 3)
-		.attr("stroke", function(d){
+		.attr("stroke", function (d) {
 			return strokeColor(getCompAttr(d.key, "bivesChange"));
 		})
 		.attr("fill", "none")
@@ -438,12 +461,35 @@ function createCompartments() {
 			});
 			return cNode[0].label;
 		});
+
+	//show popup if emtpy compartments exists
+	let allComps = nodes.filter(function(d){
+		if(d.sboTerm == "SBO:0000290") return true;
+		return false;
+	})
+	console.log(allComps);
+	allComps.forEach(e => {
+		let empty = true;
+		nodesByCompartment.forEach(c => {
+			console.log(e.id, c.key);
+			if(e.id == c.key){
+				empty = false;
+				return;
+			}
+		});
+		if(empty){
+			let info = document.getElementById("infoPopup");
+			info.innerHTML = info.innerHTML + "<p> The compartment <b><em><span class='" + e.bivesChange + "-color'>" + e.label + "</span></em></b> does not contain nodes. Thus, it is not displayed.";
+			info.style.display = "block";
+		}
+
+	});
 }
 
 function updateMathContent(s) {
 	var math = MathJax.Hub.getAllJax("popup")[0];
 	MathJax.Hub.Queue(["Text", math, s]);
-}	
+}
 
 function ticked() {
 	node.attr("cx", function (d) {
@@ -463,7 +509,6 @@ function ticked() {
 	});
 
 	compartments.select("path").attr("d", function (d) {
-		//alert("test");
 		return compartmentFlex(d);
 	});
 
@@ -474,55 +519,66 @@ function ticked() {
 
 
 function dragstarted(d) {
-	if (!d3.event.active) forceSimulation.alphaTarget(0.5).restart();
-	d.fx = d.x;
-	d.fy = d.y;
+	console.log("drag start");
+	//	if (!d3.event.active) forceSimulation.alphaTarget(0.1).restart();
+	//d.fx = d.x;
+	//d.fy = d.y;
 }
 
 function dragged(d) {
+	console.log("draging");
+	forceSimulation.alphaTarget(0.05).restart();
 	d.fx = d3.event.x;
 	d.fy = d3.event.y;
 }
 
 function dragended(d) {
-	if (!d3.event.active) forceSimulation.alphaTarget(0);
+	console.log("dragg end start");
+	//if (!d3.event.active) forceSimulation.alphaTarget(0);
+	if (!d3.event.active) 	forceSimulation.alphaTarget(0);
 	d.fx = d3.event.x;
 	d.fy = d3.event.y;
 }
 
 
 
-function highlight(d){
+function highlight(d) {
 	enterNode.style('stroke-opacity', o => (isConnected(this, o) ? 1 : dimmOpacity));
 	enterNode.select("text").style('opacity', o => (isConnected(this, o) ? 1 : dimmOpacity));
 	//this.setAttribute("stroke-opacity", 1);
 	link.style('opacity', o => (o.source.id === d.id || o.target.id === d.id ? 1 : dimmOpacity));
 }
 
-function resetOpacity(){
+function resetOpacity() {
 	enterNode.style('stroke-opacity', 1);
 	enterNode.select("text").style('opacity', 1);
 	link.style('opacity', 1);
 }
 
-var hideTooltip = function (d){
+var hideTooltip = function (d) {
 	d3.select("#popup")
-      .transition()
-      .duration(200)
-      .style("opacity", 0)
+		.transition()
+		.duration(200)
+		.style("opacity", 0)
 }
 
-function isConnected(main, other){
-	for(var i = 0; i < links.length; i++){
-			//console.log(l.source.id, main.id, l.target.id, other.id, l.target.id, main.id, l.source.id, other.id);
-			if((links[i].source.id == main.id && links[i].target.id == other.id) || (links[i].target.id == main.id && links[i].source.id == other.id) || main.id == other.id) return true;
+function isConnected(main, other) {
+	for (var i = 0; i < links.length; i++) {
+		//console.log(l.source.id, main.id, l.target.id, other.id, l.target.id, main.id, l.source.id, other.id);
+		if ((links[i].source.id == main.id && links[i].target.id == other.id) || (links[i].target.id == main.id && links[i].source.id == other.id) || main.id == other.id) return true;
 	}
 	return false;
 }
 
 function dblclicked(d) {
+	console.log(dblclicked);
 	d.fx = null;
 	d.fy = null;
+	// reheat forces
+	//if (!d3.event.active) 
+	forceSimulation.alphaTarget(0.2).restart();
+	forceSimulation.alphaTarget(0);
+
 	//if (d3.event.defaultPrevented) return; // dragged
 }
 
@@ -553,7 +609,6 @@ function compartmentFlex(c) {
 		yMax = -Infinity;
 
 	xMin = d3.min(c.values, function (d) {
-
 		halfElementWidth = d3.select("#" + d.id).node().getBBox().width / 2;
 		return d.x - halfElementWidth;
 	});
@@ -605,17 +660,18 @@ function changeProcessNode(size) {
 	}
 }
 
-function getCompAttr(id, attr){
-	for(let i = 0; i < obj.nodes.length; i++){
-		if(obj.nodes[i].id == id){
-			if(attr == "bivesChange") return obj.nodes[i].bivesChange;
+function getCompAttr(id, attr) {
+	for (let i = 0; i < obj.nodes.length; i++) {
+		if (obj.nodes[i].id == id) {
+			if (attr == "bivesChange") return obj.nodes[i].bivesChange;
 		}
 	}
 	return "getAttr Failed";
 }
 
-function addLegend(){
-	var legendSize = 10, legendSpacing = 10;
+function addLegend() {
+	var legendSize = 10,
+		legendSpacing = 10;
 
 	var color = d3.scaleOrdinal()
 		.domain(["no change", "exclusively in first verion", "exclusively in second version", "changed attribute"]) //move:  "changed position in document",
@@ -626,23 +682,25 @@ function addLegend(){
 		.data(color.domain())
 		.enter()
 		.append('g')
-		  .attr('class', 'legend')
-		  .attr('transform', function(d, i) {
+		.attr('class', 'legend')
+		.attr('transform', function (d, i) {
 			var x = 0;
 			var y = i * legendSize + 20 + i * 5;
 			return 'translate(' + x + ',' + y + ')';
 		});
-	
+
 	legend.append('rect')
 		.attr('width', legendSize)
 		.attr('height', legendSize)
 		.style('fill', color)
 		.style('stroke', color);
-	
+
 	legend.append('text')
 		.attr('x', legendSize + legendSpacing)
-		.attr('y', legendSize - legendSize/5)
-		.text(function(d) { return d; });
+		.attr('y', legendSize - legendSize / 5)
+		.text(function (d) {
+			return d;
+		});
 }
 
 function strokeColor(bives) {

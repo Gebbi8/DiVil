@@ -6,10 +6,10 @@ function tickArrows(d) {
 		x2 = d.target.x;
 
 	var element = d3.select("#" + d.target.id).select("path").node();
-	var boundingBox = element.getBoundingClientRect();
+	var boundingBox = element.getBBox();
 	//console.log(boundingBox);
-	var halfElementWidth = boundingBox.width / 2; ///currentZoom;
-	var halfElementHeight = boundingBox.height / 2; ///currentZoom;
+	var halfElementWidth = boundingBox.width / 2 + 2.5; ///currentZoom;
+	var halfElementHeight = boundingBox.height / 2 + 2.5; ///currentZoom;
 
 
 	elementClass = sboSwitchArc(d.sboTerm);
@@ -132,7 +132,7 @@ function tickArrows(d) {
 			}
 
 		}
-	} else if (targetClass == "macromolecule") {
+	} else if (targetClass == "macromolecule" || targetClass == "phenotype") {
 		var m = (d.target.y - d.source.y) / (d.target.x - d.source.x);
 		var rectWidth = halfElementWidth * 2;
 		var rectHeight = halfElementHeight * 2;

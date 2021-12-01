@@ -267,7 +267,6 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
                 
                 console.log(newParameter);
                 return htmlChange += "<li>Attribute <em><b><span class='" + changeClass + "'>" + changedAttr + "</span></b></em> of local parameter <b><em>" + newParameter.attributes.name.value + "</em></b> changed: " + oldVal + " &rarr; " + newVal;
-                alert("!");
             }
             //get path
 
@@ -470,8 +469,12 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
                     htmlChange += "<ul>" + getAllParticipant(newPath, newDoc, changeClass);
                     // console.log(htmlChange);
                     // alert();
-                    htmlChange += "<li><b><span class='insert-color'>Math</span></b>: " + getMath(newPath, newDoc) + "</li>";
-                    htmlChange += "<li><b><span class='insert-color'>Parameters</span></b>: " + getParameters(newPath, newDoc, line) + "</li>";
+
+                    let math = getMath(newPath, newDoc);
+                    if(math) htmlChange += "<li><b><span class='insert-color'>Math</span></b>: " + math + "</li>";
+
+                    let parameters = getParameters(newPath, newDoc, line);
+                    if(parameters) htmlChange += "<li><b><span class='insert-color'>Parameters</span></b>: " + parameters + "</li>";
                     //htmlChange += (newPath, newDoc, line);
                     return htmlChange += "</ul>";
                 }
@@ -615,7 +618,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
         console.log(changeType);
         let path = regEx(line, docPath);
         //console.log(path, docPath, line);
-        return htmlChange += "<li>hiiiieeer??????    Math " + changeFill + ":</li> " + getMath(path, doc);
+        return htmlChange += "<li>Math " + changeFill + ":</li> " + getMath(path, doc);
     } 
     
 
@@ -662,6 +665,7 @@ function getMath(path, doc){
     //console.log(path, path.indexOf("/kineticLaw[1]/math[1]/"));
     if(path.indexOf("/kineticLaw[1]/math[1]/") != -1) path = path.substr(0, path.indexOf("/kineticLaw[1]/math[1]/"));
     path += "/kineticLaw[1]/math[1]";
+
     path = getLocalXPath(path);
     //var mathIndex = path.indexOf("/*[local-name()='math']");
 
@@ -670,11 +674,11 @@ function getMath(path, doc){
     //     path = path.substr(0, mathIndex + 23) + helpString.substr(0, helpString.indexOf("/"));
     // }
 
-    //console.log(path);
 
     var mathML = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null).iterateNext();
-    //console.log(mathML);
+    console.log(mathML);
 
+    if(mathML == null) return mathML;
     return mathML.outerHTML;//.iterateNext().innerHTML;
 }
 

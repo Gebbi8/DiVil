@@ -5,7 +5,7 @@ function getBivesData(v1, v2, callback){
 		const load = new Promise( (resolve, reject) => {
 			let f1 = loadTestFile(file1);
 			if(f1){
-				console.log(f1);
+				//console.log(f1);
 				//alert("japp");
 			} else f1 = file1;
 
@@ -80,7 +80,7 @@ function loadTestFile(filePath) {
 
 const checkF = (file) => {
 	return new Promise((resolve, reject) => {
-		console.log(file);
+		//console.log(file);
 		//alert();
 		var bivesJob = {
 			files:	[file],
@@ -94,7 +94,7 @@ const checkF = (file) => {
 			{
 				console.log(data);
 				let fileType = $.parseJSON(data).documentType;
-				console.log(fileType[1]);
+				//console.log(fileType[1]);
 
 				//alert("check file");
 				if(fileType) resolve(fileType[1]);
@@ -130,7 +130,7 @@ function compareModels(f1, f2, command){
 	 		var comodiAnnotation = $.parseJSON(data).separateAnnotations;
 	 		//$("#sbgnJson").text(sbgnJson);
 	 		var xmlDiff = $.parseJSON (data).xmlDiff;
-	 		//console.log(xmlDiff);
+	 		console.log(xmlDiff);
 	 		//console.log(comodiAnnotation);
 	 		//console.log(report);
 	 		//console.log(xmlDocDiff, xmlDocSbml);
