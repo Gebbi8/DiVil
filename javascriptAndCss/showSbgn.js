@@ -7,6 +7,18 @@ var dimmOpacity = 0.25;
 
 function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
 
+
+
+	let info = document.getElementById("infoPopup");
+	info.style.display = "none";
+	info.innerHTML = '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+
+	//override dismiss to not remove div
+	$('.alert').on('close.bs.alert', function (event) {
+		event.preventDefault();
+		$(this).hide();
+	  });
+
 	//split diff into lines
 	const splitLines = str => xmlDiff.split(/\r?\n/);
 	var xmlLines = splitLines(xmlDiff);
@@ -386,6 +398,7 @@ function createCompartments() {
 				function (n) {
 					return d.key == n.id;
 				});
+				console.log(filter);
 			return filter > [];
 		}))
 		.enter().append("g")
@@ -448,6 +461,29 @@ function createCompartments() {
 			});
 			return cNode[0].label;
 		});
+
+	//show popup if emtpy compartments exists
+	let allComps = nodes.filter(function(d){
+		if(d.sboTerm == "SBO:0000290") return true;
+		return false;
+	})
+	console.log(allComps);
+	allComps.forEach(e => {
+		let empty = true;
+		nodesByCompartment.forEach(c => {
+			console.log(e.id, c.key);
+			if(e.id == c.key){
+				empty = false;
+				return;
+			}
+		});
+		if(empty){
+			let info = document.getElementById("infoPopup");
+			info.innerHTML = info.innerHTML + "<p> The compartment <b><em><span class='" + e.bivesChange + "-color'>" + e.label + "</span></em></b> does not contain nodes. Thus, it is not displayed.";
+			info.style.display = "block";
+		}
+
+	});
 }
 
 function updateMathContent(s) {
