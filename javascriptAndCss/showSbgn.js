@@ -204,7 +204,7 @@ forceProperties = {
 		y: .5
 	},
 	link: {
-		enabled: true,
+		enabled: false,
 		distance: 50,
 		iterations: 1
 	}
