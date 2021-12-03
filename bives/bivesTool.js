@@ -3,13 +3,18 @@ function getBivesData(v1, v2, callback){
 	const callBives = (file1, file2) => {
 		//first load test file from local storage (if they are testfiles)
 		const load = new Promise( (resolve, reject) => {
-			let f1 = loadTestFile(file1);
+			let f1;
+			if(file1.startsWith("./")) f1 = loadTestFile(file1);
+			//else f1 = loadLocalFile(file1);
+
 			if(f1){
 				//console.log(f1);
 				//alert("japp");
 			} else f1 = file1;
 
-			let f2 = loadTestFile(file2);
+			let f2;
+			if(file2.startsWith("./")) f2 = loadTestFile(file2);
+			//else f2 = loadLocalFile(file2);
 			if(f2){
 				//alert("jippi");
 			} else f2 = file2;
@@ -71,6 +76,17 @@ function loadTestFile(filePath) {
 	var result = null;
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.open("GET", filePath, false);
+	xmlhttp.send();
+	if (xmlhttp.status==200) {
+	  result = xmlhttp.responseText;
+	}
+	return result;
+}
+
+function loadLocalFile(filePath) {
+	var result = null;
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.open("GET", filePath, true);
 	xmlhttp.send();
 	if (xmlhttp.status==200) {
 	  result = xmlhttp.responseText;
