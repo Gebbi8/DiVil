@@ -2,6 +2,7 @@ function appendDefs() {
 	var defs = d3.select("svg").append("defs");
 	var refX = "12";
 	var refXCat = "9";
+	var refXNS = "9";
 	var refXInh = "2";
 	var marker = "10";
 	var refXProduction = "9";
@@ -440,7 +441,7 @@ function appendDefs() {
 		.attr("viewBox", "-2 -6 13 12")
 		.attr("stroke-width", strokeWidth)
 		.attr("fill", "white")
-		.attr("refX", refXCat)
+		.attr("refX", refXNS)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -457,7 +458,7 @@ function appendDefs() {
 		.attr("viewBox", "-2 -6 13 12")
 		.attr("stroke-width", strokeWidth)
 		.attr("fill", "white")
-		.attr("refX", refXCat)
+		.attr("refX", refXNS)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -474,7 +475,7 @@ function appendDefs() {
 		.attr("viewBox", "-2 -6 13 12")
 		.attr("stroke-width", strokeWidth)
 		.attr("fill", "white")
-		.attr("refX", refXCat)
+		.attr("refX", refXNS)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -491,7 +492,7 @@ function appendDefs() {
 		.attr("viewBox", "-2 -6 13 12")
 		.attr("stroke-width", strokeWidth)
 		.attr("fill", "white")
-		.attr("refX", refXCat)
+		.attr("refX", refXNS)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)
@@ -508,7 +509,7 @@ function appendDefs() {
 		.attr("viewBox", "-2 -6 13 12")
 		.attr("stroke-width", strokeWidth)
 		.attr("fill", "white")
-		.attr("refX", refX)
+		.attr("refX", refXNS)
 		.attr("refY", "0")
 		.attr("markerWidth", marker)
 		.attr("markerHeight", marker)

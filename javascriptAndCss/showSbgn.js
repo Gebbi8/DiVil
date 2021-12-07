@@ -374,6 +374,7 @@ function createGraph() {
 		.style("stroke", "none")
 		.style("font-size", "14px")
 		.attr('dy', "0.25em")
+		.attr('pointer-events', "none")
 		.text(function (d) {
 			//console.log(d.label);
 			return d.label
@@ -422,14 +423,14 @@ function createCompartments() {
 
 	console.log(temp);
 
-	if (temp != undefined){
+	if (temp != undefined) {
 		//alert("sadas");
 		nodesByCompartment = nodesByCompartment.concat(temp);
-	} 
+	}
 
 	console.log(nodesByCompartment);
 
-	for(let i = 0; i < compartmentHierachy.length; i++){
+	for (let i = 0; i < compartmentHierachy.length; i++) {
 		let cId = compartmentHierachy[i];
 
 		let temp = nBCTemp.find(function (d) {
@@ -442,7 +443,7 @@ function createCompartments() {
 
 	console.log(nodesByCompartment);
 	//add compartment ids to the containing compartment
-	nodesByCompartment.forEach( d => {
+	nodesByCompartment.forEach(d => {
 		console.log(d);
 		let temp = allComps.filter(function (c) {
 			return c.compartment == d.key;
@@ -519,6 +520,7 @@ function createCompartments() {
 		.style("stroke", "none")
 		.style("font-size", "14px")
 		.attr('dy', "0.25em")
+		.attr('pointer-events', "none")
 		.text(function (c) {
 
 			var cNode = nodes.filter(function (d) {
@@ -566,9 +568,10 @@ function ticked() {
 		return compartmentFlex(d);
 	});
 
-	compartments.select("text").attr("transform", function (d) {
-		return compartmentText(d);
-	});
+	compartments.select("text")
+		.attr("transform", function (d) {
+			return compartmentText(d);
+		});
 }
 
 
@@ -664,31 +667,31 @@ function compartmentFlex(c) {
 		yMax = -Infinity;
 
 	xMin = d3.min(c.values, function (d) {
-		let node =  d3.select("#" + d.id).node().getBBox();
+		let node = d3.select("#" + d.id).node().getBBox();
 
-		if(d.id.startsWith("c")) return node.x - 10;
+		if (d.id.startsWith("c")) return node.x - 10;
 		else return d.x - node.width / 2 - 10;
 
 	});
 	xMax = d3.max(c.values, function (d) {
-		let node =  d3.select("#" + d.id).node().getBBox();
+		let node = d3.select("#" + d.id).node().getBBox();
 
-		if(d.id.startsWith("c")) return node.x + node.width + 10;
+		if (d.id.startsWith("c")) return node.x + node.width + 10;
 		else return d.x + node.width / 2 + 10;
 
 	});
 
 	yMin = d3.min(c.values, function (d) {
-		let node =  d3.select("#" + d.id).node().getBBox();
+		let node = d3.select("#" + d.id).node().getBBox();
 
-		if(d.id.startsWith("c")) return node.y - 10;
+		if (d.id.startsWith("c")) return node.y - 10;
 		else return d.y - node.height / 2 - 10;
 	});
 
 	yMax = d3.max(c.values, function (d) {
-		let node =  d3.select("#" + d.id).node().getBBox();
+		let node = d3.select("#" + d.id).node().getBBox();
 
-		if(d.id.startsWith("c")) return node.y + node.height + 10;
+		if (d.id.startsWith("c")) return node.y + node.height + 10;
 		else return d.y + node.height / 2 + 10;
 	});
 
@@ -765,6 +768,7 @@ function addLegend() {
 	legend.append('text')
 		.attr('x', legendSize + legendSpacing)
 		.attr('y', legendSize - legendSize / 5)
+		.attr('pointer-events', "none")
 		.text(function (d) {
 			return d;
 		});
