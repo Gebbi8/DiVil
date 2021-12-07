@@ -17,11 +17,12 @@ function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
 	$('.alert').on('close.bs.alert', function (event) {
 		event.preventDefault();
 		$(this).hide();
-	  });
+	});
 
 	//split diff into lines
 	const splitLines = str => xmlDiff.split(/\r?\n/);
-	var xmlLines = splitLines(xmlDiff);
+	var xmlLines = [];
+	if (xmlDiff) xmlLines = splitLines(xmlDiff);
 
 	//parse the data
 	obj = JSON.parse(data);
@@ -116,7 +117,7 @@ function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
 	currentZoom = 1;
 	width = d3.select("#container").node().getBoundingClientRect().width;
 	height = d3.select("#container").node().getBoundingClientRect().height;
-	size = (1200 - 50) / 10;
+	size = (1200 - 100) / 10;
 	//	marker = width / 100;
 
 
@@ -227,7 +228,9 @@ function initializeForces() {
 	// add forces and associate each with a name
 	forceSimulation
 		.force("center", d3.forceCenter())
-		.force("link", d3.forceLink(links).id(function(n) {return n.id; }))
+		.force("link", d3.forceLink(links).id(function (n) {
+			return n.id;
+		}))
 		.force("charge", d3.forceManyBody(-200))
 		.force("collide", d3.forceCollide().strength(0))
 		.force("forceX", d3.forceX())
@@ -264,8 +267,8 @@ function updateForces() {
 		// })
 		.distance(forceProperties.link.distance)
 		.iterations(forceProperties.link.iterations)
-		//.links(forceProperties.link.enabled ? links : [])
-		;
+	//.links(forceProperties.link.enabled ? links : [])
+	;
 
 	// updates ignored until this is run
 	// restarts the simulforceSimulationation (important if forceSimulation has already slowed down)
@@ -371,6 +374,7 @@ function createGraph() {
 		.style("stroke", "none")
 		.style("font-size", "14px")
 		.attr('dy', "0.25em")
+		.attr('pointer-events', "none")
 		.text(function (d) {
 			//console.log(d.label);
 			return d.label
@@ -382,25 +386,87 @@ function createGraph() {
 //////////////Compartments///////////////
 function createCompartments() {
 
-	nodesByCompartment = d3.nest()
+	let compartmentHierachy = [];
+	let allComps = nodes.filter(function (d) {
+		return d.sboTerm == "SBO:0000290";
+	})
+
+	// first
+	console.log(compartmentHierachy, allComps);
+
+	while (compartmentHierachy.length < allComps.length) {
+
+		allComps.forEach(c => {
+			if (!compartmentHierachy.includes(c.id)) {
+				if (c.compartment == null || c.compartment == "null" || compartmentHierachy.includes(c.compartment)) compartmentHierachy.push(c.id);
+			}
+		})
+	}
+
+	compartmentHierachy = compartmentHierachy.reverse();
+
+	console.log(compartmentHierachy);
+
+	let nBCTemp = d3.nest()
 		.key(function (d) {
 			//	console.log(d.compartment)
 			return d.compartment;
 		})
 		.entries(nodesFilterComp);
 
+
+
+	nodesByCompartment = [];
+	let temp = nBCTemp.filter(function (d) {
+		return d.key == "null" || d.key == null;
+	});
+
+	console.log(temp);
+
+	if (temp != undefined) {
+		//alert("sadas");
+		nodesByCompartment = nodesByCompartment.concat(temp);
+	}
+
 	console.log(nodesByCompartment);
+
+	for (let i = 0; i < compartmentHierachy.length; i++) {
+		let cId = compartmentHierachy[i];
+
+		let temp = nBCTemp.find(function (d) {
+			//console.log(d, cId);
+			return d.key == cId;
+		});
+		if (temp != undefined) nodesByCompartment = nodesByCompartment.concat(temp);
+
+	}
+
+	console.log(nodesByCompartment);
+	//add compartment ids to the containing compartment
+	nodesByCompartment.forEach(d => {
+		console.log(d);
+		let temp = allComps.filter(function (c) {
+			return c.compartment == d.key;
+		});
+		console.log(temp);
+		d.values = d.values.concat(temp);
+	})
+
+
+	console.log(nodesByCompartment);
+
+	//nodesByCompartment is now sorted by drawing dependency
 
 	compartments = svg
 		.selectAll("compartments")
-		.data(nodesByCompartment.filter(function (d) {
-			var filter = nodes.filter(
-				function (n) {
-					return d.key == n.id;
-				});
-				console.log(filter);
-			return filter > [];
-		}))
+		.data(
+			nodesByCompartment.filter(function (d) {
+				var filter = nodes.filter(
+					function (n) {
+						return d.key == n.id;
+					});
+				return filter > [];
+			}))
 		.enter().append("g")
 		.attr("class", "compartment")
 		.attr("id", function (d) {
@@ -454,6 +520,7 @@ function createCompartments() {
 		.style("stroke", "none")
 		.style("font-size", "14px")
 		.attr('dy', "0.25em")
+		.attr('pointer-events', "none")
 		.text(function (c) {
 
 			var cNode = nodes.filter(function (d) {
@@ -463,32 +530,21 @@ function createCompartments() {
 		});
 
 	//show popup if emtpy compartments exists
-	let allComps = nodes.filter(function(d){
-		if(d.sboTerm == "SBO:0000290") return true;
-		return false;
-	})
-	console.log(allComps);
 	allComps.forEach(e => {
 		let empty = true;
 		nodesByCompartment.forEach(c => {
-			console.log(e.id, c.key);
-			if(e.id == c.key){
+			if (e.id == c.key) {
 				empty = false;
 				return;
 			}
 		});
-		if(empty){
+		if (empty) {
 			let info = document.getElementById("infoPopup");
 			info.innerHTML = info.innerHTML + "<p> The compartment <b><em><span class='" + e.bivesChange + "-color'>" + e.label + "</span></em></b> does not contain nodes. Thus, it is not displayed.";
 			info.style.display = "block";
 		}
 
 	});
-}
-
-function updateMathContent(s) {
-	var math = MathJax.Hub.getAllJax("popup")[0];
-	MathJax.Hub.Queue(["Text", math, s]);
 }
 
 function ticked() {
@@ -512,9 +568,10 @@ function ticked() {
 		return compartmentFlex(d);
 	});
 
-	compartments.select("text").attr("transform", function (d) {
-		return compartmentText(d);
-	});
+	compartments.select("text")
+		.attr("transform", function (d) {
+			return compartmentText(d);
+		});
 }
 
 
@@ -535,7 +592,7 @@ function dragged(d) {
 function dragended(d) {
 	console.log("dragg end start");
 	//if (!d3.event.active) forceSimulation.alphaTarget(0);
-	if (!d3.event.active) 	forceSimulation.alphaTarget(0);
+	if (!d3.event.active) forceSimulation.alphaTarget(0);
 	d.fx = d3.event.x;
 	d.fy = d3.event.y;
 }
@@ -602,6 +659,7 @@ function getColor(bivesColor) {
 }
 
 function compartmentFlex(c) {
+	//console.log("------------------------------------------------: ", c.key);
 	//find min and max values of contained nodes
 	var xMin = Infinity,
 		xMax = -Infinity,
@@ -609,20 +667,32 @@ function compartmentFlex(c) {
 		yMax = -Infinity;
 
 	xMin = d3.min(c.values, function (d) {
-		halfElementWidth = d3.select("#" + d.id).node().getBBox().width / 2;
-		return d.x - halfElementWidth;
+		let node = d3.select("#" + d.id).node().getBBox();
+
+		if (d.id.startsWith("c")) return node.x - 10;
+		else return d.x - node.width / 2 - 10;
+
 	});
 	xMax = d3.max(c.values, function (d) {
-		halfElementWidth = d3.select("#" + d.id).node().getBBox().width / 2;
-		return d.x + halfElementWidth;
+		let node = d3.select("#" + d.id).node().getBBox();
+
+		if (d.id.startsWith("c")) return node.x + node.width + 10;
+		else return d.x + node.width / 2 + 10;
+
 	});
+
 	yMin = d3.min(c.values, function (d) {
-		halfElementHeight = d3.select("#" + d.id).node().getBBox().height / 2;
-		return d.y - halfElementHeight;
+		let node = d3.select("#" + d.id).node().getBBox();
+
+		if (d.id.startsWith("c")) return node.y - 10;
+		else return d.y - node.height / 2 - 10;
 	});
+
 	yMax = d3.max(c.values, function (d) {
-		halfElementHeight = d3.select("#" + d.id).node().getBBox().height / 2;
-		return d.y + halfElementHeight;
+		let node = d3.select("#" + d.id).node().getBBox();
+
+		if (d.id.startsWith("c")) return node.y + node.height + 10;
+		else return d.y + node.height / 2 + 10;
 	});
 
 	var x;
@@ -698,6 +768,7 @@ function addLegend() {
 	legend.append('text')
 		.attr('x', legendSize + legendSpacing)
 		.attr('y', legendSize - legendSize / 5)
+		.attr('pointer-events', "none")
 		.text(function (d) {
 			return d;
 		});
