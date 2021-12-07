@@ -377,10 +377,10 @@
 		//let testJson = "testModels/testJson/Kummer5vs6.json";
 		// let testJson = "testModels/testJson/toyModel-same.json";
 		//let testJson = "testModels/testJson/testJson+Comodi/toyModel.json";
-		let testJson = "testModels/testJson/julias.json";
-		$.get(testJson, function(data){
-			showSbgn(data, null);
-		}, 'text');
+		// let testJson = "testModels/testJson/julias.json";
+		// $.get(testJson, function(data){
+		// 	showSbgn(data, null);
+		// }, 'text');
 
 		//assign examples from local files
 		document.getElementById("e1Kummer").onclick = function () {
@@ -409,7 +409,7 @@
 		}
 
 		window.onload = function () {
-			//document.getElementById("e1Kummer").click();
+			document.getElementById("e1Kummer").click();
 			//assignExamples(hiddenTests["omex"][0], hiddenTests["omex"][1]);
 			//assignExamples(hiddenTests["xml"][0], hiddenTests["xml"][1]);
 			//assignExamples(hiddenTests["paths"][0], hiddenTests["paths"][1]);
