@@ -114,9 +114,13 @@ const checkF = (file) => {
 
 				//alert("check file");
 				if(fileType) resolve(fileType[1]);
-				else reject("meh");
+				else reject("Failed to load file.");
 			}
 		);
+	})
+	.catch((error) => {
+		alert(error);
+		console.log("load failed");
 	})
 }
 
