@@ -1,4 +1,7 @@
 function appendDefs() {
+	if(getDeviceWidth() < 700){
+
+	}
 	var defs = d3.select("svg").append("defs");
 	var refX = "12";
 	var refXCat = "9";
@@ -15,6 +18,10 @@ function appendDefs() {
 	var insertC = "#76D6AF";
 	var deleteC = "#D66A56";
 	var moveC = "#8E67D6";
+
+	if(getDeviceWidth() < 700){
+		marker = "7.5";
+	}
 
 
 	defs.append("marker")
