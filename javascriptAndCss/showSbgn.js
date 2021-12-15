@@ -2,6 +2,7 @@ var currentZoom, width, height, size, marker, svg, obj, nodes, links, node, link
 var sameLinks;
 var nodeSize = 50;
 var dimmOpacity = 0.25;
+var dragable = true;
 
 
 function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
@@ -320,6 +321,8 @@ function createGraph() {
 			// console.log(d.bivesChange, d.path);
 			// console.log(structeredData[d.path]);
 
+			if (d3.event.defaultPrevented) return;
+
 			path = d.path;
 			if (d.bivesChange == "delete") path = "old-" + d.path;
 
@@ -353,6 +356,7 @@ function createGraph() {
 	if(getDeviceWidth() < 700){
 		nodeSize = 30;
 		fontSize = "8px";
+		dragable = false;
 	} 
 
 
@@ -587,21 +591,25 @@ function ticked() {
 
 function dragstarted(d) {
 	console.log("drag start");
-	//	if (!d3.event.active) forceSimulation.alphaTarget(0.1).restart();
+		if(!dragable) return;
+		if (!d3.event.active) forceSimulation.alphaTarget(0.1).restart();
 	//d.fx = d.x;
 	//d.fy = d.y;
 }
 
 function dragged(d) {
-	console.log("draging");
-	forceSimulation.alphaTarget(0.05).restart();
+	if(!dragable) return;
+
+	console.log("dragging");
+	//forceSimulation.alphaTarget(0.05).restart();
 	d.fx = d3.event.x;
 	d.fy = d3.event.y;
 }
 
 function dragended(d) {
+	if(!dragable) return;
+
 	console.log("dragg end start");
-	//if (!d3.event.active) forceSimulation.alphaTarget(0);
 	if (!d3.event.active) forceSimulation.alphaTarget(0);
 	d.fx = d3.event.x;
 	d.fy = d3.event.y;
