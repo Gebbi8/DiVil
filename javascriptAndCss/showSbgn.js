@@ -1,12 +1,10 @@
 var currentZoom, width, height, size, marker, svg, obj, nodes, links, node, link, nodeShape, nodeLabel, compartments, nodesByCompartment, enterNode, structeredData;
 var sameLinks;
-var docDeb; //for debugging
 var nodeSize = 50;
 var dimmOpacity = 0.25;
 
 
 function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
-
 
 
 	let info = document.getElementById("infoPopup");
@@ -350,6 +348,14 @@ function createGraph() {
 		})
 		.on("mouseleave", hideTooltip);
 
+	
+	let fontSize = "12px"
+	if(getDeviceWidth() < 700){
+		nodeSize = 30;
+		fontSize = "8px";
+	} 
+
+
 	nodeShape = enterNode.append("path")
 		.attr("d", function (d) {
 			var nodeType = sboSwitch(d.sboTerm);
@@ -372,7 +378,7 @@ function createGraph() {
 	nodeLabel = enterNode.append("text")
 		.style("text-anchor", "middle")
 		.style("stroke", "none")
-		.style("font-size", "14px")
+		.style("font-size", fontSize)
 		.attr('dy', "0.25em")
 		.attr('pointer-events', "none")
 		.text(function (d) {
@@ -548,15 +554,19 @@ function createCompartments() {
 }
 
 function ticked() {
-	node.attr("cx", function (d) {
-			return d.x;
+	//console.log(node.attr);
+	nodeShape.attr("cx", function (d) {
+			let nodeWidth = d3.select("#" + d.id).node().getBBox().width;
+			return d.x = Math.max(nodeWidth/2 + 10, Math.min(d.x, width - nodeWidth/2 - 10));
 		})
 		.attr("cy", function (d) {
-			return d.y;
-		});
-
+			let nodeHeight = d3.select("#" + d.id).node().getBBox().height;
+			return d.y = Math.max(nodeHeight/2 + 10, Math.min(d.y, height - nodeHeight/2 - 10));
+		})
+//alert("tasdasd");
 	link.attr("d", tickArrows);
 	nodeShape.attr("transform", function (d) {
+		//alert("!");
 		return "translate(" + d.x + "," + d.y + ")";
 	});
 
@@ -791,4 +801,18 @@ function strokeColor(bives) {
 
 function updateAll() {
 	updateForces();
+}
+
+function getDeviceWidth() {
+    if (typeof (window.innerWidth) == 'number') {
+        //Non-IE
+        return window.innerWidth;
+    } else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
+        //IE 6+ in 'standards compliant mode'
+        return document.documentElement.clientWidth;
+    } else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
+        //IE 4 compatible
+        return document.body.clientWidth;
+    }
+    return 0;
 }
