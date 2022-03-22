@@ -1,5 +1,5 @@
 function customSymbol(node, nodeSize) {
-	size = nodeSize;
+	var size = nodeSize;
 
 	// DEFINE A COUPLE OF CUSTOM SYMBOLS
 	var reactionSize = nodeSize * .3;
@@ -11,15 +11,15 @@ function customSymbol(node, nodeSize) {
 		" v " + reactionSize +
 		" h -" + reactionSize +
 		" z ";
-	
-	var omittedProcess = 
+
+	var omittedProcess =
 		"m -" + reactionSize * 0.5 + " -" + reactionSize * 0.5 +
 		" h " + reactionSize +
 		" v " + reactionSize +
 		" h -" + reactionSize +
-		" z " + 
+		" z " +
 		" m " + 0.2 * reactionSize + " " + 0.8 * reactionSize +
-		" l " + 0.2 * reactionSize + " -" + 0.6 * reactionSize + 
+		" l " + 0.2 * reactionSize + " -" + 0.6 * reactionSize +
 		" m " + 0.2 * reactionSize + " " + 0.6 * reactionSize +
 		" l " + 0.2 * reactionSize + " -" + 0.6 * reactionSize;
 
@@ -42,11 +42,11 @@ function customSymbol(node, nodeSize) {
 		" a " + reactionSize * 0.5 + " " + reactionSize * 0.5 + " 0 1 0 " + reactionSize * 1 + " 0" +
 		" a " + reactionSize * 0.5 + " " + reactionSize * 0.5 + " 0 1 0 -" + reactionSize * 1 + " 0";
 
-		//would add antennas
-		//  +
-		// " h -" + reactionSize * 0.25 +
-		// " m " + reactionSize  * 1.25 + " 0 " +
-		// " h " + reactionSize * 0.25;
+	//would add antennas
+	//  +
+	// " h -" + reactionSize * 0.25 +
+	// " m " + reactionSize  * 1.25 + " 0 " +
+	// " h " + reactionSize * 0.25;
 
 	var macromolecule =
 		"m -" + size * 0.8 + " -" + size * 0.3 +
@@ -165,13 +165,13 @@ function customSymbol(node, nodeSize) {
 	//" z ";
 
 	var phenotype =
-	"m -" + size  + " -" + size *0.25 +
-	" l " + size * 2 + " 0 " +
-	" l " + size * 0.25 + " " + size * 0.25 +
-	" l -" + size * 0.25 + " " + size * 0.25 +
-	" l -" + size * 2 + " 0 " +
-	" l -" + size * 0.25 + " -" + size * 0.25 +
-	" z ";
+		"m -" + size + " -" + size * 0.25 +
+		" l " + size * 2 + " 0 " +
+		" l " + size * 0.25 + " " + size * 0.25 +
+		" l -" + size * 0.25 + " " + size * 0.25 +
+		" l -" + size * 2 + " 0 " +
+		" l -" + size * 0.25 + " -" + size * 0.25 +
+		" z ";
 
 	var missingNode =
 		"m -" + size * 0.5 + " -" + size * 0.5 +
@@ -182,54 +182,41 @@ function customSymbol(node, nodeSize) {
 	switch (node) {
 		case 'simple chemical':
 			return simpleChemical;
-			break;
+
 		case 'reaction':
-		case 'necessarystimulation': console.log("missing process node: necessarystimulation")
+		case 'necessarystimulation':
 		case 'process':
 			return reaction;
-			break;
 		case 'dissociation':
 			return dissociation;
-			break;
 		case 'association':
 			return association;
-			break;
+
 		case 'macromolecule':
 			return macromolecule;
-			break;
 		case 'nucleic acid feature':
 			return nucleicAcidFeature;
-			break;
 		case 'unspecified entity':
 			return unspecifiedEntity;
-			break;
 		case 'source and sink':
 			return sourceAndSink;
-			break;
 		case 'complex':
 			return complex;
-			break;
 		case 'perturbing agent':
 			return perturbingAgent;
-			break;
 		case 'simple chemical multimer':
 			return simpleChemicalMulti;
-			break;
 		case 'macromolecule multimer':
 			return macromoleculeMultimer;
-			break;
 		case 'nucleic acid feature multimer':
 			return nucleicAcidFeatureMultimer;
-			break;
 		case 'complex multimer':
 			return complexMulti;
-			break;
 		case 'omitted process':
 			return omittedProcess;
-			break;
 		case 'phenotype':
 			return phenotype;
-			break;
+
 		default:
 			console.log("missing node: " + node);
 			return missingNode;

@@ -1,25 +1,28 @@
-var currentZoom, width, height, size, marker, svg, obj, nodes, links, node, link, nodeShape, nodeLabel, compartments, nodesByCompartment, enterNode, structeredData;
+import * as d3 from '../thirdParty/d3.min.js';
+import * as d3Sbgn from './appendDefs.js';
+import * as xmlParser from './xmlParser.js';
+import * as sboTermMapper from './sboTermMapping.js';
+import * as customSymbol from './customSymbol';
+
+var width, height, svg, obj, nodes, links, node, link, nodeShape, nodeLabel, compartments, nodesByCompartment, enterNode, structeredData, nodesFilterComp;
 var sameLinks;
 var nodeSize = 50;
 var dimmOpacity = 0.25;
 var dragable = true;
 
 
-function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
+export function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
+
+	alert("check my out <<<<-----");
 
 
 	let info = document.getElementById("infoPopup");
 	info.style.display = "none";
 	info.innerHTML = '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
 
-	//override dismiss to not remove div
-	$('.alert').on('close.bs.alert', function (event) {
-		event.preventDefault();
-		$(this).hide();
-	});
 
 	//split diff into lines
-	const splitLines = str => xmlDiff.split(/\r?\n/);
+	const splitLines = xmlDiff.split(/\r?\n/); //!!! check !!!
 	var xmlLines = [];
 	if (xmlDiff) xmlLines = splitLines(xmlDiff);
 
@@ -47,7 +50,7 @@ function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
 
 	nodes = obj.nodes;
 	nodesFilterComp = nodes.filter(function (d) {
-		return sboSwitch(d.sboTerm) != "compartment"
+		return sboTermMapper.sboSwitch(d.sboTerm) != "compartment"
 	});
 	links = obj.links;
 	console.log(links);
@@ -103,20 +106,19 @@ function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
 	d3.selectAll("#bivesGraph").selectAll("svg").remove();
 
 	//check if graph data is available
-	if (data == "" || data == undefined) {
-		$('#graphTab').hide();
-		alert("No data for graph available.")
-		return;
-	}
+	/* 	if (data == "" || data == undefined) {
+			$('#graphTab').hide();
+			alert("No data for graph available.")
+			return;
+		} */
 
 
 
 	//set size and zoom variables
 	console.log(d3.select("#container").node().getBoundingClientRect());
-	currentZoom = 1;
 	width = d3.select("#container").node().getBoundingClientRect().width;
 	height = d3.select("#container").node().getBoundingClientRect().height;
-	size = (1200 - 100) / 10;
+	//var size = (1200 - 100) / 10;
 	//	marker = width / 100;
 
 
@@ -131,7 +133,7 @@ function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
 		.attr("width", width);
 	//	.call(zoom);
 
-	appendDefs(); //define arrowheads: see appendDefs.js
+	d3Sbgn.appendDefs(); //define arrowheads: see appendDefs.js
 
 	//add addEventListener to checkbox for port toggling
 	//var checkbox = document.querySelector("input[id=portToggle]");
@@ -155,21 +157,11 @@ function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
 
 	initializeSimulation();
 
-	structeredData = getStructeredData(xmlLines, comodiAnnotation, v1, v2);
+	structeredData = xmlParser.getStructeredData(xmlLines, comodiAnnotation, v1, v2);
 
 	console.log(structeredData);
 	//assign dowload function with data to button
-	document.getElementById("downloadBtn").classList.remove("disabled");
-	document.getElementById("sbgnMlDownload").onclick = function () {
-		downloadSBGNML(obj, structeredData)
-	};
-	//document.getElementById("pngDownload").onclick = function(){ downloadPNGfromSVG("bivesGraphSvg")};
-	document.getElementById("pngDownload").onclick = function () {
-		downloadPNG("bivesGraphSvg")
-	};
-	document.getElementById("svgDownload").onclick = function () {
-		downloadSvg("bivesGraphSvg")
-	};
+
 
 }
 
@@ -187,7 +179,7 @@ function initializeSimulation() {
 }
 
 // values for all forces
-forceProperties = {
+var forceProperties = {
 	center: {
 		enabled: true,
 		x: 0.5,
@@ -266,8 +258,8 @@ function updateForces() {
 		// })
 		.distance(forceProperties.link.distance)
 		.iterations(forceProperties.link.iterations)
-	//.links(forceProperties.link.enabled ? links : [])
-	;
+		//.links(forceProperties.link.enabled ? links : [])
+		;
 
 	// updates ignored until this is run
 	// restarts the simulforceSimulationation (important if forceSimulation has already slowed down)
@@ -298,8 +290,8 @@ function createGraph() {
 		.style("marker-end", function (d) {
 			//console.log(d.sboTerm, sboSwitchArc(d.sboTerm));
 			//if(d.sboTerm == "") console.log(d.source, d.target);
-			if (sboSwitchArc(d.sboTerm) == "consumption") return "none";
-			return "url(#" + sboSwitchArc(d.sboTerm) + "" + d.bivesChange + ")"
+			if (sboTermMapper.sboSwitchArc(d.sboTerm) == "consumption") return "none";
+			return "url(#" + sboTermMapper.sboSwitchArc(d.sboTerm) + "" + d.bivesChange + ")"
 		});
 
 	////////// nodes ////////
@@ -323,7 +315,7 @@ function createGraph() {
 
 			if (d3.event.defaultPrevented) return;
 
-			path = d.path;
+			var path = d.path;
 			if (d.bivesChange == "delete") path = "old-" + d.path;
 
 			console.log(structeredData[path]);
@@ -331,39 +323,39 @@ function createGraph() {
 
 			d3.select("#popup").transition()
 				.duration(200)
-				.style("opacity", function (d) {
+				.style("opacity", function () {
 					if (structeredData[path]) return 0.9;
 					else return 0;
 				});
 			d3.select("#popup").html(
-					function (d) {
-						if (structeredData[path]) {
-							return "<ul>" + structeredData[path].popup + "</ul>";
-						} else {
-							return "";
-						}
+				function () {
+					if (structeredData[path]) {
+						return "<ul>" + structeredData[path].popup + "</ul>";
+					} else {
+						return "";
 					}
-				) //getHtmlChanges from node id	
+				}
+			) //getHtmlChanges from node id	
 				.style("left", (d3.event.pageX) + "px")
 				.style("top", (d3.event.pageY - 28) + "px");
-			ctop();
-			MathJax.typeset();
+			/* ctop();
+			MathJax.typeset(); */
 		})
 		.on("mouseleave", hideTooltip);
 
-	
+
 	let fontSize = "12px"
-	if(getDeviceWidth() < 700){
+	if (getDeviceWidth() < 700) {
 		nodeSize = 30;
 		fontSize = "8px";
 		dragable = false;
-	} 
+	}
 
 
 	nodeShape = enterNode.append("path")
 		.attr("d", function (d) {
-			var nodeType = sboSwitch(d.sboTerm);
-			return customSymbol(nodeType, nodeSize);
+			var nodeType = sboTermMapper.sboSwitch(d.sboTerm);
+			return customSymbol.customSymbol(nodeType, nodeSize);
 		})
 		.attr("id", function (d) {
 			return d.id
@@ -487,7 +479,7 @@ function createCompartments() {
 		})
 		.on("click", function (d) {
 			let node = nodes.find(node => node.id == d.key);
-			path = node.path;
+			var path = node.path;
 			if (getCompAttr(d.key, "bivesChange") == "delete") path = "old-" + path;
 			// let popup;
 			// if(!(popup = structeredData[path])) popup = "<li>This node element was not changed.</li>";
@@ -495,12 +487,12 @@ function createCompartments() {
 
 			d3.select("#popup").transition()
 				.duration(200)
-				.style("opacity", function (d) {
+				.style("opacity", function () {
 					if (structeredData[path]) return 0.9;
 					else return 0;
 				});
 			d3.select("#popup").html(
-				function (d) {
+				function () {
 					if (structeredData[path]) {
 						return "<ul>" + structeredData[path].popup + "</ul>";
 					} else {
@@ -509,8 +501,8 @@ function createCompartments() {
 				}
 			)
 			//MathJax.Hub.Rerender(); //recall mathjax
-			ctop();
-			MathJax.typeset(); //MathJax.Hub.Queue(["Typeset", MathJax.Hub]); 
+			/* 			ctop();
+						MathJax.typeset(); //MathJax.Hub.Queue(["Typeset", MathJax.Hub]);  */
 		})
 		.on("mouseleave", hideTooltip);
 
@@ -560,15 +552,15 @@ function createCompartments() {
 function ticked() {
 	//console.log(node.attr);
 	nodeShape.attr("cx", function (d) {
-			let nodeWidth = d3.select("#" + d.id).node().getBBox().width;
-			return d.x = Math.max(nodeWidth/2 + 10, Math.min(d.x, width - nodeWidth/2 - 10));
-		})
+		let nodeWidth = d3.select("#" + d.id).node().getBBox().width;
+		return d.x = Math.max(nodeWidth / 2 + 10, Math.min(d.x, width - nodeWidth / 2 - 10));
+	})
 		.attr("cy", function (d) {
 			let nodeHeight = d3.select("#" + d.id).node().getBBox().height;
-			return d.y = Math.max(nodeHeight/2 + 10, Math.min(d.y, height - nodeHeight/2 - 10));
+			return d.y = Math.max(nodeHeight / 2 + 10, Math.min(d.y, height - nodeHeight / 2 - 10));
 		})
-//alert("tasdasd");
-	link.attr("d", tickArrows);
+	//alert("tasdasd");
+	//link.attr("d", tickArrows); //???
 	nodeShape.attr("transform", function (d) {
 		//alert("!");
 		return "translate(" + d.x + "," + d.y + ")";
@@ -589,16 +581,16 @@ function ticked() {
 }
 
 
-function dragstarted(d) {
+function dragstarted() {
 	console.log("drag start");
-		if(!dragable) return;
-		if (!d3.event.active) forceSimulation.alphaTarget(0.1).restart();
+	if (!dragable) return;
+	if (!d3.event.active) forceSimulation.alphaTarget(0.1).restart();
 	//d.fx = d.x;
 	//d.fy = d.y;
 }
 
 function dragged(d) {
-	if(!dragable) return;
+	if (!dragable) return;
 
 	console.log("dragging");
 	//forceSimulation.alphaTarget(0.05).restart();
@@ -607,7 +599,7 @@ function dragged(d) {
 }
 
 function dragended(d) {
-	if(!dragable) return;
+	if (!dragable) return;
 
 	console.log("dragg end start");
 	if (!d3.event.active) forceSimulation.alphaTarget(0);
@@ -630,7 +622,7 @@ function resetOpacity() {
 	link.style('opacity', 1);
 }
 
-var hideTooltip = function (d) {
+var hideTooltip = function () {
 	d3.select("#popup")
 		.transition()
 		.duration(200)
@@ -657,24 +649,20 @@ function dblclicked(d) {
 	//if (d3.event.defaultPrevented) return; // dragged
 }
 
-function getColor(bivesColor) {
+/* function getColor(bivesColor) {
 	switch (bivesColor) {
 		case 'insert':
 			return "green";
-			break;
 		case 'delete':
 			return "red";
-			break;
 		case 'move':
 			return "blue";
-			break;
 		case 'update':
 			return "orange";
-			break;
 		default:
 			return "black";
 	}
-}
+} */
 
 function compartmentFlex(c) {
 	//console.log("------------------------------------------------: ", c.key);
@@ -727,7 +715,7 @@ function compartmentFlex(c) {
 		" h " + (-x) +
 		" q " + (-x / 3) + " " + 0 + " " + (-x) + " " + (-14) +
 		" z ";
-};
+}
 
 function compartmentText(c) {
 	var bBox = d3.select("#" + c.key + "-path").node().getBBox();
@@ -737,8 +725,8 @@ function compartmentText(c) {
 	return "translate(" + xMid + "," + y + ")";
 }
 
-function changeProcessNode(size) {
-	var size = size * 0.15;
+/* function changeProcessNode(size) {
+	size = size * 0.15;
 	if (document.getElementById("portToggle").checked) {
 		d3.selectAll(".node.process").selectAll("path")
 			.attr("d", "m -" + size * 0.5 + " -" + size * 0.5 + " h " + size + " v " + size + " h -" + size + " z ");
@@ -746,7 +734,7 @@ function changeProcessNode(size) {
 		d3.selectAll(".node.process").selectAll("path")
 			.attr("d", "m -" + size * 0.5 + " -" + size * 0.5 + " h " + size + " v " + size + " h -" + size + " z " + " m 0 " + size / 2 + " h -" + size / 2 + " m " + size * 2 + " 0" + " h -" + size / 2);
 	}
-}
+} */
 
 function getCompAttr(id, attr) {
 	for (let i = 0; i < obj.nodes.length; i++) {
@@ -804,23 +792,23 @@ function strokeColor(bives) {
 			return "#8E67D6";
 		case 'update':
 			return "#D6D287";
-	};
+	}
 }
 
-function updateAll() {
+/* function updateAll() {
 	updateForces();
-}
+} */
 
 function getDeviceWidth() {
-    if (typeof (window.innerWidth) == 'number') {
-        //Non-IE
-        return window.innerWidth;
-    } else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
-        //IE 6+ in 'standards compliant mode'
-        return document.documentElement.clientWidth;
-    } else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
-        //IE 4 compatible
-        return document.body.clientWidth;
-    }
-    return 0;
+	if (typeof (window.innerWidth) == 'number') {
+		//Non-IE
+		return window.innerWidth;
+	} else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
+		//IE 6+ in 'standards compliant mode'
+		return document.documentElement.clientWidth;
+	} else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
+		//IE 4 compatible
+		return document.body.clientWidth;
+	}
+	return 0;
 }
