@@ -2,7 +2,8 @@ import * as d3 from '../thirdParty/d3.min.js';
 import * as d3Sbgn from './appendDefs.js';
 import * as xmlParser from './xmlParser.js';
 import * as sboTermMapper from './sboTermMapping.js';
-import * as customSymbol from './customSymbol';
+import * as customSymbol from './customSymbol.js';
+import * as arrowsOnNodes from './arrowsOnNodes.js';
 
 var width, height, svg, obj, nodes, links, node, link, nodeShape, nodeLabel, compartments, nodesByCompartment, enterNode, structeredData, nodesFilterComp;
 var sameLinks;
@@ -12,22 +13,14 @@ var dragable = true;
 
 
 export function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
-
-	alert("check my out <<<<-----");
-
-
-	let info = document.getElementById("infoPopup");
-	info.style.display = "none";
-	info.innerHTML = '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-
-
 	//split diff into lines
-	const splitLines = xmlDiff.split(/\r?\n/); //!!! check !!!
+	//const splitLines = //!!! check !!!
+	console.log(data, xmlDiff);
 	var xmlLines = [];
-	if (xmlDiff) xmlLines = splitLines(xmlDiff);
+	//if (xmlDiff) xmlLines = xmlDiff.split(/\r?\n/);
 
 	//parse the data
-	obj = JSON.parse(data);
+	obj = data;
 	// var idMap = {delete:{}, insert:{}, update:{}, move:{}};
 
 	// obj.nodes.forEach(node => {
@@ -49,6 +42,7 @@ export function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
 	});
 
 	nodes = obj.nodes;
+	console.log("nodes: ", nodes);
 	nodesFilterComp = nodes.filter(function (d) {
 		return sboTermMapper.sboSwitch(d.sboTerm) != "compartment"
 	});
@@ -159,7 +153,8 @@ export function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
 
 	structeredData = xmlParser.getStructeredData(xmlLines, comodiAnnotation, v1, v2);
 
-	console.log(structeredData);
+	if (structeredData == {}) console.log("no xmlLines available, check for dev mode");
+	else console.log("structurede data: ", structeredData);
 	//assign dowload function with data to button
 
 
@@ -232,7 +227,7 @@ function initializeForces() {
 
 // apply new force properties
 function updateForces() {
-	console.log(forceSimulation.force);
+	//console.log(forceSimulation.force);
 	// get each force by name and update the properties
 	forceSimulation.force("center")
 		.x(width * forceProperties.center.x)
@@ -560,7 +555,7 @@ function ticked() {
 			return d.y = Math.max(nodeHeight / 2 + 10, Math.min(d.y, height - nodeHeight / 2 - 10));
 		})
 	//alert("tasdasd");
-	//link.attr("d", tickArrows); //???
+	link.attr("d", function (d) { return arrowsOnNodes.tickArrows(d, sameLinks) });
 	nodeShape.attr("transform", function (d) {
 		//alert("!");
 		return "translate(" + d.x + "," + d.y + ")";

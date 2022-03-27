@@ -1,4 +1,4 @@
-function sboSwitch(sboTerm) {
+export function sboSwitch(sboTerm) {
 	//console.log(sboTerm);
 	switch (sboTerm) {
 		case "SBO:0000247": return "simple chemical"; // simple chemical
@@ -124,7 +124,7 @@ function sboSwitch(sboTerm) {
 	}
 }
 
-function sboSwitchArc(sboTerm) {
+export function sboSwitchArc(sboTerm) {
 	//console.log(sboTerm);
 	switch (sboTerm) {
 		case "SBO:0000247": return "simple chemical"; // simple chemical

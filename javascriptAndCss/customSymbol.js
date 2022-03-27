@@ -1,4 +1,4 @@
-function customSymbol(node, nodeSize) {
+export function customSymbol(node, nodeSize) {
 	var size = nodeSize;
 
 	// DEFINE A COUPLE OF CUSTOM SYMBOLS
