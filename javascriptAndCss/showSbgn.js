@@ -12,13 +12,17 @@ var dimmOpacity = 0.25;
 var dragable = true;
 
 
-export function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
+export function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2, containerID) {
 	//split diff into lines
 	//const splitLines = //!!! check !!!
-	console.log(data, xmlDiff);
-	var xmlLines = [];
-	//if (xmlDiff) xmlLines = xmlDiff.split(/\r?\n/);
+	//console.log(data, xmlDiff, containerID);
 
+	if (!containerID) containerID = "#bivesGraph";
+	else containerID = "#" + containerID;
+
+	var xmlLines = [];
+	if (xmlDiff) xmlLines = xmlDiff.split(/\r?\n/);
+	console.log("xmlLines: ", xmlLines);
 	//parse the data
 	obj = data;
 	// var idMap = {delete:{}, insert:{}, update:{}, move:{}};
@@ -49,10 +53,12 @@ export function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
 	links = obj.links;
 	console.log(links);
 	//console.log(nodesFilterComp);
+
 	//////same source/link combination/////
 
 	var sameIndex = 0;
 	sameLinks = [];
+	console.log(links);
 
 	links.forEach(function (l, i) {
 		var sameCount = 0;
@@ -94,10 +100,10 @@ export function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
 	});
 
 	//console.log(links);
-	//console.log(sameLinks);
+	console.log("same links: ", sameLinks);
 	///////////////////////////////////////
 	//delete current graph and show graph tab and download button
-	d3.selectAll("#bivesGraph").selectAll("svg").remove();
+	d3.selectAll(containerID).selectAll("svg").remove();
 
 	//check if graph data is available
 	/* 	if (data == "" || data == undefined) {
@@ -109,15 +115,15 @@ export function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
 
 
 	//set size and zoom variables
-	console.log(d3.select("#container").node().getBoundingClientRect());
-	width = d3.select("#container").node().getBoundingClientRect().width;
-	height = d3.select("#container").node().getBoundingClientRect().height;
+	console.log(d3.select(containerID).node().getBoundingClientRect());
+	width = d3.select(containerID).node().getBoundingClientRect().width;
+	height = d3.select(containerID).node().getBoundingClientRect().height;
 	//var size = (1200 - 100) / 10;
 	//	marker = width / 100;
 
 
 	//append clean svg
-	svg = d3.select("div#container").append("svg")
+	svg = d3.select(containerID).append("svg")
 		.attr("id", 'bivesGraphSvg')
 		.attr("preserveAspectRatio", "xMinYMin meet")
 		//.attr("viewBox", "0 0 " + width + " " +  height)
@@ -144,7 +150,7 @@ export function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
 	addLegend();
 
 	//add tooltip
-	d3.select("body").append("div")
+	d3.select(containerID).append("div")
 		.attr("class", "tooltip")
 		.attr("id", "popup")
 		.style("opacity", 0);
@@ -153,9 +159,8 @@ export function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2) {
 
 	structeredData = xmlParser.getStructeredData(xmlLines, comodiAnnotation, v1, v2);
 
-	if (structeredData == {}) console.log("no xmlLines available, check for dev mode");
+	if (structeredData == {}) alert("no xmlLines available, check for dev mode");
 	else console.log("structurede data: ", structeredData);
-	//assign dowload function with data to button
 
 
 }
@@ -331,8 +336,8 @@ function createGraph() {
 					}
 				}
 			) //getHtmlChanges from node id	
-				.style("left", (d3.event.pageX) + "px")
-				.style("top", (d3.event.pageY - 28) + "px");
+				.style("left", d3.event.layerX + "px")
+				.style("top", (d3.event.layerY - 28) + "px");
 			/* ctop();
 			MathJax.typeset(); */
 		})

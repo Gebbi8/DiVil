@@ -2,10 +2,12 @@
 import * as showSbgn from './showSbgn.js';
 
 
-export function callDiVil(sbgnJson) {
+export function callDiVil(sbgnJson, xmlDiff, v1, v2, containerID) {
     console.log("hey, welcome inside the divil plugin");
-    console.log(sbgnJson);
-    showSbgn.showSbgn(sbgnJson, "", {}, {}, {}); //showSbgn(data, xmlDiff, comodiAnnotation, v1, v2);
+
+    if (sbgnJson == "cheekz") alert("cheekz!");
+
+    showSbgn.showSbgn(sbgnJson, xmlDiff, {}, v1, v2, containerID); //showSbgn(data, xmlDiff, comodiAnnotation, v1, v2);
 }
 
 

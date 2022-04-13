@@ -1,7 +1,7 @@
 export function getStructeredData(xmlLines, comodi, v1, v2) {
     console.log("xmlLines: ", xmlLines);
     if (xmlLines.length == 0) return {}; //when no changes are available or provided, no information can be shown
-    alert("teeest");
+
     //files
     // Create a DOMParser
     var parser = new DOMParser();
@@ -36,6 +36,7 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
     //debugging
     //var i = 0;
     // -- create move map
+    console.log(xmlLines);
     let moveFlag = 0;
     xmlLines.forEach(line => {
         if (line.includes("<move>")) {
@@ -47,7 +48,7 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
             return;
         }
         if (moveFlag) {
-            // console.log(line)
+            console.log(line)
             let oldPath = regEx(line, "oldPath");
             let newPath = regEx(line, "newPath");
             moveMap[oldPath] = newPath;
@@ -208,7 +209,9 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
 
     //var arr = [["delete", "deletion"], ["insert", "insertion"], ["update", "update"], ["move", "PermutationOfEntities"]];
 
-    // arr.forEach(pair => {
+
+    /* DEV-MODE - no comodi provided for dev and probably not needed for plugins 
+
     Object.entries(dataByKeys).forEach(data => {
         console.log(data);
         // comodiGrep = grep(comodi, comodiID);
@@ -220,6 +223,8 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
         dataByKeys[data[0]].comodi = comodiChanges; //add all changes
     });
     // });
+
+    */
 
     return dataByKeys;
 }
@@ -678,7 +683,6 @@ function getMath(path, doc) {
 
 
     var mathML = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null).iterateNext();
-    console.log(mathML);
 
     if (mathML == null) return mathML;
     return mathML.outerHTML;//.iterateNext().innerHTML;
@@ -822,11 +826,11 @@ function getLocalXPath(path) {
 }
 
 function regEx(line, attribute) {
-    //console.log(line, attribute);
     var regex = new RegExp(attribute + '="(.*?)"', 'g');
     return regex.exec(line)[1];
 }
 
+/* DEV-MODE - no comodi -> no grep 
 function grep(comodi, id) {
     let regex = new RegExp('<comodi:' + '((?:Insertion|Deletion|Move|Update|PermutationOfEntities))' + ' rdf:about="file://bives-differences.patch#' + id + '".*?\\1>', "si");
     let comodiSnippet = comodi.match(regex)[0];

@@ -3,7 +3,6 @@ import * as sboTermMapper from './sboTermMapping.js';
 
 
 export function tickArrows(d, sameLinks) {
-	console.log("check links:", sameLinks);
 	//links for costum symbols and multiple links for inserts and updates
 	var x1 = d.source.x,
 		y1 = d.source.y,
