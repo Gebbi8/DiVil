@@ -1,5 +1,6 @@
 //Info-Content
 function getBivesData(v1, v2, callback) {
+	alert("TEST");
 	const callBives = (file1, file2) => {
 		//first load test file from local storage (if they are testfiles)
 		const load = new Promise((resolve, reject) => {
@@ -152,6 +153,7 @@ function compareModels(f1, f2, command) {
 			//console.log(comodiAnnotation);
 			//console.log(report);
 			//console.log(xmlDocDiff, xmlDocSbml);
+			alert("wird das getriggert?");
 			showSbgn(sbgnJson, xmlDiff, comodiAnnotation, f1, f2);
 			//console.log($.parseJSON (sbgnJson));
 		}

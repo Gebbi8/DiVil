@@ -1,4 +1,4 @@
-import * as d3 from '../thirdParty/d3.min.js'
+import * as d3 from 'd3'
 import * as sboTermMapper from './sboTermMapping.js';
 
 

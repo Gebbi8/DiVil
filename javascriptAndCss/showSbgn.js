@@ -1,4 +1,4 @@
-import * as d3 from '../thirdParty/d3.min.js';
+import * as d3 from 'd3';
 import * as d3Sbgn from './appendDefs.js';
 import * as xmlParser from './xmlParser.js';
 import * as sboTermMapper from './sboTermMapping.js';
@@ -12,10 +12,14 @@ var dimmOpacity = 0.25;
 var dragable = true;
 
 
+
 export function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2, containerID) {
+	alert("HIER?");
 	//split diff into lines
 	//const splitLines = //!!! check !!!
 	//console.log(data, xmlDiff, containerID);
+
+	alert("test");
 
 	if (!containerID) containerID = "#bivesGraph";
 	else containerID = "#" + containerID;
@@ -169,10 +173,11 @@ export function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2, containerID) {
 //////////// FORCE SIMULATION //////////// 
 //adapted from: https://bl.ocks.org/steveharoz/8c3e2524079a8c440df60c1ab72b5d03
 // force simulator
-var forceSimulation = d3.forceSimulation();
+var forceSimulation;
 
 // set up the forceSimulation and event to update locations after each tick
 function initializeSimulation() {
+	forceSimulation = d3.forceSimulation();
 	forceSimulation.nodes(nodesFilterComp);
 	initializeForces();
 	forceSimulation.on("tick", ticked);
