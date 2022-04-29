@@ -5,7 +5,7 @@ import * as sboTermMapper from './sboTermMapping.js';
 import * as customSymbol from './customSymbol.js';
 import * as arrowsOnNodes from './arrowsOnNodes.js';
 
-var width, height, svg, obj, nodes, links, node, link, nodeShape, nodeLabel, compartments, nodesByCompartment, enterNode, structeredData, nodesFilterComp;
+var width, height, svg, obj, nodes, links, node, link, nodeShape, nodeLabel, compartments, nodesByCompartment, enterNode, nodesFilterComp;
 var sameLinks;
 var nodeSize = 50;
 var dimmOpacity = 0.25;
@@ -13,13 +13,11 @@ var dragable = true;
 
 
 
-export function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2, containerID) {
-	alert("HIER?");
-	//split diff into lines
-	//const splitLines = //!!! check !!!
-	//console.log(data, xmlDiff, containerID);
+export function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2, containerID, popUpID, structuredData) {
 
-	alert("test");
+	/*     console.log(changeListID);
+		alert(); */
+
 
 	if (!containerID) containerID = "#bivesGraph";
 	else containerID = "#" + containerID;
@@ -118,23 +116,7 @@ export function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2, containerID) {
 
 
 
-	//set size and zoom variables
-	console.log(d3.select(containerID).node().getBoundingClientRect());
-	width = d3.select(containerID).node().getBoundingClientRect().width;
-	height = d3.select(containerID).node().getBoundingClientRect().height;
-	//var size = (1200 - 100) / 10;
-	//	marker = width / 100;
 
-
-	//append clean svg
-	svg = d3.select(containerID).append("svg")
-		.attr("id", 'bivesGraphSvg')
-		.attr("preserveAspectRatio", "xMinYMin meet")
-		//.attr("viewBox", "0 0 " + width + " " +  height)
-		.classed("svg-content", true)
-		.attr("xmlns", "http://www.w3.org/2000/svg")
-		.attr("height", height)
-		.attr("width", width);
 	//	.call(zoom);
 
 	d3Sbgn.appendDefs(); //define arrowheads: see appendDefs.js
@@ -149,22 +131,23 @@ export function showSbgn(data, xmlDiff, comodiAnnotation, v1, v2, containerID) {
 			console.log("Toogle want's to tickle")
 		}); */
 
-	createGraph();
+	createGraph(structuredData, data.centralNode, popUpID, containerID);
 	//add legend
 	addLegend();
 
 	//add tooltip
-	d3.select(containerID).append("div")
-		.attr("class", "tooltip")
-		.attr("id", "popup")
-		.style("opacity", 0);
+	if (!popUpID)
+		d3.select(containerID).append("div")
+			.attr("class", "tooltip")
+			.attr("id", "popup")
+			.style("opacity", 0);
 
 	initializeSimulation();
 
-	structeredData = xmlParser.getStructeredData(xmlLines, comodiAnnotation, v1, v2);
+	if (!structuredData) structuredData = xmlParser.getstructuredData(xmlLines, comodiAnnotation, v1, v2);
 
-	if (structeredData == {}) alert("no xmlLines available, check for dev mode");
-	else console.log("structurede data: ", structeredData);
+	if (structuredData == {}) alert("no xmlLines available, check for dev mode");
+	else console.log("structurede data: ", structuredData);
 
 
 }
@@ -273,8 +256,43 @@ function updateForces() {
 
 ////////////////////////////////////////
 
+//central node marks the node in the middle for subgraphs, e.g. single reactions, to show the changes of this node.
+function createGraph(structuredData, centralNode, popUpID, containerID) {
 
-function createGraph() {
+
+	console.log(centralNode);
+	if (centralNode && popUpID) {
+		console.log(popUpID);
+		d3.select("#" + popUpID).html(
+			function () {
+				if (structuredData[centralNode]) {
+					return "<ul class='list-group'>" + structuredData[centralNode].popup + "</ul>";
+				} else {
+					return "";
+				}
+			}
+		)
+	}
+
+	//set size and zoom variables
+	console.log(d3.select(containerID).node().getBoundingClientRect());
+	width = d3.select(containerID).node().getBoundingClientRect().width;
+	height = d3.select(containerID).node().getBoundingClientRect().height;
+	//var size = (1200 - 100) / 10;
+	//	marker = width / 100;
+
+
+	//append clean svg
+	svg = d3.select(containerID).append("svg")
+		.attr("id", 'bivesGraphSvg')
+		.attr("preserveAspectRatio", "xMinYMin meet")
+		//.attr("viewBox", "0 0 " + width + " " +  height)
+		.classed("svg-content", true)
+		.attr("xmlns", "http://www.w3.org/2000/svg")
+		.attr("height", height)
+		.attr("width", width);
+
+	d3Sbgn.appendDefs();
 
 	///////// Links ////////
 	link = svg.append("g")
@@ -316,37 +334,45 @@ function createGraph() {
 		.on("click", function (d) {
 			//forceSimulation.stop();
 			// console.log(d.bivesChange, d.path);
-			// console.log(structeredData[d.path]);
+			// console.log(structuredData[d.path]);
 
 			if (d3.event.defaultPrevented) return;
 
 			var path = d.path;
 			if (d.bivesChange == "delete") path = "old-" + d.path;
 
-			console.log(structeredData[path]);
-			console.log(path);
+			console.log(path, structuredData[path]);
 
-			d3.select("#popup").transition()
-				.duration(200)
-				.style("opacity", function () {
-					if (structeredData[path]) return 0.9;
-					else return 0;
-				});
-			d3.select("#popup").html(
-				function () {
-					if (structeredData[path]) {
-						return "<ul>" + structeredData[path].popup + "</ul>";
-					} else {
-						return "";
+			if (!d3.select("#popup").empty()) {
+				d3.select("#popup").transition()
+					.duration(200)
+					.style("opacity", function () {
+						if (structuredData[path]) return 0.9;
+						else return 0;
+					});
+				d3.select("#popup").html(
+					function () {
+						if (structuredData[path]) {
+							return "<ul>" + structuredData[path].popup + "</ul>";
+						} else {
+							return "";
+						}
 					}
-				}
-			) //getHtmlChanges from node id	
-				.style("left", d3.event.layerX + "px")
-				.style("top", (d3.event.layerY - 28) + "px");
+				) //getHtmlChanges from node id	
+					.style("left", d3.event.layerX + "px")
+					.style("top", (d3.event.layerY - 28) + "px");
+			}
+
+
 			/* ctop();
 			MathJax.typeset(); */
 		})
-		.on("mouseleave", hideTooltip);
+		.on("mouseleave", function () {
+			if (!d3.select("#popup").empty()) {
+				hideTooltip();
+			}
+			else;
+		});
 
 
 	let fontSize = "12px"
@@ -388,6 +414,8 @@ function createGraph() {
 		});
 
 	createCompartments();
+
+
 }
 
 //////////////Compartments///////////////
@@ -487,19 +515,19 @@ function createCompartments() {
 			var path = node.path;
 			if (getCompAttr(d.key, "bivesChange") == "delete") path = "old-" + path;
 			// let popup;
-			// if(!(popup = structeredData[path])) popup = "<li>This node element was not changed.</li>";
+			// if(!(popup = structuredData[path])) popup = "<li>This node element was not changed.</li>";
 			// else popup = popup.popup;
 
 			d3.select("#popup").transition()
 				.duration(200)
 				.style("opacity", function () {
-					if (structeredData[path]) return 0.9;
+					if (structuredData[path]) return 0.9;
 					else return 0;
 				});
 			d3.select("#popup").html(
 				function () {
-					if (structeredData[path]) {
-						return "<ul>" + structeredData[path].popup + "</ul>";
+					if (structuredData[path]) {
+						return "<ul>" + structuredData[path].popup + "</ul>";
 					} else {
 						return "";
 					}
@@ -509,7 +537,13 @@ function createCompartments() {
 			/* 			ctop();
 						MathJax.typeset(); //MathJax.Hub.Queue(["Typeset", MathJax.Hub]);  */
 		})
-		.on("mouseleave", hideTooltip);
+		.on("mouseleave", function () {
+			if (!d3.select("#popup").empty()) {
+				hideTooltip();
+			}
+
+			else;
+		})
 
 	compartments.append("path")
 		.attr("stroke-width", 3)
@@ -552,6 +586,9 @@ function createCompartments() {
 		}
 
 	});
+
+
+
 }
 
 function ticked() {
@@ -627,7 +664,7 @@ function resetOpacity() {
 	link.style('opacity', 1);
 }
 
-var hideTooltip = function () {
+function hideTooltip() {
 	d3.select("#popup")
 		.transition()
 		.duration(200)

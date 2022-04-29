@@ -48,7 +48,6 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
             return;
         }
         if (moveFlag) {
-            console.log(line)
             let oldPath = regEx(line, "oldPath");
             let newPath = regEx(line, "newPath");
             moveMap[oldPath] = newPath;
@@ -125,10 +124,10 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
                     changes = dataByKeys[path].popup;
                     ids = dataByKeys[path].comodi;
                 }
-                if (changes.includes("<li>Annotations were changed,")) return;
+                if (changes.includes("<li class='list-group-item'>Annotations were changed,")) return;
 
                 ids.push(id);
-                changes += "<li>Annotations were changed, which is not displayed here.</li>"
+                changes += "<li class='list-group-item'>Annotations were changed, which is not displayed here.</li>"
                 dataByKeys[path] = { "comodi": ids, "popup": changes };
                 return;
             }
@@ -273,7 +272,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
                 let newParameter = newDoc.evaluate(newPath, newDoc, null, XPathResult.ANY_TYPE, null).iterateNext();
 
                 console.log(newParameter);
-                return htmlChange += "<li>Attribute <em><b><span class='" + changeClass + "'>" + changedAttr + "</span></b></em> of local parameter <b><em>" + newParameter.attributes.name.value + "</em></b> changed: " + oldVal + " &rarr; " + newVal;
+                return htmlChange += "<li class='list-group-item'>Attribute <em><b><span class='" + changeClass + "'>" + changedAttr + "</span></b></em> of local parameter <b><em>" + newParameter.attributes.name.value + "</em></b> changed: " + oldVal + " &rarr; " + newVal;
             }
             //get path
 
@@ -320,14 +319,14 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
         }
         let effectedNode = regEx(line, "newPath");
         effectedNode = effectedNode.substring(effectedNode.lastIndexOf("/") + 1, effectedNode.lastIndexOf("["));
-        return htmlChange += "<li>" + elementType + " <em><b>" + elementName + "</b></em> of <em><b>" + effectedNode + "</b></em> has changed: <span class='delete-color'>" + oldValue + "</span> &rarr;  <span class='insert-color'>" + newValue + "</span></li>";
+        return htmlChange += "<li class='list-group-item'>" + elementType + " <em><b>" + elementName + "</b></em> of <em><b>" + effectedNode + "</b></em> has changed: <span class='delete-color'>" + oldValue + "</span> &rarr;  <span class='insert-color'>" + newValue + "</span></li>";
     }
 
     // if(changeType == "insert"){
     //     if(elementType == "Attribute"){
     //         elementName = regEx(line, "name");
     //         newValue = regEx(line, "newValue");
-    //         return htmlChange += "<li>" + elementType + " <em><b>" + elementName + "</b></em> was added: <span class='insert-color'>" + newValue + "</span></li>";
+    //         return htmlChange += "<li class='list-group-item'>" + elementType + " <em><b>" + elementName + "</b></em> was added: <span class='insert-color'>" + newValue + "</span></li>";
     //     }
 
     //     if(elementType == "Node"){
@@ -337,15 +336,15 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
     //             if(newValue == "math"){
     //                 alert("got math");
     //                 //console.log(line);
-    //                 return htmlChange += "<li>Math handling of inserted Node missing.</li>";
+    //                 return htmlChange += "<li class='list-group-item'>Math handling of inserted Node missing.</li>";
     //             }
     //         }
 
     //         if(newValue == "reaction"){
-    //             htmlChange += "<li><em><b><span class='insert-color'>Reaction</span></b></em> was added</li>";
+    //             htmlChange += "<li class='list-group-item'><em><b><span class='insert-color'>Reaction</span></b></em> was added</li>";
     //             let newPath = regEx(line, "newPath");
-    //             //htmlChange += "<li><em><b>Kinetic law</em></b>:</li>";
-    //             htmlChange += "<ul><li>Math: " + getMath(newPath, newDoc) + "</li>";
+    //             //htmlChange += "<li class='list-group-item'><em><b>Kinetic law</em></b>:</li>";
+    //             htmlChange += "<ul class='list-group'><li class='list-group-item'>Math: " + getMath(newPath, newDoc) + "</li>";
     //             htmlChange += getParameters(newPath, newDoc, line);
     //             htmlChange += getParameters(newPath, newDoc, line);
     //             return htmlChange += "</ul>";
@@ -416,11 +415,11 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
 
                 //console.log(path, node, parameterName);
                 //alert("jop");
-                return htmlChange += "<li>Attribute <span class='" + changeClass + "'><em><b>" + name + "</b></em></span> of local paramter <em><b>" + parameterName + "</b></em> was " + changeFill + ": <span class='" + changeClass + "'><em><b>" + changeValue + "</b></em></span></li>";
+                return htmlChange += "<li class='list-group-item'>Attribute <span class='" + changeClass + "'><em><b>" + name + "</b></em></span> of local paramter <em><b>" + parameterName + "</b></em> was " + changeFill + ": <span class='" + changeClass + "'><em><b>" + changeValue + "</b></em></span></li>";
             } else {
                 //console.log(line);
                 // alert("unidentified attribute change, delete");
-                return htmlChange += "<li>Attribute <em><b><span class='" + changeClass + "'>" + regEx(line, "name") + "</span></em></b> of kinetic law was " + changeFill + "</li>";
+                return htmlChange += "<li class='list-group-item'>Attribute <em><b><span class='" + changeClass + "'>" + regEx(line, "name") + "</span></em></b> of kinetic law was " + changeFill + "</li>";
             }
 
 
@@ -443,14 +442,14 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
             let getName = doc.getElementById(participantName).attributes.name.value;
             if (getName) participantName = getName;
 
-            return "<li>" + elementType + " <span class='" + changeClass + "'><em><b>" + elementName + "</b></em></span> of " + participantRole + " <em><b>" + participantName + "</b></em> was " + changeFill + ": <span class='" + changeClass + "'>" + val + "</span></li>";
+            return "<li class='list-group-item'>" + elementType + " <span class='" + changeClass + "'><em><b>" + elementName + "</b></em></span> of " + participantRole + " <em><b>" + participantName + "</b></em> was " + changeFill + ": <span class='" + changeClass + "'>" + val + "</span></li>";
         }
 
         //normal change
         elementName = regEx(line, "name");
         oldValue = regEx(line, value);
         //alert(line);
-        return htmlChange += "<li>" + elementType + " <em><b>" + elementName + "</b></em> was " + changeFill + ": <span class='" + changeClass + "'>" + oldValue + "</span></li>";
+        return htmlChange += "<li class='list-group-item'>" + elementType + " <em><b>" + elementName + "</b></em> was " + changeFill + ": <span class='" + changeClass + "'>" + oldValue + "</span></li>";
     } // end of Attribute handling
 
     if (elementType == "Node") {
@@ -468,20 +467,20 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
                 // alert(path.lastIndexOf("/*") - path.indexOf("[local-name()='reaction']"));
                 if (path.lastIndexOf("/*") - path.indexOf("[local-name()='reaction']") == -2) {
                     //    alert("reaction added");
-                    htmlChange += "<li><em><b><span class='insert-color'>Reaction</span></b></em> was added</li>";
+                    htmlChange += "<li class='list-group-item'><em><b><span class='insert-color'>Reaction</span></b></em> was added</li>";
                     let newPath = regEx(line, "newPath");
-                    //htmlChange += "<li><em><b>Kinetic law</em></b>:</li>";
+                    //htmlChange += "<li class='list-group-item'><em><b>Kinetic law</em></b>:</li>";
                     //console.log(newPath, line);
 
-                    htmlChange += "<ul>" + getAllParticipant(newPath, newDoc, changeClass);
+                    htmlChange += "<ul class='list-group'>" + getAllParticipant(newPath, newDoc, changeClass);
                     // console.log(htmlChange);
                     // alert();
 
                     let math = getMath(newPath, newDoc);
-                    if (math) htmlChange += "<li><b><span class='insert-color'>Math</span></b>: " + math + "</li>";
+                    if (math) htmlChange += "<li class='list-group-item'><b><span class='insert-color'>Math</span></b>: " + math + "</li>";
 
                     let parameters = getParameters(newPath, newDoc, line);
-                    if (parameters) htmlChange += "<li><b><span class='insert-color'>Parameters</span></b>: " + parameters + "</li>";
+                    if (parameters) htmlChange += "<li class='list-group-item'><b><span class='insert-color'>Parameters</span></b>: " + parameters + "</li>";
                     //htmlChange += (newPath, newDoc, line);
                     return htmlChange += "</ul>";
                 }
@@ -542,7 +541,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
                 }
 
                 return htmlChange += "Math changed: <span class='delete-color'>" + oldMath + "</span> &rarr;  <span class='insert-color'>" + newMath + "</span>";
-                //return htmlChange += "!!---><li><em><b><span class='" + changeClass + "'>Math</span></b></em> was " + changeFill + ":</li> " + getMath(path, doc) + "<---";
+                //return htmlChange += "!!---><li class='list-group-item'><em><b><span class='" + changeClass + "'>Math</span></b></em> was " + changeFill + ":</li> " + getMath(path, doc) + "<---";
             }
         }
 
@@ -583,7 +582,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
             let node = doc.getElementById(participantName);
             if (node.hasAttribute("name")) participantName = node.attributes.name.value;
 
-            return "<li>" + participantRole + " <span class='" + changeClass + "'><em><b>" + participantName + "</b></em></span> was " + changeFill + "</li>";
+            return "<li class='list-group-item'>" + participantRole + " <span class='" + changeClass + "'><em><b>" + participantName + "</b></em></span> was " + changeFill + "</li>";
         }
 
         if (line.includes("listOfReactants") || line.includes("listOfProducts") || line.includes("listOfModifiers")) {
@@ -600,32 +599,32 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
             //console.log(path);
             //alert();
             let participantsList = getParticipants(path, doc);
-            return "<li> List of  <span class='" + changeClass + "'><em><b>" + participantRole + "s</b></em></span> was " + changeFill + ":</li>" + participantsList;
+            return "<li class='list-group-item'> List of  <span class='" + changeClass + "'><em><b>" + participantRole + "s</b></em></span> was " + changeFill + ":" + participantsList + "</li>";
 
         }
 
         //It seems that there is a bug in BiVeS: the dupreez example shows a move in the ATP to ADP reaction and also a deletion of the first reactant, as well as an insert of the first reactant. Both are ATP which seems buggy.
         if (changeType == "delete" && oldValue == "speciesReference") {
             console.log(line);
-            return htmlChange += "<li>" + line + "<em><b><span class='" + changeClass + "'>" + oldValue[0].toUpperCase() + oldValue.substring(1) + "</span></b></em> was " + changeFill + "</li>";
+            return htmlChange += "<li class='list-group-item'>" + line + "<em><b><span class='" + changeClass + "'>" + oldValue[0].toUpperCase() + oldValue.substring(1) + "</span></b></em> was " + changeFill + "</li>";
         }
         // if(changeType == "insert") {
 
         //     console.log(line);
         //     alert("take care of insert");
         // }
-        return htmlChange += "<li><em><b><span class='" + changeClass + "'>" + oldValue[0].toUpperCase() + oldValue.substring(1) + "</span></b></em> was " + changeFill + "</li>";
+        return htmlChange += "<li class='list-group-item'><em><b><span class='" + changeClass + "'>" + oldValue[0].toUpperCase() + oldValue.substring(1) + "</span></b></em> was " + changeFill + "</li>";
 
     }
 
     if (line.includes("/math[")) {
         if (dataByKeys[addPath].popup.includes("<math xmlns=")) return "";
-        //else return htmlChange += "<li>Math added: " + getMath(newPath, newDoc) + "</li>";
+        //else return htmlChange += "<li class='list-group-item'>Math added: " + getMath(newPath, newDoc) + "</li>";
 
         console.log(changeType);
         let path = regEx(line, docPath);
         //console.log(path, docPath, line);
-        return htmlChange += "<li>Math " + changeFill + ":</li> " + getMath(path, doc);
+        return htmlChange += "<li class='list-group-item'>Math " + changeFill + ":</li> " + getMath(path, doc);
     }
 
 
@@ -658,12 +657,12 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
         //     null
         //   );
     }
-    //return "<li>Some kind of " + changeType + " change is missing!</li>";
+    //return "<li class='list-group-item'>Some kind of " + changeType + " change is missing!</li>";
 
     //htmlChange += elementType + " <em>" + elementName + "</em> was added: " + newValue;
 
 
-    return "<li> TODO: " + changeType + " " + elementType + "</li>";
+    return "<li class='list-group-item'> TODO: " + changeType + " " + elementType + "</li>";
 
 }
 
@@ -699,10 +698,10 @@ function getParameters(path, doc, line) {
     let parameterlist = "";
     node = parameters.iterateNext();
     while (node) {
-        parameterlist += "<li>" + node.attributes.name.value + ": " + node.attributes.value.value + "</li>";
+        parameterlist += "<li class='list-group-item'>" + node.attributes.name.value + ": " + node.attributes.value.value + "</li>";
         node = parameters.iterateNext();
     }
-    if (parameterlist != "") parameterlist = "<ul>" + parameterlist + "</ul>";
+    if (parameterlist != "") parameterlist = "<ul class='list-group list-group-horizontal'>" + parameterlist + "</ul>";
     else parameterlist += "No parameters listed in the document";
     //console.log(parameters);
     //alert(parameters);
@@ -714,23 +713,23 @@ function getAllParticipant(path, doc, changeClass, changeFill) {
     let participantsList = "";
     let rPath = path + "/listOfReactants/speciesReference";
 
-    participantsList += "<li><span class='" + changeClass + "'><b>Reactants</span></b>: ";
+    participantsList += "<li class='list-group-item'><span class='" + changeClass + "'><b>Reactants</span></b>: ";
     participantsList += getParticipants(rPath, doc, changeClass, changeFill);
 
     //Products
     let pPath = path + "/listOfProducts/speciesReference";
-    participantsList += "<li><span class='" + changeClass + "'><b>Products</span></b>: ";
+    participantsList += "<li class='list-group-item'><span class='" + changeClass + "'><b>Products</span></b>: ";
     participantsList += getParticipants(pPath, doc, changeClass, changeFill);
 
     //Modifiers
     let mPath = path + "/listOfModifiers/modifierSpeciesReference";
-    participantsList += "<li><span class='" + changeClass + "'><b>Modifiers</span></b>: ";
+    participantsList += "<li class='list-group-item'><span class='" + changeClass + "'><b>Modifiers</span></b>: ";
     participantsList += getParticipants(mPath, doc, changeClass, changeFill);
 
     return participantsList;
 
     // let pPath = path + "/listOfProducts/speciesReference";
-    // participantsList += "<li><span class='" + changeClass + "'><b>Products</span></b>: ";
+    // participantsList += "<li class='list-group-item'><span class='" + changeClass + "'><b>Products</span></b>: ";
     // participantsList +=  getParticipants(pPath, doc, changeClass, changeFill);
     // //Modifiers
 
@@ -739,9 +738,9 @@ function getAllParticipant(path, doc, changeClass, changeFill) {
 
     // let modifiers = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null);
     // let node = null;
-    // let modifiersList = "<li><span class='" + changeClass + "'><em><b>List of modifiers</span></em></b> was " + changeFill + ". Former modifiers:</li><ul>";
+    // let modifiersList = "<li class='list-group-item'><span class='" + changeClass + "'><em><b>List of modifiers</span></em></b> was " + changeFill + ". Former modifiers:</li><ul class='list-group'>";
     // while(node = modifiers.iterateNext()){
-    //     modifiersList += "<li><em><b>" + node.attributes.species.value + "</em></b></li>";
+    //     modifiersList += "<li class='list-group-item'><em><b>" + node.attributes.species.value + "</em></b></li>";
     // }
     // modifiersList += "</ul>";
     // console.log(modifiers);
@@ -760,11 +759,11 @@ function getParticipants(path, doc) {
         //grep name of species if available
         let node = doc.getElementById(participantName);
         if (node.hasAttribute("name")) participantName = node.attributes.name.value;
-        participantsList += "<li>" + participantName + "</li>";
+        participantsList += "<li class='list-group-item'>" + participantName + "</li>";
         participant = participants.iterateNext();
     }
 
-    if (participantsList != "") participantsList = "</li><ul>" + participantsList + "</ul>";
+    if (participantsList != "") participantsList = "<ul class='list-group list-group-horizontal'>" + participantsList + "</ul></li>";
     else return "&#8709</li>";
 
     return participantsList;
@@ -777,17 +776,17 @@ function getModifiers(path, doc, changeClass, changeFill) {
 
     let modifiers = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null);
     let node = null;
-    let modifiersList = "<li><span class='" + changeClass + "'><em><b>List of modifiers</span></em></b> was " + changeFill + ":</li><ul>";
+    let modifiersList = "<li class='list-group-item'><span class='" + changeClass + "'><em><b>List of modifiers</span></em></b> was " + changeFill + ":<ul class='list-group'>";
     node = modifiers.iterateNext();
     while (node) {
         let participantName = node.attributes.species.nodeValue;
         //grep name of species if available
         let getName = doc.getElementById(participantName).attributes.name.value;
         if (getName) participantName = getName;
-        modifiersList += "<li><em><b>" + participantName + "</em></b></li>";
+        modifiersList += "<li class='list-group-item'><em><b>" + participantName + "</em></b></li>";
         node = modifiers.iterateNext();
     }
-    modifiersList += "</ul>";
+    modifiersList += "</ul></li>";
     //console.log(modifiers);
     return modifiersList;
 }
@@ -802,7 +801,7 @@ function getSingleModifier(path, doc, changeClass, changeFill) {
     let getName = doc.getElementById(speciesName).attributes.name.value;
     if (getName) speciesName = getName;
 
-    return "<li>Modifier <span class='" + changeClass + "'><em><b>" + speciesName + "</b></em></span> was " + changeFill + "</li>";
+    return "<li class='list-group-item'>Modifier <span class='" + changeClass + "'><em><b>" + speciesName + "</b></em></span> was " + changeFill + "</li>";
 }
 
 function getLocalXPath(path) {

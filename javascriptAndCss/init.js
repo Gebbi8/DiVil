@@ -1,13 +1,21 @@
 //this shall function as an interface for divil
 import * as showSbgn from './showSbgn';
+import * as xmlParser from './xmlParser';
+
+export function initDivil(xmlDiff, v1, v2) {
+    //init all static/computed properties
+    let xmlLines = xmlDiff.split(/\r?\n/);
+    let structeredData = xmlParser.getStructeredData(xmlLines, {}, v1, v2);
+
+    return structeredData;
+
+};
 
 
-export function callDiVil(sbgnJson, xmlDiff, v1, v2, containerID) {
-    console.log("hey, welcome inside the divil plugin");
 
-    alert("cheekz!");
+export function callDiVil(sbgnJson, xmlDiff, v1, v2, containerID, changeListID, structeredData) {
 
-    showSbgn.showSbgn(sbgnJson, xmlDiff, {}, v1, v2, containerID); //showSbgn(data, xmlDiff, comodiAnnotation, v1, v2);
+    showSbgn.showSbgn(sbgnJson, xmlDiff, {}, v1, v2, containerID, changeListID, structeredData); //showSbgn(data, xmlDiff, comodiAnnotation, v1, v2);
 }
 
 
