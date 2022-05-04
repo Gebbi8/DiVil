@@ -55,8 +55,8 @@ if (isset($f1) && !empty($f2) && isset($f2) && !empty($f2)) {
 	callBives($bivesJob, $BIVES, $storage, $rnd);
 
 	//echo "mkdir echo: " . file_exists($dir);
-	echo $rnd;
-    header("Location: ../index.html?id:" + $rnd);
+	//echo $rnd;
+    header("Location: https://divil.bio.informatik.uni-rostock.de/index.html?id:" + $rnd);
     exit();
 } 
 else {
