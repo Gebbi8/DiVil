@@ -6,10 +6,10 @@
 //
 error_reporting(E_ALL ^ E_WARNING);
 
-$BIVES = "https://bives.bio.informatik.uni-rostock.de/";
+/* $BIVES = "https://bives.bio.informatik.uni-rostock.de/";
 $storage = '/tmp/filestorage';
 $f1 = $_FILES['file1'];
-$f2 = $_FILES['file2'];
+$f2 = $_FILES['file2']; */
 //$job = $_GET['jobID'];
 
 
@@ -56,10 +56,15 @@ if (isset($f1) && !empty($f2) && isset($f2) && !empty($f2)) {
 
 	//echo "mkdir echo: " . file_exists($dir);
 	//echo $rnd;
-    header("Location: https://divil.bio.informatik.uni-rostock.de/index.html?id:" + $rnd);
+    header("Location: https://divil.bio.informatik.uni-rostock.de/index.html?id:" . 'noFilesAttached');
     exit();
 } 
 else {
+	//Test php redirect
+	$rnd = md5(time());
+	header("Location: https://divil.bio.informatik.uni-rostock.de/index.html?id:" . $rnd);
+    exit();
+
 /* 	if(isset($job) && empty($job)) echo "\n Job set but empty \n";
 	if (!file_exists($storage) ) echo "STORAGE does not exist " . $storage;
 	if (!file_exists($storage . '/' . $job) ) echo "\nID does not exist " . $storage . '/' . $job . "\n";
