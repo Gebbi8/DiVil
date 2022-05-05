@@ -21,6 +21,7 @@
 	<script type="text/javascript" src="javascriptAndCss/xmlDiffParser.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/arrowsOnNodes.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/xmlParser.js"></script>
+	<script type="text/javascript" src="javascriptAndCss/parseUrl.js"></script>
 
 	<script type="text/javascript" src="thirdParty/ctop.js"></script>
 	<script src="thirdParty/xmlBeautify.js"></script>
@@ -429,13 +430,34 @@
 			"nodesAndArcs": ["julia/v1.xml", "julia/v2.xml"]
 		}
 
-		window.onload = function () {
-			document.getElementById("e1Kummer").click();
-			//assignExamples(hiddenTests["omex"][0], hiddenTests["omex"][1]);
-			//assignExamples(hiddenTests["xml"][0], hiddenTests["xml"][1]);
-			//assignExamples(hiddenTests["paths"][0], hiddenTests["paths"][1]);
-			//assignExamples(hiddenTests["singleChange"][0], hiddenTests["singleChange"][1]);
-			//assignExamples(hiddenTests["nodesAndArcs"][0], hiddenTests["nodesAndArcs"][1]);
+		//check if URL has attributes
+		//s: source of models, biom -> biomodels database
+		const queryString = window.location.search;
+		console.log(queryString);
+		if (queryString) {
+			window.onload = function () {
+				let params = parseParams(queryString);
+
+				if (params['s'] == 'biom') {
+					//alert("source is biomodels");
+					let model = params['m'];
+					let version1 = params['v1'];
+					let version2 = params['v2'];
+
+					compareFromBiomodels(model, version1, version2);
+				}
+			}
+
+		} else {
+
+			window.onload = function () {
+				document.getElementById("e1Kummer").click();
+				//assignExamples(hiddenTests["omex"][0], hiddenTests["omex"][1]);
+				//assignExamples(hiddenTests["xml"][0], hiddenTests["xml"][1]);
+				//assignExamples(hiddenTests["paths"][0], hiddenTests["paths"][1]);
+				//assignExamples(hiddenTests["singleChange"][0], hiddenTests["singleChange"][1]);
+				//assignExamples(hiddenTests["nodesAndArcs"][0], hiddenTests["nodesAndArcs"][1]);
+			}
 		}
 	</script>
 </body>

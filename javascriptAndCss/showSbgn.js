@@ -240,7 +240,6 @@ function initializeForces() {
 
 // apply new force properties
 function updateForces() {
-	console.log(forceSimulation.force);
 	// get each force by name and update the properties
 	forceSimulation.force("center")
 		.x(width * forceProperties.center.x)
@@ -266,8 +265,8 @@ function updateForces() {
 		// })
 		.distance(forceProperties.link.distance)
 		.iterations(forceProperties.link.iterations)
-	//.links(forceProperties.link.enabled ? links : [])
-	;
+		//.links(forceProperties.link.enabled ? links : [])
+		;
 
 	// updates ignored until this is run
 	// restarts the simulforceSimulationation (important if forceSimulation has already slowed down)
@@ -336,14 +335,14 @@ function createGraph() {
 					else return 0;
 				});
 			d3.select("#popup").html(
-					function (d) {
-						if (structeredData[path]) {
-							return "<ul>" + structeredData[path].popup + "</ul>";
-						} else {
-							return "";
-						}
+				function (d) {
+					if (structeredData[path]) {
+						return "<ul>" + structeredData[path].popup + "</ul>";
+					} else {
+						return "";
 					}
-				) //getHtmlChanges from node id	
+				}
+			) //getHtmlChanges from node id	
 				.style("left", (d3.event.pageX) + "px")
 				.style("top", (d3.event.pageY - 28) + "px");
 			ctop();
@@ -351,13 +350,13 @@ function createGraph() {
 		})
 		.on("mouseleave", hideTooltip);
 
-	
+
 	let fontSize = "12px"
-	if(getDeviceWidth() < 700){
+	if (getDeviceWidth() < 700) {
 		nodeSize = 30;
 		fontSize = "8px";
 		dragable = false;
-	} 
+	}
 
 
 	nodeShape = enterNode.append("path")
@@ -560,14 +559,14 @@ function createCompartments() {
 function ticked() {
 	//console.log(node.attr);
 	nodeShape.attr("cx", function (d) {
-			let nodeWidth = d3.select("#" + d.id).node().getBBox().width;
-			return d.x = Math.max(nodeWidth/2 + 10, Math.min(d.x, width - nodeWidth/2 - 10));
-		})
+		let nodeWidth = d3.select("#" + d.id).node().getBBox().width;
+		return d.x = Math.max(nodeWidth / 2 + 10, Math.min(d.x, width - nodeWidth / 2 - 10));
+	})
 		.attr("cy", function (d) {
 			let nodeHeight = d3.select("#" + d.id).node().getBBox().height;
-			return d.y = Math.max(nodeHeight/2 + 10, Math.min(d.y, height - nodeHeight/2 - 10));
+			return d.y = Math.max(nodeHeight / 2 + 10, Math.min(d.y, height - nodeHeight / 2 - 10));
 		})
-//alert("tasdasd");
+	//alert("tasdasd");
 	link.attr("d", tickArrows);
 	nodeShape.attr("transform", function (d) {
 		//alert("!");
@@ -591,14 +590,14 @@ function ticked() {
 
 function dragstarted(d) {
 	console.log("drag start");
-		if(!dragable) return;
-		if (!d3.event.active) forceSimulation.alphaTarget(0.1).restart();
+	if (!dragable) return;
+	if (!d3.event.active) forceSimulation.alphaTarget(0.1).restart();
 	//d.fx = d.x;
 	//d.fy = d.y;
 }
 
 function dragged(d) {
-	if(!dragable) return;
+	if (!dragable) return;
 
 	console.log("dragging");
 	//forceSimulation.alphaTarget(0.05).restart();
@@ -607,7 +606,7 @@ function dragged(d) {
 }
 
 function dragended(d) {
-	if(!dragable) return;
+	if (!dragable) return;
 
 	console.log("dragg end start");
 	if (!d3.event.active) forceSimulation.alphaTarget(0);
@@ -812,15 +811,15 @@ function updateAll() {
 }
 
 function getDeviceWidth() {
-    if (typeof (window.innerWidth) == 'number') {
-        //Non-IE
-        return window.innerWidth;
-    } else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
-        //IE 6+ in 'standards compliant mode'
-        return document.documentElement.clientWidth;
-    } else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
-        //IE 4 compatible
-        return document.body.clientWidth;
-    }
-    return 0;
+	if (typeof (window.innerWidth) == 'number') {
+		//Non-IE
+		return window.innerWidth;
+	} else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
+		//IE 6+ in 'standards compliant mode'
+		return document.documentElement.clientWidth;
+	} else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
+		//IE 4 compatible
+		return document.body.clientWidth;
+	}
+	return 0;
 }
