@@ -2,7 +2,7 @@
 function parseParams(params) {
     params = params.substr(1);
     //console.log(typeof (params));
-    params = params.split(',');
+    params = params.split('&');
 
     let map = {};
     params.forEach(p => {
@@ -15,6 +15,7 @@ function parseParams(params) {
 
 //handle biomodel requests
 function compareFromBiomodels(model, version1, version2) {
+
     //curl -X GET "https://www.ebi.ac.uk/biomodels/model/files/BIOMD0000000123.2" -H  "accept: application/json"
 
     let filename1;
@@ -23,14 +24,10 @@ function compareFromBiomodels(model, version1, version2) {
     var urlV1 = "https://www.ebi.ac.uk/biomodels/model/files/" + model + '.' + version1;
     var urlV2 = "https://www.ebi.ac.uk/biomodels/model/files/" + model + '.' + version2;
 
+
     var xhrV1 = new XMLHttpRequest();
     xhrV1.responseType = 'json';
     xhrV1.open("GET", urlV1);
-
-
-
-
-
     xhrV1.setRequestHeader("accept", "application/json");
     xhrV1.onreadystatechange = function () {
         if (xhrV1.readyState === 4) {
@@ -51,7 +48,12 @@ function compareFromBiomodels(model, version1, version2) {
 
     xhrV2.onreadystatechange = function () {
         if (xhrV2.readyState === 4) {
-            console.log(xhrV2.status);
+            if (xhrV2.status === 404) {
+                toggleModal('errorModal', xhrV2.response.errorMessage);
+                return;
+            }
+
+            //console.log(xhrV2.status);
             filename2 = xhrV2.response["main"][0].name;
 
             //callDiVil with URL to Biomodels
@@ -60,6 +62,7 @@ function compareFromBiomodels(model, version1, version2) {
             let base = "https://www.ebi.ac.uk/biomodels/model/download/";
             let url1 = base + model + '.' + version1 + '?filename=' + filename1;
             let url2 = base + model + '.' + version2 + '?filename=' + filename2;
+
 
             //get files for popup
             let file1, file2;
@@ -70,14 +73,19 @@ function compareFromBiomodels(model, version1, version2) {
             xhrFile1.setRequestHeader("accept", "application/xml");
 
             var xhrFile2 = new XMLHttpRequest();
-            xhrFile2.open("GET", url1);
+            xhrFile2.open("GET", url2);
             xhrFile2.responseType = 'xml';
             xhrFile2.setRequestHeader("accept", "application/xml");
 
 
             xhrFile2.onreadystatechange = function () {
                 if (xhrFile2.readyState === 4) {
-                    console.log(xhrFile2.response);
+                    //console.log(xhrFile2.response);
+                    if (xhrFile2.status === 404) {
+                        toggleModal('errorModal', xhrFile2.response.errorMessage);
+                        return;
+                    }
+
                     file2 = xhrFile2.response;
 
                     //everything should be done here
@@ -94,7 +102,11 @@ function compareFromBiomodels(model, version1, version2) {
 
             xhrFile1.onreadystatechange = function () {
                 if (xhrFile1.readyState === 4) {
-                    console.log(xhrFile1.response);
+                    //console.log(xhrFile1.response);
+                    if (xhrFile1.status === 404) {
+                        toggleModal('errorModal', xhrFile1.response.errorMessage);
+                        return;
+                    }
                     file1 = xhrFile1.response;
                     xhrFile2.send();
                 }
@@ -116,7 +128,5 @@ function toggleModal(modalId, error) {
     //toggle it
     var myModal = new bootstrap.Modal(document.getElementById(modalId), 'data-bs-focus');
     myModal.toggle();
-
-    alert(error);
 
 }

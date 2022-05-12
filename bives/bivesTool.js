@@ -146,9 +146,9 @@ function compareModels(f1, f2, command, urlFlag, file1, file2) {
 	};
 
 	//get file for pop up
-	$.get(
-
-	)
+	/* 	$.get(
+			//???
+		) */
 
 	// call the bives wrapper script
 	$.post(

@@ -6,7 +6,17 @@ DiVil uses:
 SBGN-ML is the XML based format used to store an SBGN map. In DiVil, the SBGN-ML is extended with a color coded information to visualize the differences.
 
 ## Try it out
-DiVil is used at http://most.sems.uni-rostock.de/. Go check it out!
+DiVil is running at https://divil.bio.informatik.uni-rostock.de/. Go check it out!
+
+## Connection to BioModels
+DiVil connects to the BioModels API by setting URL parameters:
+
+divil-url + "?s:biom&m:_BIOMODELS-ID_&v1:_VERSION-NUMBER-1_&v2:_VERSION-NUMBER-2_"
+
+* s:biom sets the source to BioModels database
+* BIOMODELS-ID: ID of the biomodel of interest. E.g.: BIOMD0000000413
+* VERSION-NUMBER-1 / VERSION-NUMBER-2: Numbers of version to compare
+* Full example to compare version 1 and 2 of BIOMD0000000413: https://divil.bio.informatik.uni-rostock.de/?s:biom&m:BIOMD0000000413&v1:1&v2:2
 
 ## Input: Bives support
 The network information is provided by a JSON Object in the following format:

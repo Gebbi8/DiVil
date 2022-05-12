@@ -325,7 +325,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
         else name = regEx(line, "id");
         if (line.includes("/kineticLaw[")) { //change is in child node of kinetic law
             if (line.includes("/math[")) {
-                alert(changeType + " on math attribute");
+                alert(changeType + " on math attribute"); //is not expected to occur
             } else if (line.includes("/parameter[") || line.includes("/localParameter[")) { // change on parameter attribute in kin. law //localParameter for SBML version 3
                 let changeValue = regEx(line, value);
 
@@ -346,10 +346,13 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
 
         } else if (line.includes("listOfReactants[1]") || line.includes("listOfProducts[1]") || line.includes("listOfModifiers[1]")) {
 
+            //console.log(line);
+
             elementName = regEx(line, "name");
             let val = regEx(line, value);
             path = getLocalXPath(regEx(line, docPath));
             let participant = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null);
+            //console.log(path);
             participant = participant.iterateNext();
             let participantName = participant.attributes.species.value;
             let participantRole;
@@ -357,9 +360,12 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
             else if (line.includes("listOfProducts[1]")) participantRole = "Product";
             else participantRole = "Modifier";
 
+            // console.log(participantRole, doc.getElementById(participantName));
+
             //grep name of species if available
-            let getName = doc.getElementById(participantName).attributes.name.value;
-            if (getName) participantName = getName;
+            let getName = doc.getElementById(participantName);
+            //console.log(getName.attributes);
+            if (getName.attributes.name) participantName = getName.attributes.name.value;
 
             return "<li>" + elementType + " <span class='" + changeClass + "'><em><b>" + elementName + "</b></em></span> of " + participantRole + " <em><b>" + participantName + "</b></em> was " + changeFill + ": <span class='" + changeClass + "'>" + val + "</span></li>";
         }
@@ -658,8 +664,8 @@ function getSingleModifier(path, doc, changeClass, changeFill) {
     let modifier = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null);
     let mod = modifier.iterateNext();
     let speciesName = mod.attributes.species.nodeValue;
-    let getName = doc.getElementById(speciesName).attributes.name.value;
-    if (getName) speciesName = getName;
+    let getName = doc.getElementById(speciesName);
+    if (getName.attributes.name) speciesName = getName.attributes.name.value;
 
     return "<li>Modifier <span class='" + changeClass + "'><em><b>" + speciesName + "</b></em></span> was " + changeFill + "</li>";
 }
