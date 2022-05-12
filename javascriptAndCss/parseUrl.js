@@ -68,12 +68,12 @@ function compareFromBiomodels(model, version1, version2) {
 
             var xhrFile1 = new XMLHttpRequest();
             xhrFile1.open("GET", url1);
-            xhrFile1.responseType = 'xml';
+            xhrFile1.responseType = 'text';
             xhrFile1.setRequestHeader("accept", "application/xml");
 
             var xhrFile2 = new XMLHttpRequest();
             xhrFile2.open("GET", url2);
-            xhrFile2.responseType = 'xml';
+            xhrFile2.responseType = 'text';
             xhrFile2.setRequestHeader("accept", "application/xml");
 
 

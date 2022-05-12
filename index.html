@@ -3,9 +3,25 @@
 
 <head>
 	<title>DiVil</title>
+	<meta http-equiv="Content-Security-Policy" content="
+			default-src 'self'
+				'sha256-mQyxHEuwZJqpxCw3SLmc4YOySNKXunyu2Oiz1r3/wAE='
+				'sha256-OCf+kv5Asiwp++8PIevKBYSgnNLNUZvxAp4a7wMLuKA='
+				'sha256-JLEjeN9e5dGsz5475WyRaoA4eQOdNPxDIeUhclnJDCE='; 
+			script-src 'self'
+				'sha256-fqsfQ0DVytS9FgJr6u/mPEQ+SpkMfF5U5D9qdwawkiw='
+				'sha256-JLEjeN9e5dGsz5475WyRaoA4eQOdNPxDIeUhclnJDCE='
+				'sha256-mQyxHEuwZJqpxCw3SLmc4YOySNKXunyu2Oiz1r3/wAE='
+				'sha256-OCf+kv5Asiwp++8PIevKBYSgnNLNUZvxAp4a7wMLuKA='
+				'sha256-z98jpZ04eD2Hf+5ubttTfBxTzZpZJuYaOENgY3T9UXk='
+				'sha256-JLEjeN9e5dGsz5475WyRaoA4eQOdNPxDIeUhclnJDCE='; 
+			img-src 'self' https://* data: w3.org/svg/2000;
+			child-src 'none'; 
+			connect-src 'self' https://www.ebi.ac.uk/biomodels/">
+
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<script src="https://d3js.org/d3.v5.js"></script>
+	<script type="text/javascript" src="thirdParty/d3.v5.js"></script>
 	<script type="text/javascript" src="thirdParty/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/sboTermMapping.js"></script>
 	<script type="text/javascript" src="javascriptAndCss/showSbgn.js"></script>
