@@ -69,6 +69,7 @@ function getBivesData(v1, v2, urlFlag, file1, file2) {
 
 
 	} else {
+		console.log('%c Example is computed! ', 'background: #222; color: #bada55');
 		callBives(v1, v2);
 	}
 
@@ -145,17 +146,20 @@ function compareModels(f1, f2, command, urlFlag, file1, file2) {
 			command
 	};
 
+	//console.trace();
+
 	//get file for pop up
-	/* 	$.get(
-			//???
-		) */
+	$.get(
+		//???
+	)
+	console.log(JSON.stringify(bivesJob));
 
 	// call the bives wrapper script
 	$.post(
 		"bives/bives.php",
 		"bivesJob=" + JSON.stringify(bivesJob),
 		function (data) {
-			//console.log(data);
+			console.log(data);
 			var report = $.parseJSON(data).reportHtml;
 			//console.log(report);
 			var sbgnJson = $.parseJSON(data).reactionsSbgnJson;

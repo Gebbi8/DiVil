@@ -24,7 +24,6 @@ function compareFromBiomodels(model, version1, version2) {
     var urlV1 = "https://www.ebi.ac.uk/biomodels/model/files/" + model + '.' + version1;
     var urlV2 = "https://www.ebi.ac.uk/biomodels/model/files/" + model + '.' + version2;
 
-
     var xhrV1 = new XMLHttpRequest();
     xhrV1.responseType = 'json';
     xhrV1.open("GET", urlV1);

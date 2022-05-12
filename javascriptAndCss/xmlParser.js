@@ -15,7 +15,7 @@ function getStructeredData(xmlLines, comodi, v1, v2) {
     // produce double key array based on change + path. vlaue comodi term
     var changeType = null;
     var changes = "";
-    var ids = "";
+    var ids;
 
     //debugging
     var i = 0;
@@ -239,8 +239,10 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
                 // let oldParameter = oldDoc.evaluate(oldPath, oldDoc, null, XPathResult.ANY_TYPE, null).iterateNext();
                 let newParameter = newDoc.evaluate(newPath, newDoc, null, XPathResult.ANY_TYPE, null).iterateNext();
 
-                console.log(newParameter);
-                return htmlChange += "<li>Attribute <em><b><span class='" + changeClass + "'>" + changedAttr + "</span></b></em> of local parameter <b><em>" + newParameter.attributes.name.value + "</em></b> changed: " + oldVal + " &rarr; " + newVal;
+                let parameterName;
+                if (newParameter.attributes.name) parameterName = newParameter.attributes.name.value;
+                else parameterName = newParameter.attributes.id;
+                return htmlChange += "<li>Attribute <em><b><span class='" + changeClass + "'>" + changedAttr + "</span></b></em> of local parameter <b><em>" + parameterName + "</em></b> changed: " + oldVal + " &rarr; " + newVal;
             }
             //get path
 
@@ -334,7 +336,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
                 let node = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null);
                 node = node.iterateNext();
                 let parameterName;
-                if (parameterName = node.attributes.name.nodeValue);
+                if (node.attributes.name) parameterName = node.attributes.name.nodeValue;
                 else {
                     parameterName = node.attributes.id.nodeValue;
                 }

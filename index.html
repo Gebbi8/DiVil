@@ -452,7 +452,7 @@
 			getBivesData(
 				"./testModels/" + file1, // + ".xml",
 				"./testModels/" + file2, // + ".xml",
-				["reportHtml", "reactionsSbgnJson", "xmlDiff", "separateAnnotations"]);
+			);
 		}
 
 		var hiddenTests = {
@@ -477,7 +477,9 @@
 					let version1 = params['v1'];
 					let version2 = params['v2'];
 
-					compareFromBiomodels(model, version1, version2);
+					if (!model || !version1 || !version2)
+						toggleModal('errorModal', "The provided URL parameters are not well formed!");
+					else compareFromBiomodels(model, version1, version2);
 				} else {
 					toggleModal('errorModal', "The provided URL parameters are not well formed.");
 					document.getElementById("e1Kummer").click();
