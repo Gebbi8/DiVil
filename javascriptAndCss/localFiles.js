@@ -1,5 +1,3 @@
-document.getElementById("local-files-form").addEventListener("submit", submitLocalFiles);
-
 function submitLocalFiles() {
 
 
