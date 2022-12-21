@@ -12,7 +12,7 @@ function getStructeredData(xmlLines, comodi, v1, v2) {
     var dataByNetwork = {}; //element id, changetype, changeinfo/changehtml
     var dataByKeys = {};
 
-    // produce double key array based on change + path. vlaue comodi term
+    // produce double key array based on change + path. value comodi term
     var changeType = null;
     var changes = "";
     var ids;
