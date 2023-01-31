@@ -11,6 +11,9 @@ export function initDivil(xmlDiff, v1, v2) {
 
 };
 
+export function stopD3ForceOfDivil(containerID) {
+    showSbgn.stopD3ForceOfDivil(containerID);
+}
 
 
 export function callDiVil(sbgnJson, xmlDiff, v1, v2, containerID, changeListID, structeredData) {

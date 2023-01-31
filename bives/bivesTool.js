@@ -124,6 +124,8 @@ const checkF = (file) => {
 		})
 }
 
+function getMergeData(f1, f2)
+
 function compareModels(f1, f2, command) {
 	var bivesJob = {
 		files:
