@@ -278,6 +278,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
                 let oldVal = regEx(line, "oldValue");
                 let newVal = regEx(line, "newValue");
                 // let oldParameter = oldDoc.evaluate(oldPath, oldDoc, null, XPathResult.ANY_TYPE, null).iterateNext();
+                console.debug("hier1");
                 let newParameter = newDoc.evaluate(newPath, newDoc, null, XPathResult.ANY_TYPE, null).iterateNext();
 
                 console.log(newParameter);
@@ -692,7 +693,7 @@ function getMath(path, doc) {
     //     path = path.substr(0, mathIndex + 23) + helpString.substr(0, helpString.indexOf("/"));
     // }
 
-
+    console.debug("hier2");
     var mathML = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null).iterateNext();
 
     if (mathML == null) return mathML;
