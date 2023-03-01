@@ -84,7 +84,7 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
 
             var id = regEx(line, "id");  //for comodi grep           
 
-            console.debug(line);
+            //console.debug(line);
             //alert("check");
 
 
@@ -198,9 +198,9 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
 
             changes = changes + addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, path, moveMap, id);
             //if(changes.includes("undefined")) alert(line);
-            console.debug(changes);
+            //console.debug(changes);
             dataByKeys[path] = { "ids": ids, "popup": changes };
-            console.debug(dataByKeys);
+            //console.debug(dataByKeys);
             //  console.log(dataByKeys);
             // if(path == "/sbml[1]/model[1]/listOfSpecies[1]/species[1]") {
             //     i++;
