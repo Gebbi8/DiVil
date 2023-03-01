@@ -1,4 +1,5 @@
 export function getStructeredData(xmlLines, comodi, v1, v2) {
+    console.debug("check getStructuredData");
     console.log("xmlLines: ", xmlLines);
     if (xmlLines.length == 0) return {}; //when no changes are available or provided, no information can be shown
 
