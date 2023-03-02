@@ -181,7 +181,7 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
                 // return;
                 if (line.includes("/kineticLaw[1]")) {              //path already handled -> math already added
 
-                    alert(changes);
+                    //alert(changes);
                     if (changes.includes(">Math")) return; //kinetic law has already been added
                     //else alert(path);
                 }
