@@ -4,6 +4,7 @@ import * as xmlParser from './xmlParser';
 
 export function initDivil(xmlDiff, v1, v2) {
     //init all static/computed properties
+    console.log(xmlDiff);
     let xmlLines = xmlDiff.split(/\r?\n/);
     let structeredData = xmlParser.getStructeredData(xmlLines, {}, v1, v2);
 
