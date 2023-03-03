@@ -83,7 +83,7 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
         }
 
         if (changeType != null && changeType != "move") { //second key old bzw newPath belegen
-
+            console.info("got to this point -99");
             var id = regEx(line, "id");  //for comodi grep           
 
             //console.debug(line);
@@ -139,6 +139,7 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
                 return;
             }
 
+            console.info("got to this point -98");
 
             if (changeType == "delete") {
                 path = regEx(line, "oldPath")
@@ -155,6 +156,7 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
             //     console.log("------------");
             //     console.log(dataByKeys[path].popup );
             // }
+            console.info("got to this point -97");
 
             if (line.includes("/kineticLaw[1]")) {
 
@@ -191,6 +193,7 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
             //console.log(line);
             //!!! change path for deleted node so that theres no issue for change lists
 
+            console.info("got to this point -50");
             if (changeType == "delete" && elementType == "node") {
 
                 let oldTag = regEx(line, "oldTag");
@@ -209,11 +212,11 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
             //     console.log(path);
             //     console.log(dataByKeys[path].popup );
 
-            console.info("got to this point -1");
+
             //     alert("123");
             // }
         }
-
+        console.info("got to this point -1");
         //console.log(dataByKeys);
     });
 
