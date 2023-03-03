@@ -216,6 +216,8 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
         //console.log(dataByKeys);
     });
 
+    console.info("got to this point");
+
     //var arr = [["delete", "deletion"], ["insert", "insertion"], ["update", "update"], ["move", "PermutationOfEntities"]];
 
 

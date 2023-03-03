@@ -3,7 +3,6 @@ import * as showSbgn from './showSbgn';
 import * as xmlParser from './xmlParser';
 
 export function initDivil(xmlDiff, v1, v2) {
-    console.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! check auto update Divil")
     //init all static/computed properties
     console.log(xmlDiff);
     let xmlLines = xmlDiff.split(/\r?\n/);
