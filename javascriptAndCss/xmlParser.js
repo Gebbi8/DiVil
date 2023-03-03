@@ -56,6 +56,7 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
     })
 
     xmlLines.forEach(line => {
+        console.info(line);
         //skip all changes that are irrelevant for the graph and child nodes of kinetic law
         if (line.includes("triggeredBy=") || line.includes("listOfRules[") || line.includes("/notes[") ||
             line.includes("/listOfFunctionDefinitions[") || line.includes("listOfUnitDefinitions[") || line.includes("/sbml[1]/model[1]/listOfParameters[")) return;
@@ -208,7 +209,7 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
             //     console.log(path);
             //     console.log(dataByKeys[path].popup );
 
-
+            console.info("got to this point -1");
             //     alert("123");
             // }
         }
