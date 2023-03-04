@@ -56,7 +56,7 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
     })
 
     xmlLines.forEach(line => {
-        console.info(line);
+        //console.info(line);
         //skip all changes that are irrelevant for the graph and child nodes of kinetic law
         if (line.includes("triggeredBy=") || line.includes("listOfRules[") || line.includes("/notes[") ||
             line.includes("/listOfFunctionDefinitions[") || line.includes("listOfUnitDefinitions[") || line.includes("/sbml[1]/model[1]/listOfParameters[")) return;
@@ -83,7 +83,6 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
         }
 
         if (changeType != null && changeType != "move") { //second key old bzw newPath belegen
-            console.info("got to this point -99");
             var id = regEx(line, "id");  //for comodi grep           
 
             //console.debug(line);
@@ -139,7 +138,8 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
                 return;
             }
 
-            console.info("got to this point -98");
+
+
 
             if (changeType == "delete") {
                 path = regEx(line, "oldPath")
@@ -156,7 +156,7 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
             //     console.log("------------");
             //     console.log(dataByKeys[path].popup );
             // }
-            console.info("got to this point -97");
+
 
             if (line.includes("/kineticLaw[1]")) {
 
@@ -193,19 +193,19 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
             //console.log(line);
             //!!! change path for deleted node so that theres no issue for change lists
 
-            console.info("got to this point -50");
+
             if (changeType == "delete" && elementType == "node") {
-                console.info("got to this point -49");
+
                 let oldTag = regEx(line, "oldTag");
                 if (oldTag == "species" || oldTag == "compartment" || oldTag == "reaction") path = "old-" + path;
-                console.info("got to this point -58");
+
             }
 
-            console.info("got to this point -47");
+
 
             changes = changes + addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, path, moveMap, id);
 
-            console.info("got to this point -30");
+
             //if(changes.includes("undefined")) alert(line);
             //console.debug(changes);
             dataByKeys[path] = { "ids": ids, "popup": changes };
@@ -220,11 +220,11 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
             //     alert("123");
             // }
         }
-        console.info("got to this point -1");
+
         //console.log(dataByKeys);
     });
 
-    console.info("got to this point");
+
 
     //var arr = [["delete", "deletion"], ["insert", "insertion"], ["update", "update"], ["move", "PermutationOfEntities"]];
 
@@ -473,9 +473,9 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
         //alert(line);
         return htmlChange += "<li id='" + id + "' class='list-group-item'>" + elementType + " <em><b>" + elementName + "</b></em> was " + changeFill + ": <span class='" + changeClass + "'>" + oldValue + "</span></li>";
     } // end of Attribute handling
-    console.info("got to this point -32");
+
     if (elementType == "Node") {
-        console.info("got to this point -31");
+
         let val;
         if (changeType == "insert") {
 
@@ -567,7 +567,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
             }
         }
 
-        console.info("got to this point -30.1");
+
         if (val == "listOfModifiers") {          //listOfModifiers changed
             console.debug(addPath);
             if (dataByKeys[addPath].popup.includes("Modifiers</span></b>:")) return "";      //for some reason bives sometimes has an untriggered change on modifiers although the whol reaction is added. BiVeS bug?
@@ -587,7 +587,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
         }
 
         if (line.includes("speciesReference") || line.includes("modifierSpeciesReference")) { //single Participant added/deleted u
-            console.info("got to this point -29.1");
+
             //alert("okay :/");
             //console.log(line);
             //elementName = regEx(line, "name");
@@ -603,7 +603,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
             if (line.includes("listOfReactants[1]")) participantRole = "Reactant";
             else if (line.includes("listOfProducts[1]")) participantRole = "Product";
             else participantRole = "Modifier";
-            console.info("got to this point -29");
+
             //grep name of species if available
 
             let node = doc.getElementById(participantName);
@@ -612,9 +612,9 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
             return "<li id='" + id + "' class='list-group-item'>" + participantRole + " <span class='" + changeClass + "'><em><b>" + participantName + "</b></em></span> was " + changeFill + "</li>";
         }
 
-        console.info("got to this point -28");
+
         if (line.includes("listOfReactants") || line.includes("listOfProducts") || line.includes("listOfModifiers")) {
-            console.info("got to this point -27");
+
             let path = regEx(line, docPath);
             //console.log(path);
             //let reactant = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null);
@@ -632,10 +632,10 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
 
         }
 
-        console.info("got to this point -26");
+
         //It seems that there is a bug in BiVeS: the dupreez example shows a move in the ATP to ADP reaction and also a deletion of the first reactant, as well as an insert of the first reactant. Both are ATP which seems buggy.
         if (changeType == "delete" && oldValue == "speciesReference") {
-            console.info("got to this point -25");
+
             console.log(line);
             return htmlChange += "<li id='" + id + "' class='list-group-item'>" + line + "<em><b><span class='" + changeClass + "'>" + oldValue[0].toUpperCase() + oldValue.substring(1) + "</span></b></em> was " + changeFill + "</li>";
         }
@@ -643,7 +643,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
 
         //     console.log(line);
         //     alert("take care of insert");
-        console.info("got to this point -24..");
+
         // }
         return htmlChange += "<li id='" + id + "' class='list-group-item'><em><b><span class='" + changeClass + "'>" + oldValue[0].toUpperCase() + oldValue.substring(1) + "</span></b></em> was " + changeFill + "</li>";
 
@@ -695,7 +695,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
 
     //htmlChange += elementType + " <em>" + elementName + "</em> was added: " + newValue;
 
-    console.info("got to this point -31");
+
     return "<li id='" + id + "' class='list-group-item'> TODO: " + changeType + " " + elementType + "</li>";
 
 
