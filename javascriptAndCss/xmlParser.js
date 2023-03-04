@@ -475,6 +475,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
     } // end of Attribute handling
     console.info("got to this point -32");
     if (elementType == "Node") {
+        console.info("got to this point -31");
         let val;
         if (changeType == "insert") {
 
@@ -566,7 +567,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
             }
         }
 
-
+        console.info("got to this point -30.1");
         if (val == "listOfModifiers") {          //listOfModifiers changed
             console.debug(addPath);
             if (dataByKeys[addPath].popup.includes("Modifiers</span></b>:")) return "";      //for some reason bives sometimes has an untriggered change on modifiers although the whol reaction is added. BiVeS bug?
@@ -598,7 +599,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
             if (line.includes("listOfReactants[1]")) participantRole = "Reactant";
             else if (line.includes("listOfProducts[1]")) participantRole = "Product";
             else participantRole = "Modifier";
-
+            console.info("got to this point -29");
             //grep name of species if available
 
             let node = doc.getElementById(participantName);
@@ -607,7 +608,9 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
             return "<li id='" + id + "' class='list-group-item'>" + participantRole + " <span class='" + changeClass + "'><em><b>" + participantName + "</b></em></span> was " + changeFill + "</li>";
         }
 
+        console.info("got to this point -28");
         if (line.includes("listOfReactants") || line.includes("listOfProducts") || line.includes("listOfModifiers")) {
+            console.info("got to this point -27");
             let path = regEx(line, docPath);
             //console.log(path);
             //let reactant = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null);
@@ -625,8 +628,10 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
 
         }
 
+        console.info("got to this point -26");
         //It seems that there is a bug in BiVeS: the dupreez example shows a move in the ATP to ADP reaction and also a deletion of the first reactant, as well as an insert of the first reactant. Both are ATP which seems buggy.
         if (changeType == "delete" && oldValue == "speciesReference") {
+            console.info("got to this point -25");
             console.log(line);
             return htmlChange += "<li id='" + id + "' class='list-group-item'>" + line + "<em><b><span class='" + changeClass + "'>" + oldValue[0].toUpperCase() + oldValue.substring(1) + "</span></b></em> was " + changeFill + "</li>";
         }
@@ -634,6 +639,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
 
         //     console.log(line);
         //     alert("take care of insert");
+        console.info("got to this point -24");
         // }
         return htmlChange += "<li id='" + id + "' class='list-group-item'><em><b><span class='" + changeClass + "'>" + oldValue[0].toUpperCase() + oldValue.substring(1) + "</span></b></em> was " + changeFill + "</li>";
 
