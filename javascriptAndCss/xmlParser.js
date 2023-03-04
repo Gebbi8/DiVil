@@ -195,13 +195,13 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
 
             console.info("got to this point -50");
             if (changeType == "delete" && elementType == "node") {
-
+                console.info("got to this point -49");
                 let oldTag = regEx(line, "oldTag");
                 if (oldTag == "species" || oldTag == "compartment" || oldTag == "reaction") path = "old-" + path;
-                console.info("got to this point -59");
+                console.info("got to this point -58");
             }
 
-            console.info("got to this point -48");
+            console.info("got to this point -47");
 
             changes = changes + addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, path, moveMap, id);
 
