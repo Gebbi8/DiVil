@@ -198,10 +198,14 @@ export function getStructeredData(xmlLines, comodi, v1, v2) {
 
                 let oldTag = regEx(line, "oldTag");
                 if (oldTag == "species" || oldTag == "compartment" || oldTag == "reaction") path = "old-" + path;
+                console.info("got to this point -59");
             }
 
+            console.info("got to this point -48");
 
             changes = changes + addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, path, moveMap, id);
+
+            console.info("got to this point -30");
             //if(changes.includes("undefined")) alert(line);
             //console.debug(changes);
             dataByKeys[path] = { "ids": ids, "popup": changes };
@@ -469,7 +473,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
         //alert(line);
         return htmlChange += "<li id='" + id + "' class='list-group-item'>" + elementType + " <em><b>" + elementName + "</b></em> was " + changeFill + ": <span class='" + changeClass + "'>" + oldValue + "</span></li>";
     } // end of Attribute handling
-
+    console.info("got to this point -32");
     if (elementType == "Node") {
         let val;
         if (changeType == "insert") {
@@ -681,8 +685,9 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
 
     //htmlChange += elementType + " <em>" + elementName + "</em> was added: " + newValue;
 
-
+    console.info("got to this point -31");
     return "<li id='" + id + "' class='list-group-item'> TODO: " + changeType + " " + elementType + "</li>";
+
 
 }
 
