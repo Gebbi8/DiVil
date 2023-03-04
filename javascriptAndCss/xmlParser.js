@@ -587,6 +587,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
         }
 
         if (line.includes("speciesReference") || line.includes("modifierSpeciesReference")) { //single Participant added/deleted u
+            console.info("got to this point -29.1");
             //alert("okay :/");
             //console.log(line);
             //elementName = regEx(line, "name");
