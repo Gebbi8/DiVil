@@ -593,8 +593,9 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
             //elementName = regEx(line, "name");
             //oldValue = regEx(line, value);
             let path = getLocalXPath(regEx(line, docPath));
-            //console.log(path);
+            console.info(path, doc);
             let participant = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null);
+            console.info(participant);
             let participantName = participant.iterateNext().attributes.species.value;
             let participantRole;
             if (line.includes("listOfReactants[1]")) participantRole = "Reactant";
