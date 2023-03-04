@@ -597,7 +597,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
 
             let participant = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null);
             console.info(participant);
-            if (path == "/*[local-name()='sbml'][1]/*[local-name()='model'][1]/*[local-name()='listOfReactions'][1]/*[local-name()='reaction'][4]/*[local-name()='listOfReactants'][1]/*[local-name()='speciesReference'][1]") alert("janz jenau");
+            //if (path == "/*[local-name()='sbml'][1]/*[local-name()='model'][1]/*[local-name()='listOfReactions'][1]/*[local-name()='reaction'][4]/*[local-name()='listOfReactants'][1]/*[local-name()='speciesReference'][1]") alert("janz jenau");
             let participantName = participant.iterateNext().attributes.species.value;
             let participantRole;
             if (line.includes("listOfReactants[1]")) participantRole = "Reactant";
