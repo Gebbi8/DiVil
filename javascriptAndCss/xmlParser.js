@@ -639,7 +639,7 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
 
         //     console.log(line);
         //     alert("take care of insert");
-        console.info("got to this point -24");
+        console.info("got to this point -24..");
         // }
         return htmlChange += "<li id='" + id + "' class='list-group-item'><em><b><span class='" + changeClass + "'>" + oldValue[0].toUpperCase() + oldValue.substring(1) + "</span></b></em> was " + changeFill + "</li>";
 
