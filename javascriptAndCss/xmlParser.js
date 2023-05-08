@@ -703,7 +703,8 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
 
 function getMath(path, doc) {
     // var path = regEx(line, "newPath");
-    //console.log(path, path.indexOf("/kineticLaw[1]/math[1]/"));
+    console.log("commit check - 08.05.2023")
+    console.log(path, path.indexOf("/kineticLaw[1]/math[1]/"));
     if (path.indexOf("/kineticLaw[1]/math[1]/") != -1) path = path.substr(0, path.indexOf("/kineticLaw[1]/math[1]/"));
     path += "/kineticLaw[1]/math[1]";
 
