@@ -273,9 +273,12 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
         tag = "newTag";
     } else if (changeType == "update") {
         changeClass = "update-color";
+        //docPath = "newPath";
     }
 
     elementType = elementType[0].toUpperCase() + elementType.substring(1);
+
+    console.debug(changeClass, docPath, value, line, "checkcheckcheck");
 
     if (changeType == "update") {
         if (line.includes("/kineticLaw[")) {
