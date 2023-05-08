@@ -533,8 +533,13 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
                 if (changeType == "delete") {
                     oldMath = getMath(path, doc);
                     console.log(path);
-                    if(moveMap[math]) newPath = moveMap[path];
+                    if(moveMap[path]){
+                        newPath = moveMap[path];
+                        console.log("got moveMap match", moveMap)
+                    } 
                     else newPath = path;
+                    console.log("check");
+                    console.log(newPath, newMath);
                     newMath = getMath(newPath, newDoc); 
                 } else {
                     newMath = getMath(path, doc);
