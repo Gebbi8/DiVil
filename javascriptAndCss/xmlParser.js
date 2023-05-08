@@ -390,23 +390,14 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
             let newPath = regEx(line, "newPath");
             moveMap[oldPath] = newPath;
             return ""; //only the order of elements changed -> irrelevant for graph
-        }
+        } 
 
         while (oldParent.lastIndexOf("/") != -1) {
             oldParent = oldParent.substr(0, oldParent.lastIndexOf("/"));
             newParent = newParent.substr(0, newParent.lastIndexOf("/"));
             if (moveMap[oldParent] == newParent) return ""; //an ancestor was moved, most likely this move is triggered (but how to make sure?)
         }
-        alert("...move");
-        // if(moveMap[oldParent] == newParent) return ""; //the parent move for some reason triggered a move of this node
 
-        // if(newParent.includes("/math[")){ //display move 
-        //     alert("math move");
-        //     return "oldMath" +  "<<rarr" + "newMath";
-
-        // } 
-        //console.log("move", oldParent);
-        //console.log(moveMap);
         alert("A change (move) occured that is currently not handled by DiVil. Please contact tom.gebhardt@uni-rostock.de. At best you already attach you files to the mail.");
         return "UNHANDLED MOVE: " + line;
     }
@@ -529,15 +520,8 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
                 return "";
             }
             else { //hier changes inside kinetic law. no full delete or insert
-                // console.log(dataByKeys[addPath].popup);
-                // console.log(changeType, docPath)
-                // console.log(line);
-                // alert("math stuff");
+ 
                 let path = regEx(line, docPath);
-                //console.log(path, docPath, line);
-                //let math = getMath(path, doc);
-                //console.log(math);
-                //alert("Math stuff");
 
                 let oldMath, newMath;
                 console.log(path, moveMap);
@@ -549,7 +533,9 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
                 if (changeType == "delete") {
                     oldMath = getMath(path, doc);
                     console.log(path);
-                    newMath = getMath(moveMap[path], newDoc);
+                    if(moveMap[math]) newPath = moveMap[path];
+                    else newPath = path;
+                    newMath = getMath(newPath, newDoc); 
                 } else {
                     newMath = getMath(path, doc);
                     //reverse moveMap?
