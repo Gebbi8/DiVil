@@ -541,15 +541,17 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
                     console.log("check");
                     console.log(newPath, newMath);
                     newMath = getMath(newPath, newDoc); 
-                } else {
+                } else { //insert
                     newMath = getMath(path, doc);
                     //reverse moveMap?
                     moveMap.forEach((move) => {
+                        console.log(move);
                         if (move[1] == path) {
                             oldMath = getMath(move[0], oldDoc);
-                            alert("wololo");
+                            //alert("wololo");
                             return;
                         }
+                        else oldMath = getMath(path, oldDoc);
                     })
                     if (oldMath == null) {
                         oldMath = getMath(path, oldDoc);
