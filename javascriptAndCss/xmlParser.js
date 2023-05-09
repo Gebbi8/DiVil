@@ -276,9 +276,11 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
         //docPath = "newPath";
     }
 
+
     elementType = elementType[0].toUpperCase() + elementType.substring(1);
 
-    console.debug(changeClass, docPath, value, line, "checkcheckcheck");
+    console.log("doc: ", doc);
+    console.debug(changeClass, doc, docPath, value, line, "checkcheckcheck");
 
     if (changeType == "update") {
         if (line.includes("/kineticLaw[")) {
@@ -584,11 +586,13 @@ function addChange(changeType, elementType, line, oldDoc, newDoc, dataByKeys, ad
 
         if (line.includes("speciesReference") || line.includes("modifierSpeciesReference")) { //single Participant added/deleted u
 
-            //alert("okay :/");
+            alert(changeType);
+
             //console.log(line);
             //elementName = regEx(line, "name");
             //oldValue = regEx(line, value);
             let path = getLocalXPath(regEx(line, docPath));
+            console.debug(line);
             console.info(path, doc);
 
             let participant = doc.evaluate(path, doc, null, XPathResult.ANY_TYPE, null);
