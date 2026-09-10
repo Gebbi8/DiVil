@@ -367,8 +367,7 @@ function createGraph(structuredData, centralNode, popUpID, containerID) {
 			}
 
 
-			/* ctop();
-			MathJax.typeset(); */
+			renderPopupMath();
 		})
 		.on("mouseleave", function () {
 			if (!d3.select("#popup").empty()) {
@@ -538,9 +537,7 @@ function createCompartments() {
 					}
 				}
 			)
-			//MathJax.Hub.Rerender(); //recall mathjax
-			/* 			ctop();
-						MathJax.typeset(); //MathJax.Hub.Queue(["Typeset", MathJax.Hub]);  */
+			renderPopupMath();
 		})
 		.on("mouseleave", function () {
 			if (!d3.select("#popup").empty()) {
@@ -674,6 +671,17 @@ function hideTooltip() {
 		.transition()
 		.duration(200)
 		.style("opacity", 0)
+}
+
+// The popup HTML can contain <math> (kinetic-law / unit changes). MathJax 4 is
+// loaded globally by the host app; typeset just the popup once it has content.
+function renderPopupMath() {
+	const popup = document.getElementById("popup");
+	if (!popup || !window.MathJax || !window.MathJax.typesetPromise) return;
+	window.MathJax.typesetClear([popup]);
+	window.MathJax.typesetPromise([popup]).catch(function (e) {
+		console.error("MathJax typeset failed", e);
+	});
 }
 
 function isConnected(main, other) {
