@@ -334,12 +334,12 @@ function createGraph(structuredData, centralNode, popUpID, containerID) {
 		.on('mouseover', highlight)
 		.on('mouseout', resetOpacity)
 		.on("dblclick", dblclicked)
-		.on("click", function (d) {
+		.on("click", function (event, d) {
 			//forceSimulation.stop();
 			// console.log(d.bivesChange, d.path);
 			// console.log(structuredData[d.path]);
 
-			if (d3.event.defaultPrevented) return;
+			if (event.defaultPrevented) return;
 
 			var path = d.path;
 			if (d.bivesChange == "delete") path = "old-" + d.path;
@@ -361,9 +361,9 @@ function createGraph(structuredData, centralNode, popUpID, containerID) {
 							return "";
 						}
 					}
-				) //getHtmlChanges from node id	
-					.style("left", d3.event.layerX + "px")
-					.style("top", (d3.event.layerY - 28) + "px");
+				) //getHtmlChanges from node id
+					.style("left", event.layerX + "px")
+					.style("top", (event.layerY - 28) + "px");
 			}
 
 
@@ -445,12 +445,14 @@ function createCompartments() {
 
 	console.log(compartmentHierachy);
 
-	let nBCTemp = d3.nest()
-		.key(function (d) {
-			//	console.log(d.compartment)
-			return d.compartment;
-		})
-		.entries(nodesFilterComp);
+	// d3.nest() was removed in d3 v6; d3.groups() returns [key, values] pairs,
+	// remap to the {key, values} shape the code below expects.
+	let nBCTemp = d3.groups(nodesFilterComp, function (d) {
+		//	console.log(d.compartment)
+		return d.compartment;
+	}).map(function (g) {
+		return { key: g[0], values: g[1] };
+	});
 
 
 
@@ -513,7 +515,7 @@ function createCompartments() {
 		.attr("name", function (d) {
 			return d.name;
 		})
-		.on("click", function (d) {
+		.on("click", function (event, d) {
 			let node = nodes.find(node => node.id == d.key);
 			var path = node.path;
 			if (getCompAttr(d.key, "bivesChange") == "delete") path = "old-" + path;
@@ -626,35 +628,35 @@ function ticked() {
 }
 
 
-function dragstarted() {
+function dragstarted(event) {
 	console.log("drag start");
 	if (!dragable) return;
-	if (!d3.event.active) forceSimulation.alphaTarget(0.1).restart();
+	if (!event.active) forceSimulation.alphaTarget(0.1).restart();
 	//d.fx = d.x;
 	//d.fy = d.y;
 }
 
-function dragged(d) {
+function dragged(event, d) {
 	if (!dragable) return;
 
 	console.log("dragging");
 	//forceSimulation.alphaTarget(0.05).restart();
-	d.fx = d3.event.x;
-	d.fy = d3.event.y;
+	d.fx = event.x;
+	d.fy = event.y;
 }
 
-function dragended(d) {
+function dragended(event, d) {
 	if (!dragable) return;
 
 	console.log("dragg end start");
-	if (!d3.event.active) forceSimulation.alphaTarget(0);
-	d.fx = d3.event.x;
-	d.fy = d3.event.y;
+	if (!event.active) forceSimulation.alphaTarget(0);
+	d.fx = event.x;
+	d.fy = event.y;
 }
 
 
 
-function highlight(d) {
+function highlight(event, d) {
 	enterNode.style('stroke-opacity', o => (isConnected(this, o) ? 1 : dimmOpacity));
 	enterNode.select("text").style('opacity', o => (isConnected(this, o) ? 1 : dimmOpacity));
 	//this.setAttribute("stroke-opacity", 1);
@@ -682,7 +684,7 @@ function isConnected(main, other) {
 	return false;
 }
 
-function dblclicked(d) {
+function dblclicked(event, d) {
 	console.log(dblclicked);
 	d.fx = null;
 	d.fy = null;
