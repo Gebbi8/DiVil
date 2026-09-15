@@ -1,3 +1,5 @@
+import { contentMathToPresentation } from "../../src/composables/contentMathml.js";
+
 export function getStructeredData(xmlLines, comodi, v1, v2) {
   console.debug("check getStructuredData");
   console.log("xmlLines: ", xmlLines);
@@ -1001,7 +1003,7 @@ function getMath(path, doc) {
     .iterateNext();
 
   if (mathML == null) return mathML;
-  return mathML.outerHTML; //.iterateNext().innerHTML;
+  return contentMathToPresentation(mathML);
 }
 
 function getParameters(path, doc, line, id) {
